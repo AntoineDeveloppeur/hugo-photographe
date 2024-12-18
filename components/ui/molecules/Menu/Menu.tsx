@@ -1,23 +1,29 @@
-import './menu.scss'
+import styles from './menu.module.scss'
 import Link from 'next/link'
 
 export default function () {
     return (
         <nav>
-            <ul>
+            <ul className={styles.chapters}>
                 <li>
                     <Link href="#">
-                        <p>PORTFOLIO</p>
+                        <p className={`${styles.chapter} ${styles.chapter__1}`}>
+                            PORTFOLIO
+                        </p>
                     </Link>
                 </li>
                 <li>
                     <Link href="#">
-                        <p>PROJETS</p>
+                        <p className={`${styles.chapter} ${styles.chapter__2}`}>
+                            PROJETS
+                        </p>
                     </Link>
                 </li>
                 <li>
                     <Link href="#">
-                        <p>CONTACT</p>
+                        <p className={`${styles.chapter} ${styles.chapter__3}`}>
+                            CONTACT
+                        </p>
                     </Link>
                 </li>
             </ul>

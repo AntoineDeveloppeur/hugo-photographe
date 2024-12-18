@@ -1,0 +1,30 @@
+.chapters {
+    display: flex;
+    justify-content: center;
+}
+
+.chapter {
+    padding: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    border-color: white;
+    border-style: solid;
+    &__1 {
+        border-left: 1px;
+        border-top: 1px;
+        border-right: 1px;
+        border-style: solid;
+        border-radius: 10px 0 0 0;
+    }
+    &__2 {
+        border-top: 1px;
+        border-right: 1px;
+        border-style: solid;
+    }
+    &__3 {
+        border-top: 1px;
+        border-right: 1px;
+        border-style: solid;
+        border-radius: 0 10px 0 0;
+    }
+}

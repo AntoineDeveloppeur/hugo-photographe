@@ -1,0 +1,17 @@
+.header {
+    position: fixed;
+    width: 100vw;
+    height: 120px;
+}
+
+.positionLogoWithSignature {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.positionMenu {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}

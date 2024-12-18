@@ -1,4 +1,4 @@
-import './logo.css'
+import './logo.scss'
 import Image from 'next/image'
 import logo from '@/public/logo.png'
 

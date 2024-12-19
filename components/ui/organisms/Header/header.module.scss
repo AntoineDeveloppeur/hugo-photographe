@@ -2,16 +2,20 @@
     position: fixed;
     width: 100vw;
     height: 120px;
-}
-
-.positionLogoWithSignature {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-}
-
-.positionMenu {
+    border-bottom: 1px solid var(--dark15);
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
+    background-color: var(--background-main);
+}
+
+.LogoWithSignatureWrapper {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 24px;
+}
+
+.MenuWrapper {
+    display: flex;
 }

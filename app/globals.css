@@ -2,14 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --dark0: #000000;
+  --dark5: #181818;
+  --dark10: #303030;
+  --dark12: #383838;
+  --dark15: #474747;
+  --dark20: #5e5e5e;
+  --dark30: #919191;
+  --dark40: #c8c8c8;
+  --dark50: #e5e5e5;
+  --dark100: white;
+  --background-main: var(--dark10);
+  --background-second: var(--dark12);
+  --color-text-main: var(--dark100);
+  --color-text-second: var(--dark50);
 }
 
 html {
   font-size: 12px;
   line-height: 1.5;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 @media (prefers-color-scheme: dark) {

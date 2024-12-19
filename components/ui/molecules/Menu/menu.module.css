@@ -4,11 +4,13 @@
 }
 
 .chapter {
-  padding: 1rem;
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
+  padding-left: 4.16rem;
+  padding-right: 4.16rem;
   font-size: 1.5rem;
+  font-family: var(--font-merriweather);
   color: white;
-  border-color: white;
-  border-style: solid;
 }
 .chapter__1 {
   border-left: 1px;
@@ -16,15 +18,18 @@
   border-right: 1px;
   border-style: solid;
   border-radius: 10px 0 0 0;
+  border-color: var(--dark15);
 }
 .chapter__2 {
   border-top: 1px;
   border-right: 1px;
   border-style: solid;
+  border-color: var(--dark15);
 }
 .chapter__3 {
   border-top: 1px;
   border-right: 1px;
   border-style: solid;
   border-radius: 0 10px 0 0;
+  border-color: var(--dark15);
 }/*# sourceMappingURL=menu.module.css.map */

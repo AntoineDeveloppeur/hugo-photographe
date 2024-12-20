@@ -1,0 +1,46 @@
+{
+    "galery": [
+        [
+            {
+                "src": "../public/paysage.jpg",
+                "alt": "jjjj"
+            },
+            {
+                "src": "../public/voiture.jpg",
+                "alt": "jjjj"
+            },
+            {
+                "src": "../public/cowboy.jpg",
+                "alt": "jjjj"
+            }
+        ],
+        [
+            {
+                "src": "../public/concert.jpg",
+                "alt": "jjjj"
+            },
+            {
+                "src": "../public/taureau.jpg",
+                "alt": "jjjj"
+            },
+            {
+                "src": "../public/cuisine.jpg",
+                "alt": "jjjj"
+            }
+        ],
+        [
+            {
+                "src": "../public/singe.jpg",
+                "alt": "jjjj"
+            },
+            {
+                "src": "../public/taj.jpg",
+                "alt": "jjjj"
+            },
+            {
+                "src": "../public/prince.jpg",
+                "alt": "jjjj"
+            }
+        ]
+    ]
+}

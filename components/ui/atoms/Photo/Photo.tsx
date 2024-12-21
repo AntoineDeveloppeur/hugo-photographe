@@ -8,6 +8,8 @@ export default function Photo({ photo }: PhotoProps) {
             className={styles.image}
             src={photo.src}
             alt={photo.alt}
+            width="200"
+            height="130"
             // placeholder="blur"
         />
     )

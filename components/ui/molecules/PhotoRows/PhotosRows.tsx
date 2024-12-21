@@ -1,6 +1,6 @@
 import { ColumnProps } from '@/types'
 import data from '@/data/data.json'
-import PhotosColumns from '../PhotoColumns/photosColumn'
+import PhotosColumns from '../PhotoColumns/PhotosColumn'
 
 const PhotosRows = ({ rows }: any) => {
     return (

@@ -11,7 +11,9 @@ export default function Photo({
             className={styles.image}
             src={photo.src}
             alt={photo.alt}
-            placeholder="blur"
+            width="200"
+            height="130"
+            // placeholder="blur"
         />
     )
 }

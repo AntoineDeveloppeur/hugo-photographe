@@ -5,3 +5,11 @@ export interface SubtitleProps {
 export interface TitleProps {
     content: string
 }
+
+export interface PhotoProps {
+    photo: { src: string; alt: string }
+}
+
+export interface ColumnProps {
+    column: object
+}

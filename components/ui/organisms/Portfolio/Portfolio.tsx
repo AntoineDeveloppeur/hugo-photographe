@@ -20,19 +20,20 @@ export default function Portfolio() {
     return (
         <div className={styles.portfolio}>
             <Title content="PORTFOLIO" />
-            <div className={styles.subtitleWrapper}>
+            <div className={styles.portfolio__subtitleWrapper}>
                 <Subtitle content="UN APERCU DE MON TRAVAIL" />
             </div>
-            <div className={styles.columns}>
-                {data.galery.map((columns): any => {
-                    return (
-                        <div className={styles.column}>
-                            {columns.map((pic): any => {
-                                return <Photo photo={pic} />
-                            })}
-                        </div>
-                    )
-                })}
+            <div className={styles.portfolio__columns}>
+                {data.galery.map((columns, i): any => (
+                    <div
+                        key={`column${i}`}
+                        className={styles.portfolio__columns__column}
+                    >
+                        {columns.map((pic, i): any => (
+                            <Photo key={`pic${i}`} photo={pic} />
+                        ))}
+                    </div>
+                ))}
             </div>
         </div>
     )

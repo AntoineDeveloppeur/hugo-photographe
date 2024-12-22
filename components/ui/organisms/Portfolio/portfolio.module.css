@@ -1,3 +1,14 @@
 .portfolio {
   max-width: 1000px;
+}
+
+.columns {
+  display: flex;
+  gap: 1rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }/*# sourceMappingURL=portfolio.module.css.map */

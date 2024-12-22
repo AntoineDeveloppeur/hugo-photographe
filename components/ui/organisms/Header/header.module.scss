@@ -7,15 +7,17 @@
     justify-content: center;
     align-items: flex-end;
     background-color: var(--background-main);
-}
+    &__largeScreen {
+        max-width: 1440px;
+        &__LogoWithSignatureWrapper {
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            left: 24px;
+        }
 
-.LogoWithSignatureWrapper {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    left: 24px;
-}
-
-.MenuWrapper {
-    display: flex;
+        &__MenuWrapper {
+            display: flex;
+        }
+    }
 }

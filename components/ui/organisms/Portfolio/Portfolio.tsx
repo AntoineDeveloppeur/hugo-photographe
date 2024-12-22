@@ -23,11 +23,17 @@ export default function Portfolio() {
             <div className={styles.subtitleWrapper}>
                 <Subtitle content="UN APERCU DE MON TRAVAIL" />
             </div>
-            {data.galery.map((columns): any => {
-                return columns.map((pic): any => {
-                    return <Photo photo={pic} />
-                })
-            })}
+            <div className={styles.columns}>
+                {data.galery.map((columns): any => {
+                    return (
+                        <div className={styles.column}>
+                            {columns.map((pic): any => {
+                                return <Photo photo={pic} />
+                            })}
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }

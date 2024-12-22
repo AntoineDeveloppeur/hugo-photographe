@@ -8,14 +8,15 @@
   align-items: flex-end;
   background-color: var(--background-main);
 }
-
-.LogoWithSignatureWrapper {
+.header__largeScreen {
+  max-width: 1440px;
+}
+.header__largeScreen__LogoWithSignatureWrapper {
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
   left: 24px;
 }
-
-.MenuWrapper {
+.header__largeScreen__MenuWrapper {
   display: flex;
 }/*# sourceMappingURL=header.module.css.map */

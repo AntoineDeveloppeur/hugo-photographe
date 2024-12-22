@@ -5,11 +5,17 @@ import Menu from '../../molecules/Menu/Menu'
 export default function Header() {
     return (
         <header className={styles.header}>
-            <div className={styles.LogoWithSignatureWrapper}>
-                <LogoWithSignature />
-            </div>
-            <div className={styles.MenuWrapper}>
-                <Menu />
+            <div className={styles.header__largeScreen}>
+                <div
+                    className={
+                        styles.header__largeScreen__LogoWithSignatureWrapper
+                    }
+                >
+                    <LogoWithSignature />
+                </div>
+                <div className={styles.header__largeScreen__MenuWrapper}>
+                    <Menu />
+                </div>
             </div>
         </header>
     )

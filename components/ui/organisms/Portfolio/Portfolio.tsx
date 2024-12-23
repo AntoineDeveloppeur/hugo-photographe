@@ -19,9 +19,9 @@ import Photo from '../../atoms/Photo/Photo'
 export default function Portfolio() {
     return (
         <div className={styles.portfolio}>
-            <Title content="PORTFOLIO" />
+            <Title text="PORTFOLIO" />
             <div className={styles.portfolio__subtitleWrapper}>
-                <Subtitle content="UN APERCU DE MON TRAVAIL" />
+                <Subtitle text="UN APERCU DE MON TRAVAIL" />
             </div>
             <div className={styles.portfolio__columns}>
                 {data.galery.map((columns, i): any => (

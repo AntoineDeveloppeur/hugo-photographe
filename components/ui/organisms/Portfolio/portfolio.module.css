@@ -1,10 +1,22 @@
-.portfolio__columns {
+.portfolio {
+  margin-top: 6rem;
+  margin-left: 12rem;
+  margin-right: 12rem;
+}
+.portfolio__largeScreen {
+  width: 100%;
+  max-width: 1440px;
+}
+.portfolio__largeScreen__subtitleWrapper {
+  margin-bottom: 6rem;
+}
+.portfolio__largeScreen__columns {
   width: 100%;
   display: flex;
   gap: 2rem;
   margin-bottom: 6rem;
 }
-.portfolio__columns__column {
+.portfolio__largeScreen__columns__column {
   flex: 1;
   display: flex;
   flex-direction: column;

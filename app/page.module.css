@@ -2,8 +2,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1440px;
-  margin-top: 6rem;
-  margin-left: 12rem;
-  margin-right: 12rem;
+  width: 100%;
 }/*# sourceMappingURL=page.module.css.map */

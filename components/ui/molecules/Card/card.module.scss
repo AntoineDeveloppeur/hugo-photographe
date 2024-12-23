@@ -1,0 +1,11 @@
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    &__line {
+        height: 2px;
+        width: 50%;
+        border-radius: 1px;
+        background-color: var(--dark0);
+    }
+}

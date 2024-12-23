@@ -13,3 +13,7 @@ export interface PhotoProps {
 export interface ButtonProps {
     text?: string
 }
+
+export interface TitleCardProps {
+    text: string
+}

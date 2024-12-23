@@ -1,6 +1,6 @@
 import { SubtitleProps } from '@/types'
 import styles from './subtitle.module.scss'
 
-export default function Subtitle({ content }: SubtitleProps) {
-    return <h2 className={styles.subtitle}>{content}</h2>
+export default function Subtitle({ text }: SubtitleProps) {
+    return <h2 className={styles.subtitle}>{text}</h2>
 }

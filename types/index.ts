@@ -1,9 +1,9 @@
 export interface SubtitleProps {
-    content: string
+    text: string
 }
 
 export interface TitleProps {
-    content: string
+    text: string
 }
 
 export interface PhotoProps {

@@ -1,0 +1,7 @@
+.projetSection {
+  background-color: var(--dark12);
+  width: 100%;
+}
+.projetSection__largeScreen {
+  max-width: 1440px;
+}/*# sourceMappingURL=projet-section.module.css.map */

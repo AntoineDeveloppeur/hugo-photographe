@@ -1,0 +1,7 @@
+.projetSection {
+    background-color: var(--dark12);
+    width: 100%;
+    &__largeScreen {
+        max-width: 1440px;
+    }
+}

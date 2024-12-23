@@ -10,6 +10,7 @@ export interface PhotoProps {
     photo: { src: string; alt: string }
 }
 
-export interface ColumnProps {
-    column: object
+export interface ButtonProps {
+    text?: string
+    icon?: string
 }

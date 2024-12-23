@@ -1,10 +1,11 @@
+'use client'
+
 import { ButtonProps } from '@/types'
 
-const Button = ({ text, icon }: ButtonProps) => {
+const Button = ({ text }: ButtonProps) => {
     return (
         <button onClick={() => {}}>
             <p>{text}</p>
-            {icon}
         </button>
     )
 }

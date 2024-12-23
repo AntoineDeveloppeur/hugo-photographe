@@ -12,5 +12,4 @@ export interface PhotoProps {
 
 export interface ButtonProps {
     text?: string
-    icon?: string
 }

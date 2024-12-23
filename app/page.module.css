@@ -1,6 +1,6 @@
 .pages {
   display: flex;
-  flex-direction: columns;
+  flex-direction: row;
   align-items: center;
   max-width: 1440px;
   margin-top: 6rem;

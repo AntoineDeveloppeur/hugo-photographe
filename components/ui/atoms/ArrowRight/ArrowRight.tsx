@@ -7,9 +7,9 @@ const ArrowRight = () => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="feather feather-arrow-right"
         >
             <line x1="5" y1="12" x2="19" y2="12"></line>

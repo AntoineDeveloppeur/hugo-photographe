@@ -1,16 +1,24 @@
 .portfolio {
-    &__subtitleWrapper {
-    }
-    &__columns {
+    margin-top: 6rem;
+    margin-left: 12rem;
+    margin-right: 12rem;
+    &__largeScreen {
         width: 100%;
-        display: flex;
-        gap: 2rem;
-        margin-bottom: 6rem;
-        &__column {
-            flex: 1;
+        max-width: 1440px;
+        &__subtitleWrapper {
+            margin-bottom: 6rem;
+        }
+        &__columns {
+            width: 100%;
             display: flex;
-            flex-direction: column;
             gap: 2rem;
+            margin-bottom: 6rem;
+            &__column {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
         }
     }
 }

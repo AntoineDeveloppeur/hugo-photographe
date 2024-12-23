@@ -1,5 +1,6 @@
 import Subtitle from '../../atoms/Subtitle/Subtitle'
 import Title from '../../atoms/Title/Title'
+import Card from '../../molecules/Card/Card'
 import styles from './projet-section.module.scss'
 import Button from '@/components/ui/atoms/Button/Button'
 
@@ -17,6 +18,11 @@ export default function ProjetSection() {
                         <Subtitle text="VOYAGEZ A TRAVERS MES PROJETS" />
                     </div>
                     <Button text="Tous les projets" />
+                </div>
+                <div className={styles.projetSection__largeScreen__cards}>
+                    <Card />
+                    <Card />
+                    <Card />
                 </div>
             </div>
         </section>

@@ -18,4 +18,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 6rem;
+}
+.projetSection__largeScreen__cards {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 6rem;
+}
+.projetSection__largeScreen__cards > * {
+  flex: 1;
 }/*# sourceMappingURL=projet-section.module.css.map */

@@ -1,0 +1,11 @@
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.cards__line {
+  height: 2px;
+  width: 50%;
+  border-radius: 1px;
+  background-color: var(--dark0);
+}/*# sourceMappingURL=card.module.css.map */

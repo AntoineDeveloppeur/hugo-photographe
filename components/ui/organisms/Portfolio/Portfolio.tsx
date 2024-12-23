@@ -18,7 +18,7 @@ import Photo from '../../atoms/Photo/Photo'
 
 export default function Portfolio() {
     return (
-        <div className={styles.portfolio}>
+        <section className={styles.portfolio}>
             <Title text="PORTFOLIO" />
             <div className={styles.portfolio__subtitleWrapper}>
                 <Subtitle text="UN APERCU DE MON TRAVAIL" />
@@ -35,6 +35,6 @@ export default function Portfolio() {
                     </div>
                 ))}
             </div>
-        </div>
+        </section>
     )
 }

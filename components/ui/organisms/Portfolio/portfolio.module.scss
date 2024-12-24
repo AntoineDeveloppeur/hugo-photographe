@@ -1,7 +1,8 @@
 .portfolio {
-    margin-top: 6rem;
-    margin-left: 12rem;
-    margin-right: 12rem;
+    background-color: var(--background-main);
+    padding-top: 6rem;
+    padding-left: 12rem;
+    padding-right: 12rem;
     &__largeScreen {
         width: 100%;
         max-width: 1440px;

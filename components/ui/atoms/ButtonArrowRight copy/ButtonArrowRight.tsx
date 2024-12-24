@@ -1,14 +1,14 @@
 'use client'
 
-import { ButtonArrowRightProps } from '@/types'
-import IconArrowRight from '../IconArrowRight/IconArrowRight'
+import { ButtonProps } from '@/types'
+import ArrowRight from '../IconArrowRight/IconArrowRight'
 import styles from './button-arrow-right.module.scss'
 
-const Button = ({ text }: ButtonArrowRightProps) => {
+const Button = ({ text }: ButtonProps) => {
     return (
         <button onClick={() => {}} className={styles.button}>
             {text && <p className={styles.button__p}>{text}</p>}
-            <IconArrowRight />
+            <ArrowRight />
         </button>
     )
 }

@@ -2,7 +2,7 @@ import Subtitle from '../../atoms/Subtitle/Subtitle'
 import Title from '../../atoms/Title/Title'
 import Card from '../../molecules/Card/Card'
 import styles from './projet-section.module.scss'
-import Button from '@/components/ui/atoms/Button/Button'
+import Button from '@/components/ui/atoms/ButtonArrowRight/ButtonArrowRight'
 
 export default function ProjetSection() {
     return (

@@ -1,4 +1,4 @@
-.cards {
+.card {
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -7,5 +7,23 @@
         width: 50%;
         border-radius: 1px;
         background-color: var(--dark0);
+    }
+    &__summary {
+        &__text {
+            font-size: 1.5rem;
+            color: var(--color-text-main);
+            display: inline;
+        }
+        &__dots {
+            font-size: 1.5rem;
+            color: var(--color-text-main);
+            display: inline;
+        }
+        &__link {
+            text-decoration: underline;
+            font-size: 1.7rem;
+            color: var(--color-text-second);
+            display: inline;
+        }
     }
 }

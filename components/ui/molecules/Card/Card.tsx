@@ -11,7 +11,7 @@ const Card = () => {
         <div className={styles.card}>
             <Photo photo={example} />
             <TitleCard text="Première carte, qu'elle est jolie la première carte" />
-            <div className={styles.cards__line}></div>
+            <div className={styles.card__line}></div>
             <div className={styles.card__summary}>
                 <p className={styles.card__summary__text}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed

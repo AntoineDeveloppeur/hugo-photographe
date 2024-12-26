@@ -7,7 +7,7 @@ const IconMap = () => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1"
+            strokeWidth="1"
             strokeLinecap="round"
             strokeLinejoin="round"
             className="feather feather-map-pin"

@@ -21,3 +21,9 @@ export interface ButtonArrowRightProps {
 export interface TitleCardProps {
     text: string
 }
+
+export interface CardProps {
+    title: string
+    description: string
+    photo: { src: string; alt: string }
+}

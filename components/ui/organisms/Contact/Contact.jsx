@@ -7,19 +7,12 @@ import Link from 'next/link'
 import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
 import IconPhone from '../../atoms/IconPhone/IconPhone'
-import { motion } from 'motion/react'
 const Contact = () => {
     const example = { src: voiture.src, alt: 'Voiture' }
 
     return (
         <section className={styles.contact}>
             <Button text="DECOUVREZ LE PHOTOGRAPHE" />
-            <motion.div
-                animate={{
-                    scale: 2,
-                    transition: { duration: 2 },
-                }}
-            />
             <div className={styles.contact__presentation}>
                 <div className={styles.contact__presentation__photoWrapper}>
                     <Photo photo={example} />

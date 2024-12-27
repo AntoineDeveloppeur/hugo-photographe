@@ -1,7 +1,7 @@
 import styles from './projectPage.module.scss'
 import Photo from '@/components/ui/atoms/Photo/Photo'
 import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjectPage'
-import voiture from '@/public/voiture.jpg'
+import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 import data from '@/data/data.json'
 
 export default function ProjectPage() {
@@ -10,10 +10,22 @@ export default function ProjectPage() {
             <div className={styles.projectPage__largeScreen}>
                 <div className={styles.projectPage__largeScreen__photoWrapper}>
                     <Photo photo={data.projects[0].mainPhoto} />
-
-                    {/* <Photo photo={{ src: voiture.src, alt: 'voiture' }} /> */}
                 </div>
-                <TitleProjectPage text="Titre tout a fait correct" />
+                <div className={styles.projectPage__largeScreen__titleWrapper}>
+                    <TitleProjectPage text="Titre tout a fait correct" />
+                </div>
+                {data.projects[0].textsAbovePhotos &&
+                    data.projects[0].textsAbovePhotos.map((text, index) => (
+                        <p
+                            key={index}
+                            className={
+                                styles.projectPage__largeScreen__textAbovePhotos
+                            }
+                        >
+                            {text}
+                        </p>
+                    ))}
+                <PhotosSets photosSets={data.projects[0]} />
             </div>
         </section>
     )

@@ -27,3 +27,7 @@ export interface CardProps {
     description: string
     mainPhoto: { src: string; alt: string }
 }
+
+export interface PhotosSetsProps {
+    photosSets: [{ src: string; alt: string }]
+}

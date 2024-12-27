@@ -16,7 +16,26 @@
         align-items: center;
         &__photoWrapper {
             max-width: 50vw;
-            margin-bottom: 8rem;
+        }
+        &__titleWrapper {
+            margin-top: 3rem;
+            margin-bottom: 6rem;
+        }
+        &__textAbovePhotos {
+            font-size: 1.5rem;
+            font-family: lora;
+            margin-top: 1rem;
+            color: var(--color-text-second);
+        }
+        &__photosSet {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            flex-wrap: wrap;
+            &__photoWrapper {
+                margin: auto;
+            }
         }
     }
 }

@@ -18,5 +18,24 @@
 }
 .projectPage__largeScreen__photoWrapper {
   max-width: 50vw;
-  margin-bottom: 8rem;
+}
+.projectPage__largeScreen__titleWrapper {
+  margin-top: 3rem;
+  margin-bottom: 6rem;
+}
+.projectPage__largeScreen__textAbovePhotos {
+  font-size: 1.5rem;
+  font-family: lora;
+  margin-top: 1rem;
+  color: var(--color-text-second);
+}
+.projectPage__largeScreen__photosSet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.projectPage__largeScreen__photosSet__photoWrapper {
+  margin: auto;
 }/*# sourceMappingURL=projectPage.module.css.map */

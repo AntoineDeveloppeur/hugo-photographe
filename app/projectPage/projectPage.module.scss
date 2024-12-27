@@ -1,0 +1,22 @@
+.projectPage {
+    width: 100%;
+    background-color: var(--background-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__largeScreen {
+        margin-top: 6rem;
+        margin-bottom: 6rem;
+        margin-left: 12rem;
+        margin-right: 12rem;
+        width: 100%;
+        max-width: 1440px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &__photoWrapper {
+            max-width: 50vw;
+            margin-bottom: 8rem;
+        }
+    }
+}

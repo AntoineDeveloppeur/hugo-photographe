@@ -1,0 +1,44 @@
+.photosSet {
+    display: grid;
+    width: 100%;
+    gap: 1rem;
+    &1photo {
+        grid-template-rows: 1fr;
+    }
+    &2photo {
+        grid-template-rows: repeat(2, 1fr);
+    }
+    &3photo {
+        grid-template-rows: repeat(3, 1fr);
+    }
+    &4photo {
+        grid-template-rows: repeat(2, 1fr);
+    }
+    &__photoWrapper {
+        margin: auto;
+    }
+}
+
+// .photosSet {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     width: 100%;
+//     flex-wrap: wrap;
+//     gap: 1rem;
+//     &__photoWrapper {
+//         margin: auto;
+//         &For1photo {
+//             width: 100%;
+//         }
+//         &For2photo {
+//             flex: 1;
+//         }
+//         &For3photo {
+//             flex: 1;
+//         }
+//         &For4photo {
+//             flex-wrap: wrap;
+//         }
+//     }
+// }

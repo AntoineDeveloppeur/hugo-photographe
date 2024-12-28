@@ -1,0 +1,20 @@
+.photosSet {
+  display: grid;
+  width: 100%;
+  gap: 1rem;
+}
+.photosSet1photo {
+  grid-template-rows: 1fr;
+}
+.photosSet2photo {
+  grid-template-rows: repeat(2, 1fr);
+}
+.photosSet3photo {
+  grid-template-rows: repeat(3, 1fr);
+}
+.photosSet4photo {
+  grid-template-rows: repeat(2, 1fr);
+}
+.photosSet__photoWrapper {
+  margin: auto;
+}/*# sourceMappingURL=photosSets.module.css.map */

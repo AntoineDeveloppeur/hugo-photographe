@@ -1,21 +1,24 @@
-.photosSet {
-    display: grid;
-    width: 100%;
-    gap: 1rem;
-    &1photo {
-        grid-template-rows: 1fr;
-    }
-    &2photo {
-        grid-template-rows: repeat(2, 1fr);
-    }
-    &3photo {
-        grid-template-rows: repeat(3, 1fr);
-    }
-    &4photo {
-        grid-template-rows: repeat(2, 1fr);
-    }
-    &__photoWrapper {
-        margin: auto;
+.photosSets {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    &__photosSet {
+        display: grid;
+        width: 100%;
+        gap: 1rem;
+        &1photo {
+            grid-template-columns: 1fr;
+        }
+        &2photo {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        &3photo {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        &4photo {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 }
 

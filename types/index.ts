@@ -28,6 +28,10 @@ export interface TitleProps {
     text: string
 }
 
+export interface TextsProps {
+    texts: string[] | undefined
+}
+
 export interface ButtonProps {
     text: string
 }
@@ -43,52 +47,5 @@ export interface TitleCardProps {
 export interface CardProps {
     title: string
     description: string
-    mainPhoto: Photo
+    mainPhoto: PhotoProps
 }
-
-// export interface SubtitleProps {
-//     text: string
-// }
-
-// export interface TitleProps {
-//     text: string
-// }
-
-// export interface PhotoProps {
-//     src: string
-//     alt: string
-// }
-
-// // export interface PhotosSetProps extends Array<PhotoProps> {}
-
-// // export interface PhotosSetsProps extends Array<PhotosSetProps> {}
-
-// export interface PhotoProps2 {
-//     photo: { src: string; alt: string }
-// }
-
-// export interface PhotosSetProps {
-//     photosSet: PhotoProps2[]
-// }
-
-// export interface PhotosSetsProps {
-//     photosSets: PhotosSetProps[]
-// }
-
-// export interface ButtonProps {
-//     text: string
-// }
-
-// export interface ButtonArrowRightProps {
-//     text?: string
-// }
-
-// export interface TitleCardProps {
-//     text: string
-// }
-
-// export interface CardProps {
-//     title: string
-//     description: string
-//     mainPhoto: { src: string; alt: string }
-// }

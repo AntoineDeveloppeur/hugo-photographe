@@ -4,19 +4,24 @@ import styles from './photosSets.module.scss'
 
 export default function PhotosSets({ photosSets }: PhotosSetsProps) {
     return (
-        <>
+        <div className={styles.photosSets}>
             {photosSets.map((photosSet, setIndex) => (
                 <div
-                    className={`styles.photosSet styles.photosSet${photosSet.length}photo`}
+                    className={`
+                        ${styles.photosSets__photosSet} 
+                        ${
+                            styles[
+                                `photosSets__photosSet${photosSet.length}photo`
+                            ]
+                        }`}
                     key={`photosSet-${setIndex}`}
                 >
                     {photosSet.map((photo, photoIndex) => (
                         <div
-                            style={{
-                                width: `calc(${90 / photosSet.length}%)`,
-                            }}
                             // className={`styles.photosSet__photoWrapperFor${photosSet.length}photo`}
-                            className={`styles.photosSet__photoWrapperFor${photosSet.length}photo`}
+                            className={
+                                styles.photosSets__photosSet__photoWrapper
+                            }
                             key={`photo-${setIndex}-${photoIndex}`}
                         >
                             <Photo photo={photo} />
@@ -24,6 +29,6 @@ export default function PhotosSets({ photosSets }: PhotosSetsProps) {
                     ))}
                 </div>
             ))}
-        </>
+        </div>
     )
 }

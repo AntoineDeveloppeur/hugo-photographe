@@ -48,4 +48,5 @@ export interface CardProps {
     title: string
     description: string
     mainPhoto: PhotoProps
+    id: string
 }

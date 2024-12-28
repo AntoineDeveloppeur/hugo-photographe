@@ -59,6 +59,7 @@ export default function ProjetSection() {
                               .map((project, i): any => (
                                   <Card
                                       key={`project${i}`}
+                                      id={project.key}
                                       title={project.title}
                                       description={project.description}
                                       mainPhoto={project.mainPhoto}
@@ -72,6 +73,7 @@ export default function ProjetSection() {
                               .map((project, i): any => (
                                   <Card
                                       key={`project${i}`}
+                                      id={project.key}
                                       title={project.title}
                                       description={project.description}
                                       mainPhoto={project.mainPhoto}

@@ -1,9 +1,8 @@
 import styles from './projectPage.module.scss'
 import Photo from '@/components/ui/atoms/Photo/Photo'
 import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjectPage'
-import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 import data from '@/data/data.json'
-
+import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 export default function ProjectPage() {
     return (
         <section className={styles.projectPage}>
@@ -25,7 +24,7 @@ export default function ProjectPage() {
                             {text}
                         </p>
                     ))}
-                <PhotosSets photosSets={data.projects[0]} />
+                <PhotosSets photosSets={data.projects[0].photosSets} />
             </div>
         </section>
     )

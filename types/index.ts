@@ -1,13 +1,31 @@
+// types.ts
+
+// Définition du type Photo
+export interface PhotoProps {
+    photo: { src: string; alt: string }
+}
+
+// Définition du type PhotoSet comme un tableau de Photo
+
+export interface PhotoProps2 {
+    src: string
+    alt: string
+}
+
+export type PhotoSet = PhotoProps2[]
+
+// Définition des props pour le composant PhotosSets
+export interface PhotosSetsProps {
+    photosSets: PhotoSet[]
+}
+
+// Autres types que vous aviez précédemment
 export interface SubtitleProps {
     text: string
 }
 
 export interface TitleProps {
     text: string
-}
-
-export interface PhotoProps {
-    photo: { src: string; alt: string }
 }
 
 export interface ButtonProps {
@@ -25,9 +43,52 @@ export interface TitleCardProps {
 export interface CardProps {
     title: string
     description: string
-    mainPhoto: { src: string; alt: string }
+    mainPhoto: Photo
 }
 
-export interface PhotosSetsProps {
-    photosSets: [{ src: string; alt: string }]
-}
+// export interface SubtitleProps {
+//     text: string
+// }
+
+// export interface TitleProps {
+//     text: string
+// }
+
+// export interface PhotoProps {
+//     src: string
+//     alt: string
+// }
+
+// // export interface PhotosSetProps extends Array<PhotoProps> {}
+
+// // export interface PhotosSetsProps extends Array<PhotosSetProps> {}
+
+// export interface PhotoProps2 {
+//     photo: { src: string; alt: string }
+// }
+
+// export interface PhotosSetProps {
+//     photosSet: PhotoProps2[]
+// }
+
+// export interface PhotosSetsProps {
+//     photosSets: PhotosSetProps[]
+// }
+
+// export interface ButtonProps {
+//     text: string
+// }
+
+// export interface ButtonArrowRightProps {
+//     text?: string
+// }
+
+// export interface TitleCardProps {
+//     text: string
+// }
+
+// export interface CardProps {
+//     title: string
+//     description: string
+//     mainPhoto: { src: string; alt: string }
+// }

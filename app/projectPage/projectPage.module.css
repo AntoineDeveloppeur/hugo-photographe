@@ -17,17 +17,17 @@
   align-items: center;
 }
 .projectPage__largeScreen__photoWrapper {
-  max-width: 50vw;
+  width: 100%;
 }
 .projectPage__largeScreen__titleWrapper {
-  margin-top: 3rem;
-  margin-bottom: 6rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
-.projectPage__largeScreen__textAbovePhotos {
+.projectPage__largeScreen__paragraphesWrapper {
   font-size: 1.5rem;
   font-family: lora;
-  margin-top: 1rem;
-  color: var(--color-text-second);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .projectPage__largeScreen__photosSet {
   display: flex;

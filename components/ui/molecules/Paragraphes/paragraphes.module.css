@@ -6,4 +6,6 @@
 .paragraphes__text {
   font-size: 1.5rem;
   font-family: lora;
-}/*# sourceMappingURL=paragraphes.modules.css.map */
+  width: 60rem;
+  color: var(--color-text-second);
+}/*# sourceMappingURL=paragraphes.module.css.map */

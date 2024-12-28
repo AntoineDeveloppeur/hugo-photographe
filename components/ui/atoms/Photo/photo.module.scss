@@ -2,4 +2,7 @@
     width: 100%;
     height: auto;
     stroke: 1px solid var(--dark0);
+    object-fit: cover;
+    flex-grow: 1;
+    flex-shrink: 1;
 }

@@ -4,7 +4,7 @@ import styles from './card.module.scss'
 import Link from 'next/link'
 import { CardProps } from '@/types/index.js'
 
-const Card = ({ title, description, mainPhoto }: CardProps) => {
+const Card = ({ id, title, description, mainPhoto }: CardProps) => {
     return (
         <div className={styles.card}>
             <Photo photo={mainPhoto} />
@@ -13,7 +13,10 @@ const Card = ({ title, description, mainPhoto }: CardProps) => {
             <div className={styles.card__summary}>
                 <p className={styles.card__summary__text}>{description}</p>
                 <p className={styles.card__summary__dots}>... </p>
-                <Link href="/" className={styles.card__summary__link}>
+                <Link
+                    href={`/projetPage/${id}`}
+                    className={styles.card__summary__link}
+                >
                     voir plus
                 </Link>
             </div>

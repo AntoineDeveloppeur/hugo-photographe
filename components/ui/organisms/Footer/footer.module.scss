@@ -1,20 +1,29 @@
 .footer {
     background-color: var(--dark12);
     width: 100%;
+    padding-top: 1rem;
     padding-left: 12rem;
     padding-right: 12rem;
+    padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 6rem;
     &__largeScreen {
         width: 100%;
         max-width: 1440px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         &__text {
             display: inline;
+            color: var(--color-text-second);
+            font-size: 1rem;
         }
         &__link {
             display: inline;
+            color: var(--color-text-second);
+            font-size: 1rem;
         }
     }
 }

@@ -10,6 +10,14 @@
     &__largeScreen {
         width: 100%;
         max-width: 1440px;
+        display: flex;
+        flex-direction: column;
+        &__moreProjects {
+            margin-top: 3rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
         &__top {
             width: auto;
             display: flex;

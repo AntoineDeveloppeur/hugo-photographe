@@ -1,13 +1,17 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+}
+.card__title {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .card__line {
   height: 2px;
   width: 50%;
   border-radius: 1px;
   background-color: var(--dark0);
+  margin-bottom: 2rem;
 }
 .card__summary__text {
   font-size: 1.5rem;

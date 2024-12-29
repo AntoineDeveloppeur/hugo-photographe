@@ -14,7 +14,7 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
                 <p className={styles.card__summary__text}>{description}</p>
                 <p className={styles.card__summary__dots}>... </p>
                 <Link
-                    href={`/projetPage/${id}`}
+                    href={`/projectPage/${id}`}
                     className={styles.card__summary__link}
                 >
                     voir plus

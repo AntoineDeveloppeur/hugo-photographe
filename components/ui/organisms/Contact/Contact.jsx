@@ -1,5 +1,5 @@
 import styles from './contact.module.scss'
-import Button from '../../atoms/Button/Button'
+import ButtonBig from '../../atoms/ButtonBig/ButtonBig'
 import Photo from '../../atoms/Photo/Photo'
 import voiture from '@/public/voiture.jpg'
 import Title from '../../atoms/Title/Title'
@@ -12,7 +12,7 @@ const Contact = () => {
 
     return (
         <section id="Contact" className={styles.contact}>
-            <Button text="DECOUVREZ LE PHOTOGRAPHE" />
+            <ButtonBig text="DECOUVREZ LE PHOTOGRAPHE" />
             <div className={styles.contact__presentation}>
                 <div className={styles.contact__presentation__photoWrapper}>
                     <Photo photo={example} />

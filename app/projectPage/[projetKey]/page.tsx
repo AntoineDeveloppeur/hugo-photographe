@@ -4,7 +4,7 @@ import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjec
 import data from '@/data/data.json'
 import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
-import Button from '@/components/ui/atoms/Button/Button'
+import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 
 export default function ProjectPage({ params }) {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est la clé du projet

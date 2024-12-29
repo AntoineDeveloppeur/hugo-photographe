@@ -5,6 +5,7 @@ import Subtitle from '../../atoms/Subtitle/Subtitle'
 import Title from '../../atoms/Title/Title'
 import Card from '../../molecules/Card/Card'
 import ButtonArrowRight from '@/components/ui/atoms/ButtonArrowRight/ButtonArrowRight'
+import Button from '../../atoms/Button/Button'
 import data from '@/data/data.json'
 import { useState } from 'react'
 
@@ -107,7 +108,7 @@ export default function ProjetSection() {
                                 styles.projetSection__largeScreen__moreProjects
                             }
                         >
-                            <ButtonArrowRight text="Voir Plus de projets" />
+                            <Button text="Voir Plus de projets" />
                         </div>
                     )
                 )}

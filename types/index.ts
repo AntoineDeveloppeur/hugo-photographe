@@ -34,10 +34,12 @@ export interface TextsProps {
 
 export interface ButtonProps {
     text: string
+    link?: string
 }
 
 export interface ButtonArrowRightProps {
     text?: string
+    link?: string
 }
 
 export interface TitleCardProps {
@@ -50,3 +52,5 @@ export interface CardProps {
     mainPhoto: PhotoProps
     id: string
 }
+
+export let params: string

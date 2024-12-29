@@ -5,46 +5,41 @@ import data from '@/data/data.json'
 import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
 export default function ProjectPage({ params }) {
-    //aller chercher dans data.json le projet correspondant à params. Le paramètres est la clé du projet
-    // const project = data.projects.find(
-    //     (project) => project.key === params.projetKey
-    // )
-    // if (!project) {
-    //     // Si le projet n'est pas trouvé, renvoyer une page d'erreur
-    //     return <div>Erreur 404 : Projet introuvable</div>
-    // }
+    // aller chercher dans data.json le projet correspondant à params. Le paramètres est la clé du projet
+    const project = data.projects.find(
+        (project) => project.key === params.projectKey
+    )
+    if (!project) {
+        // Si le projet n'est pas trouvé, renvoyer une page d'erreur
+        return <div>Erreur 404 : Projet introuvable</div>
+    }
 
     return (
         <section className={styles.projectPage}>
-            {/* {project.title} */}
             <div className={styles.projectPage__largeScreen}>
                 <div className={styles.projectPage__largeScreen__photoWrapper}>
-                    <Photo photo={data.projects[0].mainPhoto} />
+                    <Photo photo={project.mainPhoto} />
                 </div>
                 <div className={styles.projectPage__largeScreen__titleWrapper}>
-                    <TitleProjectPage text={data.projects[0].title} />
+                    <TitleProjectPage text={project.title} />
                 </div>
                 <div
                     className={
                         styles.projectPage__largeScreen__paragraphesWrapper
                     }
                 >
-                    {data.projects[0].textsAbovePhotos && (
-                        <Paragraphes
-                            texts={data.projects[0].textsAbovePhotos}
-                        />
+                    {project.textsAbovePhotos && (
+                        <Paragraphes texts={project.textsAbovePhotos} />
                     )}
                 </div>
-                <PhotosSets photosSets={data.projects[0].photosSets} />
+                <PhotosSets photosSets={project.photosSets} />
                 <div
                     className={
                         styles.projectPage__largeScreen__paragraphesWrapper
                     }
                 >
-                    {data.projects[0].textsBelowPhotos && (
-                        <Paragraphes
-                            texts={data.projects[0].textsBelowPhotos}
-                        />
+                    {project.textsBelowPhotos && (
+                        <Paragraphes texts={project.textsBelowPhotos} />
                     )}
                 </div>
             </div>

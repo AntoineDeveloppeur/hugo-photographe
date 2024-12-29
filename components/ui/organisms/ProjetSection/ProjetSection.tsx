@@ -57,13 +57,19 @@ export default function ProjetSection() {
                                   currentPage * projectsPerPage
                               )
                               .map((project, i): any => (
-                                  <Card
-                                      key={`project${i}`}
-                                      id={project.key}
-                                      title={project.title}
-                                      description={project.description}
-                                      mainPhoto={project.mainPhoto}
-                                  />
+                                  <div
+                                      className={
+                                          styles.projetSection__largeScreen__cards__card
+                                      }
+                                  >
+                                      <Card
+                                          key={`project${i}`}
+                                          id={project.key}
+                                          title={project.title}
+                                          description={project.description}
+                                          mainPhoto={project.mainPhoto}
+                                      />
+                                  </div>
                               ))
                         : data.projects
                               .slice(
@@ -71,13 +77,19 @@ export default function ProjetSection() {
                                   (currentPage - 1) * projectsPerPage + 3
                               )
                               .map((project, i): any => (
-                                  <Card
-                                      key={`project${i}`}
-                                      id={project.key}
-                                      title={project.title}
-                                      description={project.description}
-                                      mainPhoto={project.mainPhoto}
-                                  />
+                                  <div
+                                      className={
+                                          styles.projetSection__largeScreen__cards__card
+                                      }
+                                  >
+                                      <Card
+                                          key={`project${i}`}
+                                          id={project.key}
+                                          title={project.title}
+                                          description={project.description}
+                                          mainPhoto={project.mainPhoto}
+                                      />
+                                  </div>
                               ))}
                 </div>
                 {isExpandedView && (

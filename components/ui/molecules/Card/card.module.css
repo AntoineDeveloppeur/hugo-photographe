@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  width: 30%;
 }
 .card__line {
   height: 2px;

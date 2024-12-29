@@ -26,9 +26,6 @@
   gap: 6rem;
   flex-wrap: wrap;
 }
-.projetSection__largeScreen__cards__card {
-  width: 30%;
-}
 .projetSection__largeScreen__pagination {
   margin-top: 3rem;
   width: 100%;

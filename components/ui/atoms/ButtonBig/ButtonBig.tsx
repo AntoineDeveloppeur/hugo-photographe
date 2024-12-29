@@ -1,10 +1,10 @@
 'use client'
 
-import styles from './button.module.scss'
+import styles from './buttonBig.module.scss'
 import { ButtonProps } from '@/types'
 import Link from 'next/link'
 
-const Button = ({ text, link }: ButtonProps) => {
+const ButtonBig = ({ text, link }: ButtonProps) => {
     return (
         <button onClick={() => {}} className={styles.button}>
             {link ? (
@@ -18,4 +18,4 @@ const Button = ({ text, link }: ButtonProps) => {
     )
 }
 
-export default Button
+export default ButtonBig

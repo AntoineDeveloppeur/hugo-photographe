@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { CardProps } from '@/types/index.js'
 
 const Card = ({ id, title, description, mainPhoto }: CardProps) => {
+    const descriptionShort = description.split(' ').slice(0, 20).join(' ')
+
     return (
         <div className={styles.card}>
             <Photo photo={mainPhoto} />
@@ -13,7 +15,7 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
             </div>
             <div className={styles.card__line}></div>
             <div className={styles.card__summary}>
-                <p className={styles.card__summary__text}>{description}</p>
+                <p className={styles.card__summary__text}>{descriptionShort}</p>
                 <p className={styles.card__summary__dots}>... </p>
                 <Link
                     href={`/projectPage/${id}`}

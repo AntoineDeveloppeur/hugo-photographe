@@ -6,7 +6,7 @@ import Photo from '../../atoms/Photo/Photo'
 
 export default function Portfolio() {
     return (
-        <section className={styles.portfolio}>
+        <section id="Porfolio" className={styles.portfolio}>
             <div className={styles.portfolio__largeScreen}>
                 <Title text="PORTFOLIO" />
                 <div className={styles.portfolio__largeScreen__subtitleWrapper}>

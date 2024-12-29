@@ -29,7 +29,7 @@ export default function ProjetSection() {
     }
 
     return (
-        <section className={styles.projetSection}>
+        <section id="Projects" className={styles.projetSection}>
             <div className={styles.projetSection__largeScreen}>
                 <div className={styles.projetSection__largeScreen__top}>
                     <div

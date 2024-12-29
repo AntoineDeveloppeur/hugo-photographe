@@ -11,7 +11,7 @@ const Contact = () => {
     const example = { src: voiture.src, alt: 'Voiture' }
 
     return (
-        <section className={styles.contact}>
+        <section id="Contact" className={styles.contact}>
             <Button text="DECOUVREZ LE PHOTOGRAPHE" />
             <div className={styles.contact__presentation}>
                 <div className={styles.contact__presentation__photoWrapper}>
@@ -56,6 +56,7 @@ const Contact = () => {
                         <IconMap />
                         <Link
                             href="https://www.google.fr/maps/place/Fos-sur-Mer/@43.4545215,4.8155204,12z/data=!4m15!1m8!3m7!1s0x12b619721d5cf72d:0xea40197d819691d!2sFos-sur-Mer!3b1!8m2!3d43.437882!4d4.945711!16zL20vMDkxX3Zi!3m5!1s0x12b619721d5cf72d:0xea40197d819691d!8m2!3d43.437882!4d4.945711!16zL20vMDkxX3Zi!5m1!1e8?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank"
                             className={
                                 styles.contact__presentation__text__details__link
                             }

@@ -1,9 +1,9 @@
 'use client'
 
+import styles from './projet-section.module.scss'
 import Subtitle from '../../atoms/Subtitle/Subtitle'
 import Title from '../../atoms/Title/Title'
 import Card from '../../molecules/Card/Card'
-import styles from './projet-section.module.scss'
 import ButtonArrowRight from '@/components/ui/atoms/ButtonArrowRight/ButtonArrowRight'
 import data from '@/data/data.json'
 import { useState } from 'react'
@@ -42,11 +42,6 @@ export default function ProjetSection() {
                         <Title text="PROJETS" />
                         <Subtitle text="VOYAGEZ A TRAVERS MES PROJETS" />
                     </div>
-                    {projectsCount > 3 && (
-                        <div onClick={clickOnAllProjects}>
-                            <ButtonArrowRight text="Tous les projets" />
-                        </div>
-                    )}
                 </div>
                 <div className={styles.projetSection__largeScreen__cards}>
                     {/* Afficher le nombre de projets entre 1 et 3 */}
@@ -74,7 +69,7 @@ export default function ProjetSection() {
                             </div>
                         ))}
                 </div>
-                {isExpandedView && (
+                {isExpandedView ? (
                     <div
                         className={
                             styles.projetSection__largeScreen__pagination
@@ -104,6 +99,17 @@ export default function ProjetSection() {
                             <ButtonArrowRight />
                         </div>
                     </div>
+                ) : (
+                    projectsCount > 3 && (
+                        <div
+                            onClick={clickOnAllProjects}
+                            className={
+                                styles.projetSection__largeScreen__moreProjects
+                            }
+                        >
+                            <ButtonArrowRight text="Voir Plus de projets" />
+                        </div>
+                    )
                 )}
             </div>
         </section>

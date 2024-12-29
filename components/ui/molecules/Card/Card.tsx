@@ -8,7 +8,9 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
     return (
         <div className={styles.card}>
             <Photo photo={mainPhoto} />
-            <TitleCard text={title} />
+            <div className={styles.card__title}>
+                <TitleCard text={title} />
+            </div>
             <div className={styles.card__line}></div>
             <div className={styles.card__summary}>
                 <p className={styles.card__summary__text}>{description}</p>

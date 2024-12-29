@@ -16,6 +16,8 @@ export default function ProjetSection() {
     const PagesCount = Math.ceil(projectsCount / projectsPerPage)
 
     const [isExpandedView, setIsExpandedView] = useState<boolean>(false)
+    const projectCountPerPage = isExpandedView ? 6 : 3
+
     const [currentPage, setCurrentPage] = useState<number>(1)
 
     function clickOnAllProjects() {
@@ -50,47 +52,27 @@ export default function ProjetSection() {
                     {/* Afficher le nombre de projets entre 1 et 3 */}
                     {/* Ajouter un état qui prends en compte si l'utilisateur à cliquer sur 
                     'voir tous les projets', Si c'est le cas afficher le nombre de projet max 6 */}
-                    {isExpandedView
-                        ? data.projects
-                              .slice(
-                                  (currentPage - 1) * projectsPerPage,
-                                  currentPage * projectsPerPage
-                              )
-                              .map((project, i): any => (
-                                  <div
-                                      className={
-                                          styles.projetSection__largeScreen__cards__card
-                                      }
-                                  >
-                                      <Card
-                                          key={`project${i}`}
-                                          id={project.key}
-                                          title={project.title}
-                                          description={project.description}
-                                          mainPhoto={project.mainPhoto}
-                                      />
-                                  </div>
-                              ))
-                        : data.projects
-                              .slice(
-                                  (currentPage - 1) * projectsPerPage,
-                                  (currentPage - 1) * projectsPerPage + 3
-                              )
-                              .map((project, i): any => (
-                                  <div
-                                      className={
-                                          styles.projetSection__largeScreen__cards__card
-                                      }
-                                  >
-                                      <Card
-                                          key={`project${i}`}
-                                          id={project.key}
-                                          title={project.title}
-                                          description={project.description}
-                                          mainPhoto={project.mainPhoto}
-                                      />
-                                  </div>
-                              ))}
+                    {data.projects
+                        .slice(
+                            (currentPage - 1) * projectsPerPage,
+                            (currentPage - 1) * projectsPerPage +
+                                projectCountPerPage
+                        )
+                        .map((project, i): any => (
+                            <div
+                                className={
+                                    styles.projetSection__largeScreen__cards__card
+                                }
+                            >
+                                <Card
+                                    key={`project${i}`}
+                                    id={project.key}
+                                    title={project.title}
+                                    description={project.description}
+                                    mainPhoto={project.mainPhoto}
+                                />
+                            </div>
+                        ))}
                 </div>
                 {isExpandedView && (
                     <div

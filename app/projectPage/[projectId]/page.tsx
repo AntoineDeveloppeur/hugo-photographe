@@ -9,8 +9,9 @@ import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 export default function ProjectPage({ params }) {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est la clé du projet
     const project = data.projects.find(
-        (project) => project.key === params.projectKey
+        (project) => project.id === params.projectId
     )
+    console.log('project', project)
     if (!project) {
         // Si le projet n'est pas trouvé, renvoyer une page d'erreur
         return (
@@ -26,7 +27,7 @@ export default function ProjectPage({ params }) {
                         >
                             Le projet n'a pas été trouvé.
                         </p>
-                        <Button text="retourer aux projets" link="/" />
+                        <Button text="Retourez aux projets" link="/" />
                     </div>
                 </div>
             </section>

@@ -56,13 +56,13 @@ export default function ProjetSection() {
                         )
                         .map((project, i): any => (
                             <div
+                                key={`project${i}`}
                                 className={
                                     styles.projetSection__largeScreen__cards__card
                                 }
                             >
                                 <Card
-                                    key={`project${i}`}
-                                    id={project.key}
+                                    id={project.id}
                                     title={project.title}
                                     description={project.description}
                                     mainPhoto={project.mainPhoto}

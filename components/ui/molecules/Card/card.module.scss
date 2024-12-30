@@ -23,11 +23,12 @@
             color: var(--color-text-second);
             display: inline;
         }
-        &__link {
+        &__seeMore {
             text-decoration: underline;
             font-size: 1.5rem;
             color: var(--color-text-main);
             display: inline;
+            cursor: pointer;
         }
     }
 }

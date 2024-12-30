@@ -6,14 +6,14 @@ export default function () {
         <nav>
             <ul className={styles.chapters}>
                 <li>
-                    <Link href="#Portfolio">
+                    <Link href="/#Portfolio">
                         <p className={`${styles.chapter} ${styles.chapter__1}`}>
                             PORTFOLIO
                         </p>
                     </Link>
                 </li>
                 <li>
-                    <Link href="#Projects">
+                    <Link href="/#Projects">
                         <p className={`${styles.chapter} ${styles.chapter__2}`}>
                             PROJETS
                         </p>

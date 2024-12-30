@@ -8,22 +8,16 @@ export default function Footer() {
                     ©2024 Hugo Randez Photographe 
                 </p>
                 <Link
-                    href="/mentions-legales"
+                    href="/mentionsLegales"
                     className={styles.footer__largeScreen__link}
                 >
                     | Mentions Légales | 
                 </Link>
                 <Link
-                    href="/mentions-legales"
+                    href="/politiqueConfidentialite"
                     className={styles.footer__largeScreen__link}
                 >
-                    Politique de confidentialité 
-                </Link>
-                <Link
-                    href="/mentions-legales"
-                    className={styles.footer__largeScreen__link}
-                >
-                    | CGV | 
+                    Politique de confidentialité | 
                 </Link>
                 <Link
                     href="https://antoinedeveloppeur.github.io/portfolio/"

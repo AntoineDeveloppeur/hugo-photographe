@@ -8,7 +8,7 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
     const descriptionShort = description.split(' ').slice(0, 20).join(' ')
 
     return (
-        <div className={styles.card}>
+        <Link className={styles.card} href={`/projectPage/${id}`}>
             <Photo photo={mainPhoto} />
             <div className={styles.card__title}>
                 <TitleCard text={title} />
@@ -17,14 +17,9 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
             <div className={styles.card__summary}>
                 <p className={styles.card__summary__text}>{descriptionShort}</p>
                 <p className={styles.card__summary__dots}>... </p>
-                <Link
-                    href={`/projectPage/${id}`}
-                    className={styles.card__summary__link}
-                >
-                    voir plus
-                </Link>
+                <p className={styles.card__summary__seeMore}>voir plus</p>
             </div>
-        </div>
+        </Link>
     )
 }
 

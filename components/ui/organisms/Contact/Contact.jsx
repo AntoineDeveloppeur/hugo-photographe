@@ -7,6 +7,7 @@ import Link from 'next/link'
 import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
 import IconPhone from '../../atoms/IconPhone/IconPhone'
+
 const Contact = () => {
     const example = { src: voiture.src, alt: 'Voiture' }
 

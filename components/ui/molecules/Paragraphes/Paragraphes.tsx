@@ -1,5 +1,6 @@
 import { TextsProps } from '@/types'
 import styles from './paragraphes.module.scss'
+
 const Paragraphes = ({ texts }: TextsProps) => {
     return (
         <div className={styles.paragraphes}>

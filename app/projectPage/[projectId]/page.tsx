@@ -6,12 +6,11 @@ import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 
-export default function ProjectPage({ params }) {
+const ProjectPage = ({ params }) => {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est la clé du projet
     const project = data.projects.find(
         (project) => project.id === params.projectId
     )
-    console.log('project', project)
     if (!project) {
         // Si le projet n'est pas trouvé, renvoyer une page d'erreur
         return (
@@ -65,3 +64,5 @@ export default function ProjectPage({ params }) {
         </section>
     )
 }
+
+export default ProjectPages

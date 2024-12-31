@@ -1,7 +1,7 @@
 import styles from './menu.module.scss'
 import Link from 'next/link'
 
-export default function () {
+const Menu = () => {
     return (
         <nav>
             <ul className={styles.chapters}>
@@ -30,3 +30,5 @@ export default function () {
         </nav>
     )
 }
+
+export default Menu

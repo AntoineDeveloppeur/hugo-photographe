@@ -4,7 +4,7 @@ import Subtitle from '../../atoms/Subtitle/Subtitle'
 import data from '@/data/data.json'
 import Photo from '../../atoms/Photo/Photo'
 
-export default function Portfolio() {
+const Portfolio = () => {
     return (
         <section id="Porfolio" className={styles.portfolio}>
             <div className={styles.portfolio__largeScreen}>
@@ -30,3 +30,5 @@ export default function Portfolio() {
         </section>
     )
 }
+
+export default Portfolio

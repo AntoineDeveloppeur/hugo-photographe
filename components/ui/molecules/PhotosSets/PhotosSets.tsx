@@ -2,7 +2,7 @@ import Photo from '@/components/ui/atoms/Photo/Photo'
 import { PhotosSetsProps } from '@/types'
 import styles from './photosSets.module.scss'
 
-export default function PhotosSets({ photosSets }: PhotosSetsProps) {
+const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
     return (
         <div className={styles.photosSets}>
             {photosSets.map((photosSet, setIndex) => (
@@ -32,3 +32,5 @@ export default function PhotosSets({ photosSets }: PhotosSetsProps) {
         </div>
     )
 }
+
+export default PhotosSets

@@ -9,7 +9,7 @@ import Button from '../../atoms/Button/Button'
 import data from '@/data/data.json'
 import { useState } from 'react'
 
-export default function ProjetSection() {
+const ProjetSection = () => {
     // définir une constant qui dépend du nombre de projets
     // const projectsCount = nombre d'élément dans le tableau de données
     const projectsPerPage: number = 6
@@ -116,3 +116,4 @@ export default function ProjetSection() {
         </section>
     )
 }
+export default ProjetSection

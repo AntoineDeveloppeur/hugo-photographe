@@ -2,7 +2,8 @@ import { PhotoProps } from '@/types'
 import styles from './photo.module.scss'
 import Image from 'next/image'
 
-export default function Photo({ photo }: PhotoProps) {
+const Photo = ({ photo }: PhotoProps) => {
+    // export default function Photo({ photo }: PhotoProps) {
     return (
         <Image
             className={styles.image}
@@ -14,3 +15,5 @@ export default function Photo({ photo }: PhotoProps) {
         />
     )
 }
+
+export default Photo

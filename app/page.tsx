@@ -3,7 +3,7 @@ import styles from './page.module.scss'
 import ProjetSection from '@/components/ui/organisms/ProjetSection/ProjetSection'
 import Contact from '@/components/ui/organisms/Contact/Contact'
 
-export default function Home() {
+const Home = () => {
     return (
         <div className={styles.pages}>
             <Portfolio />
@@ -12,3 +12,5 @@ export default function Home() {
         </div>
     )
 }
+
+export default Home

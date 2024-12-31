@@ -1,5 +1,5 @@
 import Photo from '../../atoms/Photo/Photo'
-import TitleCard from '../../atoms/TitleCard.tsx/TitleCard'
+import TitleCard from '../../atoms/TitleCard/TitleCard'
 import styles from './card.module.scss'
 import Link from 'next/link'
 import { CardProps } from '@/types/index.js'

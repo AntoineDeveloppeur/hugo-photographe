@@ -1,5 +1,7 @@
 import './signature.scss'
 
-export default function Signature() {
+const Signature = () => {
     return <h1>HUGO RANDEZ - PHOTOGRAPHE</h1>
 }
+
+export default Signature

@@ -1,7 +1,7 @@
 .image {
   width: 100%;
   height: auto;
-  stroke: 1px solid var(--dark0);
+  stroke: 10px solid var(--dark0);
   -o-object-fit: cover;
      object-fit: cover;
   flex-grow: 1;

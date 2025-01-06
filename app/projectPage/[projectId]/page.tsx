@@ -65,4 +65,4 @@ const ProjectPage = ({ params }) => {
     )
 }
 
-export default ProjectPages
+export default ProjectPage

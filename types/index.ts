@@ -1,25 +1,21 @@
 // types.ts
 
-// Définition du type Photo
-export interface PhotoProps {
-    photo: { src: string; alt: string }
+export interface PhotosSetsProps {
+    photosSets: photoSet[]
 }
+export type photoSet = PhotoVariableProps[]
 
-// Définition du type PhotoSet comme un tableau de Photo
-
-export interface PhotoProps2 {
+export interface PhotoVariableProps {
     src: string
     alt: string
 }
 
-export type PhotoSet = PhotoProps2[]
-
-// Définition des props pour le composant PhotosSets
-export interface PhotosSetsProps {
-    photosSets: PhotoSet[]
+export interface PhotoProps {
+    photo: PhotoVariableProps
 }
 
-// Autres types que vous aviez précédemment
+// Définition des props pour le composant PhotosSets
+
 export interface SubtitleProps {
     text: string
 }
@@ -29,7 +25,7 @@ export interface TitleProps {
 }
 
 export interface TextsProps {
-    texts: string[] | undefined
+    texts: string[]
 }
 
 export interface ButtonProps {

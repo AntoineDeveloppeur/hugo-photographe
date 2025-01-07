@@ -1,9 +1,0 @@
-.image {
-  width: 100%;
-  height: auto;
-  stroke: 10px solid var(--dark0);
-  -o-object-fit: cover;
-     object-fit: cover;
-  flex-grow: 1;
-  flex-shrink: 1;
-}/*# sourceMappingURL=photo.module.css.map */

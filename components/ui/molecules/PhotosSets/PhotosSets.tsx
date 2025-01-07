@@ -1,6 +1,6 @@
-import Photo from '@/components/ui/atoms/Photo/Photo'
 import { PhotosSetsProps } from '@/types'
 import styles from './photosSets.module.scss'
+import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
 
 const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
     return (
@@ -24,7 +24,7 @@ const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
                             }
                             key={`photo-${setIndex}-${photoIndex}`}
                         >
-                            <Photo photo={photo} />
+                            <PhotoBasic photo={photo} />
                         </div>
                     ))}
                 </div>

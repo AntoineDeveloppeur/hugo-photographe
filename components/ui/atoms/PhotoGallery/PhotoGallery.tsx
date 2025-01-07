@@ -1,14 +1,14 @@
 'use client'
 
 import { PhotoProps } from '@/types'
-import styles from './photo.module.scss'
+import styles from './photoGallery.module.scss'
 import NextImage from 'next/image'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 
-const Photo = ({ photo }: PhotoProps) => {
+const PhotoGallery = ({ photo }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
@@ -69,4 +69,4 @@ const Photo = ({ photo }: PhotoProps) => {
     )
 }
 
-export default Photo
+export default PhotoGallery

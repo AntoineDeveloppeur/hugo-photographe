@@ -1,4 +1,4 @@
-import Photo from '../../atoms/Photo/Photo'
+import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
 import TitleCard from '../../atoms/TitleCard/TitleCard'
 import styles from './card.module.scss'
 import Link from 'next/link'
@@ -10,21 +10,8 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
 
     return (
         <Link className={styles.card} href={`/projectPage/${id}`}>
-            <Photo photo={mainPhoto} />
-            <motion.div
-                style={{
-                    color: 'green',
-                    fontSize: 20,
-                    width: '300px',
-                    height: '30px',
-                    textAlign: 'center',
-                    border: '2px solid green',
-                    margin: '40px',
-                }}
-                whileHover={{ scale: 0.5 }}
-            >
-                GeeksforGeeks
-            </motion.div>
+            <PhotoBasic photo={mainPhoto} />
+        
             <div className={styles.card__title}>
                 <TitleCard text={title} />
             </div>

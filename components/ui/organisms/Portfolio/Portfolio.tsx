@@ -2,7 +2,7 @@ import styles from './portfolio.module.scss'
 import Title from '@/components/ui/atoms/Title/Title'
 import Subtitle from '../../atoms/Subtitle/Subtitle'
 import data from '@/data/data.json'
-import Photo from '../../atoms/Photo/Photo'
+import PhotoGallery from '../../atoms/PhotoGallery/PhotoGallery'
 
 const Portfolio = () => {
     return (
@@ -21,7 +21,7 @@ const Portfolio = () => {
                             }
                         >
                             {columns.map((pic, i): any => (
-                                <Photo key={`pic${i}`} photo={pic} effect="effect1" />
+                                <PhotoGallery key={`pic${i}`} photo={pic} effect="effect1" />
                             ))}
                         </div>
                     ))}

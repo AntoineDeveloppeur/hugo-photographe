@@ -36,16 +36,21 @@ const Photo = ({ photo }: PhotoProps) => {
                 onMouseEnter={preloadHighResImage}
                 onMouseLeave={() => setIsHovered(false)}
                 whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
+                transition={{ 
+                    duration: 5, 
+                    ease: [0.215, 0.61, 0.355, 1]
+                }}
             >
-                <NextImage
-                    className={styles.image}
-                    src={photo.src}
-                    alt={photo.alt}
-                    width={500}
-                    height={300}
-                    quality={75}
-                />
+                <div className={styles.imageWrapper}>
+                    <NextImage
+                        className={styles.image}
+                        src={photo.src}
+                        alt={photo.alt}
+                        width={500}
+                        height={300}
+                        quality={75}
+                    />
+                </div>
             </motion.div>
 
             <ModalPhoto

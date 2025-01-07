@@ -21,7 +21,7 @@ const Portfolio = () => {
                             }
                         >
                             {columns.map((pic, i): any => (
-                                <Photo key={`pic${i}`} photo={pic} />
+                                <Photo key={`pic${i}`} photo={pic} effect="effect1" />
                             ))}
                         </div>
                     ))}

@@ -15,25 +15,18 @@ const Photo = ({ photo }: PhotoProps) => {
 
     const handleModalClose = () => {
         setIsModalOpen(false)
-        // Réinitialiser l'état de chargement pour la prochaine ouverture
-        setIsLoading(true)
     }
 
-    // Précharger l'image haute qualité au survol
-    const preloadHighResImage = () => {
-        const img = new window.Image()
-        img.src = photo.src
-        img.onload = () => {
-            setIsLoading(false)
-        }
+    const handleMouseEnter = () => {
         setIsHovered(true)
+        setIsLoading(true)
     }
 
     return (
         <>
             <motion.div 
                 onClick={() => setIsModalOpen(true)}
-                onMouseEnter={preloadHighResImage}
+                onMouseEnter={handleMouseEnter}
                 onMouseLeave={() => setIsHovered(false)}
                 whileHover={{ scale: 1.05 }}
                 transition={{ 
@@ -66,7 +59,9 @@ const Photo = ({ photo }: PhotoProps) => {
                         width={1920}
                         height={1080}
                         quality={100}
+                        priority={isHovered || isModalOpen}
                         onLoadingComplete={() => setIsLoading(false)}
+                        style={{ objectFit: 'contain' }}
                     />
                 </div>
             </ModalPhoto>

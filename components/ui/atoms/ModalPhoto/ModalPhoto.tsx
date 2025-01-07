@@ -27,9 +27,8 @@ const ModalPhoto = ({ isOpen, onClose, children }: ModalPhotoProps) => {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.5, opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        onClick={(e) => e.stopPropagation()}
                     >
-                        <button className={styles.closeButton} onClick={onClose}>
+                        <button className={styles.closeButton} onClick={onClose} aria-label='Close'>
                             ✕
                         </button>
                         {children}

@@ -7,9 +7,7 @@ import { motion } from 'framer-motion'
 
 const Button = ({ text, link }: ButtonProps) => {
     return (
-        <motion.button
-            onClick={() => {}}
-            whileHover={{ scale: 0.5 }}
+        <button
             className={styles.button}
         >
             {link ? (
@@ -19,7 +17,7 @@ const Button = ({ text, link }: ButtonProps) => {
             ) : (
                 <p className={styles.button__p}>{text}</p>
             )}
-        </motion.button>
+        </button>
     )
 }
 

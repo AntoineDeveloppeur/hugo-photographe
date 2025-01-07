@@ -1,6 +1,6 @@
 import styles from './contact.module.scss'
 import ButtonBig from '../../atoms/ButtonBig/ButtonBig'
-import Photo from '../../atoms/Photo/Photo'
+import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
 import voiture from '@/public/voiture.jpg'
 import Title from '../../atoms/Title/Title'
 import Link from 'next/link'
@@ -16,7 +16,7 @@ const Contact = () => {
             <ButtonBig text="DECOUVREZ LE PHOTOGRAPHE" />
             <div className={styles.contact__presentation}>
                 <div className={styles.contact__presentation__photoWrapper}>
-                    <Photo photo={example} />
+                    <PhotoBasic photo={example} />
                 </div>
                 <div className={styles.contact__presentation__text}>
                     <Title text="HUGO RANDEZ" />

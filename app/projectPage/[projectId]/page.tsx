@@ -1,10 +1,10 @@
 import styles from './projectPage.module.scss'
-import Photo from '@/components/ui/atoms/Photo/Photo'
 import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjectPage'
 import data from '@/data/data.json'
 import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
+import PhotoBasic from '@/components/ui/atoms/PhotoBasic/PhotoBasic'
 
 const ProjectPage = ({ params }) => {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est la clé du projet
@@ -36,7 +36,7 @@ const ProjectPage = ({ params }) => {
         <section className={styles.projectPage}>
             <div className={styles.projectPage__largeScreen}>
                 <div className={styles.projectPage__largeScreen__photoWrapper}>
-                    <Photo photo={project.mainPhoto} />
+                    <PhotoBasic photo={project.mainPhoto} />
                 </div>
                 <div className={styles.projectPage__largeScreen__titleWrapper}>
                     <TitleProjectPage text={project.title} />

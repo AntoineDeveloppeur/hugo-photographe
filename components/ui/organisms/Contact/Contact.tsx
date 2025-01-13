@@ -10,7 +10,7 @@ import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
 import IconPhone from '../../atoms/IconPhone/IconPhone'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion} from 'framer-motion'
 
 const Contact = () => {
     const example = { src: voiture.src, alt: 'Voiture' }
@@ -18,11 +18,9 @@ const Contact = () => {
 
     return (
         <section id="Contact" className={styles.contact}>
-            <AnimatePresence>
                 {!showPresentation && (
                     <motion.div
                         initial={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
                     >
                         <ButtonBig 
@@ -31,15 +29,14 @@ const Contact = () => {
                         />
                     </motion.div>
                 )}
-            </AnimatePresence>
 
-            <AnimatePresence>
+
+
                 {showPresentation && (
                     <motion.div 
                         className={styles.contact__presentation}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0, x: '50vw' }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
                     >
                         <div className={styles.contact__presentation__photoWrapper}>
@@ -96,7 +93,6 @@ const Contact = () => {
                       
                     </motion.div>
                 )}
-            </AnimatePresence>
         </section>
     )
 }

@@ -7,8 +7,10 @@ import { motion } from 'framer-motion'
 
 const Button = ({ text, link }: ButtonProps) => {
     return (
-        <button
+        <motion.button
             className={styles.button}
+            whileHover={{ backgroundColor: 'var(--dark10)' }}
+            whileTap={{ scale: 0.9 }}
         >
             {link ? (
                 <Link href={link}>
@@ -17,7 +19,7 @@ const Button = ({ text, link }: ButtonProps) => {
             ) : (
                 <p className={styles.button__p}>{text}</p>
             )}
-        </button>
+        </motion.button>
     )
 }
 

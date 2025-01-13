@@ -4,32 +4,66 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    overflow: hidden;
-    &__hovered {
-        background: radial-gradient(circle at 30% 30%, var(--dark30), var(--dark12) 70%);
+}
+
+.cardWrapper:hover .gradientLayer {
+    opacity: 1;
+}
+
+.hindHover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark12);
+    transform: translate(0, 0);
+    transition: transform 0.5s ease-in-out;
+    z-index: -1;
+    &__visible {
+        transform: translate(100%, 0);
     }
-    .hindHover {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--dark12);
-        transform: translate(0,0);
-        transition: transform 0.5s ease-in-out;
-        z-index: -1;
-        &__visible {
-            transform: translate(100%,0)
-        }
-    }
+}
+
+.baseLayer {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    background-color: #e5e7eb;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.gradientLayer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    background: linear-gradient(
+        to bottom right,
+        var(--dark20),
+        var(--dark10) 95%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .card {
     display: flex;
     flex-direction: column;
+    padding: 1rem;
+
     &__title {
         margin-top: 1rem;
         margin-bottom: 1rem;
+        z-index: 2;
     }
     &__line {
         height: 2px;
@@ -37,8 +71,10 @@
         border-radius: 1px;
         background-color: var(--dark0);
         margin-bottom: 2rem;
+        z-index: 2;
     }
     &__summary {
+        z-index: 2;
         &__text {
             font-size: 1.5rem;
             color: var(--color-text-second);

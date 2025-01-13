@@ -3,38 +3,33 @@ import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
 import TitleCard from '../../atoms/TitleCard/TitleCard'
 import Link from 'next/link'
 import { CardProps } from '@/types/index.js'
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+
 
 const Card = ({ id, title, description, mainPhoto }: CardProps) => {
     const descriptionShort = description.split(' ').slice(0, 20).join(' ')
-    const [isHovered, setIsHovered] = useState(false)
+
 
     return (
-        <motion.div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        <div
         className={styles.cardWrapper}
         >
 
-        <Link className={styles.card} href={`/projectPage/${id}`}>
-        <div className={styles.baseLayer}></div>
-        <div className={styles.gradientLayer}></div>
+        <Link className={styles.cardWrapper__card} href={`/projectPage/${id}`}>
+        {/* <div className={styles.cardWrapper__baseLayer}></div> */}
+        <div className={styles.cardWrapper__gradientLayer}></div>
             <PhotoBasic photo={mainPhoto} />
         
-            <div className={styles.card__title}>
+            <div className={styles.cardWrapper__card__title}>
                 <TitleCard text={title} />
             </div>
-            <div className={styles.card__line}></div>
-            <div className={styles.card__summary}>
-                <p className={styles.card__summary__text}>{descriptionShort}</p>
-                <p className={styles.card__summary__dots}>... </p>
-                <p className={styles.card__summary__seeMore}>voir plus</p>
+            <div className={styles.cardWrapper__card__line}></div>
+            <div className={styles.cardWrapper__card__summary}>
+                <p className={styles.cardWrapper__card__summary__text}>{descriptionShort}</p>
+                <p className={styles.cardWrapper__card__summary__dots}>... </p>
+                <p className={styles.cardWrapper__card__summary__seeMore}>voir plus</p>
             </div>
-            {/* <div className={ isHovered ? styles.hindHover__visible : styles.hindHover}>
-            </div> */}
         </Link>
-        </motion.div>
+        </div>
     )
 }
 

@@ -4,6 +4,7 @@
 }
 
 .chapter {
+    position: relative;
     padding-top: 2.25rem;
     padding-bottom: 2.25rem;
     padding-left: 4.16rem;
@@ -11,6 +12,23 @@
     font-size: 1.5rem;
     font-family: var(--font-merriweather);
     color: white;
+    z-index:1;
+    &::before {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        left: 0px;
+        bottom: 0px;
+        content: '';
+        background: var(--dark15);
+        // opacity: 0.3;
+        transition: all 0.3s;
+        z-index: -1;
+    }
+
+    &:hover::before {
+        height: calc(100% + 1px);
+    }
     &__1 {
         border-left: 1px;
         border-top: 1px;
@@ -18,12 +36,18 @@
         border-style: solid;
         border-radius: 10px 0 0 0;
         border-color: var(--dark15);
+        &::before {
+            border-radius: 10px 0 0 0 ;
+        }
     }
     &__2 {
         border-top: 1px;
         border-right: 1px;
         border-style: solid;
         border-color: var(--dark15);
+        &::before {
+            // border-radius: 10px 0 0 0 ;
+        }
     }
     &__3 {
         border-top: 1px;
@@ -31,5 +55,8 @@
         border-style: solid;
         border-radius: 0 10px 0 0;
         border-color: var(--dark15);
+        &::before {
+            border-radius: 0 10px 0 0 ;
+        }
     }
 }

@@ -15,7 +15,6 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
         >
 
         <Link className={styles.cardWrapper__card} href={`/projectPage/${id}`}>
-        {/* <div className={styles.cardWrapper__baseLayer}></div> */}
         <div className={styles.cardWrapper__gradientLayer}></div>
             <PhotoBasic photo={mainPhoto} />
         

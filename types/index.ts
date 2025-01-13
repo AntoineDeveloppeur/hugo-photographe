@@ -31,6 +31,7 @@ export interface TextsProps {
 export interface ButtonProps {
     text: string
     link?: string
+    onclick?: () => void
 }
 
 export interface ButtonArrowRightProps {

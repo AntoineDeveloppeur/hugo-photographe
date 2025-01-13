@@ -3,14 +3,20 @@
 import { ButtonArrowRightProps } from '@/types'
 import IconArrowRight from '../IconArrowRight/IconArrowRight'
 import styles from './button-arrow-right.module.scss'
+import { motion } from 'framer-motion'
 
-const Button = ({ text }: ButtonArrowRightProps) => {
+const ButtonArrowRight = ({ text }: ButtonArrowRightProps) => {
     return (
-        <button onClick={() => {}} className={styles.button}>
+        <motion.button 
+        onClick={() => {}}
+        whileHover={{backgroundColor: 'var(--dark10)'}}
+        // whileHover={{filter: 'brightness(1.4)'}}
+        whileTap={{ scale: 0.9 }}
+        className={styles.button}>
             {text && <p className={styles.button__p}>{text}</p>}
             <IconArrowRight />
-        </button>
+        </motion.button>
     )
 }
 
-export default Button
+export default ButtonArrowRight

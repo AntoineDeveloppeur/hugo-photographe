@@ -11,11 +11,15 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
     const [isHovered, setIsHovered] = useState(false)
 
     return (
-        <motion.div className={isHovered ? styles.cardWrapper__hovered : styles.cardWrapper}
+        <motion.div
         onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}>
+        onMouseLeave={() => setIsHovered(false)}
+        className={styles.cardWrapper}
+        >
 
         <Link className={styles.card} href={`/projectPage/${id}`}>
+        <div className={styles.baseLayer}></div>
+        <div className={styles.gradientLayer}></div>
             <PhotoBasic photo={mainPhoto} />
         
             <div className={styles.card__title}>
@@ -27,8 +31,8 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
                 <p className={styles.card__summary__dots}>... </p>
                 <p className={styles.card__summary__seeMore}>voir plus</p>
             </div>
-            <div className={ isHovered ? styles.hindHover__visible : styles.hindHover}>
-            </div>
+            {/* <div className={ isHovered ? styles.hindHover__visible : styles.hindHover}>
+            </div> */}
         </Link>
         </motion.div>
     )

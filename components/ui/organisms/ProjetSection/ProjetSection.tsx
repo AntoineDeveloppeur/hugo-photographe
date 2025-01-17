@@ -8,6 +8,7 @@ import ButtonArrowRight from '@/components/ui/atoms/ButtonArrowRight/ButtonArrow
 import Button from '../../atoms/Button/Button'
 import data from '@/data/data.json'
 import { useState } from 'react'
+import Pagination from '../../molecules/Pagination/Pagination'
 
 const ProjetSection = () => {
     // définir une constant qui dépend du nombre de projets
@@ -45,9 +46,10 @@ const ProjetSection = () => {
                     </div>
                 </div>
                 <div className={styles.projetSection__largeScreen__cards}>
-                    {/* Afficher le nombre de projets entre 1 et 3 */}
-                    {/* Ajouter un état qui prends en compte si l'utilisateur à cliquer sur 
-                    'voir tous les projets', Si c'est le cas afficher le nombre de projet max 6 */}
+                    {/* Afficher le nombre de projets entre 1 et 3 initialement
+                    Si l'utilisateur à cliquer sur 'voir tous les projets' la 
+                    variable isExpandedView devient true, Si c'est le cas afficher
+                     le nombre de projet max 6 */}
                     {data.projects
                         .slice(
                             (currentPage - 1) * projectsPerPage,
@@ -71,41 +73,17 @@ const ProjetSection = () => {
                         ))}
                 </div>
                 {isExpandedView ? (
-                    <div
-                        className={
-                            styles.projetSection__largeScreen__pagination
-                        }
-                    >
-                        <div
-                            className={
-                                styles.projetSection__largeScreen__pagination__previous
-                            }
-                            onClick={previousPage}
-                        >
-                            <ButtonArrowRight />
-                        </div>
-                        <p
-                            className={
-                                styles.projetSection__largeScreen__pagination__p
-                            }
-                        >
-                            {currentPage}
-                        </p>
-                        <div
-                            className={
-                                styles.projetSection__largeScreen__pagination__next
-                            }
-                            onClick={nextPage}
-                        >
-                            <ButtonArrowRight />
-                        </div>
-                    </div>
+                   <Pagination
+                        previousPage={previousPage}
+                        nextPage={nextPage}
+                        currentPage={currentPage}
+                    />
                 ) : (
                     projectsCount > 3 && (
                         <div
                             onClick={clickOnAllProjects}
                             className={
-                                styles.projetSection__largeScreen__moreProjects
+                                styles.projetSection__largeScreen__moreProjectsWrapper
                             }
                         >
                             <Button text="Voir Plus de projets" />

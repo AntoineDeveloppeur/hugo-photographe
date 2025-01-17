@@ -28,7 +28,7 @@ const PhotoGallery = ({ photo }: PhotoProps) => {
                 onClick={() => setIsModalOpen(true)}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={() => setIsHovered(false)}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.08 }}
                 transition={{ 
                     duration: 5, 
                     ease: [0.215, 0.61, 0.355, 1]

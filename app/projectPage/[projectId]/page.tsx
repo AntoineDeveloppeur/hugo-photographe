@@ -6,11 +6,10 @@ import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import PhotoBasic from '@/components/ui/atoms/PhotoBasic/PhotoBasic'
 
-const ProjectPage = ({ params }) => {
+const ProjectPage = async ({ params }) => {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est la clé du projet
-    const project = data.projects.find(
-        (project) => project.id === params.projectId
-    )
+    const { projectId } = await params
+    const project = data.projects.find((project) => project.id === projectId)
     if (!project) {
         // Si le projet n'est pas trouvé, renvoyer une page d'erreur
         return (

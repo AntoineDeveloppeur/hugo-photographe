@@ -6,8 +6,8 @@ import { CardProps } from '@/types/index.js'
 
 
 const Card = ({ id, title, description, mainPhoto }: CardProps) => {
-    const descriptionShort = description.split(' ').slice(0, 20).join(' ')
 
+    const descriptionShort = description.split(' ').slice(0, 20).join(' ')
 
     return (
         <div

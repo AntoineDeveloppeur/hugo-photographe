@@ -4,7 +4,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    &:hover .gradientLayer {
+    &:hover .cardWrapper__gradientLayer {
         opacity: 1;
     }
     &__gradientLayer {

@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import { lora, baskervville, merriweather } from './font'
 import Footer from '@/components/ui/organisms/Footer/Footer'
 import { useEffect, useState } from 'react'
-import Header from '@/components/ui/organisms/Header/Header'
+import Header from '@/components/ui/organisms/HeaderDesktop/HeaderDesktop'
 import HeaderMobile from '@/components/ui/organisms/HeaderMobile/HeaderMobile'
 
 // J'ai du enlever metadata car 'use client' ne l'autorise pas à vérifier si je garde

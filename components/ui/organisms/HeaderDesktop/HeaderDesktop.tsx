@@ -1,4 +1,4 @@
-import styles from './header.module.scss'
+import styles from './header-desktop.module.scss'
 import LogoWithSignature from '../../molecules/LogoWithSignature/LogoWithSignature'
 import Menu from '../../molecules/Menu/Menu'
 

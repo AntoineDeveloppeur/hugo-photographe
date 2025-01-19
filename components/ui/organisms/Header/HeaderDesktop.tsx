@@ -2,7 +2,7 @@ import styles from './header-desktop.module.scss'
 import LogoWithSignature from '../../molecules/LogoWithSignature/LogoWithSignature'
 import Menu from '../../molecules/MenuDesktop/MenuDesktop'
 
-const HeaderDesktop = () => {
+const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.header__largeScreen}>
@@ -21,4 +21,4 @@ const HeaderDesktop = () => {
     )
 }
 
-export default HeaderDesktop
+export default Header

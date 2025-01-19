@@ -1,0 +1,19 @@
+.header {
+    position: relative;
+    width: 100vw;
+    height: 120px;
+    border-bottom: 1px solid var(--dark15);
+    // display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-main);
+    &__LogoWithSignatureWrapper {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        left: 24px;
+    }
+    &__MenuWrapper {
+
+    }
+}

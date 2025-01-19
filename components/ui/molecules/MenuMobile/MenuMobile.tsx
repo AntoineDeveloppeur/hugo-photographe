@@ -1,7 +1,7 @@
 "use client"
 
-import type { Variants } from "motion/react"
-import * as motion from "motion/react-client"
+import type { Variants } from "framer-motion"
+import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 
 export default function Variants() {
@@ -10,7 +10,6 @@ export default function Variants() {
     const { height } = useDimensions(containerRef)
 
     return (
-        <div>
             <div style={container}>
                 <motion.nav
                     initial={false}
@@ -24,7 +23,6 @@ export default function Variants() {
                     <MenuToggle toggle={() => setIsOpen(!isOpen)} />
                 </motion.nav>
             </div>
-        </div>
     )
 }
 

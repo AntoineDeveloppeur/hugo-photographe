@@ -4,8 +4,6 @@
     height: 120px;
     border-bottom: 1px solid var(--dark15);
     // display: flex;
-    justify-content: space-between;
-    align-items: center;
     background-color: var(--background-main);
     &__LogoWithSignatureWrapper {
         position: absolute;
@@ -14,6 +12,9 @@
         left: 24px;
     }
     &__MenuWrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
 
     }
 }

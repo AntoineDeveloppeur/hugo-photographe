@@ -1,7 +1,7 @@
-import styles from './menu.module.scss'
+import styles from './menu-desktop.module.scss'
 import Link from 'next/link'
 
-const Menu = () => {
+const MenuDesktop = () => {
     return (
         <nav>
             <ul className={styles.chapters}>
@@ -31,4 +31,4 @@ const Menu = () => {
     )
 }
 
-export default Menu
+export default MenuDesktop

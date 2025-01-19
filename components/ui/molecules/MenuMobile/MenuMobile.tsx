@@ -1,8 +1,14 @@
 "use client"
 
+import styles from './menu-mobile.module.scss'
 import type { Variants } from "framer-motion"
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
+import IconPhone from '../../atoms/IconPhone/IconPhone'
+import IconBook from '../../atoms/IconBook/IconBook'
+import IconPortfolio from '../../atoms/IconPortfolio/IconPortfolio'     
+import useDimensions from '@/hooks/useDimensions'
+import Link from 'next/link'
 
 export default function Variants() {
     const [isOpen, setIsOpen] = useState(false)
@@ -10,16 +16,20 @@ export default function Variants() {
     const { height } = useDimensions(containerRef)
 
     return (
-            <div style={container}>
+            <div className={styles.container}>
                 <motion.nav
                     initial={false}
                     animate={isOpen ? "open" : "closed"}
                     custom={height}
                     ref={containerRef}
-                    style={nav}
+                    className={styles.nav}
                 >
-                    <motion.div style={background} variants={sidebarVariants} />
-                    <Navigation />
+                    <motion.div className={styles.background} variants={sidebarVariants} />
+                    <motion.ul className={styles.list} variants={navVariants}>
+                        <MenuItem text="Portfolio" icon="portfolio" link="/#Portfolio" />
+                        <MenuItem text="Projets" icon="book" link="/#Projects" />
+                        <MenuItem text="Contact" icon="phone" link="/#Contact" />
+                    </motion.ul>
                     <MenuToggle toggle={() => setIsOpen(!isOpen)} />
                 </motion.nav>
             </div>
@@ -35,13 +45,25 @@ const navVariants = {
     },
 }
 
-const Navigation = () => (
-    <motion.ul style={list} variants={navVariants}>
-        {[0, 1, 2, 3, 4].map((i) => (
-            <MenuItem i={i} key={i} />
-        ))}
-    </motion.ul>
-)
+
+
+const MenuItem = ({ text, icon, link }: { text: string, icon: string, link: string }) => {
+    return (
+        <motion.li
+            // className={styles.listItem}
+            variants={itemVariants}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+        ><Link href={link} className={styles.listItem}>
+
+            {icon === 'portfolio' && <div className={styles.icon}><IconPortfolio /></div>}
+            {icon === 'book' && <div className={styles.icon}><IconBook /></div>}
+            {icon === 'phone' && <div className={styles.icon}><IconPhone /></div>}
+            <div className={styles.text} >{text}</div>
+        </Link>
+        </motion.li>
+    )
+}
 
 const itemVariants = {
     open: {
@@ -60,26 +82,9 @@ const itemVariants = {
     },
 }
 
-const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"]
-
-const MenuItem = ({ i }: { i: number }) => {
-    const border = `2px solid ${colors[i]}`
-    return (
-        <motion.li
-            style={listItem}
-            variants={itemVariants}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-        >
-            <div style={{ ...iconPlaceholder, border }} />
-            <div style={{ ...textPlaceholder, border }} />
-        </motion.li>
-    )
-}
-
 const sidebarVariants = {
-    open: (height = 1000) => ({
-        clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+    open: (height = 500) => ({
+        clipPath: `circle(${height * 2 + 200}px at 220px 40px)`,
         transition: {
             type: "spring",
             stiffness: 20,
@@ -87,7 +92,7 @@ const sidebarVariants = {
         },
     }),
     closed: {
-        clipPath: "circle(30px at 40px 40px)",
+        clipPath: "circle(30px at 220px 40px)",
         transition: {
             delay: 0.2,
             type: "spring",
@@ -105,16 +110,19 @@ interface PathProps {
 
 const Path = (props: PathProps) => (
     <motion.path
-        fill="transparent"
+        fill="var(--color-text-main)"
         strokeWidth="3"
-        stroke="hsl(0, 0%, 18%)"
+        stroke="var(--color-text-main)"
         strokeLinecap="round"
         {...props}
     />
 )
 
 const MenuToggle = ({ toggle }: { toggle: () => void }) => (
-    <button style={toggleContainer} onClick={toggle}>
+    <motion.div
+        className={styles.toggleContainer}
+        onClick={toggle}
+    >
         <svg width="23" height="23" viewBox="0 0 23 23">
             <Path
                 variants={{
@@ -137,89 +145,9 @@ const MenuToggle = ({ toggle }: { toggle: () => void }) => (
                 }}
             />
         </svg>
-    </button>
+    </motion.div>
 )
 
-/**
- * ==============   Styles   ================
- */
-
-const container: React.CSSProperties = {
-    position: "relative",
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "stretch",
-    flex: 1,
-    width: 500,
-    maxWidth: "100%",
-    height: 400,
-    backgroundColor: "var(--accent)",
-    borderRadius: 20,
-    overflow: "hidden",
-}
-
-const nav: React.CSSProperties = {
-    width: 300,
-}
-
-const background: React.CSSProperties = {
-    backgroundColor: "#f5f5f5",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    width: 300,
-}
-
-const toggleContainer: React.CSSProperties = {
-    outline: "none",
-    border: "none",
-    WebkitUserSelect: "none",
-    MozUserSelect: "none",
-    cursor: "pointer",
-    position: "absolute",
-    top: 18,
-    left: 15,
-    width: 50,
-    height: 50,
-    borderRadius: "50%",
-    background: "transparent",
-}
-
-const list: React.CSSProperties = {
-    listStyle: "none",
-    padding: 25,
-    margin: 0,
-    position: "absolute",
-    top: 80,
-    width: 230,
-}
-
-const listItem: React.CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    padding: 0,
-    margin: 0,
-    listStyle: "none",
-    marginBottom: 20,
-    cursor: "pointer",
-}
-
-const iconPlaceholder: React.CSSProperties = {
-    width: 40,
-    height: 40,
-    borderRadius: "50%",
-    flex: "40px 0",
-    marginRight: 20,
-}
-
-const textPlaceholder: React.CSSProperties = {
-    borderRadius: 5,
-    width: 200,
-    height: 20,
-    flex: 1,
-}
 
 /**
  * ==============   Utils   ================
@@ -241,4 +169,3 @@ const useDimensions = (ref: React.RefObject<HTMLDivElement | null>) => {
 
     return dimensions.current
 }
-

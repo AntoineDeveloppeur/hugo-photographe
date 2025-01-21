@@ -27,7 +27,7 @@ export default function RootLayout({
 
     useEffect(() => {
       const checkIsMobile = () => {
-        setIsMobile(window.innerWidth < 768)
+        setIsMobile(window.innerWidth < 900)
       }
       
       checkIsMobile()

@@ -2,47 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    //Color palet :
-    --dark0: #000000;
-    --dark5: #181818;
-    --dark7: #282828;
-    --dark10: #303030;
-    --dark12: #383838;
-    --dark15: #474747;
-    --dark20: #5e5e5e;
-    --dark30: #919191;
-    --dark40: #c8c8c8;
-    --dark50: #e5e5e5;
-    --dark100: white;
-
-    //Color
-    --background-main: var(--dark10);
-    --background-second: var(--dark12);
-    --color-text-main: var(--dark100);
-    --color-text-second: var(--dark50);
-    // Variables globales
-}
-
-html {
-    font-size: 12px;
-    line-height: 1.5;
-    font-weight: 400;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
-}
-
-body {
-    color: var(--foreground);
-    background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 /*
 *
 ******CSS reset begins*****
@@ -128,3 +87,70 @@ select {
 ******CSS reset ends*****
 *
 */
+
+:root {
+    //Color palet :
+    --dark0: #000000;
+    --dark5: #181818;
+    --dark7: #282828;
+    --dark10: #303030;
+    --dark12: #383838;
+    --dark15: #474747;
+    --dark20: #5e5e5e;
+    --dark30: #919191;
+    --dark40: #c8c8c8;
+    --dark50: #e5e5e5;
+    --dark100: white;
+
+    //Color
+    --background-main: var(--dark10);
+    --background-second: var(--dark12);
+    --color-text-main: var(--dark100);
+    --color-text-second: var(--dark50);
+    // Variables globales
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+}
+
+body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Police responsive begins */
+
+@mixin responsive-font($min-size, $max-size, $min-width: 320px, $max-width: 1440px) {
+    font-size: $min-size;
+    
+    @media screen and (min-width: $min-width) {
+      font-size: calc(#{$min-size} + #{strip-unit($max-size - $min-size)} * ((100vw - #{$min-width}) / #{strip-unit($max-width - $min-width)}));
+    }
+    
+    @media screen and (min-width: $max-width) {
+      font-size: $max-size;
+    }
+  }
+  
+  //Supprime l'unité
+  @function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+  }
+  
+
+  html {
+    // font-size: 12px;
+    @include responsive-font(8px, 12px);
+    line-height: 1.5;
+    font-weight: 400;
+}
+  h1 {
+    @include responsive-font(18px, 32px);
+  }
+
+  /* Police responsive ends */

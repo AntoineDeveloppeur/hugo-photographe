@@ -10,7 +10,7 @@ import IconPortfolio from '../../atoms/IconPortfolio/IconPortfolio'
 import useDimensions from '@/hooks/useDimensions'
 import Link from 'next/link'
 
-export default function Variants() {
+export default function MenuMobile() {
     const [isOpen, setIsOpen] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
     const { height } = useDimensions(containerRef)
@@ -52,7 +52,7 @@ const MenuItem = ({ text, icon, link }: { text: string, icon: string, link: stri
         <motion.li
             // className={styles.listItem}
             variants={itemVariants}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
         ><Link href={link} className={styles.listItem}>
 
@@ -83,8 +83,8 @@ const itemVariants = {
 }
 
 const sidebarVariants = {
-    open: (height = 500) => ({
-        clipPath: `circle(${height * 2 + 200}px at 220px 40px)`,
+    open: (height = 200) => ({
+        clipPath: `circle(${height * 2 + 200}px at 210px 40px)`,
         transition: {
             type: "spring",
             stiffness: 20,
@@ -92,7 +92,7 @@ const sidebarVariants = {
         },
     }),
     closed: {
-        clipPath: "circle(30px at 220px 40px)",
+        clipPath: "circle(0px at 140px 60px)",
         transition: {
             delay: 0.2,
             type: "spring",
@@ -111,7 +111,7 @@ interface PathProps {
 const Path = (props: PathProps) => (
     <motion.path
         fill="var(--color-text-main)"
-        strokeWidth="3"
+        strokeWidth="1"
         stroke="var(--color-text-main)"
         strokeLinecap="round"
         {...props}
@@ -123,7 +123,7 @@ const MenuToggle = ({ toggle }: { toggle: () => void }) => (
         className={styles.toggleContainer}
         onClick={toggle}
     >
-        <svg width="23" height="23" viewBox="0 0 23 23">
+        <svg width="30" height="30" viewBox="0 0 23 23" strokeWidth="1">
             <Path
                 variants={{
                     closed: { d: "M 2 2.5 L 20 2.5" },

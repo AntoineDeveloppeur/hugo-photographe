@@ -8,6 +8,7 @@ import Button from '../../atoms/Button/Button'
 import data from '@/data/data.json'
 import { useState } from 'react'
 import Pagination from '../../molecules/Pagination/Pagination'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const ProjetSection = () => {
     // définir une constant qui dépend du nombre de projets
@@ -34,42 +35,44 @@ const ProjetSection = () => {
     return (
         <section id="Projects" className={styles.projetSection}>
             <div className={styles.projetSection__largeScreen}>
-                <div className={styles.projetSection__largeScreen__top}>
-                    <div
-                        className={
-                            styles.projetSection__largeScreen__top__TitleSubtitle
-                        }
-                    >
+                <div className={styles.projetSection__largeScreen__titleAndSubtitle}>
+                    
                         <Title text="PROJETS" />
                         <Subtitle text="VOYAGEZ A TRAVERS MES PROJETS" />
-                    </div>
+                 
                 </div>
                 <div className={styles.projetSection__largeScreen__cards}>
-                    {/* Afficher le nombre de projets entre 1 et 3 initialement
-                    Si l'utilisateur à cliquer sur 'voir tous les projets' la 
-                    variable isExpandedView devient true, Si c'est le cas afficher
-                     le nombre de projet max 6 */}
-                    {data.projects
+                    <AnimatePresence>
+                        {data.projects
                         .slice(
                             (currentPage - 1) * projectsPerPage,
                             (currentPage - 1) * projectsPerPage +
                                 projectCountPerPage
                         )
-                        .map((project, i): any => (
-                            <div
-                                key={`project${i}`}
-                                className={
-                                    styles.projetSection__largeScreen__cards__card
-                                }
-                            >
-                                <Card
-                                    id={project.id}
-                                    title={project.title}
-                                    description={project.description}
-                                    mainPhoto={project.mainPhoto}
-                                />
-                            </div>
-                        ))}
+                        .map((project, index): any => (
+                            <motion.div
+                                key={`project${index}`}
+                                    className={
+                                        styles.projetSection__largeScreen__cards__card
+                                    }
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{
+                                        duration: 0.5,
+                                        delay: index * 0.2 - 0.6,
+                                        ease: "easeOut"
+                                    }}
+                                >
+                                    <Card
+                                        title={project.title}
+                                        description={project.description}
+                                        mainPhoto={project.mainPhoto}
+                                        id={project.id}
+                                    />
+                                </motion.div>
+                            ))}
+                    </AnimatePresence>
                 </div>
                 {isExpandedView ? (
                    <Pagination

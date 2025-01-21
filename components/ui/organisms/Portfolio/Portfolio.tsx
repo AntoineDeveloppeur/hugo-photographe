@@ -6,10 +6,11 @@ import Subtitle from '../../atoms/Subtitle/Subtitle'
 import data from '@/data/data.json'
 import PhotoGallery from '../../atoms/PhotoGallery/PhotoGallery'
 import { useState, useEffect } from 'react'
+import type { PhotosSetsProps, PhotoVariableProps, GaleryType, DataType } from '@/types'
 
 const Portfolio = () => {
 
-    const [galery, setGalery] = useState('galeryDesktop')
+    const [galery, setGalery] = useState<GaleryType>('galeryDesktop')
     useEffect(() => {
     const checkDevice = () => {
             if (window.innerWidth < 768) {
@@ -38,15 +39,15 @@ const Portfolio = () => {
                     <Subtitle text="UN APERCU DE MON TRAVAIL" />
                 </div>
                 <div className={styles.portfolio__largeScreen__columns}>
-                    {data[galery].map((columns, i): any => (
+                    {(data as DataType)[galery].map((columns: PhotoVariableProps[], i) => (
                         <div
                             key={`column${i}`}
                             className={
                                 styles.portfolio__largeScreen__columns__column
                             }
                         >
-                            {columns.map((pic, i): any => (
-                                <PhotoGallery key={`pic${i}`} photo={pic} effect="effect1" />
+                            {columns.map((pic: PhotoVariableProps, i) => (
+                                <PhotoGallery key={`pic${i}`} photo={pic} />
                             ))}
                         </div>
                     ))}

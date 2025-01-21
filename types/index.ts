@@ -1,18 +1,24 @@
 // types.ts
 
-export interface PhotosSetsProps {
-    photosSets: photoSet[]
-}
-export type photoSet = PhotoVariableProps[]
-
 export interface PhotoVariableProps {
     src: string
     alt: string
 }
-
 export interface PhotoProps {
     photo: PhotoVariableProps
 }
+export type photoSet = PhotoVariableProps[]
+
+export interface PhotosSetsProps {
+    photosSets: PhotoVariableProps[][]
+}
+
+export interface DataType {
+    galeryDesktop: PhotoVariableProps[][];
+    galeryTablet: PhotoVariableProps[][];
+    galeryMobile: PhotoVariableProps[][];
+}
+
 
 // Définition des props pour le composant PhotosSets
 
@@ -49,5 +55,7 @@ export interface CardProps {
     mainPhoto: PhotoProps
     id: string
 }
+
+export type GaleryType = 'galeryDesktop' | 'galeryTablet' | 'galeryMobile';
 
 export let params: string

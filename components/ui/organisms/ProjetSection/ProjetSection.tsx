@@ -9,6 +9,7 @@ import data from '@/data/data.json'
 import { useState } from 'react'
 import Pagination from '../../molecules/Pagination/Pagination'
 import { motion, AnimatePresence } from 'framer-motion'
+import { projectsProps } from '@/types'
 
 const ProjetSection = () => {
     // définir une constant qui dépend du nombre de projets
@@ -36,22 +37,19 @@ const ProjetSection = () => {
         <section id="Projects" className={styles.projetSection}>
             <div className={styles.projetSection__largeScreen}>
                 <div className={styles.projetSection__largeScreen__titleAndSubtitle}>
-                    
                         <Title text="PROJETS" />
                         <Subtitle text="VOYAGEZ A TRAVERS MES PROJETS" />
-                 
                 </div>
                 <div className={styles.projetSection__largeScreen__cards}>
                     <AnimatePresence>
-                        {data.projects
+                        {(data.projects as projectsProps[])
                         .slice(
                             (currentPage - 1) * projectsPerPage,
                             (currentPage - 1) * projectsPerPage +
-                                projectCountPerPage
-                        )
-                        .map((project, index): any => (
+                                projectCountPerPage )
+                        .map((project: projectsProps, index) => (
                             <motion.div
-                                key={`project${index}`}
+                                key={project.id}
                                     className={
                                         styles.projetSection__largeScreen__cards__card
                                     }
@@ -70,8 +68,8 @@ const ProjetSection = () => {
                                         mainPhoto={project.mainPhoto}
                                         id={project.id}
                                     />
-                                </motion.div>
-                            ))}
+                            </motion.div>
+                        ))}
                     </AnimatePresence>
                 </div>
                 {isExpandedView ? (
@@ -93,6 +91,7 @@ const ProjetSection = () => {
                     )
                 )}
             </div>
+          
         </section>
     )
 }

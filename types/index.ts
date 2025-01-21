@@ -59,3 +59,13 @@ export interface CardProps {
 export type GaleryType = 'galeryDesktop' | 'galeryTablet' | 'galeryMobile';
 
 export let params: string
+
+export interface projectProps {
+    id: string
+    title: string
+    description: string
+    mainPhoto : PhotoVariableProps
+    textsAbovePhotos : string[]
+    photosSets : PhotoVariableProps[][]
+    textsBelowPhotos : string[]
+}

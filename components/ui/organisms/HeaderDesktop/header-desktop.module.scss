@@ -8,7 +8,14 @@
     align-items: flex-end;
     background-color: var(--background-main);
     &__largeScreen {
+        position: relative;
+        width: 100vw;
         max-width: 1440px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        height: 120px;
+
         &__LogoWithSignatureWrapper {
             position: absolute;
             top: 50%;
@@ -18,6 +25,7 @@
 
         &__MenuWrapper {
             display: flex;
+            margin-right: 24px;
         }
     }
 }

@@ -1,6 +1,6 @@
 import styles from './header-desktop.module.scss'
 import LogoWithSignature from '../../molecules/LogoWithSignature/LogoWithSignature'
-import Menu from '../../molecules/MenuDesktop/MenuDesktop'
+import MenuDesktop from '../../molecules/MenuDesktop/MenuDesktop'
 
 const HeaderDesktop = () => {
     return (
@@ -14,7 +14,7 @@ const HeaderDesktop = () => {
                     <LogoWithSignature />
                 </div>
                 <div className={styles.header__largeScreen__MenuWrapper}>
-                    <Menu />
+                    <MenuDesktop />
                 </div>
             </div>
         </header>

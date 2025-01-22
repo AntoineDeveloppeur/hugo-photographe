@@ -20,5 +20,13 @@
         &4photo {
             grid-template-columns: repeat(2, 1fr);
         }
+        &__photoWrapper {
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+        }
     }
 }

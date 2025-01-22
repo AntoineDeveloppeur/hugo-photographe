@@ -3,7 +3,7 @@
 import styles from './contact.module.scss'
 import ButtonBig from '../../atoms/ButtonBig/ButtonBig'
 import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
-import voiture from '@/public/voiture.jpg'
+import taj from '@/public/taj.jpg'
 import Title from '../../atoms/Title/Title'
 import Link from 'next/link'
 import IconMail from '../../atoms/IconMail/IconMail'
@@ -11,9 +11,10 @@ import IconMap from '../../atoms/IconMap/IconMap'
 import IconPhone from '../../atoms/IconPhone/IconPhone'
 import { useState } from 'react'
 import { motion} from 'framer-motion'
+import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
 
 const Contact = () => {
-    const example = { src: voiture.src, alt: 'Voiture' }
+    const example = { src: taj.src, alt: 'taj' }
     const [showPresentation, setShowPresentation] = useState(false)
 
     return (
@@ -43,7 +44,7 @@ const Contact = () => {
                             <PhotoBasic photo={example} />
                         </div>
                         <div className={styles.contact__presentation__text}>
-                    <Title text="HUGO RANDEZ" />
+                    <TitleProjectPage text="HUGO RANDEZ" />
                     <p className={styles.contact__presentation__text__p}>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore

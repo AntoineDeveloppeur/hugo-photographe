@@ -19,9 +19,9 @@ const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
                     {photosSet.map((photo, photoIndex) => (
                         <div
                             // className={`styles.photosSet__photoWrapperFor${photosSet.length}photo`}
-                            className={
-                                styles.photosSets__photosSet__photoWrapper
-                            }
+                            className={`${styles.photosSets__photosSet__photoWrapper} 
+                            ${styles[`photosSets__photosSet__photoWrapperFor${photosSet.length}photo`]}
+                            `}
                             key={`photo-${setIndex}-${photoIndex}`}
                         >
                             <PhotoBasic photo={photo} />

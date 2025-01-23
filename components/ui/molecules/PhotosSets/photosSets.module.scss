@@ -3,30 +3,152 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    width: 100%;
+    
     &__photosSet {
-        display: grid;
-        width: 100%;
+        display: flex;
         gap: 1rem;
-        overflow: hidden;
-        &1photo {
-            grid-template-columns: 1fr;
-        }
-        &2photo {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        &3photo {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        &4photo {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        justify-content: center;
+        align-items: stretch;
+        flex-wrap: wrap;
+        width: 100%;
+        
         &__photoWrapper {
-            height: 50vh;
+            max-height: 60vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            
+            &For1photo {
+                flex: 1 1 100%;
+                max-width: 800px;
+            }
+            
+            &For2photo {
+                flex: 1 1 300px;
+                max-width: 500px;
+            }
+            
+            &For3photo {
+                flex: 1 1 250px;
+                max-width: 400px;
+            }
+            
+            &For4photo {
+                flex: 1 1 300px;
+                min-width: 200px;
+                max-height: 400px;
 
+
+
+
+            }
         }
     }
 }
+
+
+
+// .photosSets {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     gap: 2rem;
+//     &__photosSet {
+//         display: flex;
+//         // width: 100%;
+//         gap: 1rem;
+//         justify-content: center;
+//         align-items: center;
+//         overflow: hidden;
+//         flex-wrap: wrap;
+//         &1photo {
+//             flex: 1 1 100%;
+//         }
+//         &2photo {
+//             flex: 1 1 calc(50% - 1rem);
+//             width: 100%;
+//         }
+//         &3photo {
+//             flex: 1 1 calc(33% - 1rem);
+//             width: 100%;
+
+//         }
+//         &4photo {
+//             flex: 1 1 calc(25% - 1rem);
+//             width: 100%;
+//         }
+//         &__photoWrapper {
+//             max-height: 60vh;
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             overflow: hidden;
+//             flex-wrap: wrap;
+//             &For1photo {
+
+//             }
+//             &For2photo {
+//                 min-width: 200px;
+//                 max-width: 300px;
+
+
+
+//             }
+//             &For3photo {
+
+//                 max-width: calc(33% - 1rem);
+//                 min-width: 200px;
+
+
+//             }
+//             &For4photo {
+//                 flex: 1 1 calc(50% - 1rem);
+//                 min-width: 200px;
+
+
+
+
+//             }
+//         }
+//     }
+// }
+
+
+// .photosSets {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     gap: 2rem;
+//     &__photosSet {
+//         display: grid;
+//         // width: 100%;
+//         gap: 1rem;
+//         overflow: hidden;
+//         &1photo {
+//             grid-template-columns: 1fr;
+//         }
+//         &2photo {
+//             grid-template-columns: repeat(2, 1fr);
+//             width: 100%;
+//         }
+//         &3photo {
+//             grid-template-columns: repeat(3, 1fr);
+//             width: 100%;
+
+//         }
+//         &4photo {
+//             grid-template-columns: repeat(2, 1fr);
+//             width: 100%;
+//         }
+//         &__photoWrapper {
+//             max-height: 80vh;
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             overflow: hidden;
+
+//         }
+//     }
+// }

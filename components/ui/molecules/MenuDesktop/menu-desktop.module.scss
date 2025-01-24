@@ -11,7 +11,7 @@
     padding-right: 3.7rem;
     font-size: 1.25rem;
     font-family: merriweather;
-    color: white;
+    color: var(--color-text-main);
     z-index:1;
     &::before {
         position: absolute;
@@ -20,7 +20,7 @@
         left: 0px;
         bottom: 0px;
         content: '';
-        background: var(--dark15);
+        background: var(--background-main);
         // opacity: 0.3;
         transition: all 0.3s;
         z-index: -1;
@@ -35,7 +35,7 @@
         border-right: 1px;
         border-style: solid;
         border-radius: 10px 0 0 0;
-        border-color: var(--dark15);
+        border-color: var(--color-border);
         &::before {
             border-radius: 10px 0 0 0 ;
         }
@@ -44,14 +44,14 @@
         border-top: 1px;
         border-right: 1px;
         border-style: solid;
-        border-color: var(--dark15);
+        border-color: var(--color-border);
     }
     &__3 {
         border-top: 1px;
         border-right: 1px;
         border-style: solid;
         border-radius: 0 10px 0 0;
-        border-color: var(--dark15);
+        border-color: var(--color-border);
         &::before {
             border-radius: 0 10px 0 0 ;
         }

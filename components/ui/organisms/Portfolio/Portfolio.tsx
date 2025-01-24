@@ -7,7 +7,7 @@ import data from '@/data/data.json'
 import PhotoGallery from '../../atoms/PhotoGallery/PhotoGallery'
 import { useState, useEffect } from 'react'
 import type { PhotosSetsProps, PhotoVariableProps, GaleryType, DataType } from '@/types'
-
+import ButtonTheme from '../../atoms/ButtonTheme/ButtonTheme'
 const Portfolio = () => {
 
     const [galery, setGalery] = useState<GaleryType>('galeryDesktop')
@@ -35,6 +35,7 @@ const Portfolio = () => {
         <section id="Porfolio" className={styles.portfolio}>
             <div className={styles.portfolio__largeScreen}>
                 <Title text="PORTFOLIO" />
+                <ButtonTheme />
                 <div className={styles.portfolio__largeScreen__subtitleWrapper}>
                     <Subtitle text="UN APERCU DE MON TRAVAIL" />
                 </div>

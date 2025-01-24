@@ -101,12 +101,8 @@ select {
     --dark40: #c8c8c8;
     --dark50: #e5e5e5;
     --dark100: white;
+    --terracotta: #dca59e;
 
-    //Color
-    --background-main: var(--dark10);
-    --background-second: var(--dark12);
-    --color-text-main: var(--dark100);
-    --color-text-second: var(--dark50);
     // Variables globales
 }
 
@@ -117,9 +113,29 @@ select {
     }
 }
 
+/* Colors begins */
+
+[data-theme="dark"] {
+    --background-main: var(--dark100);
+    --background-second: var(--dark12);
+    --color-text-main: var(--dark100);
+    --color-text-second: var(--dark50);
+    --background-button: black;
+  }
+
+  [data-theme="light"] {
+      --background-main: var(--dark10);
+      --background-second: var(--dark50);
+      --color-text-main: var(--dark0);
+      --color-text-second: var(--dark10);
+      --color-text-button: var(--dark100);
+      --background-button: var(--terracotta);
+  }
+
+  /* Colors ends */
+
+
 body {
-    color: var(--foreground);
-    background: var(--background);
     font-family: Arial, Helvetica, sans-serif;
 }
 

@@ -16,8 +16,8 @@
         border-radius: 5px;
         background: linear-gradient(
             to bottom right,
-            var(--dark20),
-            var(--dark10) 95%
+            var(--color-card-highlight-top),
+            var(--color-card-highlight-bottom) 90%
         );
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
@@ -32,7 +32,7 @@
     
         &__title {
             margin-top: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             z-index: 2;
         }
         &__line {

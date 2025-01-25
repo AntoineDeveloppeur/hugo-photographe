@@ -135,6 +135,9 @@ select {
 
     --background-button:var(--dark0);
     --background-button-second: var(--dark10);
+    --background-button-pagination: var(--dark0);
+    --color-text-pagination: var(--dark100);
+
     --color-border: var(--dark0);
 
     --color-card-highlight-top: var(--dark20);
@@ -155,6 +158,8 @@ select {
 
     --background-button: var(--light0);
     --background-button-second: var(--light10);
+    --background-button-pagination: var(--light90);
+    --color-text-pagination: var(--dark10);
     --color-border: var(--light0);
 
     --color-card-highlight-top: var(--light60);

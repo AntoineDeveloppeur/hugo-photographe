@@ -1,11 +1,12 @@
 'use client'
 
-import { ButtonArrowRightProps } from '@/types'
+import { ButtonArrowProps } from '@/types'
 import IconArrowRight from '../IconArrowRight/IconArrowRight'
-import styles from './button-arrow-right.module.scss'
+import IconArrowLeft from '../IconArrowLeft/IconArrowLeft'
+import styles from './button-arrow.module.scss'
 import { motion } from 'framer-motion'
 
-const ButtonArrowRight = ({ text }: ButtonArrowRightProps) => {
+const ButtonArrow = ({ text, direction }: ButtonArrowProps) => {
     return (
         <motion.button 
         onClick={() => {}}
@@ -13,9 +14,9 @@ const ButtonArrowRight = ({ text }: ButtonArrowRightProps) => {
         whileTap={{ scale: 0.9 }}
         className={styles.button}>
             {text && <p className={styles.button__p}>{text}</p>}
-            <IconArrowRight />
+            {direction === 'left' ? <IconArrowLeft /> : <IconArrowRight />}
         </motion.button>
     )
 }
 
-export default ButtonArrowRight
+export default ButtonArrow

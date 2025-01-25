@@ -40,9 +40,10 @@ export interface ButtonProps {
     onclick?: () => void
 }
 
-export interface ButtonArrowRightProps {
+export interface ButtonArrowProps {
     text?: string
     link?: string
+    direction: 'left' | 'right'
 }
 
 export interface TitleCardProps {

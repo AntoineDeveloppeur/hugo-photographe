@@ -20,8 +20,7 @@ const politiqueConfidentialite = () => {
 
                 <p className={styles.politique__largeScreen__p}>
                     Toutes les informations que nous recueillons peuvent être
-                    utilisées uniquement pour vous mettre en relation avec Lisa
-                    Tastevin.
+                    utilisées uniquement pour vous mettre en relation avec Hugo Randez.
                 </p>
                 <Subtitle text="Divulgation à des tiers" />
                 <p className={styles.politique__largeScreen__p}>

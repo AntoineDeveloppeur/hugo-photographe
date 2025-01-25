@@ -9,7 +9,7 @@ const Button = ({ text, link }: ButtonProps) => {
     return (
         <motion.button
             className={styles.button}
-            whileHover={{ backgroundColor: 'var(--background-button)' }}
+            whileHover={{ backgroundColor: 'var(--background-button-second)' }}
             whileTap={{ scale: 0.9 }}
         >
             {link ? (

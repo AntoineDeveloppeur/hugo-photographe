@@ -9,7 +9,7 @@ const ButtonBig = ({ text, link, onclick }: ButtonProps) => {
     return (
         <motion.button
         className={styles.button}
-        whileHover={{ backgroundColor: 'var(--dark7)' }}
+        whileHover={{ backgroundColor:  'var(--background-button-second)' }}
         whileTap={{ scale: 0.9 }}
         onClick={onclick}>
             {link ? (

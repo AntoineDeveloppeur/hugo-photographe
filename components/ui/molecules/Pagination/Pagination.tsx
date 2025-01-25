@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './pagination.module.scss'
-import ButtonArrowRight from '@/components/ui/atoms/ButtonArrowRight/ButtonArrowRight'
+import ButtonArrow from '@/components/ui/atoms/ButtonArrow/ButtonArrow'
 
 const Pagination = ({previousPage, nextPage, currentPage}: any) => {
     return (
@@ -15,7 +15,7 @@ const Pagination = ({previousPage, nextPage, currentPage}: any) => {
             }
             onClick={previousPage}
         >
-            <ButtonArrowRight />
+            <ButtonArrow direction='left' />
         </div>
         <p
             className={
@@ -30,7 +30,7 @@ const Pagination = ({previousPage, nextPage, currentPage}: any) => {
             }
             onClick={nextPage}
         >
-            <ButtonArrowRight />
+            <ButtonArrow direction='right' />
         </div>
     </div>
     )

@@ -1,3 +1,5 @@
+import styles from './icon-arrow-left.module.scss'
+
 const IconArrowRight = () => {
     return (
         <svg

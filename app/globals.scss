@@ -103,11 +103,12 @@ select {
     --dark90: LIGHTGRAY;
     --dark100: white;
 
-    --terracotta: #CC4E5C;
-    --terracotta-light: #D96E75;
-
-    // --terracotta-light: #E58E8E;
-    
+    --light0: #CC4E5C;
+    --light10: #D96E75;
+    --light60: #f0cace;
+    --light70:#faedef;
+    --light80: #FFF9F9;
+    --light90: #FFFDFD;
 
     // Variables globales
 }
@@ -124,27 +125,41 @@ select {
 [data-theme="dark"] {
     --background-main: var(--dark10);
     --background-second: var(--dark12);
+
     --color-text-main: var(--dark100);
     --color-text-second: var(--dark50);
     --color-text-third: var(--dark100);
     --color-text-button: var(--dark100);
+
+    --color-menu-highlight: var(--dark5);
+
     --background-button:var(--dark0);
     --background-button-second: var(--dark10);
-
     --color-border: var(--dark0);
-  }
 
-  [data-theme="light"] {
-      --background-main: #FFFDFD;
-      --background-second: #FFF9F9;
-      --color-text-main: var(--dark10);
-      --color-text-second: var(--dark12);
-      --color-text-third: var(--terracotta);
-      --color-text-button: var(--dark100);
-      --background-button: var(--terracotta);
-      --background-button-second: var(--terracotta-light);
-      --color-border: var(--terracotta);
-  }
+    --color-card-highlight-top: var(--dark20);
+    --color-card-highlight-bottom: var(--dark10);
+
+}
+
+[data-theme="light"] {
+    --background-main: var(--light90);
+    --background-second: var(--light80);
+
+    --color-text-main: var(--dark10);
+    --color-text-second: var(--dark12);
+    --color-text-third: var(--light0);
+    --color-text-button: var(--dark100);
+
+    --color-menu-highlight: var(--light0);
+
+    --background-button: var(--light0);
+    --background-button-second: var(--light10);
+    --color-border: var(--light0);
+
+    --color-card-highlight-top: var(--light60);
+    --color-card-highlight-bottom: var(--light70);
+}
 
   /* Colors ends */
 

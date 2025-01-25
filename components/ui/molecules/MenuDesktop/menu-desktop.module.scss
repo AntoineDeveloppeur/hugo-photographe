@@ -20,7 +20,7 @@
         left: 0px;
         bottom: 0px;
         content: '';
-        background: var(--background-main);
+        background: var(--color-menu-highlight);
         // opacity: 0.3;
         transition: all 0.3s;
         z-index: -1;
@@ -28,6 +28,9 @@
 
     &:hover::before {
         height: calc(100% + 1px);
+    }
+    &:hover {
+        color: var(--color-text-button)
     }
     &__1 {
         border-left: 1px;

@@ -4,11 +4,9 @@
     display: flex;
     justify-content: center;
     gap: 2rem;
-    &__previous {
-        transform: rotate(180deg);
-    }
     &__p {
         font-size: 16px;
         font-family: lora;
+        color: var(--color-text-second)
     }
 }

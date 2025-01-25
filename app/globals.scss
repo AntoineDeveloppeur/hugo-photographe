@@ -140,6 +140,9 @@ select {
 
     --color-border: var(--dark0);
 
+    --color-shadow-main :  rgba(0, 0, 0, 0.1);
+    --color-shadow-second: rgba(0, 0, 0, 0.04);
+
     --color-card-highlight-top: var(--dark20);
     --color-card-highlight-bottom: var(--dark10);
 
@@ -161,6 +164,9 @@ select {
     --background-button-pagination: var(--light90);
     --color-text-pagination: var(--dark10);
     --color-border: var(--light0);
+
+    --color-shadow-main : var(--light60);
+    --color-shadow-second: var(--light70);
 
     --color-card-highlight-top: var(--light60);
     --color-card-highlight-bottom: var(--light70);

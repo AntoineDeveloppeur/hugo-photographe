@@ -9,7 +9,7 @@ const ButtonArrowRight = ({ text }: ButtonArrowRightProps) => {
     return (
         <motion.button 
         onClick={() => {}}
-        whileHover={{backgroundColor: 'var(--dark7)'}}
+        whileHover={{backgroundColor: 'var(--background-button-second)' }}
         whileTap={{ scale: 0.9 }}
         className={styles.button}>
             {text && <p className={styles.button__p}>{text}</p>}

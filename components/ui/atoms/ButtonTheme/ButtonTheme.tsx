@@ -1,5 +1,6 @@
 "use client"
 
+import styles from './button-theme.module.scss'
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 
@@ -21,16 +22,14 @@ export default function ButtonTheme() {
 
     return (
         <button
-            className="toggle-container"
+            className={styles.container}
             style={{
-                ...container,
                 justifyContent: "flex-" + (isOn ? "start" : "end"),
             }}
             onClick={toggleSwitch}
         >
             <motion.div
-                className="toggle-handle"
-                style={handle}
+                className={styles.handle}
                 layout
                 transition={{
                     type: "spring",
@@ -40,25 +39,4 @@ export default function ButtonTheme() {
             />
         </button>
     )
-}
-
-/**
- * ==============   Styles   ================
- */
-
-const container = {
-    width: 100,
-    height: 50,
-    backgroundColor: "grey",
-    borderRadius: 50,
-    cursor: "pointer",
-    display: "flex",
-    padding: 10,
-}
-
-const handle = {
-    width: 30,
-    height: 30,
-    backgroundColor: "#9911ff",
-    borderRadius: "50%",
 }

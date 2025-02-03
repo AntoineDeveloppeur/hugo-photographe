@@ -1,0 +1,16 @@
+.container {
+    width: 100px;
+    height: 50px;
+    background-color: grey;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    padding: 10px;
+}
+
+.handle {
+    width: 30px;
+    height: 30px;
+    background-color: var(--dark90);
+    border-radius: 50%;
+}

@@ -1,9 +1,6 @@
 .projetSection {
     background-color: var(--background-second);
     width: 100%;
-
-    padding-left: 12rem;
-    padding-right: 12rem;
     padding-top: 6rem;
     padding-bottom: 6rem;
     display: flex;
@@ -12,6 +9,8 @@
     &__largeScreen {
         width: 100%;
         max-width: 1440px;
+        padding-left: 4rem;
+        padding-right: 4rem;
         display: flex;
         flex-direction: column;
         &__moreProjectsWrapper {

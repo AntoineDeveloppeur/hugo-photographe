@@ -1,16 +1,17 @@
 .container {
-    width: 100px;
-    height: 50px;
-    background-color: grey;
+    width: 40px;
+    height: 25px;
+    background-color: var(--color-border);
     border-radius: 50px;
+    
     cursor: pointer;
     display: flex;
-    padding: 10px;
+    padding: 5px;
 }
 
 .handle {
-    width: 30px;
-    height: 30px;
-    background-color: var(--dark90);
+    width: 15px;
+    height: 15px;
+    background-color: var(--color-button-theme);
     border-radius: 50%;
 }

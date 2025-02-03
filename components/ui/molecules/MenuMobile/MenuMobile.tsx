@@ -9,6 +9,7 @@ import IconBook from '../../atoms/IconBook/IconBook'
 import IconPortfolio from '../../atoms/IconPortfolio/IconPortfolio'     
 import useDimensions from '@/hooks/useDimensions'
 import Link from 'next/link'
+import ThemeChanger from '../ThemeChanger/ThemeChanger'
 
 export default function MenuMobile() {
     const [isOpen, setIsOpen] = useState(false)
@@ -29,6 +30,7 @@ export default function MenuMobile() {
                         <MenuItem text="Portfolio" icon="portfolio" link="/#Portfolio" />
                         <MenuItem text="Projets" icon="book" link="/#Projects" />
                         <MenuItem text="Contact" icon="phone" link="/#Contact" />
+                        <ThemeChanger />
                     </motion.ul>
                     <MenuToggle toggle={() => setIsOpen(!isOpen)} />
                 </motion.nav>

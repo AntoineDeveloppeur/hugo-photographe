@@ -30,7 +30,10 @@ export default function MenuMobile() {
                         <MenuItem text="Portfolio" icon="portfolio" link="/#Portfolio" />
                         <MenuItem text="Projets" icon="book" link="/#Projects" />
                         <MenuItem text="Contact" icon="phone" link="/#Contact" />
-                        <ThemeChanger />
+                        <motion.div
+            variants={itemVariants}
+            ><ThemeChanger />
+            </motion.div>
                     </motion.ul>
                     <MenuToggle toggle={() => setIsOpen(!isOpen)} />
                 </motion.nav>

@@ -7,9 +7,12 @@ import data from '@/data/data.json'
 import PhotoGallery from '../../atoms/PhotoGallery/PhotoGallery'
 import { useState, useEffect } from 'react'
 import type { PhotosSetsProps, PhotoVariableProps, GaleryType, DataType } from '@/types'
-import ButtonTheme from '../../atoms/ButtonTheme/ButtonTheme'
+import ThemeChanger from '../../molecules/ThemeChanger/ThemeChanger'
+import useIsMobile from '@/hooks/useIsMobile'
+
 const Portfolio = () => {
 
+    const isMobile = useIsMobile()
     const [galery, setGalery] = useState<GaleryType>('galeryDesktop')
     useEffect(() => {
     const checkDevice = () => {
@@ -34,10 +37,15 @@ const Portfolio = () => {
     return (
         <section id="Porfolio" className={styles.portfolio}>
             <div className={styles.portfolio__largeScreen}>
-                <Title text="PORTFOLIO" />
-                <ButtonTheme />
-                <div className={styles.portfolio__largeScreen__subtitleWrapper}>
-                    <Subtitle text="UN APERCU DE MON TRAVAIL" />
+                <div className={styles.portfolio__largeScreen__header}>
+                    <div className={styles.portfolio__largeScreen__header__titles}>
+
+                    <Title text="PORTFOLIO" />
+                    <div className={styles.portfolio__largeScreen__header__titles__subtitleWrapper}>
+                        <Subtitle text="UN APERCU DE MON TRAVAIL" />
+                    </div>
+                    </div>
+                    {!isMobile && <ThemeChanger />}
                 </div>
                 <div className={styles.portfolio__largeScreen__columns}>
                     {(data as DataType)[galery].map((columns: PhotoVariableProps[], i) => (

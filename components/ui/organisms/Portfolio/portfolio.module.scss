@@ -11,8 +11,16 @@
         max-width: 1440px;
         padding-left: 4rem;
         padding-right: 4rem;
-        &__subtitleWrapper {
-            margin-bottom: 3rem;
+        &__header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            &__titles {
+                &__subtitleWrapper {
+                    margin-bottom: 3rem;
+                }
+            }
         }
         &__columns {
             width: 100%;

@@ -7,6 +7,7 @@ import Footer from '@/components/ui/organisms/Footer/Footer'
 import { useEffect, useState } from 'react'
 import Header from '@/components/ui/organisms/HeaderDesktop/HeaderDesktop'
 import HeaderMobile from '@/components/ui/organisms/HeaderMobile/HeaderMobile'
+import useIsMobile from '@/hooks/useIsMobile'
 
 // J'ai du enlever metadata car 'use client' ne l'autorise pas à vérifier si je garde
 // le useEffect ici
@@ -22,20 +23,8 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    const isMobile = useIsMobile()
 
-    const [isMobile, setIsMobile] = useState(false)
-
-    useEffect(() => {
-      const checkIsMobile = () => {
-        setIsMobile(window.innerWidth < 900)
-      }
-      
-      checkIsMobile()
-      window.addEventListener('resize', checkIsMobile)
-      
-      return () => window.removeEventListener('resize', checkIsMobile)
-    }, [])
-  
     return (
         <html lang="en">
             <body

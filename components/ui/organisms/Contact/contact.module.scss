@@ -1,13 +1,16 @@
 .contact {
     background-color: var(--background-main);
     padding-top: 6rem;
+    padding-bottom: 6rem;
     padding-left: 12rem;
     padding-right: 12rem;
-    padding-bottom: 6rem;
     width: 100%;
+    min-height: 413px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+
     &__presentation {
         display: flex;
         justify-content: space-between;

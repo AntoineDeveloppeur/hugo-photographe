@@ -146,6 +146,8 @@ select {
     --color-card-highlight-bottom: var(--dark10);
     --color-card-line: var(--dark5);
 
+    --color-button-theme: var(--dark20);
+
 }
 
 [data-theme="light"] {
@@ -171,6 +173,9 @@ select {
     --color-card-highlight-top: var(--light60);
     --color-card-highlight-bottom: var(--light70);
     --color-card-line: var(--dark15);
+
+    --color-button-theme: var(--light90);
+
 
 }
 

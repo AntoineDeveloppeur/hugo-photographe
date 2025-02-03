@@ -1,6 +1,7 @@
 import styles from './header-desktop.module.scss'
 import LogoWithSignature from '../../molecules/LogoWithSignature/LogoWithSignature'
 import MenuDesktop from '../../molecules/MenuDesktop/MenuDesktop'
+import ThemeChanger from '../../molecules/ThemeChanger/ThemeChanger'
 
 const HeaderDesktop = () => {
     return (
@@ -13,6 +14,7 @@ const HeaderDesktop = () => {
                 >
                     <LogoWithSignature />
                 </div>
+                {/* <div className={styles.header__largeScreen__ThemeChangerWrapper}><ThemeChanger/></div> */}
                 <div className={styles.header__largeScreen__MenuWrapper}>
                     <MenuDesktop />
                 </div>

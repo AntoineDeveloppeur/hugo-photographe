@@ -9,20 +9,49 @@ import Link from 'next/link'
 import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
 import IconPhone from '../../atoms/IconPhone/IconPhone'
-import { useState } from 'react'
-import { motion} from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
 
 const Contact = () => {
     const example = { src: taj.src, alt: 'taj' }
     const [showPresentation, setShowPresentation] = useState(false)
+    const containerRef = useRef(null)
+    
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    })
+
+    const y = useTransform(
+        scrollYProgress,
+        [0.1, 1],
+        ["-27vh", "37vh"]
+    )
 
     return (
-        <section id="Contact" className={styles.contact}>
+        <section ref={containerRef} id="Contact" className={styles.contact}>
                 {!showPresentation && (
                     <motion.div
-                        initial={{ opacity: 1 }}
-                        transition={{ duration: 0.5 }}
+                        style={{ 
+                            y,
+                            position: 'relative',
+                            zIndex: 1
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ 
+                            opacity: 1,
+                            transition: {
+                                duration: 0.5
+                            }
+                        }}
+                        whileInView={{
+                            transition: {
+                                type: "spring",
+                                bounce: 0.4,
+                                duration: 0.8
+                            }
+                        }}
                     >
                         <ButtonBig 
                             text="DECOUVREZ LE PHOTOGRAPHE" 
@@ -30,7 +59,6 @@ const Contact = () => {
                         />
                     </motion.div>
                 )}
-
 
 
                 {showPresentation && (

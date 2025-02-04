@@ -21,7 +21,7 @@
             align-items: center;
             &__text {
                 font-size: 2.5rem;
-                font-family: lora;
+                font-family: var(--font-paragraph);
                 color: var(--color-text-second);
                 margin-bottom: 2rem;
             }
@@ -40,7 +40,7 @@
         }
         &__paragraphesWrapper {
             font-size: 1.5rem;
-            font-family: lora;
+            font-family: var(--font-paragraph);
             margin-top: 2rem;
             margin-bottom: 2rem;
         }

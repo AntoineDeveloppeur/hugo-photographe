@@ -60,7 +60,7 @@ const Contact = () => {
                                 styles.contact__presentation__text__details__link
                                     }
                                 >
-                            06 44 21 07 16
+                            06 99 25 17 32
                         </Link>
                                 </div>
                                 <div

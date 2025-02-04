@@ -182,12 +182,27 @@ select {
 
 }
 
-  /* Colors ends */
+/* Colors ends */
 
 
+/* Font begins */
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+:root {
+    --font-title: 'Merriweather', serif;
+    --font-p: 'Lora', serif;
+    --font-paragraph: 'Baskervville', serif;
+    --font-button: 'Lora', serif;
+    --font-title-card: 'Lora', serif;
+    --font-menu-mobile: 'Lora', serif;
+    --font-contact-link: 'Lora', serif;
+    --font-pagination: 'Lora', serif;
+
+}
+
+/* Font ends */
 
 /* Police responsive begins */
 

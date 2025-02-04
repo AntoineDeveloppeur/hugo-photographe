@@ -49,5 +49,5 @@
 }
 .projetSection__largeScreen__pagination__p {
   font-size: 16px;
-  font-family: lora;
+  font-family: var(--font-p);
 }/*# sourceMappingURL=projet-section.module.css.map */

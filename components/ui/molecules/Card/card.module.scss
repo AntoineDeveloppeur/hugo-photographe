@@ -45,22 +45,26 @@
         }
         &__summary {
             z-index: 2;
+            font-size: 1.5rem;
+            display: inline;
+            font-family: var(--font-paragraph);
+            font-weight: 100;
             &__text {
-                font-size: 1.5rem;
+
                 color: var(--color-text-second);
-                display: inline;
             }
             &__dots {
-                font-size: 1.5rem;
+
                 color: var(--color-text-second);
                 display: inline;
             }
             &__seeMore {
                 text-decoration: underline;
-                font-size: 1.5rem;
+
                 color: var(--color-text-third);
                 display: inline;
                 cursor: pointer;
+
             }
         }
     }

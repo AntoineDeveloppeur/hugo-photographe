@@ -10,7 +10,7 @@
     padding-left: 3.7rem;
     padding-right: 3.7rem;
     font-size: 1.25rem;
-    font-family: merriweather;
+    font-family: var(--font-title);
     color: var(--color-text-main);
     z-index:1;
     &::before {

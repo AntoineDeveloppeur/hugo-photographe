@@ -10,5 +10,5 @@
 .button__p {
   color: white;
   font-size: 2rem;
-  font-family: lora;
+  font-family: var(--font-p);
 }/*# sourceMappingURL=button.module.css.map */

@@ -23,23 +23,24 @@
         &__text {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 0.5rem;
             &__p {
                 max-width: 30rem;
                 font-family: var(--font-paragraph);
                 font-size: 1.5rem;
                 color: var(--color-text-second);
-                margin-bottom: 1rem;
+                margin-top: 1rem;
+                margin-bottom: 2rem;
                 margin-left: 1rem;
             }
             &__details {
                 display: flex;
                 gap: 2rem;
                 margin-bottom: 0.5rem;
-
                 &__link {
-                    font-family: var( --font-contact-link);
+                    font-family: ebGaramond;
                     font-size: 1.5rem;
+                    font-weight: 300;
                     color: var(--color-text-second);
                 }
             }

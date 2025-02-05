@@ -28,9 +28,11 @@ const ProjetSection = () => {
     }
     function previousPage() {
         setCurrentPage(((currentPage - 2 + PagesCount) % PagesCount) + 1)
+        document.getElementById('Projects')?.scrollIntoView({ behavior: 'smooth' })
     }
     function nextPage() {
         setCurrentPage((currentPage % PagesCount) + 1)
+        document.getElementById('Projects')?.scrollIntoView({ behavior: 'smooth' })
     }
 
     return (
@@ -40,8 +42,11 @@ const ProjetSection = () => {
                         <Title text="PROJETS" />
                         <Subtitle text="VOYAGEZ A TRAVERS MES PROJETS" />
                 </div>
-                <div className={styles.projetSection__largeScreen__cards}>
-                    <AnimatePresence>
+                <motion.div 
+                    className={styles.projetSection__largeScreen__cards}
+                    layout
+                >
+                    <AnimatePresence mode="wait">
                         {(data.projects as projectsProps[])
                         .slice(
                             (currentPage - 1) * projectsPerPage,
@@ -53,22 +58,19 @@ const ProjetSection = () => {
                                 className={
                                     styles.projetSection__largeScreen__cards__card
                                 }
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0 }}
                                 animate={{ 
-                                    opacity: 1, 
-                                    y: 0,
+                                    opacity: 1,
                                     transition: {
                                         duration: 0.5,
-                                        delay: index * 0.2 - 0.6 + (currentPage - 1) * 1.2,
+                                        delay: index * 0.2,
                                         ease: "easeOut"
                                     }
                                 }}
                                 exit={{ 
-                                    opacity: 0, 
-                                    y: -20,
+                                    opacity: 0,
                                     transition: {
                                         duration: 0.3,
-                                        delay: 0, 
                                         ease: "easeIn"
                                     }
                                 }}
@@ -82,7 +84,7 @@ const ProjetSection = () => {
                             </motion.div>
                         ))}
                     </AnimatePresence>
-                </div>
+                </motion.div>
                 {isExpandedView ? (
                    <Pagination
                         previousPage={previousPage}

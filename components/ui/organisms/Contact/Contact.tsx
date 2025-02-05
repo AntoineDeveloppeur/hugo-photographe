@@ -26,7 +26,7 @@ const Contact = () => {
     const y = useTransform(
         scrollYProgress,
         [0.1, 1],
-        ["-27vh", "37vh"]
+        ["-20vh", "40vh"]
     )
 
     return (

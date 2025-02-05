@@ -153,11 +153,11 @@ select {
 }
 
 [data-theme="light"] {
-    --background-main: var(--light90);
-    --background-second: var(--light80);
+    --background-main: #fffdfdd4;
+    --background-second:#fbf0f0b7;
 
     --color-text-main: var(--dark10);
-    --color-text-second: var(--dark12);
+    --color-text-second: var(--dark10);
     --color-text-third: var(--light0);
     --color-text-button: var(--dark100);
 
@@ -192,7 +192,6 @@ body {
 
 :root {
     --font-title: 'Merriweather', serif;
-    --font-p: 'Lora', serif;
     --font-paragraph: 'Baskervville', serif;
     --font-button: 'Lora', serif;
     --font-title-card: 'Lora', serif;

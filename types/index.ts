@@ -52,7 +52,7 @@ export interface TitleCardProps {
 
 export interface CardProps {
     title: string
-    description: string
+    summary: string
     mainPhoto: PhotoProps
     id: string
 }
@@ -64,7 +64,7 @@ export let params: string
 export interface projectProps {
     id: string
     title: string
-    description: string
+    summary: string
     mainPhoto : PhotoVariableProps
     textsAbovePhotos : string[]
     photosSets : PhotoVariableProps[][]

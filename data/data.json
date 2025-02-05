@@ -123,7 +123,7 @@
         {
             "id": "klyx",
             "title": "Mon premier projet",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/prince.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",
@@ -159,7 +159,7 @@
         {
             "id": "zrtq",
             "title": "Mon premier projet",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/prince.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",
@@ -195,7 +195,7 @@
         {
             "id": "wubp",
             "title": "Mon deuxième projet",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/voiture.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",
@@ -231,7 +231,7 @@
         {
             "id": "fghj",
             "title": "Mon troisième projet",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/cuisine.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",
@@ -267,7 +267,7 @@
         {
             "id": "cvbn",
             "title": "Mon projet",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/cowboy.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",
@@ -303,7 +303,7 @@
         {
             "id": "qsdf",
             "title": "C'est Notre projet",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/paysage.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",
@@ -339,7 +339,7 @@
         {
             "id": "uiop",
             "title": "Mon projet aussi",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/concert.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",
@@ -375,7 +375,7 @@
         {
             "id": "mlkj",
             "title": "Mon premier projet",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/taj.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",
@@ -411,7 +411,7 @@
         {
             "id": "hgfd",
             "title": "Long titre de projet encore plus long que ça oui voilà c'est ça ",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, et semper justo tempor. Sed in felis id neque cursus posuere vitae at lectus. Sed dignissim, justo vel tristique fermentum, lectus justo sagittis neque, non consectetur nunc justo vel velit. Duis vel dui id metus facilisis vulputate vel at justo.",
             "mainPhoto": { "src": "/Taj.jpg", "alt": "prince" },
             "textsAbovePhotos": [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum justo non enim euismod, ",

@@ -138,6 +138,7 @@ select {
     --color-text-pagination: var(--dark100);
 
     --color-border: var(--dark0);
+    --color-border-photo: var(--dark0);
 
     --color-shadow-main :  rgba(0, 0, 0, 0.1);
     --color-shadow-second: rgba(0, 0, 0, 0.04);
@@ -167,7 +168,10 @@ select {
     --background-button-second: var(--light10);
     --background-button-pagination: var(--light80);
     --color-text-pagination: var(--dark10);
+
     --color-border: var(--light0);
+    --color-border-photo: var(--dark40);
+
 
     --color-shadow-main : var(--light60);
     --color-shadow-second: var(--light70);

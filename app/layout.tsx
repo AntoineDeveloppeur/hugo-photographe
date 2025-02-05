@@ -17,7 +17,7 @@ export default function RootLayout({
     const isMobile = useIsMobile()
 
     return (
-        <html lang="en">
+        <html lang="en" style={{ scrollBehavior: 'smooth' }}>
             <body
                 className={`${lora.variable} ${baskervville.variable} ${merriweather.variable}antialiased`}
             >

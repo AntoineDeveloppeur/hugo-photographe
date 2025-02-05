@@ -13,7 +13,10 @@ const Pagination = ({previousPage, nextPage, currentPage}: any) => {
             className={
                 styles.pagination__previous
             }
-            onClick={previousPage}
+            onClick={(e) => {
+                e.preventDefault();
+                previousPage();
+            }}
         >
             <ButtonArrow direction='left' />
         </div>
@@ -28,7 +31,10 @@ const Pagination = ({previousPage, nextPage, currentPage}: any) => {
             className={
                 styles.pagination__next
             }
-            onClick={nextPage}
+            onClick={(e) => {
+                e.preventDefault();
+                nextPage();
+            }}
         >
             <ButtonArrow direction='right' />
         </div>

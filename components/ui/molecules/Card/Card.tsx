@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { CardProps } from '@/types/index.js'
 
 
-const Card = ({ id, title, description, mainPhoto }: CardProps) => {
+const Card = ({ id, title, summary, mainPhoto }: CardProps) => {
 
-    const descriptionShort = description.split(' ').slice(0, 20).join(' ')
+    const summaryShort = summary.split(' ').slice(0, 20).join(' ')
 
     return (
         <div
@@ -23,7 +23,7 @@ const Card = ({ id, title, description, mainPhoto }: CardProps) => {
             </div>
             <div className={styles.cardWrapper__card__line}></div>
             <div className={styles.cardWrapper__card__summary}>
-                <p className={styles.cardWrapper__card__summary__text}>{descriptionShort}</p>
+                <p className={styles.cardWrapper__card__summary__text}>{summaryShort}</p>
                 <p className={styles.cardWrapper__card__summary__dots}>... </p>
                 <p className={styles.cardWrapper__card__summary__seeMore}>voir plus</p>
             </div>

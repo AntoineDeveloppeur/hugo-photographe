@@ -75,7 +75,7 @@ const ProjetSection = () => {
                             >
                                     <Card
                                         title={project.title}
-                                        description={project.description}
+                                        summary={project.summary}
                                         mainPhoto={project.mainPhoto}
                                         id={project.id}
                                     />

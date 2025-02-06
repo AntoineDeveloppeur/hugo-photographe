@@ -1,6 +1,7 @@
 import { PhotosSetsProps } from '@/types'
 import styles from './photosSets.module.scss'
 import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
+import PhotoGallery from '../../atoms/PhotoGallery/PhotoGallery'
 
 const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
     return (

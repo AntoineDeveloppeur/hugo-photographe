@@ -6,6 +6,7 @@ import Footer from '@/components/ui/organisms/Footer/Footer'
 import Header from '@/components/ui/organisms/HeaderDesktop/HeaderDesktop'
 import HeaderMobile from '@/components/ui/organisms/HeaderMobile/HeaderMobile'
 import useIsMobile from '@/hooks/useIsMobile'
+import { ThemeProvider } from 'next-themes'
 
 
 
@@ -21,9 +22,11 @@ export default function RootLayout({
             <body
                 className={`${lora.variable} ${baskervville.variable} ${merriweather.variable}antialiased`}
             >
-                {isMobile ? <HeaderMobile /> : <Header /> }
-                {children}
-                <Footer />
+                <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem>
+                    {isMobile ? <HeaderMobile /> : <Header /> }
+                    {children}
+                    <Footer />
+                </ThemeProvider>
             </body>
         </html>
     )

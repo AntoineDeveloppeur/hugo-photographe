@@ -8,6 +8,7 @@ import IconPhone from '../../atoms/IconPhone/IconPhone'
 import IconBook from '../../atoms/IconBook/IconBook'
 import IconPortfolio from '../../atoms/IconPortfolio/IconPortfolio'     
 import useDimensions from '@/hooks/useDimensions'
+import useClickOutside from '@/hooks/useClickOutside'
 import Link from 'next/link'
 import ThemeChanger from '../ThemeChanger/ThemeChanger'
 
@@ -15,6 +16,10 @@ export default function MenuMobile() {
     const [isOpen, setIsOpen] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
     const { height } = useDimensions(containerRef)
+
+    useClickOutside(containerRef, () => {
+        if (isOpen) setIsOpen(false)
+    })
 
     return (
             <div className={styles.container}>

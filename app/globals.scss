@@ -112,16 +112,10 @@ select {
     // Variables globales
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
-}
-
 /* Colors begins */
 
-[data-theme="dark"] {
+// [data-theme="dark"] {
+:root {
     --background-main: var(--dark10);
     --background-second: var(--dark12);
 
@@ -131,7 +125,7 @@ select {
     --color-text-button: var(--dark100);
 
     --color-menu-highlight: var(--dark5);
-
+    
     --background-button:var(--dark0);
     --background-button-second: var(--dark10);
     --background-button-pagination: var(--dark0);
@@ -139,19 +133,18 @@ select {
 
     --color-border: var(--dark0);
     --color-border-photo: var(--dark0);
-
+    
     --color-shadow-main :  rgba(0, 0, 0, 0.1);
     --color-shadow-second: rgba(0, 0, 0, 0.04);
 
     --color-card-highlight-top: var(--dark20);
     --color-card-highlight-bottom: var(--dark10);
     --color-card-line: var(--dark5);
-
+    
     --color-button-theme: var(--dark20);
     --color-button-theme-background: var(--dark0);
-
-
 }
+
 
 [data-theme="light"] {
     --background-main: #fffdfdd4;

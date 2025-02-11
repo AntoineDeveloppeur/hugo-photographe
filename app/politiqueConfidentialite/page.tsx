@@ -2,7 +2,7 @@ import Subtitle from '@/components/ui/atoms/Subtitle/Subtitle'
 import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjectPage'
 import styles from './politiqueConfidentialite.module.scss'
 
-const politiqueConfidentialite = () => {
+export default function PolitiqueConfidentialite() {
     return (
         <section className={styles.politique}>
             <div className={styles.politique__largeScreen}>
@@ -53,5 +53,3 @@ const politiqueConfidentialite = () => {
         </section>
     )
 }
-
-export default politiqueConfidentialite

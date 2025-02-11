@@ -2,7 +2,7 @@ import Subtitle from '@/components/ui/atoms/Subtitle/Subtitle'
 import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjectPage'
 import styles from './mentions.module.scss'
 
-const MentionsLegales = () => {
+export default function MentionsLegales() {
     return (
         <section className="mentions">
             <div className={styles.mentions__largeScreen}>
@@ -43,5 +43,3 @@ const MentionsLegales = () => {
         </section>
     )
 }
-
-export default MentionsLegales

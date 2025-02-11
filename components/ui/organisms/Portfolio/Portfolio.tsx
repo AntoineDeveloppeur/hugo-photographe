@@ -10,7 +10,7 @@ import type { PhotosSetsProps, PhotoVariableProps, GaleryType, DataType } from '
 import ThemeChanger from '../../molecules/ThemeChanger/ThemeChanger'
 import useIsMobile from '@/hooks/useIsMobile'
 
-const Portfolio = () => {
+export default function Portfolio() {
 
     const isMobile = useIsMobile()
     const [galery, setGalery] = useState<GaleryType>('galeryDesktop')
@@ -65,5 +65,3 @@ const Portfolio = () => {
         </section>
     )
 }
-
-export default Portfolio

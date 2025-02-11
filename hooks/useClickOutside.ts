@@ -5,10 +5,12 @@ import { useEffect, RefObject } from 'react'
  * @param ref - Référence à l'élément à surveiller
  * @param handler - Fonction à exécuter lors d'un clic en dehors de l'élément
  */
-function useClickOutside(ref: RefObject<HTMLElement>, handler: () => void) {
+export default function useClickOutside(ref: RefObject<HTMLElement>, handler: () => void) {
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
       // Si la ref n'existe pas ou si le clic est à l'intérieur de l'élément, on ne fait rien
+      // La ref du composant peut ne pas exister au premier rendu pendant un court instant
+      // Typescript protège déjà contre cette effet mais il est bon de s'en rappeler
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return
       }
@@ -16,11 +18,9 @@ function useClickOutside(ref: RefObject<HTMLElement>, handler: () => void) {
       handler()
     }
 
-    // Ajout des event listeners pour les clics souris et les événements tactiles
     document.addEventListener('mousedown', listener)
     document.addEventListener('touchstart', listener)
 
-    // Nettoyage des event listeners lors du démontage du composant
     return () => {
       document.removeEventListener('mousedown', listener)
       document.removeEventListener('touchstart', listener)
@@ -28,4 +28,3 @@ function useClickOutside(ref: RefObject<HTMLElement>, handler: () => void) {
   }, [ref, handler]) // Re-exécuter l'effet si la ref ou le handler change
 }
 
-export default useClickOutside

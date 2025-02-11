@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './pagination.module.scss'
 import ButtonArrow from '@/components/ui/atoms/ButtonArrow/ButtonArrow'
 
-const Pagination = ({previousPage, nextPage, currentPage}: any) => {
+export default function Pagination({previousPage, nextPage, currentPage}: any) {
     return (
         <div
         className={
@@ -41,5 +41,3 @@ const Pagination = ({previousPage, nextPage, currentPage}: any) => {
     </div>
     )
 }
-
-export default Pagination

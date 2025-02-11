@@ -11,7 +11,7 @@ import Pagination from '../../molecules/Pagination/Pagination'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projectsProps } from '@/types'
 
-const ProjetSection = () => {
+export default function ProjetSection() {
     // définir une constant qui dépend du nombre de projets
     // const projectsCount = nombre d'élément dans le tableau de données
     const projectsPerPage: number = 6
@@ -108,4 +108,3 @@ const ProjetSection = () => {
         </section>
     )
 }
-export default ProjetSection

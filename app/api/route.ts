@@ -2,9 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
     try {
-        console.log('API route called')
         const token = await request.json()
-        console.log('Received token:', token)
         
         if (!process.env.RECAPTCHA_SECRET_KEY) {
             console.error('RECAPTCHA_SECRET_KEY is not defined')
@@ -18,7 +16,6 @@ export async function POST(request: Request) {
         })
         
         const data = await response.json()
-        console.log('Google verification response:', data)
         
         if (data.success && data.score > 0.5) {
             console.log('Verification successful')

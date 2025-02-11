@@ -18,16 +18,14 @@ export default function useReCaptcha() {
     })
 
     useEffect(() => {
+        // l'initialisation est vérifier car elle peut échouer, par exemple, avec une variable d'env manquante
         const verifyRecaptcha = async () => {
             if (!executeRecaptcha) {
-                console.log('ReCaptcha not yet initialized')
                 return
             }
 
             try {
-                console.log('Executing ReCaptcha...')
                 const token = await executeRecaptcha()
-                console.log('Token obtained:', token)
 
                 const response = await fetch('/api', {
                     method: 'POST',

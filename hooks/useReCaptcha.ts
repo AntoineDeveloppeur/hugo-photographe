@@ -19,10 +19,16 @@ export default function useReCaptcha() {
 
     useEffect(() => {
         const verifyRecaptcha = async () => {
-            if (!executeRecaptcha) return
+            if (!executeRecaptcha) {
+                console.log('ReCaptcha not yet initialized')
+                return
+            }
 
             try {
+                console.log('Executing ReCaptcha...')
                 const token = await executeRecaptcha()
+                console.log('Token obtained:', token)
+
                 const response = await fetch('/api', {
                     method: 'POST',
                     headers: {
@@ -31,10 +37,21 @@ export default function useReCaptcha() {
                     body: JSON.stringify(token)
                 })
 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`)
+                }
+
                 const data = await response.json()
+                console.log('API Response:', data)
                 setInfo(data)
             } catch (error) {
                 console.error('ReCaptcha verification failed:', error)
+                setInfo({
+                    success: false,
+                    name: '',
+                    email: '',
+                    phone: ''
+                })
             }
         }
 

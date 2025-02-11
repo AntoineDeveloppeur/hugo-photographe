@@ -2,7 +2,14 @@ import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
     try {
+        console.log('API route called')
         const token = await request.json()
+        console.log('Received token:', token)
+        
+        if (!process.env.RECAPTCHA_SECRET_KEY) {
+            console.error('RECAPTCHA_SECRET_KEY is not defined')
+            throw new Error('RECAPTCHA_SECRET_KEY is not defined')
+        }
         
         const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`
         
@@ -11,8 +18,10 @@ export async function POST(request: Request) {
         })
         
         const data = await response.json()
+        console.log('Google verification response:', data)
         
         if (data.success && data.score > 0.5) {
+            console.log('Verification successful')
             return NextResponse.json({
                 success: true,
                 name: process.env.HUGO_NAME,
@@ -21,6 +30,7 @@ export async function POST(request: Request) {
             })
         }
         
+        console.log('Verification failed')
         return NextResponse.json({
             success: false,
             name: '',
@@ -29,9 +39,10 @@ export async function POST(request: Request) {
         })
         
     } catch (error) {
+        console.error('API route error:', error)
         return NextResponse.json({
             success: false,
             error: 'Failed to verify reCAPTCHA'
-        })
+        }, { status: 500 })
     }
 }

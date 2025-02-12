@@ -9,7 +9,6 @@ import { useState, useEffect } from 'react'
 import type { PhotoVariableProps, GaleryType, DataType } from '@/types'
 import ThemeChanger from '../../molecules/ThemeChanger/ThemeChanger'
 import useIsMobile from '@/hooks/useIsMobile'
-import useReCaptcha from '@/hooks/useReCaptcha'
 
 export default function Portfolio() {
 
@@ -34,7 +33,6 @@ export default function Portfolio() {
     return () => window.removeEventListener('resize', checkDevice)
     }, [])
 
-    const { success, phone, email, name} = useReCaptcha()
 
 
     return (
@@ -43,14 +41,6 @@ export default function Portfolio() {
                 <div className={styles.portfolio__largeScreen__header}>
                     <div className={styles.portfolio__largeScreen__header__titles}>
                     <Title text="PORTFOLIO" />
-                    
-                        <div className={styles.contact_info}>
-                        <p>Success: {success}</p>
-                            <p>Nom: {name}</p>
-                            <p>Email: {email}</p>
-                            <p>Téléphone: {phone}</p>
-                        </div>
-                
                     <div className={styles.portfolio__largeScreen__header__titles__subtitleWrapper}>
                         <Subtitle text="UN APERCU DE MON TRAVAIL" />
                     </div>

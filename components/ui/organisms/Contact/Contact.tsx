@@ -12,6 +12,7 @@ import IconPhone from '../../atoms/IconPhone/IconPhone'
 import { useState, useRef } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
+import useReCaptcha from '@/hooks/useReCaptcha'
 
 export default function Contact() {
     const example = { src: taj.src, alt: 'taj' }
@@ -28,6 +29,8 @@ export default function Contact() {
         [0.1, 1],
         ["-20vh", "40vh"]
     )
+
+    // const { email, phone} = useReCaptcha()
 
     return (
         <section ref={containerRef} id="Contact" className={styles.contact}>
@@ -83,12 +86,12 @@ export default function Contact() {
                             >
                                 <IconPhone />
                                 <Link
-                                    href="tel:+33644210716"
+                                    href={`tel:${phone}`}
                                             className={
                                         styles.contact__presentation__text__details__link
                                             }
                                         >
-                                    06 99 25 17 32
+                                    {phone}
                                 </Link>
                             </div>
                             <div
@@ -96,12 +99,12 @@ export default function Contact() {
                             >
                                 <IconMail />
                                 <Link
-                                    href="mailto:hugo.randez@gmail.com?subject=Demande%20d'information&body=Bonjour Hugo,%20je%20souhaite%20plus%20d'informations%20à%20propos%20de..."
+                                    href={`mailto:${email}?subject=Demande%20d'information&body=Bonjour Hugo,%20je%20souhaite%20plus%20d'informations%20à%20propos%20de...`}
                                             className={
                                         styles.contact__presentation__text__details__link
                                             }
                                         >
-                                    hugo.randez@gmail.com
+                                    {email}
                                 </Link>
                             </div>
                             <div

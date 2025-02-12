@@ -12,6 +12,7 @@
     font-size: 1.25rem;
     font-family: var(--font-title);
     color: var(--color-text-main);
+    transition: color 0.1s ease 0.1s;
     z-index:1;
     &::before {
         position: absolute;

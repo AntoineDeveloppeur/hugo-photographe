@@ -60,7 +60,6 @@ const navVariants = {
 const MenuItem = ({ text, icon, link }: { text: string, icon: string, link: string }) => {
     return (
         <motion.li
-            // className={styles.listItem}
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

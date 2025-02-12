@@ -3,7 +3,6 @@
 import ButtonTheme from '../../atoms/ButtonTheme/ButtonTheme'
 import styles from './theme-changer.module.scss'
 import { useTheme } from 'next-themes'
-import { useState, useEffect } from 'react'
 
 export default function ThemeChanger() {
 

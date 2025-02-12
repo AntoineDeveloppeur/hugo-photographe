@@ -49,7 +49,6 @@ export async function POST(request: Request) {
             console.log('Verification successful')
             return NextResponse.json({
                 success: true,
-                name: process.env.HUGO_NAME,
                 email: process.env.HUGO_EMAIL,
                 phone: process.env.HUGO_PHONE
             })
@@ -58,7 +57,6 @@ export async function POST(request: Request) {
         console.log('Verification failed')
         return NextResponse.json({
             success: false,
-            name: '',
             email: '',
             phone: ''
         })

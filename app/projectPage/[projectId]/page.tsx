@@ -7,7 +7,7 @@ import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import PhotoBasic from '@/components/ui/atoms/PhotoBasic/PhotoBasic'
 
 const ProjectPage = async ({ params }) => {
-    // aller chercher dans data.json le projet correspondant à params. Le paramètres est la clé du projet
+    // aller chercher dans data.json le projet correspondant à params. Le paramètres est l'id du projet
     const { projectId } = await params
     const project = data.projects.find((project) => project.id === projectId)
     if (!project) {

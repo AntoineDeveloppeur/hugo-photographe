@@ -20,7 +20,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     if (!mounted) return null
 
     return (
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
             <GoogleReCaptchaProvider
                 reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
                 scriptProps={{

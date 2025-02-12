@@ -6,6 +6,7 @@ import ProjetSectionLandscape from '@/components/ui/organisms/ProjetSectionLands
 
 export default function Home() {
     return (
+        
         <div className={styles.pages}>
             <Portfolio />
             <ProjetSectionLandscape />

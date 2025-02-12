@@ -13,8 +13,8 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="fr" style={{ scrollBehavior: 'smooth' }}>
-            <body className={`${lora.variable} ${baskervville.variable} ${merriweather.variable}antialiased`}>
+        <html lang="fr">
+            <body className={`${lora.variable} ${baskervville.variable} ${merriweather.variable} antialiased`}>
                 {children}
             </body>
         </html>

@@ -40,9 +40,12 @@ dd {
 }
 
 /* Set core body defaults */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     min-height: 100vh;
-    scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
 }
 
@@ -114,7 +117,7 @@ select {
 
 /* Colors begins */
 
-// [data-theme="dark"] {
+
 :root, [data-theme="dark"] {
     --background-main: var(--dark10);
     --background-second: var(--dark12);

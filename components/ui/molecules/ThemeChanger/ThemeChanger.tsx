@@ -6,19 +6,9 @@ import { useTheme } from 'next-themes'
 import { useState, useEffect } from 'react'
 
 export default function ThemeChanger() {
-    const [mounted, setMounted] = useState(false)
+
     const {theme, setTheme, systemTheme} = useTheme()
 
-    const toggleSwitch = () => {
-        
-    }
-
-    
-    useEffect(() => {
-       setMounted(true)
-      }, [])
-
-    if (!mounted) return null
 
     const currentTheme = theme === "system" ? systemTheme : theme
 

@@ -6,12 +6,21 @@ import Header from './ui/organisms/HeaderDesktop/HeaderDesktop'
 import HeaderMobile from './ui/organisms/HeaderMobile/HeaderMobile'
 import Footer from './ui/organisms/Footer/Footer'
 import useIsMobile from '@/hooks/useIsMobile'
+import { useState, useEffect } from 'react'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
     const isMobile = useIsMobile()
 
+    const [mounted, setMounted] = useState(false)
+    
+    useEffect(() => {
+       setMounted(true)
+     }, [])
+
+    if (!mounted) return null
+
     return (
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <GoogleReCaptchaProvider
                 reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
                 scriptProps={{
@@ -21,7 +30,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 }}
             >
                 {isMobile ? <HeaderMobile /> : <Header />}
-                {children}
+                <main>
+                    {children}
+                </main>
                 <Footer />
             </GoogleReCaptchaProvider>
         </ThemeProvider>

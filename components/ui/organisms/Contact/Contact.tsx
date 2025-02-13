@@ -1,10 +1,10 @@
 'use client'
 
 import styles from './contact.module.scss'
+import { PhotoVariableProps} from '@/types/index'
 import ButtonBig from '../../atoms/ButtonBig/ButtonBig'
 import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
 import taj from '@/public/taj.jpg'
-import Title from '../../atoms/Title/Title'
 import Link from 'next/link'
 import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
@@ -15,8 +15,9 @@ import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
 import useReCaptcha from '@/hooks/useReCaptcha'
 
 export default function Contact() {
-    const example = { src: taj.src, alt: 'taj' }
-    const [showPresentation, setShowPresentation] = useState(false)
+
+    const example : PhotoVariableProps = { src: taj.src, alt: 'taj' }
+    const [showPresentation, setShowPresentation] = useState<boolean>(false)
     const containerRef = useRef(null)
     
     const { scrollYProgress } = useScroll({
@@ -30,7 +31,7 @@ export default function Contact() {
         ["-20vh", "40vh"]
     )
 
-    // const { email, phone} = useReCaptcha()
+    const { email, phone} = useReCaptcha()
 
     return (
         <section ref={containerRef} id="Contact" className={styles.contact}>

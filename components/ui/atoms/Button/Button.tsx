@@ -5,12 +5,13 @@ import { ButtonProps } from '@/types'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
-const Button = ({ text, link }: ButtonProps) => {
+const Button = ({ text, link, onClick }: ButtonProps) => {
     return (
         <motion.button
             className={styles.button}
             whileHover={{ backgroundColor: 'var(--background-button-second)' }}
             whileTap={{ scale: 0.9 }}
+            onClick={onClick}
         >
             {link ? (
                 <Link href={link}>

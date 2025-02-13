@@ -10,7 +10,7 @@ import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
 import IconPhone from '../../atoms/IconPhone/IconPhone'
 import { useState, useRef } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
 import useReCaptcha from '@/hooks/useReCaptcha'
 
@@ -25,11 +25,19 @@ export default function Contact() {
         offset: ["start end", "end start"]
     })
 
-    const y = useTransform(
+    const transformedY = useTransform(
         scrollYProgress,
         [0.1, 1],
-        ["-20vh", "40vh"]
+        [-130, 280]
+
     )
+
+    const springY = useSpring(transformedY, {
+        stiffness: 400,
+        damping: 20,
+        bounce: 0.1,
+        mass: 0.5
+    })
 
     const { email, phone} = useReCaptcha()
 
@@ -38,23 +46,9 @@ export default function Contact() {
                 {!showPresentation && (
                     <motion.div
                         style={{ 
-                            y,
+                            y: springY,
                             position: 'relative',
                             zIndex: 1
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ 
-                            opacity: 1,
-                            transition: {
-                                duration: 0.5
-                            }
-                        }}
-                        whileInView={{
-                            transition: {
-                                type: "spring",
-                                bounce: 0.4,
-                                duration: 0.8
-                            }
                         }}
                     >
                         <ButtonBig 

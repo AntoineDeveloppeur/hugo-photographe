@@ -9,15 +9,18 @@ import Link from 'next/link'
 import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
 import IconPhone from '../../atoms/IconPhone/IconPhone'
-import { useState, useRef } from 'react'
+import { useRef, useContext } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
 import useReCaptcha from '@/hooks/useReCaptcha'
+import { ShowPresentationContext } from '@/components/Providers'
 
 export default function Contact() {
 
     const example : PhotoVariableProps = { src: taj.src, alt: 'taj' }
-    const [showPresentation, setShowPresentation] = useState<boolean>(false)
+
+    const { showPresentation, setShowPresentation } = useContext(ShowPresentationContext)
+
     const containerRef = useRef(null)
     
     const { scrollYProgress } = useScroll({

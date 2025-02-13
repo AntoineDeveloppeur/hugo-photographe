@@ -5,6 +5,7 @@ import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import PhotoBasic from '@/components/ui/atoms/PhotoBasic/PhotoBasic'
+import LinkBottomOfProjectPage from '@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage'
 
 const ProjectPage = async ({ params }) => {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est l'id du projet
@@ -59,6 +60,7 @@ const ProjectPage = async ({ params }) => {
                         <Paragraphes texts={project.textsBelowPhotos} />
                     )}
                 </div>
+                <LinkBottomOfProjectPage/>
             </div>
         </section>
     )

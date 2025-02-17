@@ -26,7 +26,7 @@ const ProjectPage = async ({ params }) => {
                         >
                             Le projet n'a pas été trouvé.
                         </p>
-                        <Button text="Retourez aux projets" link="/" />
+                        <Button text="Retourner aux projets" link="/" />
                     </div>
                 </div>
             </section>

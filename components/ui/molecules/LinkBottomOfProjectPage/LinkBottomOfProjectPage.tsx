@@ -18,7 +18,7 @@ export default function LinkBottomOfProjectPage() {
     return (
         <div className={styles.Wrapper}>
         <Button text="Contacter le photographe" onClick={handleContactClick} />
-        <Button text="Retourez aux projets" link="/#Projects" />
+        <Button text="Retourner aux projets" link="/#Projects" />
         </div>
     )
 }

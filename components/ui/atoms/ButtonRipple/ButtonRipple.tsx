@@ -9,8 +9,14 @@ type ButtonRippleProps = {
     onClick?: () => void
 }
 
+type RippleState = {
+    x: number
+    y: number
+    isAnimating: boolean
+} | null
+
 export default function ButtonRipple({ text, onClick }: ButtonRippleProps) {
-    const [ripples, setRipples] = useState<Array<{ x: number; y: number; id: number }>>([])
+    const [ripple, setRipple] = useState<RippleState>(null)
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const button = e.currentTarget
@@ -20,7 +26,7 @@ export default function ButtonRipple({ text, onClick }: ButtonRippleProps) {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
         
-        setRipples(prev => [...prev, { x, y, id: Date.now() }])
+        setRipple({ x: x-47, y: y-48, isAnimating: true })
         
         if (onClick) {
             onClick()
@@ -34,15 +40,14 @@ export default function ButtonRipple({ text, onClick }: ButtonRippleProps) {
             whileTap={{ scale: 0.95 }}
             onClick={handleClick}
         >
-            <AnimatePresence mode="popLayout">
-                {ripples.map(({ x, y, id }) => (
+            <AnimatePresence>
+                {ripple && ripple.isAnimating && (
                     <motion.span
-                        key={id}
                         className={styles.ripple}
                         style={{
-                            left: x-47,
-                            top:  y-48,
-                            width: 100, 
+                            left: ripple.x,
+                            top: ripple.y,
+                            width: 100,
                             height: 100,
                         }}
                         initial={{ 
@@ -58,10 +63,10 @@ export default function ButtonRipple({ text, onClick }: ButtonRippleProps) {
                             ease: "easeOut"
                         }}
                         onAnimationComplete={() => {
-                            setRipples(prev => prev.filter(ripple => ripple.id !== id))
+                            setRipple(null)
                         }}
                     />
-                ))}
+                )}
             </AnimatePresence>
             <p className={styles.button__p}>{text}</p>
         </motion.button>

@@ -5,7 +5,7 @@ import { ButtonProps } from '@/types'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 
-const Button = ({ text, link, onClick }: ButtonProps) => {
+export default function Button({ text, link, onClick }: ButtonProps) {
     return (
         <motion.button
             className={styles.button}
@@ -23,5 +23,3 @@ const Button = ({ text, link, onClick }: ButtonProps) => {
         </motion.button>
     )
 }
-
-export default Button

@@ -6,6 +6,7 @@ import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import PhotoBasic from '@/components/ui/atoms/PhotoBasic/PhotoBasic'
 import LinkBottomOfProjectPage from '@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage'
+import PhotoGallery from '@/components/ui/atoms/PhotoGallery/PhotoGallery'
 
 const ProjectPage = async ({ params }) => {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est l'id du projet
@@ -36,7 +37,7 @@ const ProjectPage = async ({ params }) => {
         <section className={styles.projectPage}>
             <div className={styles.projectPage__largeScreen}>
                 <div className={styles.projectPage__largeScreen__photoWrapper}>
-                    <PhotoBasic photo={project.mainPhoto} />
+                    <PhotoGallery photo={project.mainPhoto} hoverEffect={false} />
                 </div>
                 <div className={styles.projectPage__largeScreen__titleWrapper}>
                     <TitleProjectPage text={project.title} />

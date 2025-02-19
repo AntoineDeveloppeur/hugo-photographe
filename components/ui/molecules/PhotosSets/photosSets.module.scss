@@ -6,33 +6,45 @@
     gap: 2rem;
     &__photosSet {
         display: grid;
-        // width: 100%;
+        max-width: 100%;
+        max-height: 85vh;
         gap: 1rem;
+        object-fit: contain;
         overflow: hidden;
+        
         &1photo {
             grid-template-columns: 1fr;
+            width: auto;
+            height: 70vh;
+            object-fit: contain;
         }
         &2photo {
             grid-template-columns: repeat(2, 1fr);
-            width: 100%;
+            max-width: 100%;
+        
+       
         }
         &3photo {
             grid-template-columns: repeat(3, 1fr);
-            width: 100%;
-
+            width: auto;
         }
         &4photo {
             grid-template-columns: repeat(2, 1fr);
-            width: 100%;
         }
         &__photoWrapper {
-            max-height: 80vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            max-height: 85vh;
+            object-fit: contain;
 
+            &For4photo {
+                // height: calc(50% - 1rem / 2);
+                height: 100%;
+                width: auto;
+            }
         }
+
     }
 }
 

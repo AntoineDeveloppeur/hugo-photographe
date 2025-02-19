@@ -17,7 +17,6 @@ const PhotoGallery = ({ photo, hoverEffect }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
-    console.log('hoverEffect dans photogallery',hoverEffect)
 
     const handleModalClose = () => {
         setIsModalOpen(false)
@@ -40,7 +39,7 @@ const PhotoGallery = ({ photo, hoverEffect }: PhotoProps) => {
                     duration: 5, 
                     ease: [0.215, 0.61, 0.355, 1]
                 }}
-                style={{width: '100%'}}
+                style={{width: '100%', height: '100%'}}
             >
                 <div className={styles.imageWrapper}>
                     <NextImage

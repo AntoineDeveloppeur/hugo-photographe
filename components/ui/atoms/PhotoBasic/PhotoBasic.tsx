@@ -14,7 +14,6 @@ const PhotoBasic = ({ photo }: PhotoProps) => {
                 width={500}
                 height={300}
                 quality={75}
-                style={{ objectFit: 'cover' }}
             />
         </div>
     )

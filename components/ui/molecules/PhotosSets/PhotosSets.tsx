@@ -25,7 +25,7 @@ const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
                             `}
                             key={`photo-${setIndex}-${photoIndex}`}
                         >
-                            <PhotoBasic photo={photo} />
+                            <PhotoGallery photo={photo} hoverEffect={false}/>
                         </div>
                     ))}
                 </div>

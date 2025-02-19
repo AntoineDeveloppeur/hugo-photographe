@@ -8,7 +8,7 @@ import { useState } from 'react'
 import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 
-const PhotoGallery = ({ photo }: PhotoProps) => {
+const PhotoGallery = ({ photo }: PhotoProps, hoverEffect: boolean) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
@@ -18,8 +18,10 @@ const PhotoGallery = ({ photo }: PhotoProps) => {
     }
 
     const handleMouseEnter = () => {
-        setIsHovered(true)
         setIsLoading(true)
+        if (hoverEffect) {
+            setIsHovered(true)
+        }
     }
 
     return (
@@ -42,6 +44,7 @@ const PhotoGallery = ({ photo }: PhotoProps) => {
                         width={500}
                         height={300}
                         quality={75}
+                        style={{ objectFit: 'cover'}}
                     />
                 </div>
             </motion.div>

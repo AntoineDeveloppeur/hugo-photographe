@@ -60,7 +60,7 @@ export default function Portfolio() {
                             }
                         >
                             {columns.map((pic: PhotoVariableProps, i) => (
-                                <PhotoGallery key={`pic${i}`} photo={pic} />
+                                <PhotoGallery key={`pic${i}`} photo={pic} hoverEffect={true} />
                             ))}
                         </div>
                     ))}

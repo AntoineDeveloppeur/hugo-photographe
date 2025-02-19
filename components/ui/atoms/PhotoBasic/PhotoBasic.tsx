@@ -8,7 +8,7 @@ const PhotoBasic = ({ photo }: PhotoProps) => {
     return (
         <div className={styles.imageWrapper}>
             <NextImage
-                className={styles.image}
+                className={styles.imageWrapper__image}
                 src={photo.src}
                 alt={photo.alt}
                 width={500}

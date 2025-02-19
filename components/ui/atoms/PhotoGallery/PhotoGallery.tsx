@@ -8,10 +8,16 @@ import { useState } from 'react'
 import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 
-const PhotoGallery = ({ photo }: PhotoProps, hoverEffect: boolean) => {
+interface PhotoProps {
+    photo: Photo
+    hoverEffect: boolean
+}
+
+const PhotoGallery = ({ photo, hoverEffect }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
+    console.log('hoverEffect dans photogallery',hoverEffect)
 
     const handleModalClose = () => {
         setIsModalOpen(false)
@@ -19,9 +25,8 @@ const PhotoGallery = ({ photo }: PhotoProps, hoverEffect: boolean) => {
 
     const handleMouseEnter = () => {
         setIsLoading(true)
-        if (hoverEffect) {
-            setIsHovered(true)
-        }
+        setIsHovered(true)
+
     }
 
     return (
@@ -30,7 +35,7 @@ const PhotoGallery = ({ photo }: PhotoProps, hoverEffect: boolean) => {
                 onClick={() => setIsModalOpen(true)}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={() => setIsHovered(false)}
-                whileHover={{ scale: 1.08 }}
+                whileHover={hoverEffect ? { scale: 1.08 } : undefined}
                 transition={{ 
                     duration: 5, 
                     ease: [0.215, 0.61, 0.355, 1]
@@ -44,7 +49,6 @@ const PhotoGallery = ({ photo }: PhotoProps, hoverEffect: boolean) => {
                         width={500}
                         height={300}
                         quality={75}
-                        style={{ objectFit: 'cover'}}
                     />
                 </div>
             </motion.div>

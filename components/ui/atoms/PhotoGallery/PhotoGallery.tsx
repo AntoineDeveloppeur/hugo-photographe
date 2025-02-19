@@ -40,6 +40,7 @@ const PhotoGallery = ({ photo, hoverEffect }: PhotoProps) => {
                     duration: 5, 
                     ease: [0.215, 0.61, 0.355, 1]
                 }}
+                style={{width: '100%'}}
             >
                 <div className={styles.imageWrapper}>
                     <NextImage

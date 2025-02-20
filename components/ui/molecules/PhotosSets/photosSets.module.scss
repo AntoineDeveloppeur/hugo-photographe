@@ -30,18 +30,17 @@
         }
         &4photo {
             grid-template-columns: repeat(2, 1fr);
+
         }
         &__photoWrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             max-height: 85vh;
             object-fit: contain;
 
             &For4photo {
                 // height: calc(50% - 1rem / 2);
                 height: 100%;
-                width: auto;
+width: auto;
+                object-fit: contain;
             }
         }
 

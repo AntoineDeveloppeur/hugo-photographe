@@ -1,4 +1,6 @@
 .button {
+    position: relative;
+    overflow: hidden;
     background-color: var(--background-button-pagination);
     border: 1px solid var(--background-button);
     border-radius: 5px;
@@ -16,5 +18,14 @@
         color: var(--color-text-button);
         font-size: 1.5rem;
         margin-right: 1rem;
+    }
+
+    .ripple {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.35);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transform-origin: center;
+        pointer-events: none;
     }
 }

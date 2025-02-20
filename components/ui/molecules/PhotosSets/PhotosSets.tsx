@@ -2,6 +2,7 @@ import { PhotosSetsProps } from '@/types'
 import styles from './photosSets.module.scss'
 import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
 import PhotoGallery from '../../atoms/PhotoGallery/PhotoGallery'
+import PhotoProjectPage from '@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage'
 
 const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
     return (
@@ -25,7 +26,7 @@ const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
                             `}
                             key={`photo-${setIndex}-${photoIndex}`}
                         >
-                            <PhotoGallery photo={photo} hoverEffect={false}/>
+                            <PhotoProjectPage photo={photo} hoverEffect={false}/>
                         </div>
                     ))}
                 </div>

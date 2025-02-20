@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './pagination.module.scss'
 import ButtonArrow from '@/components/ui/atoms/ButtonArrow/ButtonArrow'
 
-export default function Pagination({previousPage, nextPage, currentPage}: any) {
+export default function Pagination({previousPage, nextPage, currentPage, pagesCount}: any) {
     return (
         <div
         className={
@@ -25,7 +25,7 @@ export default function Pagination({previousPage, nextPage, currentPage}: any) {
                 styles.pagination__p
             }
         >
-            {currentPage}
+            {currentPage} / {pagesCount}
         </p>
         <div
             className={

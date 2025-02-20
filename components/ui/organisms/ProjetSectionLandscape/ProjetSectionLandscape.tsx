@@ -90,6 +90,7 @@ export default function ProjetSection() {
                         previousPage={previousPage}
                         nextPage={nextPage}
                         currentPage={currentPage}
+                        pagesCount= {PagesCount}
                     />
                 ) : (
                     projectsCount > 3 && (

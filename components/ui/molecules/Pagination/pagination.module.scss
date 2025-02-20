@@ -3,10 +3,11 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 2rem;
     &__p {
         font-size: 16px;
-        font-family: var(--font-paragraph);
+        font-family: var(--font-pagination);
         color: var(--color-text-second)
     }
 }

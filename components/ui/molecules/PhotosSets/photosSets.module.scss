@@ -4,46 +4,27 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    width: 100%;
     &__photosSet {
         display: grid;
+        width: auto;
         max-width: 100%;
         max-height: 85vh;
         gap: 1rem;
-        object-fit: contain;
+        object-fit: cover;
         overflow: hidden;
         
         &1photo {
             grid-template-columns: 1fr;
-            width: auto;
             height: 70vh;
-            object-fit: contain;
         }
         &2photo {
             grid-template-columns: repeat(2, 1fr);
-            max-width: 100%;
-        
        
         }
         &3photo {
             grid-template-columns: repeat(3, 1fr);
-            width: auto;
         }
-        &4photo {
-            grid-template-columns: repeat(2, 1fr);
-
-        }
-        &__photoWrapper {
-            max-height: 85vh;
-            object-fit: contain;
-
-            &For4photo {
-                // height: calc(50% - 1rem / 2);
-                height: 100%;
-width: auto;
-                object-fit: contain;
-            }
-        }
-
     }
 }
 
@@ -62,6 +43,7 @@ width: auto;
         justify-content: center;
         align-items: center;
         width: 90vw;
+        height: auto;
         &1photo {
 
         }
@@ -78,14 +60,14 @@ width: auto;
         
         &__photoWrapper {
             position: relative;
-            height: 100%;
+            height: auto;
             max-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            
+            object-fit:contain;
             &For1photo {
                 // flex: 1 1 100%;
                 // width: 100%;
@@ -124,68 +106,3 @@ width: auto;
 }
 
 
-
-// .photosSets {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     gap: 2rem;
-//     &__photosSet {
-//         display: flex;
-//         // width: 100%;
-//         gap: 1rem;
-//         justify-content: center;
-//         align-items: center;
-//         overflow: hidden;
-//         flex-wrap: wrap;
-//         &1photo {
-//             flex: 1 1 100%;
-//         }
-//         &2photo {
-//             flex: 1 1 calc(50% - 1rem);
-//             width: 100%;
-//         }
-//         &3photo {
-//             flex: 1 1 calc(33% - 1rem);
-//             width: 100%;
-
-//         }
-//         &4photo {
-//             flex: 1 1 calc(25% - 1rem);
-//             width: 100%;
-//         }
-//         &__photoWrapper {
-//             max-height: 60vh;
-//             display: flex;
-//             justify-content: center;
-//             align-items: center;
-//             overflow: hidden;
-//             flex-wrap: wrap;
-//             &For1photo {
-
-//             }
-//             &For2photo {
-//                 min-width: 200px;
-//                 max-width: 300px;
-
-
-
-//             }
-//             &For3photo {
-
-//                 max-width: calc(33% - 1rem);
-//                 min-width: 200px;
-
-
-//             }
-//             &For4photo {
-//                 flex: 1 1 calc(50% - 1rem);
-//                 min-width: 200px;
-
-
-
-
-//             }
-//         }
-//     }
-// }

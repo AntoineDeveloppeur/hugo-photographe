@@ -9,6 +9,7 @@
         margin-bottom: 6rem;
         margin-left: 6rem;
         margin-right: 6rem;
+        width: auto;
         max-width: 1440px;
         display: flex;
         flex-direction: column;
@@ -28,7 +29,7 @@
             }
         }
         &__photoWrapper {
-            height: 55vh;
+            height: auto;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -49,7 +50,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            width: auto;
             flex-wrap: wrap;
             &__photoWrapper {
                 margin: auto;
@@ -57,3 +58,15 @@
         }
     }
 }
+
+
+// @media screen and (max-width: 950px) {
+//     .projectPage {
+//         &__largeScreen {
+//             &__photoWrapper {
+//                 height: auto;
+//                 width: 100%;
+//             }
+//         }
+//     }
+// }

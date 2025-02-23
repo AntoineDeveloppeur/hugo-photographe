@@ -27,7 +27,7 @@ export default function MentionsLegales() {
                 </p>
                 <Subtitle text="Hébergement" />
                 <p className={styles.mentions__largeScreen__p}>
-                    Nom de l'hébergeur: Hostinger
+                    Nom de l&apos;hébergeur: Hostinger
                     <br />
                     adresse : Hostinger, UAB, Jonavos g. 60C, Kaunas, Lituanie,
                     44192 <br />

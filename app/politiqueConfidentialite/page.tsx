@@ -12,8 +12,8 @@ export default function PolitiqueConfidentialite() {
                 <Subtitle text="Collecte de l'information" />
                 <p className={styles.politique__largeScreen__p}>
                     Nous recueillons des informations lorsque vous remplissez le
-                    formulaire de contact. Il s’agit de votre nom, votre adresse
-                    e-mail, votre numéro de téléphone s’il est renseigné et
+                    formulaire de contact. Il s&apos;agit de votre nom, votre adresse
+                    e-mail, votre numéro de téléphone s&apos;il est renseigné et
                     votre message.
                 </p>
                 <Subtitle text="Utilisation des informations" />
@@ -24,7 +24,7 @@ export default function PolitiqueConfidentialite() {
                 </p>
                 <Subtitle text="Divulgation à des tiers" />
                 <p className={styles.politique__largeScreen__p}>
-                    Nous ne vendons, n'échangeons et ne transférons pas vos
+                    Nous ne vendons, n&apos;échangeons et ne transférons pas vos
                     informations personnelles identifiables à des tiers.
                 </p>
                 <Subtitle text="Protection des informations" />
@@ -35,14 +35,14 @@ export default function PolitiqueConfidentialite() {
                     informations personnelles identifiables. Les ordinateurs et
                     serveurs utilisés pour stocker des informations personnelles
                     identifiables sont conservés dans un environnement sécurisé.
-                    Aucun cookie n’est utilisé.
+                    Aucun cookie n&apos;est utilisé.
                 </p>
                 <Subtitle text="Modifier ou supprimer vos données" />
                 <p className={styles.politique__largeScreen__p}>
                     A tout moment vous pouvez faire la demande de la
                     suppressions de vos données en contact Lisa Tastevin via le
                     formulaire de contact ou par email accessible depuis la page
-                    d’accueil.
+                    d&apos;accueil.
                 </p>
                 <Subtitle text="Consentement" />
                 <p className={styles.politique__largeScreen__p}>

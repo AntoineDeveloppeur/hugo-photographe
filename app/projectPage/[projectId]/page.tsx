@@ -59,7 +59,7 @@ const ProjectPage = async ({ params }) => {
                                 styles.projectPage__largeScreen__404Wrapper__text
                             }
                         >
-                            Le projet n'a pas été trouvé.
+                            Le projet n&apos;a pas été trouvé.
                         </p>
                         <Button text="Retourner aux projets" link="/" />
                     </div>

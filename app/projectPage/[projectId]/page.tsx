@@ -7,9 +7,14 @@ import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import LinkBottomOfProjectPage from '@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage'
 import PhotoProjectPage from '@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage'
 
-const ProjectPage = async ({ params } : {params: {projectId: string}}) => {
+const ProjectPage = async ({
+    params,
+}: {
+    params: { projectId: string }
+    searchParams?: { [key: string]: string | string[] | undefined }
+}) => {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est l'id du projet
-    const { projectId } = await params
+    const { projectId } = params
     const project = data.projects.find((project) => project.id === projectId)
 
     if (project) {

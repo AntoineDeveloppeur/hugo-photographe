@@ -4,7 +4,7 @@ import styles from './button-theme.module.scss'
 import { motion } from "framer-motion"
 
 
-type Theme = "light" | "dark"
+type Theme = "light" | "dark" | undefined
 
 export default function ButtonTheme({ theme }: { theme: Theme }) {
 

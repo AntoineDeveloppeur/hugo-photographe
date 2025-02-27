@@ -8,11 +8,6 @@ import { useState } from 'react'
 import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 
-interface PhotoProps {
-    photo: Photo
-    hoverEffect: boolean
-}
-
 const PhotoGallery = ({ photo, hoverEffect }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)

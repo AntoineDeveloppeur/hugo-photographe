@@ -64,7 +64,7 @@ export type GaleryType = 'galeryDesktop' | 'galeryTablet' | 'galeryMobile';
 
 export type Theme = "light" | "dark"
 
-export interface projectProps {
+export interface projectsProps {
     id: string
     title: string
     summary: string

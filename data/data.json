@@ -1,122 +1,117 @@
 {
     "galeryDesktop": [
-        [
+        [           
+            {
+                "src": "/taïwan7.jpg",
+                "alt": "paysage avec une personne de dos au loin"
+            },
+            {
+                "src": "/concert.jpg",
+                "alt": "concert avec un guitariste"
+            },
+            {
+                "src": "/concert2.jpg",
+                "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert"
+            }
+        ],
+        [         
             {
                 "src": "/paysage.jpg",
-                "alt": "jjjj"
+                "alt": "paysage d'un lac avec une maison seule"
             },
             {
-                "src": "/voiture.jpg",
-                "alt": "jjjj"
+                "src": "/chien.jpg",
+                "alt": "chien qui court dans la nature"
             },
             {
-                "src": "/cowboy.jpg",
-                "alt": "jjjj"
+                "src": "/gym.jpg",
+                "alt": "deux gymnastes en pleine représentation avec des ballons"
             }
         ],
         [
             {
-                "src": "/concert.jpg",
-                "alt": "jjjj"
+                "src": "/maquillage.jpg",
+                "alt": "Une femme se maquille devant un mirroir"
             },
             {
                 "src": "/taureau.jpg",
-                "alt": "jjjj"
+                "alt": "une personne dans une arène cour pour échapper à un taureau"
             },
             {
                 "src": "/cuisine.jpg",
-                "alt": "jjjj"
-            }
-        ],
-        [
-            {
-                "src": "/singe.jpg",
-                "alt": "jjjj"
-            },
-            {
-                "src": "/taj.jpg",
-                "alt": "jjjj"
-            },
-            {
-                "src": "/prince.jpg",
-                "alt": "jjjj"
+                "alt": "Un cuisinier cuisine en extérieur"
             }
         ]
     ],
-    
     "galeryTablet": [
-        [
+        [           
             {
-                "src": "/paysage.jpg",
-                "alt": "jjjj"
+                "src": "/taïwan7.jpg",
+                "alt": "paysage avec une personne de dos au loin"
             },
-            {
-                "src": "/voiture.jpg",
-                "alt": "jjjj"
-            },
-            {
-                "src": "/cowboy.jpg",
-                "alt": "jjjj"
-            },
-        
             {
                 "src": "/concert.jpg",
-                "alt": "jjjj"
-            }
-        ],
-        [
-            {
-                "src": "/singe.jpg",
-                "alt": "jjjj"
+                "alt": "concert avec un guitariste"
             },
             {
-                "src": "/taj.jpg",
-                "alt": "jjjj"
-            },
-            {
-                "src": "/prince.jpg",
-                "alt": "jjjj"
-            },          
-            {
-                "src": "/taureau.jpg",
-                "alt": "jjjj"
+                "src": "/concert2.jpg",
+                "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert"
             },
             {
                 "src": "/cuisine.jpg",
-                "alt": "jjjj"
+                "alt": "Un cuisinier cuisine en extérieur"
+            }
+        ],
+        [
+                
+            {
+                "src": "/paysage.jpg",
+                "alt": "paysage d'un lac avec une maison seule"
+            },
+            {
+                "src": "/chien.jpg",
+                "alt": "chien qui court dans la nature"
+            },
+            {
+                "src": "/gym.jpg",
+                "alt": "deux gymnastes en pleine représentation avec des ballons"
+            },
+            {
+                "src": "/maquillage.jpg",
+                "alt": "Une femme se maquille devant un mirroir"
+            },
+            {
+                "src": "/taureau.jpg",
+                "alt": "une personne dans une arène cour pour échapper à un taureau"
             }
         ]
     ],
     "galeryMobile": [
         [
             {
-                "src": "/paysage.jpg",
-                "alt": "jjjj"
-            },
-            {
-                "src": "/voiture.jpg",
-                "alt": "jjjj"
-            },
-            {
-                "src": "/cowboy.jpg",
-                "alt": "jjjj"
+                "src": "/taïwan7.jpg",
+                "alt": "paysage avec une personne de dos au loin"
             },
             {
                 "src": "/concert.jpg",
-                "alt": "jjjj"
+                "alt": "concert avec un guitariste"
             },
             {
-                "src": "/singe.jpg",
-                "alt": "jjjj"
+                "src": "/cuisine.jpg",
+                "alt": "Un cuisinier cuisine en extérieur"
             },
             {
-                "src": "/taj.jpg",
-                "alt": "jjjj"
+                "src": "/paysage.jpg",
+                "alt": "paysage d'un lac avec une maison seule"
             },
             {
-                "src": "/prince.jpg",
-                "alt": "jjjj"
-            }       
+                "src": "/maquillage.jpg",
+                "alt": "Une femme se maquille devant un mirroir"
+            },
+            {
+                "src": "/taureau.jpg",
+                "alt": "une personne dans une arène cour pour échapper à un taureau"
+            }     
         ]
     ],
     "projects": [

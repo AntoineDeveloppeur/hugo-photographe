@@ -19,8 +19,7 @@ export default function PolitiqueConfidentialite() {
                 <Subtitle text="Utilisation des informations" />
 
                 <p className={styles.politique__largeScreen__p}>
-                    Toutes les informations que nous recueillons peuvent être
-                    utilisées uniquement pour vous mettre en relation avec Hugo Randez.
+                Ce site utilise Google reCAPTCHA pour prévenir les abus et le spam. reCAPTCHA collecte des données personnelles des utilisateurs, telles que les adresses IP, les informations du navigateur, et les comportements des utilisateurs, afin de déterminer si une interaction est légitime. Ces données sont soumises à la Politique de confidentialité et aux Conditions d&apos;utilisation de Google. En utilisant ce site, vous consentez au traitement des données vous concernant par Google dans les conditions et pour les finalités décrites ci-dessus.
                 </p>
                 <Subtitle text="Divulgation à des tiers" />
                 <p className={styles.politique__largeScreen__p}>

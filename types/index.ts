@@ -4,9 +4,12 @@ export interface PhotoVariableProps {
     src: string
     alt: string
 }
+
 export interface PhotoProps {
     photo: PhotoVariableProps
+    hoverEffect?: boolean
 }
+
 export type photoSet = PhotoVariableProps[]
 
 export interface PhotosSetsProps {
@@ -37,7 +40,7 @@ export interface TextsProps {
 export interface ButtonProps {
     text: string
     link?: string
-    onClick?: () => void
+    onclick?: () => void
 }
 
 export interface ButtonArrowProps {
@@ -53,13 +56,11 @@ export interface TitleCardProps {
 export interface CardProps {
     title: string
     summary: string
-    mainPhoto: PhotoProps
+    mainPhoto: PhotoVariableProps
     id: string
 }
 
 export type GaleryType = 'galeryDesktop' | 'galeryTablet' | 'galeryMobile';
-
-export let params: string
 
 export interface projectProps {
     id: string

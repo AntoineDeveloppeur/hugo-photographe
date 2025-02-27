@@ -12,7 +12,7 @@ type RippleState = {
     isAnimating: boolean
 } | null
 
-export default function Button({ text, link, onClick }: ButtonProps) {
+export default function Button({ text, link, onclick }: ButtonProps) {
     const [ripple, setRipple] = useState<RippleState>(null)
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,8 +24,8 @@ export default function Button({ text, link, onClick }: ButtonProps) {
         
         setRipple({ x: x-47, y: y-48, isAnimating: true })
         
-        if (onClick) {
-            onClick()
+        if (onclick) {
+            onclick()
         }
     }
 

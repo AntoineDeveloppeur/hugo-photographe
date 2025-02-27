@@ -62,6 +62,8 @@ export interface CardProps {
 
 export type GaleryType = 'galeryDesktop' | 'galeryTablet' | 'galeryMobile';
 
+export type Theme = "light" | "dark"
+
 export interface projectProps {
     id: string
     title: string

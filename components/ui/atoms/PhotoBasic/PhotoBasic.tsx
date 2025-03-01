@@ -11,8 +11,8 @@ const PhotoBasic = ({ photo }: PhotoProps) => {
                 className={styles.imageWrapper__image}
                 src={photo.src}
                 alt={photo.alt}
-                width={500}
-                height={300}
+                width={photo.width || 4000}
+                height={photo.height|| 3000}
                 quality={75}
             />
         </div>

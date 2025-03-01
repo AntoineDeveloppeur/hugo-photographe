@@ -40,8 +40,8 @@ const PhotoGallery = ({ photo, hoverEffect }: PhotoProps) => {
                         className={styles.imageWrapper__image}
                         src={photo.src}
                         alt={photo.alt}
-                        width={500}
-                        height={300}
+                        width={photo.width}
+                        height={photo.height}
                         quality={75}
                     />
                 </div>
@@ -57,8 +57,8 @@ const PhotoGallery = ({ photo, hoverEffect }: PhotoProps) => {
                         className={`${styles.modalImage} ${!isLoading ? styles.loaded : ''}`}
                         src={photo.src}
                         alt={photo.alt}
-                        width={1920}
-                        height={1080}
+                        width={photo.width}
+                        height={photo.height}
                         quality={100}
                         priority={isHovered || isModalOpen}
                         onLoadingComplete={() => setIsLoading(false)}

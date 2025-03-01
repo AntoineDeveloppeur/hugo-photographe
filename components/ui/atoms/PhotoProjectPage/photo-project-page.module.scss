@@ -1,17 +1,19 @@
 .imageWrapper {
     position: relative;
-    width: 100%;
-    height: auto;
+    // width: 100%;
+    // height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     transition: all 5s cubic-bezier(0.215, 0.61, 0.355, 1);
     &__image {
-        width: 100%;
-        height: auto;
-        border: 1px solid var(--color-border-photo);
+        // width: 100%;
+        // height: auto;
+        max-height: 85vh;
+        width: auto;
         object-fit: contain;
+        border: 1px solid var(--color-border-photo);
         user-select: none;
         -webkit-user-select: none;
         cursor: pointer;

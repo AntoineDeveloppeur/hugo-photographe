@@ -1,9 +1,10 @@
 .imageWrapper {
     z-index:2;
     overflow: hidden;
-    // margin: auto;
+    margin: auto;
     &__image {
         width: auto;
+        max-height: 50vh;
         border: 1px solid var(--color-border-photo);
         user-select: none;
         -webkit-user-select: none;

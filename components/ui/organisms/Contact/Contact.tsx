@@ -17,7 +17,7 @@ import { ShowPresentationContext } from '@/components/Providers'
 
 export default function Contact() {
 
-    const example : PhotoVariableProps = { src: taj.src, alt: 'taj' }
+    const example : PhotoVariableProps = { src: taj.src, alt: 'taj', width: 2223, height: 2223 }
 
     const { showPresentation, setShowPresentation } = useContext(ShowPresentationContext)
 

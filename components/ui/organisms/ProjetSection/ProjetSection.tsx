@@ -6,7 +6,7 @@ import Title from '../../atoms/Title/Title'
 import CardPortrait from '../../molecules/CardPortrait/CardPortrait'
 import Button from '../../atoms/Button/Button'
 import data from '@/data/data.json'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Pagination from '../../molecules/Pagination/Pagination'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projectsProps } from '@/types'
@@ -23,8 +23,16 @@ export default function ProjetSection() {
     const [isExpandedView, setIsExpandedView] = useState<boolean>(false)
     const projectCountPerPage = isExpandedView ? 6 : 3
 
-    const [currentPage, setCurrentPage] = useState<number>(1)
-
+    
+    
+    //Enregistrer la page actuelle dans les données locales et supprimer lorsque la page est quittée
+    const currentPageStored = localStorage.getItem("currentPage") !== null ? Number(localStorage.getItem("currentPage")) : 1
+    const [currentPage, setCurrentPage] = useState<number>(currentPageStored)
+    useEffect(() => {
+        localStorage.setItem('currentPage', currentPage.toString())
+    }, [currentPage])
+    
+    
     function clickOnAllProjects() {
         setIsExpandedView(!isExpandedView)
     }
@@ -36,6 +44,7 @@ export default function ProjetSection() {
         setCurrentPage((currentPage % PagesCount) + 1)
         document.getElementById('Projects')?.scrollIntoView({ behavior: 'smooth' })
     }
+
 
     return (
         <section id="Projects" className={styles.projetSection}>

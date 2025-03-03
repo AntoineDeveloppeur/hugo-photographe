@@ -1,4 +1,4 @@
-import styles from './card.module.scss'
+import styles from './card-portrait.module.scss'
 import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
 import TitleCard from '../../atoms/TitleCard/TitleCard'
 import Link from 'next/link'

@@ -32,11 +32,9 @@
             pointer-events: none;
         }
         &__photoWrapper {
-            flex: 1;
         }
         &__text {
-            flex: 1;
-
+            max-width: 40rem;
             &__title {
                 margin-top: 1rem;
             margin-bottom: 0.5rem;

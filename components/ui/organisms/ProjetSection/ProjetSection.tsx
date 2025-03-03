@@ -3,13 +3,15 @@
 import styles from './projet-section.module.scss'
 import Subtitle from '../../atoms/Subtitle/Subtitle'
 import Title from '../../atoms/Title/Title'
-import Card from '../../molecules/Card/Card'
+import CardPortrait from '../../molecules/CardPortrait/CardPortrait'
 import Button from '../../atoms/Button/Button'
 import data from '@/data/data.json'
 import { useState } from 'react'
 import Pagination from '../../molecules/Pagination/Pagination'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projectsProps } from '@/types'
+import CardLandscape from '../../molecules/CardLandscape/CardLandscape'
+
 
 export default function ProjetSection() {
     // définir une constant qui dépend du nombre de projets
@@ -47,16 +49,30 @@ export default function ProjetSection() {
                     layout
                 >
                     <AnimatePresence mode="wait">
+                        {currentPage === 1 && (
+                            <div className={styles.projetSection__largeScreen__cards__cardLandscapteWrapper}>
+                            <CardLandscape
+                            title={data.projects[0].title}
+                            summary={data.projects[0].summary}
+                            mainPhoto={data.projects[0].mainPhoto}
+                            id={data.projects[0].id}
+                            />
+                            </div>
+                        )}
+                        <div className={styles.projetSection__largeScreen__cards__cardPortraitWrapper}>
+
                         {(data.projects as projectsProps[])
                         .slice(
-                            (currentPage - 1) * projectsPerPage,
+                            currentPage === 1 ? 1 : (currentPage - 1) * projectsPerPage + 1,
+                            currentPage === 1 ? projectCountPerPage + 1 : 
                             (currentPage - 1) * projectsPerPage +
-                                projectCountPerPage )
+                                projectCountPerPage                      
+                        )
                         .map((project: projectsProps, index) => (
                             <motion.div
                                 key={project.id}
                                 className={
-                                    styles.projetSection__largeScreen__cards__card
+                                    styles.projetSection__largeScreen__cards__cardPortraitWrapper__cardPortrait
                                 }
                                 initial={{ opacity: 0 }}
                                 animate={{ 
@@ -75,7 +91,7 @@ export default function ProjetSection() {
                                     }
                                 }}
                             >
-                                    <Card
+                                    <CardPortrait
                                         title={project.title}
                                         summary={project.summary}
                                         mainPhoto={project.mainPhoto}
@@ -83,6 +99,7 @@ export default function ProjetSection() {
                                     />
                             </motion.div>
                         ))}
+                        </div>
                     </AnimatePresence>
                 </motion.div>
                 {isExpandedView ? (

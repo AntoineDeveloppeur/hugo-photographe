@@ -50,7 +50,7 @@ export default function ProjetSection() {
                 >
                     <AnimatePresence mode="wait">
                         {currentPage === 1 && (
-                            <div className={styles.projetSection__largeScreen__cards__cardLandscapteWrapper}>
+                            <div key="cardLandscape" className={styles.projetSection__largeScreen__cards__cardLandscapteWrapper}>
                             <CardLandscape
                             title={data.projects[0].title}
                             summary={data.projects[0].summary}
@@ -59,7 +59,7 @@ export default function ProjetSection() {
                             />
                             </div>
                         )}
-                        <div className={styles.projetSection__largeScreen__cards__cardPortraitWrapper}>
+                        <div key="cardPortrait" className={styles.projetSection__largeScreen__cards__cardPortraitWrapper}>
 
                         {(data.projects as projectsProps[])
                         .slice(

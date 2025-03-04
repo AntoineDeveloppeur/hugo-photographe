@@ -59,14 +59,10 @@
     }
 }
 
-
-// @media screen and (max-width: 950px) {
-//     .projectPage {
-//         &__largeScreen {
-//             &__photoWrapper {
-//                 height: auto;
-//                 width: 100%;
-//             }
-//         }
-//     }
-// }
+@media (max-width: 739px) {
+    .projectPage {
+    &__largeScreen {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }}
+}

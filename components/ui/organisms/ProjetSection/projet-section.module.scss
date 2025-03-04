@@ -65,3 +65,12 @@
         }
     }
 }
+
+@media (max-width: 739px) {
+    .projetSection {
+        &__largeScreen {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+}

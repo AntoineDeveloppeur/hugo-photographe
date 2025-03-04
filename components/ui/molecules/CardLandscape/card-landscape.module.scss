@@ -4,6 +4,13 @@
     height: 100%;
     display: flex;
     justify-content: center;
+    border-radius: 5px;
+    background: linear-gradient(
+        to bottom right,
+        var(--color-card-highlight-top-before),
+        var(--color-card-highlight-bottom-before) 90%
+    );
+    transition: background 0.2s ease-in;
     &:hover .cardWrapper__card__gradientLayer {
         opacity: 1;
     }
@@ -23,8 +30,8 @@
             border-radius: 5px;
             background: linear-gradient(
                 to bottom right,
-                var(--color-card-highlight-top),
-                var(--color-card-highlight-bottom) 90%
+                var(--color-card-highlight-top-after),
+                var(--color-card-highlight-bottom-after) 90%
             );
             opacity: 0;
             transition: opacity 0.5s ease-in-out;

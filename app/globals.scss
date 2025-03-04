@@ -107,6 +107,7 @@ select {
 
     --light0: #CC4E5C;
     --light10: #D96E75;
+    --light50:#eec4c9;
     --light60: #f0cace;
     --light70:#faedef;
     --light80: #FFF9F9;
@@ -140,8 +141,10 @@ select {
     --color-shadow-main :  rgba(0, 0, 0, 0.1);
     --color-shadow-second: rgba(0, 0, 0, 0.04);
 
-    --color-card-highlight-top: var(--dark20);
-    --color-card-highlight-bottom: var(--dark10);
+    --color-card-highlight-top-before: var(--dark15);
+    --color-card-highlight-bottom-before: var(--dark10);
+    --color-card-highlight-top-after: var(--dark20);
+    --color-card-highlight-bottom-after: var(--dark15);
     --color-card-line: var(--dark5);
     
     --color-button-theme: var(--dark20);
@@ -172,8 +175,10 @@ select {
     --color-shadow-main : var(--light60);
     --color-shadow-second: var(--light70);
 
-    --color-card-highlight-top: var(--light60);
-    --color-card-highlight-bottom: var(--light70);
+    --color-card-highlight-top-before: var(--light80);
+    --color-card-highlight-bottom-before: var(--light80);
+    --color-card-highlight-top-after: var(--light60);
+    --color-card-highlight-bottom-after: var(--light70);
     --color-card-line: var(--dark15);
 
     --color-button-theme: var(--light90);

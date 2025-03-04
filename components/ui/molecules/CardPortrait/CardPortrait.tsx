@@ -7,8 +7,6 @@ import { CardProps } from '@/types/index.js'
 
 const Card = ({ id, title, summary, mainPhoto }: CardProps) => {
 
-    const summaryShort = summary.split(' ').slice(0, 20).join(' ')
-
     return (
         <div
         className={styles.cardWrapper}
@@ -23,9 +21,9 @@ const Card = ({ id, title, summary, mainPhoto }: CardProps) => {
             </div>
             <div className={styles.cardWrapper__card__line}></div>
             <div className={styles.cardWrapper__card__summary}>
-                <p className={styles.cardWrapper__card__summary__text}>{summaryShort}</p>
-                <p className={styles.cardWrapper__card__summary__dots}>... </p>
-                <p className={styles.cardWrapper__card__summary__seeMore}>voir plus</p>
+                <p className={styles.cardWrapper__card__summary__text}>{summary}...&nbsp;
+                <span className={styles.cardWrapper__card__summary__seeMore}>voir plus</span>
+                </p>
             </div>
         </Link>
         </div>

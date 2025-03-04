@@ -7,8 +7,6 @@ import { CardProps } from '@/types/index.js'
 
 const CardLandscape = ({ id, title, summary, mainPhoto }: CardProps) => {
 
-    const summaryShort = summary.split(' ').slice(0, 20).join(' ')
-
     return (
         <div
         className={styles.cardWrapper}
@@ -26,7 +24,7 @@ const CardLandscape = ({ id, title, summary, mainPhoto }: CardProps) => {
                 </div>
                 <div className={styles.cardWrapper__card__text__line}></div>
                 <div className={styles.cardWrapper__card__text__summary}>
-                    <p className={styles.cardWrapper__card__text__summary__text}>{summaryShort}</p>
+                    <p className={styles.cardWrapper__card__text__summary__text}>{summary}</p>
                     <p className={styles.cardWrapper__card__text__summary__dots}>... </p>
                     <p className={styles.cardWrapper__card__text__summary__seeMore}>voir plus</p>
                 </div>

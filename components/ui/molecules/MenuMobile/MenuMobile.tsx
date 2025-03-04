@@ -35,9 +35,10 @@ export default function MenuMobile() {
                         <MenuItem text="Projets" icon="book" link="/#Projects" />
                         <MenuItem text="Contact" icon="phone" link="/#Contact" />
                         <motion.div
-            variants={itemVariants}
-            ><ThemeChanger />
-            </motion.div>
+                            variants={itemVariants}
+                        >
+                            <ThemeChanger />
+                        </motion.div>
                     </motion.ul>
                     <MenuToggle toggle={() => setIsOpen(!isOpen)} />
                 </motion.nav>
@@ -75,6 +76,8 @@ const MenuItem = ({ text, icon, link }: { text: string, icon: string, link: stri
 
 const itemVariants = {
     open: {
+        display: 'block',
+        zIndex:1,
         y: 0,
         opacity: 1,
         transition: {
@@ -82,6 +85,7 @@ const itemVariants = {
         },
     },
     closed: {
+        display: 'none',
         y: 50,
         opacity: 0,
         transition: {

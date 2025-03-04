@@ -34,3 +34,11 @@
         }
     }
 }
+
+@media (max-width: 739px) {
+    .portfolio {
+    &__largeScreen {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }}
+}

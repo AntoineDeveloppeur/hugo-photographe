@@ -36,7 +36,7 @@
             z-index: 2;
         }
         &__line {
-            height: 2px;
+            height: 1px;
             width: 50%;
             border-radius: 1px;
             background-color: var(--color-card-line);
@@ -60,7 +60,6 @@
             }
             &__seeMore {
                 text-decoration: underline;
-
                 color: var(--color-text-third);
                 display: inline;
                 cursor: pointer;

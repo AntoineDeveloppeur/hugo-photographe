@@ -11,9 +11,12 @@ import Pagination from '../../molecules/Pagination/Pagination'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projectsProps } from '@/types'
 import CardLandscape from '../../molecules/CardLandscape/CardLandscape'
+import useIsMobile from '@/hooks/useIsMobile'
 
 
 export default function ProjetSection() {
+
+    const isMobile = useIsMobile()
     // définir une constant qui dépend du nombre de projets
     // const projectsCount = nombre d'élément dans le tableau de données
     const projectsPerPage: number = 6
@@ -59,12 +62,21 @@ export default function ProjetSection() {
                     <AnimatePresence mode="wait">
                         {currentPage === 1 && (
                             <div key="cardLandscape" className={styles.projetSection__largeScreen__cards__cardLandscapteWrapper}>
+                            { isMobile ?                            
+                            <CardPortrait
+                            title={data.projects[0].title}
+                            summary={data.projects[0].summary}
+                            mainPhoto={data.projects[0].mainPhoto}
+                            id={data.projects[0].id}
+                            />
+                            :
                             <CardLandscape
                             title={data.projects[0].title}
                             summary={data.projects[0].summary}
                             mainPhoto={data.projects[0].mainPhoto}
                             id={data.projects[0].id}
                             />
+                            }
                             </div>
                         )}
                         <div key="cardPortrait" className={styles.projetSection__largeScreen__cards__cardPortraitWrapper}>

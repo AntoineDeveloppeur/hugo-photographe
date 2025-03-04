@@ -55,7 +55,6 @@ export default function ProjetSection() {
                 </div>
                 <motion.div 
                     className={styles.projetSection__largeScreen__cards}
-                    layout
                 >
                     <AnimatePresence mode="wait">
                         {currentPage === 1 && (

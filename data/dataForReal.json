@@ -10,8 +10,8 @@
             {
                 "src": "/concert.jpg",
                 "alt": "concert avec un guitariste",
-                "width": 500,
-                "height": 300
+                "width": 6000,
+                "height": 4000
             },
             {
                 "src": "/concert2.jpg",
@@ -24,8 +24,8 @@
             {
                 "src": "/paysage.jpg",
                 "alt": "paysage d'un lac avec une maison seule",
-                "width": 500,
-                "height": 300
+                "width": 4032,
+                "height": 1960
             },
             {
                 "src": "/chien.jpg",
@@ -50,8 +50,8 @@
             {
                 "src": "/taureau.jpg",
                 "alt": "une personne dans une arène cour pour échapper à un taureau",
-                "width": 500,
-                "height": 300
+                "width": 6000,
+                "height": 4000
             },
             {
                 "src": "/cuisine.jpg",
@@ -72,14 +72,14 @@
             {
                 "src": "/concert.jpg",
                 "alt": "concert avec un guitariste",
-                "width": 500,
-                "height": 300
+                "width": 6000,
+                "height": 4000
             },
             {
                 "src": "/concert2.jpg",
                 "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert",
-                "width": 500,
-                "height": 300
+                "width": 3936,
+                "height": 2624
             },
             {
                 "src": "/cuisine.jpg",
@@ -117,8 +117,8 @@
             {
                 "src": "/taureau.jpg",
                 "alt": "une personne dans une arène cour pour échapper à un taureau",
-                "width": 500,
-                "height": 300
+                "width": 6000,
+                "height": 4000
             }
         ]
     ],
@@ -157,8 +157,8 @@
             {
                 "src": "/taureau.jpg",
                 "alt": "une personne dans une arène cour pour échapper à un taureau",
-                "width": 500,
-                "height": 300
+                "width": 6000,
+                "height": 4000
             }     
         ]
     ],

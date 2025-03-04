@@ -7,11 +7,13 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
+import useIsMobile from '@/hooks/useIsMobile'
 
 const PhotoProjectPage = ({ photo, hoverEffect }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
+    const isMobile = useIsMobile()
 
     const handleModalClose = () => {
         setIsModalOpen(false)
@@ -26,14 +28,16 @@ const PhotoProjectPage = ({ photo, hoverEffect }: PhotoProps) => {
     return (
         <>
             <motion.div 
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => !isMobile && setIsModalOpen(true)}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={() => setIsHovered(false)}
                 whileHover={hoverEffect ? { scale: 1.08 } : undefined}
+                whileTap={hoverEffect ? { scale: 1.08 } : undefined}
                 transition={{ 
                     duration: 5, 
                     ease: [0.215, 0.61, 0.355, 1]
                 }}
+                style={!isMobile ? {'cursor': 'pointer'} : undefined}
             >
                 <div className={styles.imageWrapper}>
                     <NextImage

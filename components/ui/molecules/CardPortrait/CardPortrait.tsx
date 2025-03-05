@@ -1,11 +1,20 @@
+'use client'
+
 import styles from './card-portrait.module.scss'
 import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
 import TitleCard from '../../atoms/TitleCard/TitleCard'
 import Link from 'next/link'
 import { CardProps } from '@/types/index.js'
+import { useEffect, useRef} from 'react'
+import { Player } from '@lordicon/react'
+import ICON from '@/public/medal.json'
 
+export default function CardPortrait ({ id, title, summary, mainPhoto }: CardProps) {
+    const playerRef = useRef<Player>(null)
 
-const Card = ({ id, title, summary, mainPhoto }: CardProps) => {
+    useEffect(() => {
+        playerRef.current?.playFromBeginning();
+    }, [])
 
     return (
         <div
@@ -18,6 +27,7 @@ const Card = ({ id, title, summary, mainPhoto }: CardProps) => {
         
             <div className={styles.cardWrapper__card__title}>
                 <TitleCard text={title} />
+                <Player ref={playerRef} icon={ICON} />
             </div>
             <div className={styles.cardWrapper__card__line}></div>
             <div className={styles.cardWrapper__card__summary}>
@@ -29,5 +39,3 @@ const Card = ({ id, title, summary, mainPhoto }: CardProps) => {
         </div>
     )
 }
-
-export default Card

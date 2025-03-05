@@ -146,8 +146,12 @@ select {
     
     --color-button-theme: var(--dark20);
     --color-button-theme-background: var(--dark0);
-}
 
+    // Les couleurs de la médailles sont à changer sur le fichier CardLandscape.tsx
+    --color-medal-primary: var(--dark50);
+    --color-medal-secondary: var(--dark30);
+    --color-medal-background: var(--dark10);
+}
 
 [data-theme="light"] {
     --background-main: #fffdfdd4;
@@ -179,7 +183,9 @@ select {
     --color-button-theme: var(--light90);
     --color-button-theme-background: var(--light60);
 
-
+    --color-medal-primary: var(--light10);
+    --color-medal-secondary: var(--light60);
+    --color-medal-background: var(--light80);
 }
 
 /* Colors ends */
@@ -232,4 +238,5 @@ body {
     @include responsive-font(18px, 32px);
   }
 
+  
   /* Police responsive ends */

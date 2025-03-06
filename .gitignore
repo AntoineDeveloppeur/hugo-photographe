@@ -42,3 +42,6 @@ next-env.d.ts
 
 # photos
 /public
+
+# Dossier d'aide à la suppression des photos dans le dépôt distant
+/git-cleanup

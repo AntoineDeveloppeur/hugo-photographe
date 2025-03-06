@@ -14,7 +14,6 @@ export default function CardPortrait ({ id, title, summary, mainPhoto }: CardPro
         <div
         className={styles.cardWrapper}
         >
-<<<<<<< HEAD
 
         <Link className={styles.cardWrapper__card} href={`/projectPage/${id}`}>
             <div className={styles.cardWrapper__gradientLayer}></div>
@@ -32,22 +31,6 @@ export default function CardPortrait ({ id, title, summary, mainPhoto }: CardPro
                 </p>
             </div>
         </Link>
-=======
-            <Link className={styles.cardWrapper__card} href={`/projectPage/${id}`}>
-                <div className={styles.cardWrapper__gradientLayer}></div>
-                    <PhotoBasic photo={mainPhoto} />
-            
-                <div className={styles.cardWrapper__card__title}>
-                    <TitleCard text={title} />
-                </div>
-                <div className={styles.cardWrapper__card__line}></div>
-                <div className={styles.cardWrapper__card__summary}>
-                    <p className={styles.cardWrapper__card__summary__text}>{summary}...&nbsp;
-                    <span className={styles.cardWrapper__card__summary__seeMore}>voir plus</span>
-                    </p>
-                </div>
-            </Link>
->>>>>>> fondCardAlternatif
         </div>
     )
 }

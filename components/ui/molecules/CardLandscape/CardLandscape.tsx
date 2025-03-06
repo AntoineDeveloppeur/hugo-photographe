@@ -18,13 +18,14 @@ export default function CardLandscape({ id, title, summary, mainPhoto }: CardPro
     
     // Utiliser useTheme pour forcer un rendu quand le thème change
     const { theme, systemTheme } = useTheme()
-    console.log('theme',theme)
     
+    // Utilise useScroll pour déclencher l'animation lorsque l'utilisateur se rapproche de la médaille
     const {scrollYProgress} = useScroll({
         target: medalWrapper,
         offset: ["start end", "end start"]
     });
 
+    // Surveiller le changement de valeur avec useMotionValueEvent
     useMotionValueEvent(scrollYProgress, 'change', (latest) => {
         if (latest > 0.2 && !isAnimationStarted) {
             playerRef.current?.playFromBeginning()
@@ -45,7 +46,6 @@ export default function CardLandscape({ id, title, summary, mainPhoto }: CardPro
                         size={64} 
                         state='in-reveal' 
                         colors={theme === 'light' ? 'primary:#D96E75,secondary:#f0cace' : 'primary:#e5e5e5,secondary:#919191'}
-                        // colors="primary:var(--color-medal-primary),secondary:var(--color-medal-secondary)"
                     />
                 </div>
                 <div className={styles.cardWrapper__card__gradientLayer}></div>

@@ -21,7 +21,7 @@ export default async function ProjectPage({
     if (project) {
         return (
             <section className={styles.projectPage}>
-            <div className={styles.projectPage__largeScreen}>
+            <article className={styles.projectPage__largeScreen}>
                 <div className={styles.projectPage__largeScreen__photoWrapper}>
                     <PhotoProjectPage photo={project.mainPhoto} hoverEffect={false} />
                 </div>
@@ -48,7 +48,7 @@ export default async function ProjectPage({
                     )}
                 </div>
                 <LinkBottomOfProjectPage/>
-            </div>
+            </article>
         </section>
         )
     }

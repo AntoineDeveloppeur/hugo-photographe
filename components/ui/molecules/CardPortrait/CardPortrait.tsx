@@ -17,7 +17,7 @@ export default function CardPortrait ({ id, title, summary, mainPhoto }: CardPro
 
         <Link className={styles.cardWrapper__card} href={`/projectPage/${id}`}>
             <div className={styles.cardWrapper__gradientLayer}></div>
-                <PhotoBasic photo={mainPhoto} />
+                <PhotoBasic photo={mainPhoto} sizes="(max-width: 684px) 100vw, (max-width: 1094px) 45vw, 30vw" />
         
             <div 
                 className={styles.cardWrapper__card__title}

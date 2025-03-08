@@ -1,10 +1,10 @@
 'use client'
 
-import { PhotoProps } from '@/types'
+import { PhotoVariableProps } from '@/types'
 import styles from './photoBasic.module.scss'
 import NextImage from 'next/image'
 
-const PhotoBasic = ({ photo }: PhotoProps) => {
+const PhotoBasic = ({ photo, sizes }: {photo: PhotoVariableProps, sizes: string}) => {
     return (
         <div className={styles.imageWrapper}>
             <NextImage
@@ -14,6 +14,7 @@ const PhotoBasic = ({ photo }: PhotoProps) => {
                 width={photo.width || 4000}
                 height={photo.height|| 3000}
                 quality={75}
+                sizes={sizes}
             />
         </div>
     )

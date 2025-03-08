@@ -47,8 +47,7 @@ export default function PhotoGallery ({ photo, hoverEffect }: PhotoProps) {
                         width={photo.width}
                         height={photo.height}
                         quality={75}
-                        // style={!isMobile ? {'cursor': 'pointer','border': '1px solid red'} : undefined}
-                        // style={{'cursor': !isMobile && 'pointer'}}
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw,33vw"
                     />
                 </div>
             </motion.div>

@@ -16,10 +16,10 @@ export default function Portfolio() {
     const [galery, setGalery] = useState<GaleryType>('galeryDesktop')
     useEffect(() => {
     const checkDevice = () => {
-            if (window.innerWidth < 768) {
+            if (window.matchMedia('(max-width: 767px)').matches ) {
                 setGalery('galeryMobile')
                 return
-            } else if (window.innerWidth < 1024) {
+            } else if (window.matchMedia('(max-width: 1023px)').matches) {
                 setGalery('galeryTablet')
                 return
             } else {

@@ -25,6 +25,7 @@
         &__columns {
             width: 100%;
             display: flex;
+            justify-content: center;
             gap: 2rem;
             &__column {
                 display: flex;
@@ -35,7 +36,7 @@
     }
 }
 
-@media (max-width: 739px) {
+@media (max-width: 767px) {
     .portfolio {
     &__largeScreen {
         padding-left: 2rem;

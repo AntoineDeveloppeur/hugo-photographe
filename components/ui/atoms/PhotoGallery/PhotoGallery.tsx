@@ -48,6 +48,7 @@ export default function PhotoGallery ({ photo, hoverEffect }: PhotoProps) {
                         height={photo.height}
                         quality={75}
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw,33vw"
+                        priority
                     />
                 </div>
             </motion.div>

@@ -72,7 +72,7 @@ export default function Contact() {
                         transition={{ duration: 0.5 }}
                     >
                         <div className={styles.contact__presentation__photoWrapper}>
-                            <PhotoBasic photo={example} />
+                            <PhotoBasic photo={example} sizes="233px" />
                         </div>
                         <div className={styles.contact__presentation__text}>
                             <TitleProjectPage text="HUGO RANDEZ" />

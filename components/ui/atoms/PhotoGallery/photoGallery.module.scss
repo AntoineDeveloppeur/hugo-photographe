@@ -1,6 +1,6 @@
 .imageWrapper {
     position: relative;
-    width: 100%;
+    width: calc(33vw - 8rem);
     height: auto;
     display: flex;
     justify-content: center;
@@ -67,5 +67,16 @@
 
     &.loaded {
         opacity: 1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .imageWrapper {
+        width: calc(50vw - 8rem);
+    }
+}
+@media (max-width: 767px) {
+    .imageWrapper {
+        width: calc(100vw - 8rem);
     }
 }

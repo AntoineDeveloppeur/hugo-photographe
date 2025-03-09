@@ -1,6 +1,6 @@
 .imageWrapper {
     position: relative;
-    width: calc(33vw - 8rem);
+    width: min(432px,calc(33vw - 8rem));
     height: auto;
     display: flex;
     justify-content: center;

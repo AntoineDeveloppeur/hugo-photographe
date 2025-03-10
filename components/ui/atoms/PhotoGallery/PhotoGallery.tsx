@@ -9,7 +9,7 @@ import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
 
-export default function PhotoGallery ({ photo, hoverEffect }: PhotoProps) {
+export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
@@ -48,7 +48,7 @@ export default function PhotoGallery ({ photo, hoverEffect }: PhotoProps) {
                         height={photo.height}
                         quality={75}
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw,33vw"
-                        priority
+                        priority={priority ? priority : false}
                     />
                 </div>
             </motion.div>

@@ -5,19 +5,22 @@
                 "src": "/taiwan7.jpg",
                 "alt": "paysage avec une personne de dos au loin",
                 "width": 3702,
-                "height": 2468
+                "height": 2468,
+                "priority": true,
             },
             {
                 "src": "/concert.jpg",
                 "alt": "concert avec un guitariste",
                 "width": 6000,
-                "height": 4000
+                "height": 4000,
+                "priority": true,
             },
             {
                 "src": "/concert2.jpg",
                 "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert",
                 "width": 3936,
-                "height": 2624
+                "height": 2624,
+                "priority": true
             }
         ],
         [         
@@ -25,19 +28,22 @@
                 "src": "/paysage.jpg",
                 "alt": "paysage d'un lac avec une maison seule",
                 "width": 4032,
-                "height": 1960
+                "height": 1960,
+                "priority": true
             },
             {
                 "src": "/chien.jpg",
                 "alt": "chien qui court dans la nature",
                 "width": 4402,
-                "height": 2885
+                "height": 2885,
+                "priority": true
             },
             {
                 "src": "/gym.jpg",
                 "alt": "deux gymnastes en pleine représentation avec des ballons",
                 "width": 5568,
-                "height": 3712
+                "height": 3712,
+                "priority": true
             }
         ],
         [
@@ -45,19 +51,22 @@
                 "src": "/maquillage.jpg",
                 "alt": "Une femme se maquille devant un mirroir",
                 "width": 3936,
-                "height": 2624
+                "height": 2624,
+                "priority": true,
             },
             {
                 "src": "/taureau.jpg",
                 "alt": "une personne dans une arène cour pour échapper à un taureau",
                 "width": 6000,
-                "height": 4000
+                "height": 4000,
+                "priority": true
             },
             {
                 "src": "/cuisine.jpg",
                 "alt": "Un cuisinier cuisine en extérieur",
                 "width": 6016,
-                "height": 4016
+                "height": 4016,
+                "priority": true
             }
         ]
     ],
@@ -67,25 +76,29 @@
                 "src": "/taiwan7.jpg",
                 "alt": "paysage avec une personne de dos au loin",
                 "width": 3702,
-                "height": 2468
+                "height": 2468,
+                "priority": true
             },
             {
                 "src": "/concert.jpg",
                 "alt": "concert avec un guitariste",
                 "width": 6000,
-                "height": 4000
+                "height": 4000,
+                "priority": true
             },
             {
                 "src": "/concert2.jpg",
                 "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert",
                 "width": 3936,
-                "height": 2624
+                "height": 2624,
+                "priority": true
             },
             {
                 "src": "/cuisine.jpg",
                 "alt": "Un cuisinier cuisine en extérieur",
                 "width": 6016,
-                "height": 4016
+                "height": 4016,
+                "priority": true
             }
         ],
         [
@@ -94,31 +107,36 @@
                 "src": "/paysage.jpg",
                 "alt": "paysage d'un lac avec une maison seule",
                 "width": 4032,
-                "height": 1960
+                "height": 1960,
+                "priority": true
             },
             {
                 "src": "/chien.jpg",
                 "alt": "chien qui court dans la nature",
                 "width": 4402,
-                "height": 2885
+                "height": 2885,
+                "priority": true
             },
             {
                 "src": "/gym.jpg",
                 "alt": "deux gymnastes en pleine représentation avec des ballons",
                 "width": 5568,
-                "height": 3712
+                "height": 3712,
+                "priority": true
             },
             {
                 "src": "/maquillage.jpg",
                 "alt": "Une femme se maquille devant un mirroir",
                 "width": 3936,
-                "height": 2624
+                "height": 2624,
+                "priority": true
             },
             {
                 "src": "/taureau.jpg",
                 "alt": "une personne dans une arène cour pour échapper à un taureau",
                 "width": 6000,
-                "height": 4000
+                "height": 4000,
+                "priority": true
             }
         ]
     ],
@@ -128,37 +146,43 @@
                 "src": "/taiwan7.jpg",
                 "alt": "paysage avec une personne de dos au loin",
                 "width": 3702,
-                "height": 2468
+                "height": 2468,
+                "priority": true
             },
             {
                 "src": "/concert.jpg",
                 "alt": "concert avec un guitariste",
                 "width": 6000,
-                "height": 4000
+                "height": 4000,
+                "priority": true
             },
             {
                 "src": "/cuisine.jpg",
                 "alt": "Un cuisinier cuisine en extérieur",
                 "width": 6016,
-                "height": 4016
+                "height": 4016,
+                "priority": true
             },
             {
                 "src": "/paysage.jpg",
                 "alt": "paysage d'un lac avec une maison seule",
                 "width": 4032,
-                "height": 1960
+                "height": 1960,
+                "priority": false
             },
             {
                 "src": "/maquillage.jpg",
                 "alt": "Une femme se maquille devant un mirroir",
                 "width": 3936,
-                "height": 2624
+                "height": 2624,
+                "priority": false
             },
             {
                 "src": "/taureau.jpg",
                 "alt": "une personne dans une arène cour pour échapper à un taureau",
                 "width": 6000,
-                "height": 4000
+                "height": 4000,
+                "priority": false
             }     
         ]
     ],

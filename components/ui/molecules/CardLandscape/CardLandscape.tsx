@@ -50,7 +50,7 @@ export default function CardLandscape({ id, title, summary, mainPhoto }: CardPro
                 </div>
                 <div className={styles.cardWrapper__card__gradientLayer}></div>
                 <div className={styles.cardWrapper__card__photoWrapper}>
-                    <PhotoBasic photo={mainPhoto} />
+                    <PhotoBasic photo={mainPhoto} sizes="(max-width: 767px) 100vw, 45vw" />
                 </div>
                 <div className={styles.cardWrapper__card__text}>
                     <div className={styles.cardWrapper__card__text__title}>

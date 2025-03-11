@@ -6,14 +6,14 @@
                 "alt": "paysage avec une personne de dos au loin",
                 "width": 3702,
                 "height": 2468,
-                "priority": true,
+                "priority": true
             },
             {
                 "src": "/concert.jpg",
                 "alt": "concert avec un guitariste",
                 "width": 6000,
                 "height": 4000,
-                "priority": true,
+                "priority": true
             },
             {
                 "src": "/concert2.jpg",
@@ -52,7 +52,7 @@
                 "alt": "Une femme se maquille devant un mirroir",
                 "width": 3936,
                 "height": 2624,
-                "priority": true,
+                "priority": true
             },
             {
                 "src": "/taureau.jpg",

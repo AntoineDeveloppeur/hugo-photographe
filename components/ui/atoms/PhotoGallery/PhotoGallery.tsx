@@ -24,6 +24,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
         setIsHovered(true)
 
     }
+    console.log(photo.alt, "priority", priority)
 
     return (
         <>

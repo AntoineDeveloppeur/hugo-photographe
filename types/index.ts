@@ -5,6 +5,7 @@ export interface PhotoVariableProps {
     alt: string
     width: number
     height: number
+    priority?: boolean
 }
 
 export interface PhotoProps {

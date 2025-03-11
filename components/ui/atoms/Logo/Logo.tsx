@@ -9,6 +9,7 @@ const Logo = () => {
             alt="logo"
             placeholder="blur"
             className={styles.logo}
+            priority
         />
     )
 }

@@ -6,7 +6,7 @@ const Footer = () => {
         <section className={styles.footer}>
             <div className={styles.footer__largeScreen}>
                 <p className={styles.footer__largeScreen__text}>
-                    ©2024 Hugo Randez Photographe&ensp;|&ensp;
+                    &copy;2024 Hugo Randez Photographe&ensp;|&ensp;
                 <Link
                     href="/mentionsLegales"
                     className={styles.footer__largeScreen__link}
@@ -18,6 +18,12 @@ const Footer = () => {
                     className={styles.footer__largeScreen__link}
                     >
                     Politique de confidentialité&ensp;|&ensp;
+                </Link>
+                <Link
+                    href="https://lordicon.com/"
+                    className={styles.footer__largeScreen__link}
+                    >
+                    Icone médaille par LordIcon&ensp;|&ensp;
                 </Link>
                 <Link
                     href="https://antoinedeveloppeur.github.io/portfolio/"

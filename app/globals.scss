@@ -245,3 +245,9 @@ body {
 
   
   /* Police responsive ends */
+
+/* Cache le badge reCaptcha */
+.grecaptcha-badge {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}

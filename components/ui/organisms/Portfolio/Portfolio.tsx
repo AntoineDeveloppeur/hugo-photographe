@@ -13,24 +13,46 @@ import useIsMobile from '@/hooks/useIsMobile'
 export default function Portfolio() {
 
     const isMobile = useIsMobile()
-    const [galery, setGalery] = useState<GaleryType>('galeryDesktop')
-    useEffect(() => {
-    const checkDevice = () => {
-            if (window.matchMedia('(max-width: 767px)').matches ) {
-                setGalery('galeryMobile')
-                return
-            } else if (window.matchMedia('(max-width: 1023px)').matches) {
-                setGalery('galeryTablet')
-                return
-            } else {
-                setGalery('galeryDesktop')
-                return
-            }
-        }
     
-    checkDevice()
-    window.addEventListener('resize', checkDevice)
-    return () => window.removeEventListener('resize', checkDevice)
+    // Déterminer la galerie initiale pour priorisé les téléchargements
+    const getInitialGalery = (): GaleryType => {
+        if (typeof window === 'undefined') {
+            return 'galeryMobile'}
+        if (window.matchMedia('(max-width: 767px)').matches) {
+            console.log('galeryMobile choisie (initial)')
+            return 'galeryMobile'
+        } else if (window.matchMedia('(max-width: 1023px)').matches) {
+            console.log('galeryTablet choisie (initial)')
+            return 'galeryTablet'
+        } else {
+            console.log('galeryDesktop choisie (initial)')
+            return 'galeryDesktop'
+        }
+    }
+
+    const [galery, setGalery] = useState<GaleryType>(getInitialGalery)
+
+    // La même fonction que getInitialGalery mais est utlisé avec une variable d'état
+    // Elle sera utilisé avec un écouteur d'événement pour s'adapter au changement de taille d'écran
+    const checkDevice = () => {
+        if (window.matchMedia('(max-width: 767px)').matches) {
+            setGalery('galeryMobile')
+            console.log('galeryMobile choisie')
+            return
+        } else if (window.matchMedia('(max-width: 1023px)').matches) {
+            setGalery('galeryTablet')
+            console.log('galeryTablet choisie')
+            return
+        } else {
+            setGalery('galeryDesktop')
+            console.log('galeryDesktop choisie')
+            return
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', checkDevice)
+        return () => window.removeEventListener('resize', checkDevice)
     }, [])
 
     return (

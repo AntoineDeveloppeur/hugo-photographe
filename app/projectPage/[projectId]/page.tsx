@@ -6,6 +6,7 @@ import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import LinkBottomOfProjectPage from '@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage'
 import PhotoProjectPage from '@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage'
+import { projectsProps } from '@/types'
 
 export default async function ProjectPage({
     params,
@@ -16,7 +17,7 @@ export default async function ProjectPage({
 }) {
     // aller chercher dans data.json le projet correspondant à params. Le paramètres est l'id du projet
     const { projectId } = await params
-    const project = data.projects.find((project) => project.id === projectId)
+    const project : projectsProps | undefined = data.projects.find((project) => project.id === projectId)
 
     if (project) {
         return (

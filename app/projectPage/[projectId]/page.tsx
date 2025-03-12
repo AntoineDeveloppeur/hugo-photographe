@@ -23,7 +23,7 @@ export default async function ProjectPage({
             <section className={styles.projectPage}>
             <article className={styles.projectPage__largeScreen}>
                 <div className={styles.projectPage__largeScreen__photoWrapper}>
-                    <PhotoProjectPage photo={project.mainPhoto} hoverEffect={false} />
+                    <PhotoProjectPage photo={project.mainPhoto} hoverEffect={false} priority={true} sizes='100vw' height='75vh'/>
                 </div>
                 <div className={styles.projectPage__largeScreen__titleWrapper}>
                     <TitleProjectPage text={project.title} />

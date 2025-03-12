@@ -9,7 +9,7 @@ import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
 
-const PhotoProjectPage = ({ photo, hoverEffect }: PhotoProps) => {
+const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
@@ -47,6 +47,9 @@ const PhotoProjectPage = ({ photo, hoverEffect }: PhotoProps) => {
                         width={photo.width}
                         height={photo.height}
                         quality={75}
+                        priority={priority}
+                        sizes={sizes}
+                        style={photo.height > photo.width ? {'height': '75vh', 'width': 'auto'} : { 'height': 'auto', 'width': '100vw'}}
                     />
                 </div>
             </motion.div>

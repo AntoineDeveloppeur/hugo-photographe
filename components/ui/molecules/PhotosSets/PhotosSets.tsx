@@ -20,13 +20,16 @@ const PhotosSets = ({ photosSets }: PhotosSetsProps) => {
                 >
                     {photosSet.map((photo, photoIndex) => (
                         <div
-                            // className={`styles.photosSet__photoWrapperFor${photosSet.length}photo`}
                             className={`${styles.photosSets__photosSet__photoWrapper} 
                             ${styles[`photosSets__photosSet__photoWrapperFor${photosSet.length}photo`]}
                             `}
                             key={`photo-${setIndex}-${photoIndex}`}
                         >
-                            <PhotoProjectPage photo={photo} hoverEffect={false}/>
+                            <PhotoProjectPage photo={photo} hoverEffect={false} priority={false} sizes={
+                                photosSet.length === 1 ? '100vw' : 
+                                photosSet.length === 2 ? '(max-width: 737px) 100vw, 50vw' :
+                                '(max-width: 737px) 100vw, 30vw'
+                            }/>
                         </div>
                     ))}
                 </div>

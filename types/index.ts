@@ -12,6 +12,7 @@ export interface PhotoProps {
     photo: PhotoVariableProps
     hoverEffect?: boolean
     priority?: boolean
+    sizes?: string
 }
 
 export type photoSet = PhotoVariableProps[]

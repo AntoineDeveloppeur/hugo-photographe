@@ -9,7 +9,7 @@ import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
 
-const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes }: PhotoProps) => {
+const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
@@ -49,7 +49,10 @@ const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes }: PhotoProps) =
                         quality={75}
                         priority={priority}
                         sizes={sizes}
-                        style={photo.height > photo.width ? {'height': '75vh', 'width': 'auto'} : { 'height': 'auto', 'width': '100vw'}}
+                        //Permet de donner une dimensions prédéfinis pour éviter le layout shifting sur la photo principale affichée above the fold
+                        // Ici il y a deux configurations disctinctes pour les photos portrait et paysage
+                        // Les autres photos ont le temps de chargé est donc de prendre la place qu'ils leurs faut
+                        style={mainPhoto ? (photo.height > photo.width ? {'height': '75vh', 'width': 'auto'} : {'height': 'auto', 'width': '100vw'}) : undefined}
                     />
                 </div>
             </motion.div>

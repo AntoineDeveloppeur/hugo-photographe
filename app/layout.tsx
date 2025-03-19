@@ -1,6 +1,7 @@
 import './globals.scss'
 import { lora, baskervville, merriweather } from './font'
 import { Metadata } from 'next'
+import Providers from '@/components/Providers'
 
 export const metadata: Metadata = {
     title: 'Hugo Photographe',
@@ -15,7 +16,7 @@ export default function RootLayout({
     return (
         <html lang="fr">
             <body className={`${lora.variable} ${baskervville.variable} ${merriweather.variable} antialiased`}>
-                {children}
+                <Providers>{children}</Providers>
             </body>
         </html>
     )

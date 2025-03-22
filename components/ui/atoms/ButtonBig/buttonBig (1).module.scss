@@ -1,0 +1,17 @@
+.button {
+    background-color: var(--background-button);
+    border: 1px solid var(--background-button);
+    border-radius: 5px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    box-shadow: 0 10px 15px -3px var(--color-shadow-main),
+    0 4px 6px -2px  var(--color-shadow-second);
+    &__p {
+        color: var(--color-text-button);
+        font-size: 2rem;
+        font-family: lora;
+    }
+}

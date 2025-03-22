@@ -1,0 +1,62 @@
+.chapters {
+    display: flex;
+    justify-content: center;
+}
+
+.chapter {
+    position: relative;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 3.7rem;
+    padding-right: 3.7rem;
+    font-size: 1.25rem;
+    font-family: merriweather;
+    color: var(--color-text-main);
+    z-index:1;
+    &::before {
+        position: absolute;
+        width: 100%;
+        height: 0px;
+        left: 0px;
+        bottom: 0px;
+        content: '';
+        background: var(--color-menu-highlight);
+        // opacity: 0.3;
+        transition: all 0.3s;
+        z-index: -1;
+    }
+
+    &:hover::before {
+        height: calc(100% + 1px);
+    }
+    &:hover {
+        color: var(--color-text-button)
+    }
+    &__1 {
+        border-left: 1px;
+        border-top: 1px;
+        border-right: 1px;
+        border-style: solid;
+        border-radius: 10px 0 0 0;
+        border-color: var(--color-border);
+        &::before {
+            border-radius: 10px 0 0 0 ;
+        }
+    }
+    &__2 {
+        border-top: 1px;
+        border-right: 1px;
+        border-style: solid;
+        border-color: var(--color-border);
+    }
+    &__3 {
+        border-top: 1px;
+        border-right: 1px;
+        border-style: solid;
+        border-radius: 0 10px 0 0;
+        border-color: var(--color-border);
+        &::before {
+            border-radius: 0 10px 0 0 ;
+        }
+    }
+}

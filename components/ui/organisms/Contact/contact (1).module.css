@@ -1,0 +1,40 @@
+.contact {
+  background-color: var(--background-main);
+  padding-top: 6rem;
+  padding-left: 12rem;
+  padding-right: 12rem;
+  padding-bottom: 6rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.contact__presentation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+}
+.contact__presentation__photoWrapper {
+  width: 30rem;
+}
+.contact__presentation__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.contact__presentation__text__p {
+  max-width: 30rem;
+  font-family: lora;
+  font-size: 1.5rem;
+  color: var(--color-text-second);
+}
+.contact__presentation__text__details {
+  display: flex;
+  gap: 2rem;
+}
+.contact__presentation__text__details__link {
+  font-family: lora;
+  font-size: 1.5rem;
+  color: var(--color-text-second);
+}/*# sourceMappingURL=contact.module.css.map */

@@ -1,0 +1,28 @@
+.header {
+    position: relative;
+    width: 100vw;
+    height: 120px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: var(--background-main);
+    &__LogoWithSignatureWrapper {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        left: 24px;
+    }
+    &__MenuWrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+    }
+}
+
+@media (max-width: 490px) {
+    .header__LogoWithSignatureWrapper {
+        width: 200px;
+    }
+}

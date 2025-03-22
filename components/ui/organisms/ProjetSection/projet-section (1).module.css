@@ -1,0 +1,53 @@
+.projetSection {
+  background-color: var(--dark12);
+  width: 100%;
+  padding-left: 12rem;
+  padding-right: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem;
+}
+.projetSection__largeScreen {
+  width: 100%;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+}
+.projetSection__largeScreen__moreProjects {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.projetSection__largeScreen__top {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+.projetSection__largeScreen__cards {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 6rem;
+  flex-wrap: wrap;
+}
+.projetSection__largeScreen__cards__card {
+  width: 30%;
+}
+.projetSection__largeScreen__pagination {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.projetSection__largeScreen__pagination__previous {
+  transform: rotate(180deg);
+}
+.projetSection__largeScreen__pagination__p {
+  font-size: 16px;
+  font-family: lora;
+}/*# sourceMappingURL=projet-section.module.css.map */

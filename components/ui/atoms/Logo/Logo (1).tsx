@@ -1,7 +1,6 @@
 import Image from 'next/image'
-// import logo from '@/public/logo.png'
+import logo from '@/public/logo.png'
 import styles from './logo.module.scss'
-import logo from '@/public/logo_test1.jpg'
 
 const Logo = () => {
     return (
@@ -10,7 +9,6 @@ const Logo = () => {
             alt="logo"
             placeholder="blur"
             className={styles.logo}
-            priority
         />
     )
 }

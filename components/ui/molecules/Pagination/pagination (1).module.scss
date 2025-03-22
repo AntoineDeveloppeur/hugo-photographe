@@ -1,0 +1,12 @@
+.pagination {
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    &__p {
+        font-size: 16px;
+        font-family: lora;
+        color: var(--color-text-second)
+    }
+}

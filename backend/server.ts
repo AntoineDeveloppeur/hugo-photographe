@@ -12,7 +12,7 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 // Crée l'application 
 const app = express();
 
-const PORT = process.env.SERVER_PORT || 3002;
+const PORT: number = parseInt(process.env.SERVER_PORT || '3002',10);
 
 // Middleware
 app.use(express.json());

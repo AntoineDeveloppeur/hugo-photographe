@@ -14,6 +14,7 @@ export interface PhotoProps {
     priority?: boolean
     sizes?: string
     mainPhoto?: boolean
+    blurDataURL?: string | undefined
 }
 
 export type photoSet = PhotoVariableProps[]

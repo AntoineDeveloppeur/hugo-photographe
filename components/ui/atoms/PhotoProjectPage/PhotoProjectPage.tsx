@@ -9,7 +9,7 @@ import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
 
-const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto }: PhotoProps) => {
+const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto, blurDataURL }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
@@ -46,6 +46,8 @@ const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto }: Ph
                         alt={photo.alt}
                         width={photo.width}
                         height={photo.height}
+                        placeholder={blurDataURL ? 'blur' : undefined}
+                        blurDataURL= {blurDataURL}
                         quality={75}
                         priority={priority}
                         sizes={sizes}

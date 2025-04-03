@@ -3,10 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose'
 
 import userRoutes from './routes/user.js'
-//test
-//jjj
 
 // Configuration des variables d'environnement
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +21,14 @@ const PORT: number = parseInt(process.env.SERVER_PORT || '3002',10);
 app.use(express.json());
     // Permet de traiter les formulaire, l'option extended à true autorise l'analyse d'objets complexes et imbriqués
 app.use(express.urlencoded({ extended: true }));
+
+// Base de donnée NoSQL
+mongoose
+    .connect(
+        `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.fndalaw.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.APPNAME}`
+    )
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'))
 
 // Configuration CORS
 app.use(cors({

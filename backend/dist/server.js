@@ -8,7 +8,9 @@ import userRoutes from './routes/user.js';
 // Configuration des variables d'environnement
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.join(__dirname, '.env') });
+// Remonter d'un niveau si on est dans le dossier dist
+const rootDir = __dirname.includes('dist') ? path.join(__dirname, '..') : __dirname;
+dotenv.config({ path: path.join(rootDir, '.env') });
 // Crée l'application 
 const app = express();
 const PORT = parseInt(process.env.SERVER_PORT || '3002', 10);
@@ -16,7 +18,6 @@ const PORT = parseInt(process.env.SERVER_PORT || '3002', 10);
 app.use(express.json());
 // Permet de traiter les formulaire, l'option extended à true autorise l'analyse d'objets complexes et imbriqués
 app.use(express.urlencoded({ extended: true }));
-console.log('process.env.DB_USERNAME',process.env.DB_USERNAME)
 // Base de donnée NoSQL
 mongoose
     .connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.fndalaw.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.APPNAME}`)

@@ -3,15 +3,16 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+import mongoose from 'mongoose'
+import projectRoutes from './routes/project.js'
 import userRoutes from './routes/user.js'
-//test
-//jjj
 
 // Configuration des variables d'environnement
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.join(__dirname, '.env') });
+// Remonter d'un niveau si on est dans le dossier dist
+const rootDir = __dirname.includes('dist') ? path.join(__dirname, '..') : __dirname;
+dotenv.config({ path: path.join(rootDir, '.env') });
 
 // Crée l'application 
 const app = express();
@@ -23,9 +24,17 @@ app.use(express.json());
     // Permet de traiter les formulaire, l'option extended à true autorise l'analyse d'objets complexes et imbriqués
 app.use(express.urlencoded({ extended: true }));
 
+// Base de donnée NoSQL
+mongoose
+    .connect(
+        `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.fndalaw.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=${process.env.APPNAME}`
+    )
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'))
+
 // Configuration CORS
 app.use(cors({
-  origin: 'http://localhost:3000', // Remplacer par l'URL de votre frontend
+  origin: process.env.DOMAIN_NAME || 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
@@ -45,6 +54,7 @@ app.get('/', (req, res) => {
 // })
 
 app.use('/api/auth',userRoutes)
+app.use('/api/project',projectRoutes)
 
 
 // Démarrer le serveur

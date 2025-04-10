@@ -10,6 +10,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@hookform/resolvers": "^5.0.1",
         "@lordicon/react": "^1.10.1",
         "framer-motion": "^11.15.0",
         "lottie-web": "^5.12.2",
@@ -18,7 +19,9 @@
         "plaiceholder": "^3.0.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-google-recaptcha-v3": "^1.10.1"
+        "react-google-recaptcha-v3": "^1.10.1",
+        "react-hook-form": "^7.55.0",
+        "zod": "^3.24.2"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",

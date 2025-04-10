@@ -62,7 +62,7 @@ export interface TitleCardProps {
 
 export interface CardProps {
     title: string
-    summary: string
+    description: string
     mainPhoto: PhotoVariableProps
     id: string
 }

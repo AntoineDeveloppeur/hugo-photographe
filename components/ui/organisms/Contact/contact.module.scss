@@ -15,10 +15,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 6rem;
+        gap: 4rem;
         &__photoWrapper {
-            height: 28rem;
-            aspect-ratio: 1/1;
+            height: 100%;
+            display: flex;
+            align-items: center;
         }
         &__text {
             display: flex;
@@ -54,5 +55,10 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            gap: 3rem;}
+            gap: 3rem;
+            &__photoWrapper {
+                height: auto;
+                width: 100%;
+            }      
+        }
 }

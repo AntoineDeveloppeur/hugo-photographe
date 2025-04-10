@@ -4,7 +4,7 @@ import styles from './contact.module.scss'
 import { PhotoVariableProps} from '@/types/index'
 import ButtonBig from '../../atoms/ButtonBig/ButtonBig'
 import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
-import taj from '@/public/taj.jpg'
+import portraitHugo from '@/public/portrait-Hugo.jpg'
 import Link from 'next/link'
 import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
@@ -14,10 +14,11 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
 import useReCaptcha from '@/hooks/useReCaptcha'
 import { ShowPresentationContext } from '@/components/Providers'
+import useIsMobile from '@/hooks/useIsMobile'
 
 export default function Contact() {
 
-    const example : PhotoVariableProps = { src: taj.src, alt: 'taj', width: 2223, height: 2223 }
+    const example : PhotoVariableProps = { src: portraitHugo.src, alt: 'Hugo Randez', width: 1943, height: 1880 }
 
     const { showPresentation, setShowPresentation } = useContext(ShowPresentationContext)
 
@@ -46,6 +47,8 @@ export default function Contact() {
     const email = "n'utilise pas le Recaptcha"
     const phone = "faux numéro"
 
+    const { isMobile } = useIsMobile()
+
     return (
         <section ref={containerRef} id="Contact" className={styles.contact}>
                 {!showPresentation && (
@@ -72,7 +75,7 @@ export default function Contact() {
                         transition={{ duration: 0.5 }}
                     >
                         <div className={styles.contact__presentation__photoWrapper}>
-                            <PhotoBasic photo={example} sizes="233px" />
+                            <PhotoBasic photo={example} sizes='250px'/>
                         </div>
                         <div className={styles.contact__presentation__text}>
                             <TitleProjectPage text="HUGO RANDEZ" />

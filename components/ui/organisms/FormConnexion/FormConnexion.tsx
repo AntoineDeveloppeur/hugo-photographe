@@ -17,13 +17,33 @@ export default function FormConnexion() {
 
     type FormFields = z.infer<typeof userSchema>
 
-    const {register, handleSubmit, formState: { errors }} = useForm<FormFields>({
-        resolver: zodResolver(userSchema)
+    const {register, 
+        handleSubmit, 
+        setError,
+        formState: { errors, isSubmitting }} = useForm<FormFields>({
+        resolver: zodResolver(userSchema), defaultValues : { email: 'test@gmail.com', password: 'jkmljklmjklmj'}
     })
 
     const onSubmit: SubmitHandler<FormFields> = async () => {
-        const promesse = new Promise()
-        console.log('form submitted')
+        try {
+            const responseJSON : Response = await fetch('http://localhost:3002/auth/signIn', {
+                headers: 'application/JSON',
+                method: 'POST',
+                body: {
+                    email: 'inputTypeEmail',
+                    password: 'inputTypePassword'
+                }
+            })
+            const response: string = await JSON.parse(responseJSON)
+            if(response.ok) {
+                console.log('requête réussie')
+                console.log('response.message',response.message)
+            }
+
+        } catch {
+            setError('root', { message : 'error' })
+            // Reste à configurer le backend pour qu'il me renvoi les erreurs
+        }
     }
 
     return (
@@ -31,7 +51,12 @@ export default function FormConnexion() {
         <form onSubmit={handleSubmit(onSubmit)}>
             <input {...register("email")} type='email' placeholder='email' />
             <input {...register("password")} type='password' placeholder='mot de passe' />
-            <button type='submit'>se connecter</button>
+            <button 
+                disabled={isSubmitting ? true : false} 
+                type='submit'
+                >{isSubmitting ? 'chargement ...':'se connecter'}
+            </button>
+            {errors.root && <div>{errors.root.message}</div>}
         </form>
 
 

@@ -24,24 +24,35 @@ export default function FormConnexion() {
         resolver: zodResolver(userSchema), defaultValues : { email: 'test@gmail.com', password: 'jkmljklmjklmj'}
     })
 
-    const onSubmit: SubmitHandler<FormFields> = async () => {
+    const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
             const responseJSON : Response = await fetch('http://localhost:3002/auth/signIn', {
-                headers: 'application/JSON',
+                headers: { 'Content-Type':
+                    'application/JSON'
+                },
                 method: 'POST',
-                body: {
-                    email: 'inputTypeEmail',
-                    password: 'inputTypePassword'
-                }
+                body: JSON.stringify({
+                    email: 'test@gmail.com',
+                    password: '456'
+                })
             })
-            const response: string = await JSON.parse(responseJSON)
-            if(response.ok) {
-                console.log('requête réussie')
-                console.log('response.message',response.message)
+            if(!responseJSON.ok) {
+                throw new Error(`Erreur HTTP: ${responseJSON.status}`)
+            }
+            const response: string = await responseJSON.json()
+            if(response.error) {
+                throw new Error(response.error)
+            }
+            if(response.token) {
+                window.localStorage.setItem('token', response.token)
+                console.log('token récupéré')
+                //redirection
+            } else {
+                throw new Error('Token manquant dans la réponse')
             }
 
-        } catch {
-            setError('root', { message : 'error' })
+        } catch (error) {
+            setError('root', { message : error instanceof Error ? error.message : 'Une erreur est survenue' })
             // Reste à configurer le backend pour qu'il me renvoi les erreurs
         }
     }

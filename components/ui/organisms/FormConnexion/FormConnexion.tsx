@@ -1,8 +1,11 @@
 'use client'
 
+import styles from './form-connection.scss'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import Button from '@/components/ui/atoms/Button/Button'
+import Input from '@/components/ui/atoms/Input/Input'
 
 export default function FormConnexion() {
 
@@ -24,6 +27,7 @@ export default function FormConnexion() {
         resolver: zodResolver(userSchema), defaultValues : { email: 'test@gmail.com', password: '45678910'}
     })
 
+
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
             const responseJSON : Response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/signIn`, {
@@ -39,7 +43,7 @@ export default function FormConnexion() {
             if(!responseJSON.ok) {
                 throw new Error(`Erreur HTTP: ${responseJSON.status}`)
             }
-            const response: string = await responseJSON.json()
+            const response = await responseJSON.json()
             if(response.error) {
                 throw new Error(response.error)
             }
@@ -60,13 +64,14 @@ export default function FormConnexion() {
     return (
 
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("email")} type='email' placeholder='email' />
-            <input {...register("password")} type='password' placeholder='mot de passe' />
-            <button 
+            <Input register={register} type='email' label='Email' error={errors.email?.message} name='email' />
+            <Input register={register} type='password' label='Mot de passe' error={errors.password?.message} name='password' />
+            <Button 
+                text={isSubmitting ? 'chargement ...':'se connecter'}
                 disabled={isSubmitting ? true : false} 
                 type='submit'
-                >{isSubmitting ? 'chargement ...':'se connecter'}
-            </button>
+                >
+            </Button>
             {errors.root && <div>{errors.root.message}</div>}
         </form>
 

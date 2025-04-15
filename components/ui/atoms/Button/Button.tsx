@@ -12,7 +12,7 @@ type RippleState = {
     isAnimating: boolean
 } | null
 
-export default function Button({ text, link, onclick }: ButtonProps) {
+export default function Button({ text, link, onclick, type, disabled }: ButtonProps) {
     const [ripple, setRipple] = useState<RippleState>(null)
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,6 +34,8 @@ export default function Button({ text, link, onclick }: ButtonProps) {
             className={styles.button}
             whileHover={{ backgroundColor: 'var(--background-button-second)' }}
             whileTap={{ scale: 0.9 }}
+            disabled= {disabled ? disabled : false}
+            type={type ? type : undefined}
             onClick={handleClick}
         >
             <AnimatePresence>

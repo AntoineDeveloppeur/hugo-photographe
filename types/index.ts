@@ -47,6 +47,8 @@ export interface TextsProps {
 export interface ButtonProps {
     text: string
     link?: string
+    type?: "button" | "submit" | "reset" | undefined
+    disabled?: boolean
     onclick?: () => void
 }
 

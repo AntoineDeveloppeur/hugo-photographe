@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 
 // Créer d'abord l'objet contrôleur
 const userCtrl = {
-    signUp: (req: Request, res: Response) => {
+    signIn: (req: Request, res: Response) => {
         // Regarder si l'adresse email existe déjà ou non
         console.log('req.body.email', req.body.email)
         console.log('req.body.password', req.body.password)
@@ -15,14 +15,14 @@ const userCtrl = {
             console.log('après le then')
             if (!user) {
                 console.log("l'utilisateur n'existe pas")
-                res.status(401).json({message: "l'utilisateur n'existe pas"})
+                res.status(401).json({error: "l'utilisateur n'existe pas"})
             }
             bcrypt
                 .compare(req.body.password, user.password)
                 .then((valid) => {
                     if (!valid) {
                         res.status(401).json({
-                            message: 'mot de pass incorect',
+                            error: 'mot de pass incorect',
                         })
                     } else {
                         res.status(200).json({

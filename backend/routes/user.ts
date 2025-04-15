@@ -3,8 +3,7 @@ import userCtrl from '../controllers/user.js'
 
 const router = express.Router()
 
-
 router.put('/modifyPassword',userCtrl.modifyPassword)
-router.post('/signUp',userCtrl.signUp)
+router.post('/signIn',userCtrl.signIn)
 
 export default router

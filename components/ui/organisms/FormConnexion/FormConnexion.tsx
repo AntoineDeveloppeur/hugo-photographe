@@ -26,7 +26,7 @@ export default function FormConnexion() {
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
-            const responseJSON : Response = await fetch('http://localhost:3002/auth/signIn', {
+            const responseJSON : Response = await fetch('http://localhost:3002/api/auth/signIn', {
                 headers: { 'Content-Type':
                     'application/JSON'
                 },

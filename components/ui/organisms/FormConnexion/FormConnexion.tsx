@@ -21,19 +21,19 @@ export default function FormConnexion() {
         handleSubmit, 
         setError,
         formState: { errors, isSubmitting }} = useForm<FormFields>({
-        resolver: zodResolver(userSchema), defaultValues : { email: 'test@gmail.com', password: 'jkmljklmjklmj'}
+        resolver: zodResolver(userSchema), defaultValues : { email: 'test@gmail.com', password: '45678910'}
     })
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
-            const responseJSON : Response = await fetch('http://localhost:3002/api/auth/signIn', {
+            const responseJSON : Response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/signIn`, {
                 headers: { 'Content-Type':
                     'application/JSON'
                 },
                 method: 'POST',
                 body: JSON.stringify({
-                    email: 'test@gmail.com',
-                    password: '456'
+                    email: data.email,
+                    password: data.password
                 })
             })
             if(!responseJSON.ok) {

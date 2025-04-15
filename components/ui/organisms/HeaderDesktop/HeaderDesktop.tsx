@@ -14,7 +14,6 @@ const HeaderDesktop = () => {
                 >
                     <LogoWithSignature />
                 </div>
-                {/* <div className={styles.header__largeScreen__ThemeChangerWrapper}><ThemeChanger/></div> */}
                 <div className={styles.header__largeScreen__MenuWrapper}>
                     <MenuDesktop />
                 </div>

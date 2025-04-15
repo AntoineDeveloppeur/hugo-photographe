@@ -9,6 +9,11 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://photographe-hugo-ra
 export const metadata: Metadata = {
     title: 'Photographe du monde Hugo Randez',
     description: 'Découvrez des destinations exotiques et vivez des aventures uniques avec les photos de voyage de Hugo Randez. Une expérience visuelle inoubliable.',
+    icons: {
+        icon: '/favicon.ico',
+        shortcut: '/favicon.ico',
+        apple: '/apple-icon.png',
+    },
     openGraph: {
         title: 'Photographe du monde Hugo Randez',
         description: 'Découvrez des destinations exotiques et vivez des aventures uniques avec les photos de voyage de Hugo Randez. Une expérience visuelle inoubliable.',
@@ -29,7 +34,6 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'Photographe du monde Hugo Randez',
         description: 'Découvrez des destinations exotiques et vivez des aventures uniques avec les photos de voyage de Hugo Randez. Une expérience visuelle inoubliable.',
-        // creator: '@hugorandez',
         images: [`${baseUrl}/images/twitter-image.jpg`],
     },
 }

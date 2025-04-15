@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 export default function FormConnexion() {
@@ -17,11 +17,12 @@ export default function FormConnexion() {
 
     type FormFields = z.infer<typeof userSchema>
 
-    const {register, handleSubmit} = useForm<FormFields>({
+    const {register, handleSubmit, formState: { errors }} = useForm<FormFields>({
         resolver: zodResolver(userSchema)
     })
 
-    const onSubmit = () => {
+    const onSubmit: SubmitHandler<FormFields> = async () => {
+        const promesse = new Promise()
         console.log('form submitted')
     }
 

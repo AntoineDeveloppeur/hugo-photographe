@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './form-connection.scss'
+import styles from './form-connexion.module.scss'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -41,7 +41,7 @@ export default function FormConnexion() {
                 })
             })
             if(!responseJSON.ok) {
-                throw new Error(`Erreur HTTP: ${responseJSON.status}`)
+                throw new Error(`Erreur ${responseJSON.status}: ${responseJSON.statusText}`)
             }
             const response = await responseJSON.json()
             if(response.error) {
@@ -63,15 +63,18 @@ export default function FormConnexion() {
 
     return (
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <Input register={register} type='email' label='Email' error={errors.email?.message} name='email' />
             <Input register={register} type='password' label='Mot de passe' error={errors.password?.message} name='password' />
-            <Button 
-                text={isSubmitting ? 'chargement ...':'se connecter'}
-                disabled={isSubmitting ? true : false} 
-                type='submit'
-                >
-            </Button>
+            <div className={styles.form__buttonWrapper}>
+                <Button 
+                    text={isSubmitting ? 'chargement ...':'se connecter'}
+                    
+                    disabled={isSubmitting ? true : false} 
+                    type='submit'
+                    >
+                </Button>
+            </div>
             {errors.root && <div>{errors.root.message}</div>}
         </form>
 

@@ -1,5 +1,6 @@
 'use client'
 
+import styles from './providers.module.scss'
 import { ThemeProvider } from 'next-themes'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import Header from './ui/organisms/HeaderDesktop/HeaderDesktop'
@@ -53,11 +54,14 @@ export default function Providers({ children }: { children: React.ReactNode }) {
                 }}
             >
                 <ShowPresentationContext.Provider value={{ showPresentation, setShowPresentation }}>
-                    {isMobile ? <HeaderMobile /> : <Header />}
-                    <main>
-                        {children}
-                    </main>
-                    <Footer />
+                    <div className={styles.pageWrapper}>
+
+                        {isMobile ? <HeaderMobile /> : <Header />}
+                        <main className={styles.pageWrapper__main}>
+                            {children}
+                        </main>
+                        <Footer />
+                    </div>
                 </ShowPresentationContext.Provider>
             </GoogleReCaptchaProvider>
         </ThemeProvider>

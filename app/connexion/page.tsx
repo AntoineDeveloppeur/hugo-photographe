@@ -8,8 +8,8 @@ export default function Connexion() {
             <div className={styles.connexion__largeScreen}>
                 <div className={styles.connexion__largeScreen__titleWrapper}>
                     <TitleProjectPage text="Connexion" />
-                    <FormConnexion/>
                 </div>
+                    <FormConnexion/>
             </div>
         </section>
     )

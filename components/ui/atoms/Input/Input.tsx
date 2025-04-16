@@ -4,7 +4,7 @@ type InputType = {
     label?: string
     placeholder?: string
     name: string
-    type: 'email' | 'password'
+    type: 'email' | 'password'| 'text'
     register: any
     error?: string
 }

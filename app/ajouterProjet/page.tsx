@@ -1,6 +1,6 @@
 import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjectPage'
 import styles from './ajouter-projet.module.scss'
-import FormConnexion from '@/components/ui/organisms/FormConnexion/FormConnexion'
+import FormAjouterProjet from '@/components/ui/organisms/FormAjouterProjet/FormAjouterProjet'
 
 export default function AjouterProjet() {
     return (
@@ -9,7 +9,7 @@ export default function AjouterProjet() {
                 <div className={styles.ajout__largeScreen__titleWrapper}>
                     <TitleProjectPage text="Ajouter un projet" />
                 </div>
-                    <FormConnexion/>
+                    <FormAjouterProjet/>
             </div>
         </section>
     )

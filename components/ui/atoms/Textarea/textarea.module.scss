@@ -1,0 +1,31 @@
+.textareaWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    &__label {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    &__textarea {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        resize: vertical;
+        min-height: 100px;
+        
+        &:focus {
+            outline: none;
+            border-color: #000;
+        }
+    }
+
+    &__p {
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+}

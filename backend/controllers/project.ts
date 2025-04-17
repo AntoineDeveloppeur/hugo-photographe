@@ -37,16 +37,6 @@ export default async function createProject(req: AuthRequest, res: Response) {
         // // Upload l'image sur S3 
         // const mainPhotoUrl = await uploadToS3(files.mainPhoto, 'projets')
 
-        console.log(' title', projectData.title,
-            'summary:', projectData.summary,
-            
-               ' src:', projectData.src,
-                'alt:', projectData.alt,
-                'height:', projectData.height,
-                'width:', projectData.width, 
-           
-            'textsAbovePhotos: ',projectData.textsAbovePhotos )
-     
 
         // Crée un nouveau projet
         const newProject = new Project({

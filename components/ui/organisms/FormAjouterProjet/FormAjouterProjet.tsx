@@ -7,8 +7,15 @@ import { promise, z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '../../atoms/Button/Button'
 import Textarea from '../../atoms/Textarea/Textarea'
+import { useState, useRef } from 'react'
 
 export default function FormAjouterProjet() {
+    // Référence pour le champ de fichier
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    // État pour stocker le fichier sélectionné
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    // État pour afficher le nom du fichier sélectionné
+    const [fileName, setFileName] = useState<string>('');
 
     const projectSchema = z.object({
         title: z.string().min(1),
@@ -17,6 +24,7 @@ export default function FormAjouterProjet() {
         set1photo1alt: z.string().min(2),
         set1photo1height: z.coerce.number().min(3),
         set1photo1width: z.coerce.number().min(3)
+        // Note: Nous ne validons pas le fichier avec Zod car il sera géré séparément
     })
 
     type FormFields = z.infer<typeof projectSchema>
@@ -25,51 +33,55 @@ export default function FormAjouterProjet() {
         resolver: zodResolver(projectSchema)
     })
 
+    // Gestionnaire pour le changement de fichier
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0] || null;
+        setSelectedFile(file);
+        setFileName(file ? file.name : '');
+    };
+
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
+            if (!selectedFile) {
+                alert('Veuillez sélectionner une image principale');
+                return;
+            }
 
-            const formData= new FormData()
-            console.log(
-
-                data.title,
-                data.summary,
-                'http://dfdq.com',
-                data.set1photo1alt,
-                 data.set1photo1height,
-                data.set1photo1width,
-                data.textAbovePhotos
-            )
-
-            const projectData= {
+            const formData = new FormData();
+            
+            // Ajouter le fichier à FormData
+            formData.append('mainPhoto', selectedFile);
+            
+            // Créer l'objet projectData
+            const projectData = {
                 title: data.title,
                 summary: data.summary,
-                src: 'http://dfdq.com',
+                src: 'http://dfdq.com', // Cette valeur sera remplacée par l'URL de l'image uploadée
                 alt: data.set1photo1alt,
                 height: data.set1photo1height,
                 width: data.set1photo1width,
                 textsAbovePhotos: data.textAbovePhotos
-            }
-
-            formData.append('project', JSON.stringify(projectData))
-            console.log('formData',formData)
-
+            };
+            
+            formData.append('project', JSON.stringify(projectData));
+            
+            console.log('Envoi du formulaire avec image...');
+            
             const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`, {
                 method: 'POST',
                 body: formData
-            })
+            });
+            
             if(!responseJSON.ok) {
-                throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`)
+                throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`);
             }
-            //redirection
-
-            console.error('Projet ajouté');
+            
+            console.log('Projet ajouté avec succès');
         }
         catch (error) {
-            console.error(error)
+            console.error(error);
         }
-
     }
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -79,10 +91,32 @@ export default function FormAjouterProjet() {
             <Input register={register} type='text' name='set1photo1alt' label='description succinte de la photo' error={errors.set1photo1alt?.message} defaultValue='test'/>
             <Input register={register} type='number' name='set1photo1height' label='hauteur en pixel' error={errors.set1photo1height?.message} defaultValue={123} />
             <Input register={register} type='number' name='set1photo1width' label='largueur en pixel' error={errors.set1photo1width?.message} defaultValue={123}  />
+            
+            {/* Champ pour télécharger une photo */}
+            <div className={styles.inputWrapper}>
+                <label htmlFor="mainPhoto" className={styles.inputWrapper__label}>Photo principale</label>
+                <div className={styles.fileInputContainer}>
+                    <input
+                        type="file"
+                        id="mainPhoto"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                        className={styles.fileInput}
+                    />
+                    <div className={styles.fileInputInfo}>
+                        {fileName ? (
+                            <span>{fileName}</span>
+                        ) : (
+                            <span>Aucun fichier sélectionné</span>
+                        )}
+                    </div>
+                </div>
+            </div>
+            
             <div className={styles.form__buttonWrapper}>
                 <Button text={isSubmitting ? 'Chargement...' : 'Ajouter le projet'} type='submit' disabled={isSubmitting}/>
             </div>
-
         </form>
     )
 }

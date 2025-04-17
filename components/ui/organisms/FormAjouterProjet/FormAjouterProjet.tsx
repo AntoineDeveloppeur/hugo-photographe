@@ -27,12 +27,46 @@ export default function FormAjouterProjet() {
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
-            await new Promise<void>((resolve) => {
-                setTimeout((resolve),2000)
+
+            const formData= new FormData()
+            console.log(
+
+                data.title,
+                data.summary,
+                'http://dfdq.com',
+                data.set1photo1alt,
+                 data.set1photo1height,
+                data.set1photo1width,
+                data.textAbovePhotos
+            )
+
+            const projectData= {
+                title: data.title,
+                summary: data.summary,
+                src: 'http://dfdq.com',
+                alt: data.set1photo1alt,
+                height: data.set1photo1height,
+                width: data.set1photo1width,
+                textsAbovePhotos: data.textAbovePhotos
+            }
+
+            formData.append('project', JSON.stringify(projectData))
+            console.log('formData',formData)
+
+            const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`, {
+                method: 'POST',
+                body: formData
             })
-            console.log('Projet ajouté');
+            if(!responseJSON.ok) {
+                throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`)
+            }
+            //redirection
+
+            console.error('Projet ajouté');
         }
-        catch (error) {}
+        catch (error) {
+            console.error(error)
+        }
 
     }
 

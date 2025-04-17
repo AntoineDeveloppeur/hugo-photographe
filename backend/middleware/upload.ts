@@ -1,4 +1,4 @@
-import formidable from 'formidable'
+import { IncomingForm } from 'formidable'
 import { S3Client, PutObjectCommand, ObjectCannedACL} from '@aws-sdk/client-s3'
 import fs from 'fs'
 import { Request } from 'express'
@@ -16,7 +16,7 @@ const s3Client = new S3Client({
 // Interface pour les fichiers téléchargés
 interface FormidableFile {
     filepath: string
-    originalFileName: string
+    originalFilename: string
     mimetype: string
     [key:string]: any;
 }
@@ -54,18 +54,41 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
 
 // Fonction pour parser le formulaire
 export async function parseForm(req: Request): Promise<ParsedForm> {
+    console.log('Début de parseForm');
+    
+    // Vérifier le type de contenu de la requête
+    console.log('Content-Type:', req.headers['content-type']);
+    
     return new Promise((resolve, reject) => {
-        const form = new formidable.IncomingForm({
-            keepExtensions: true,
-            multiples: true,
-        })
-        
-        form.parse(req, (err, fields, files) => {
-            if (err) return reject(err)
-            resolve({
-                fields,
-                files: files as unknown as { [key: string]: FormidableFile}
-                })
-            }) 
-    })
+        try {
+            console.log('Création du formulaire formidable');
+            // Nouvelle façon d'utiliser formidable (v3+)
+            const form = new IncomingForm({
+                keepExtensions: true,
+                multiples: true,
+                maxFileSize: 200 * 1024 * 1024, // 200MB
+            });
+            
+            console.log('Parsing du formulaire...');
+            form.parse(req, (err, fields, files) => {
+                if (err) {
+                    console.error('Erreur lors du parsing du formulaire:', err);
+                    return reject(err);
+                }
+                
+                console.log('Formulaire parsé avec succès');
+                console.log('Champs reçus:', Object.keys(fields));
+                console.log('Fields', fields)
+                console.log('Fichiers reçus:', Object.keys(files));
+                
+                resolve({
+                    fields,
+                    files: files as unknown as { [key: string]: FormidableFile}
+                });
+            });
+        } catch (error) {
+            console.error('Exception dans parseForm:', error);
+            reject(error);
+        }
+    });
 }

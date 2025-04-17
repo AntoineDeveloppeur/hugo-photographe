@@ -11,32 +11,52 @@ export interface AuthRequest extends Request {
 
 // Exporter les fonctions individuellement
 export default async function createProject(req: AuthRequest, res: Response) {
+    console.log('début function createProject')
     try {
         // Parse le formulaire avec formidable
+        console.log('début try')
+
         const {fields, files } = await parseForm(req)
+        console.log('après parseForm')
+
 
         // Parse les données du projet
-        const projectData = typeof fields.project === 'string' 
-            ? JSON.parse(fields.project)
+        console.log('fields dans le controller',fields)
+        console.log('typeof fields.project(0)',typeof fields.project[0])
+        console.log('JSON.parse(fields.project[0])',JSON.parse(fields.project[0]))
+
+        const projectData = typeof fields.project[0] === 'string' 
+            ? JSON.parse(fields.project[0])
             : fields.project
 
         // Vérifie si une image principale a été fournie
-        if (!files.mainPhoto) {
-            return res.status(400).json({ message: 'Une image principale est requise'})
-        }
+        // if (!files.mainPhoto) {
+        //     return res.status(400).json({ message: 'Une image principale est requise'})
+        // }
 
-        // Upload l'image sur S3 
-        const mainPhotoUrl = await uploadToS3(files.mainPhoto, 'projets')
+        // // Upload l'image sur S3 
+        // const mainPhotoUrl = await uploadToS3(files.mainPhoto, 'projets')
+
+        console.log(' title', projectData.title,
+            'summary:', projectData.summary,
+            
+               ' src:', projectData.src,
+                'alt:', projectData.alt,
+                'height:', projectData.height,
+                'width:', projectData.width, 
+           
+            'textsAbovePhotos: ',projectData.textsAbovePhotos )
+     
 
         // Crée un nouveau projet
         const newProject = new Project({
             title: projectData.title,
             summary: projectData.summary,
             mainPhoto: {
-                src: mainPhotoUrl,
+                src: projectData.src,
                 alt: projectData.alt,
-                width: projectData.mainPhotoWidth || 1200,
-                height: projectData.mainPhotoHeight || 800
+                height: projectData.height || 800,
+                width: projectData.width || 1200
             },
             textsAbovePhotos: projectData.textsAbovePhotos || []
         })

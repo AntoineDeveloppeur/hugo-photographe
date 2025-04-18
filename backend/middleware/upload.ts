@@ -1,4 +1,4 @@
-import { IncomingForm } from 'formidable'
+import { IncomingForm, Fields } from 'formidable'
 import { S3Client, PutObjectCommand, ObjectCannedACL} from '@aws-sdk/client-s3'
 import fs from 'fs'
 import { Request } from 'express'
@@ -22,7 +22,7 @@ interface FormidableFile {
 }
 
 interface ParsedForm {
-    fields: formidable.fields
+    fields: Fields
     files: {
         [key: string]: FormidableFile
     }

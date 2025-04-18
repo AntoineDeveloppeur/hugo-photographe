@@ -17,6 +17,13 @@ export default function FormAjouterProjet() {
     // État pour afficher le nom du fichier sélectionné
     const [fileName, setFileName] = useState<string>('');
 
+    // Gestionnaire pour le changement de fichier
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0] || null;
+        setSelectedFile(file);
+        setFileName(file ? file.name : '');
+    };
+
     const projectSchema = z.object({
         title: z.string().min(1),
         summary: z.string().min(1),
@@ -32,13 +39,6 @@ export default function FormAjouterProjet() {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormFields>({
         resolver: zodResolver(projectSchema)
     })
-
-    // Gestionnaire pour le changement de fichier
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0] || null;
-        setSelectedFile(file);
-        setFileName(file ? file.name : '');
-    };
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {

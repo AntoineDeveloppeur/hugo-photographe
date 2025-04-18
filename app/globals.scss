@@ -122,6 +122,9 @@ select {
 
 
 :root, [data-theme="dark"] {
+
+    --color-logo: var(--dark100);
+
     --background-main: var(--dark10);
     --background-second: var(--dark12);
 
@@ -159,6 +162,10 @@ select {
 }
 
 [data-theme="light"] {
+
+    --color-logo: var(--light0);
+
+
     --background-main: #fffdfdd4;
     --background-second:#fbf0f0b7;
 

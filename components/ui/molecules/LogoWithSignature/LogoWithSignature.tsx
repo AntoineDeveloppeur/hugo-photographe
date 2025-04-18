@@ -2,11 +2,12 @@ import styles from './logo-with-signature.module.scss'
 import Logo from '../../atoms/Logo/Logo'
 import Signature from '../../atoms/Signature/Signature'
 import Link from 'next/link'
+import LogoSvg from '../../atoms/LogoSvg/LogoSvg'
 
 const LogoWithSignature = () => {
     return (
         <Link className={styles.logoWithSignature} href="/">
-            <Logo />
+            <LogoSvg/>
             <Signature />
         </Link>
     )

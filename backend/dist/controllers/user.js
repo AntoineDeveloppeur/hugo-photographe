@@ -5,13 +5,9 @@ import jwt from 'jsonwebtoken';
 const userCtrl = {
     signIn: (req, res) => {
         // Regarder si l'adresse email existe déjà ou non
-        console.log('req.body.email', req.body.email);
-        console.log('req.body.password', req.body.password);
         User.findOne({ email: req.body.email })
             .then((user) => {
-            console.log('après le then');
             if (!user) {
-                console.log("l'utilisateur n'existe pas");
                 res.status(401).json({ error: "l'utilisateur n'existe pas" });
             }
             bcrypt
@@ -41,7 +37,6 @@ const userCtrl = {
         User.findOne({ email: req.body.email })
             .then((user) => {
             if (!user) {
-                console.log("l'utilisateur n'existe pas");
                 res.status(401).json({ message: "l'utilisateur n'existe pas" });
                 return;
             }
@@ -49,7 +44,6 @@ const userCtrl = {
                 .hash(req.body.password, 10)
                 .then((hash) => {
                 // Mise à jour du mot de passe de l'utilisateur avec le hash
-                console.log('hash', hash);
                 User.updateOne({ email: req.body.email }, { password: hash })
                     .then(() => res.status(200).json({ message: 'Mot de passe modifié avec succès' }))
                     .catch(error => res.status(500).json({ error }));

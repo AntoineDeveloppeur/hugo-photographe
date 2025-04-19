@@ -35,25 +35,18 @@ interface ParsedForm {
 export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string> {
     // Lecture du contenu du fichier
     try {
-        console.log('process.env.AWS_ACCESS_KEY_ID',process.env.AWS_ACCESS_KEY_ID)
-        console.log('process.env.AWS_SECRET_ACCESS_KEY',process.env.AWS_SECRET_ACCESS_KEY)
-    
-        console.log('démarre la function uploadToS3')
 
         const fileContent = fs.readFileSync(file.filepath)
-        console.log('fileContent généré')
         
         // Génération d'un nom de fichier unique
         const key = `${prefix ? prefix + '/' : ''}${Date.now()}-${file.originalFilename}`
-        console.log('variable key défini')
 
         // Paramètres pour l'upload
         const uploadParams = {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
             Key: key,
             Body: fileContent,
-            ContentType: file.mimetype,
-            ACL: ObjectCannedACL.public_read
+            ContentType: file.mimetype
         }
         console.log('uploadParams déifni')
 
@@ -61,6 +54,7 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
         // Envoi du fichier à S3
         const s3Client = getS3Client()
         await s3Client.send(new PutObjectCommand(uploadParams))
+        console.log('après envoie s3Client')
 
         // Retourne l'URL du fichier télécahrgé
         return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`

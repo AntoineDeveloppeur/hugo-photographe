@@ -2,11 +2,9 @@ import Project from '../models/project.js';
 import uploadToS3, { parseForm } from '../middleware/upload.js';
 // Exporter les fonctions individuellement
 export default async function createProject(req, res) {
-    console.log('début function createProject');
     try {
         // Parse le formulaire avec formidable
         const { fields, files } = await parseForm(req);
-        console.log('après parseForm');
         const projectData = typeof fields.project[0] === 'string'
             ? JSON.parse(fields.project[0])
             : fields.project;

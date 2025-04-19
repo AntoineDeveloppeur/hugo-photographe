@@ -11,12 +11,10 @@ export interface AuthRequest extends Request {
 
 // Exporter les fonctions individuellement
 export default async function createProject(req: AuthRequest, res: Response) {
-    console.log('début function createProject')
     try {
         // Parse le formulaire avec formidable
 
         const {fields, files } = await parseForm(req)
-        console.log('après parseForm')
 
 
         const projectData = typeof fields.project[0] === 'string' 

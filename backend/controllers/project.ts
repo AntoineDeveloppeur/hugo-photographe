@@ -20,22 +20,17 @@ export default async function createProject(req: AuthRequest, res: Response) {
         console.log('après parseForm')
 
 
-        // Parse les données du projet
-        console.log('fields dans le controller',fields)
-        console.log('typeof fields.project(0)',typeof fields.project[0])
-        console.log('JSON.parse(fields.project[0])',JSON.parse(fields.project[0]))
-
         const projectData = typeof fields.project[0] === 'string' 
             ? JSON.parse(fields.project[0])
             : fields.project
 
-        // Vérifie si une image principale a été fournie
-        // if (!files.mainPhoto) {
-        //     return res.status(400).json({ message: 'Une image principale est requise'})
-        // }
+        if (!files.mainPhoto) {
+            return res.status(400).json({ message: 'Une image principale est requise'})
+        }
 
-        // // Upload l'image sur S3 
-        // const mainPhotoUrl = await uploadToS3(files.mainPhoto, 'projets')
+        console.log('on va cherche le path', files.mainPhoto[0].filepath)
+        // Upload l'image sur S3 
+        const mainPhotoUrl = await uploadToS3(files.mainPhoto[0], 'projets')
 
 
         // Crée un nouveau projet
@@ -43,7 +38,7 @@ export default async function createProject(req: AuthRequest, res: Response) {
             title: projectData.title,
             summary: projectData.summary,
             mainPhoto: {
-                src: projectData.src,
+                src: mainPhotoUrl,
                 alt: projectData.alt,
                 height: projectData.height || 800,
                 width: projectData.width || 1200

@@ -31,34 +31,41 @@ interface ParsedForm {
 //Fonction pour télécharger un fichier sur S3
 export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string> {
     // Lecture du contenu du fichier
-    const fileContent = fs.readFileSync(file.filepath)
+    console.log('démarre la function uploadToS3')
+    try {
 
-    // Génération d'un nom de fichier unique
-    const key = `${prefix ? prefix + '/' : ''}${Date.now()}-${file.originalFilename}`
+        const fileContent = fs.readFileSync(file.filepath)
+        console.log('fileContent généré')
+        
+        // Génération d'un nom de fichier unique
+        const key = `${prefix ? prefix + '/' : ''}${Date.now()}-${file.originalFilename}`
+        console.log('variable key défini')
 
-    // Paramètres pour l'upload
-    const uploadParams = {
-        Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: key,
-        Body: fileContent,
-        ContentType: file.mimetype,
-        ACL: ObjectCannedACL.public_read
+        // Paramètres pour l'upload
+        const uploadParams = {
+            Bucket: process.env.AWS_S3_BUCKET_NAME,
+            Key: key,
+            Body: fileContent,
+            ContentType: file.mimetype,
+            ACL: ObjectCannedACL.public_read
+        }
+        console.log('uploadParams déifni')
+
+
+        // Envoi du fichier à S3
+
+        await s3Client.send(new PutObjectCommand(uploadParams))
+
+        // Retourne l'URL du fichier télécahrgé
+        return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`
+    } catch(error) {
+        console.log( error)
     }
-
-    // Envoi du fichier à S3
-    await s3Client.send(new PutObjectCommand(uploadParams))
-
-    // Retourne l'URL du fichier télécahrgé
-    return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`
 }
 
 // Fonction pour parser le formulaire
 export async function parseForm(req: Request): Promise<ParsedForm> {
-    console.log('Début de parseForm');
-    
-    // Vérifier le type de contenu de la requête
-    console.log('Content-Type:', req.headers['content-type']);
-    
+        
     return new Promise((resolve, reject) => {
         try {
             console.log('Création du formulaire formidable');
@@ -72,13 +79,9 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
             console.log('Parsing du formulaire...');
             form.parse(req, (err, fields, files) => {
                 if (err) {
-                    console.error('Erreur lors du parsing du formulaire:', err);
                     return reject(err);
                 }
                 
-                console.log('Formulaire parsé avec succès');
-                console.log('Champs reçus:', Object.keys(fields));
-                console.log('Fields', fields)
                 console.log('Fichiers reçus:', Object.keys(files));
                 
                 resolve({

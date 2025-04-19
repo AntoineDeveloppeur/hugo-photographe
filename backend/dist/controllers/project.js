@@ -5,7 +5,6 @@ export default async function createProject(req, res) {
     console.log('début function createProject');
     try {
         // Parse le formulaire avec formidable
-        console.log('début try');
         const { fields, files } = await parseForm(req);
         console.log('après parseForm');
         const projectData = typeof fields.project[0] === 'string'

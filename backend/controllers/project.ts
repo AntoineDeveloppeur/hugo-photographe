@@ -14,7 +14,6 @@ export default async function createProject(req: AuthRequest, res: Response) {
     console.log('début function createProject')
     try {
         // Parse le formulaire avec formidable
-        console.log('début try')
 
         const {fields, files } = await parseForm(req)
         console.log('après parseForm')

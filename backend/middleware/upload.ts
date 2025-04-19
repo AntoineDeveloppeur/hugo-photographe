@@ -4,14 +4,17 @@ import fs from 'fs'
 import { Request } from 'express'
 
 // Configuration du client S3
-const s3Client = new S3Client({
+
+const getS3Client = () => {
+    return new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     }
+    })
+}
 
-})
 
 // Interface pour les fichiers téléchargés
 interface FormidableFile {
@@ -31,8 +34,11 @@ interface ParsedForm {
 //Fonction pour télécharger un fichier sur S3
 export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string> {
     // Lecture du contenu du fichier
-    console.log('démarre la function uploadToS3')
     try {
+        console.log('process.env.AWS_ACCESS_KEY_ID',process.env.AWS_ACCESS_KEY_ID)
+        console.log('process.env.AWS_SECRET_ACCESS_KEY',process.env.AWS_SECRET_ACCESS_KEY)
+    
+        console.log('démarre la function uploadToS3')
 
         const fileContent = fs.readFileSync(file.filepath)
         console.log('fileContent généré')
@@ -53,7 +59,7 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
 
 
         // Envoi du fichier à S3
-
+        const s3Client = getS3Client()
         await s3Client.send(new PutObjectCommand(uploadParams))
 
         // Retourne l'URL du fichier télécahrgé
@@ -78,10 +84,13 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
             
             console.log('Parsing du formulaire...');
             form.parse(req, (err, fields, files) => {
+                console.log('après form.parse')
+
                 if (err) {
+                    console.log('if (err) {')
                     return reject(err);
                 }
-                
+                console.log('après if(err)')
                 console.log('Fichiers reçus:', Object.keys(files));
                 
                 resolve({
@@ -90,6 +99,7 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                 });
             });
         } catch (error) {
+            console.log('Exception dans parseForm:', error);
             console.error('Exception dans parseForm:', error);
             reject(error);
         }

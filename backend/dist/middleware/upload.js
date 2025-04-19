@@ -2,18 +2,22 @@ import { IncomingForm } from 'formidable';
 import { S3Client, PutObjectCommand, ObjectCannedACL } from '@aws-sdk/client-s3';
 import fs from 'fs';
 // Configuration du client S3
-const s3Client = new S3Client({
-    region: process.env.AWS_REGION,
-    credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    }
-});
+const getS3Client = () => {
+    return new S3Client({
+        region: process.env.AWS_REGION,
+        credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        }
+    });
+};
 //Fonction pour télécharger un fichier sur S3
 export default async function uploadToS3(file, prefix = '') {
     // Lecture du contenu du fichier
-    console.log('démarre la function uploadToS3');
     try {
+        console.log('process.env.AWS_ACCESS_KEY_ID', process.env.AWS_ACCESS_KEY_ID);
+        console.log('process.env.AWS_SECRET_ACCESS_KEY', process.env.AWS_SECRET_ACCESS_KEY);
+        console.log('démarre la function uploadToS3');
         const fileContent = fs.readFileSync(file.filepath);
         console.log('fileContent généré');
         // Génération d'un nom de fichier unique
@@ -29,6 +33,7 @@ export default async function uploadToS3(file, prefix = '') {
         };
         console.log('uploadParams déifni');
         // Envoi du fichier à S3
+        const s3Client = getS3Client();
         await s3Client.send(new PutObjectCommand(uploadParams));
         // Retourne l'URL du fichier télécahrgé
         return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
@@ -50,9 +55,12 @@ export async function parseForm(req) {
             });
             console.log('Parsing du formulaire...');
             form.parse(req, (err, fields, files) => {
+                console.log('après form.parse');
                 if (err) {
+                    console.log('if (err) {');
                     return reject(err);
                 }
+                console.log('après if(err)');
                 console.log('Fichiers reçus:', Object.keys(files));
                 resolve({
                     fields,
@@ -61,6 +69,7 @@ export async function parseForm(req) {
             });
         }
         catch (error) {
+            console.log('Exception dans parseForm:', error);
             console.error('Exception dans parseForm:', error);
             reject(error);
         }

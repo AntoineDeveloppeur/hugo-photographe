@@ -14,6 +14,7 @@ export default async function createProject(req, res) {
         console.log('on va cherche le path', files.mainPhoto[0].filepath);
         // Upload l'image sur S3 
         const mainPhotoUrl = await uploadToS3(files.mainPhoto[0], 'projets');
+        // Gérer les projets avec plusieurs set
         // Crée un nouveau projet
         const newProject = new Project({
             title: projectData.title,
@@ -24,7 +25,9 @@ export default async function createProject(req, res) {
                 height: projectData.height || 800,
                 width: projectData.width || 1200
             },
-            textsAbovePhotos: projectData.textsAbovePhotos || []
+            textsAbovePhotos: projectData.textsAbovePhotos || [],
+            photosSets: projectData.photosSets,
+            textsBelowPhotos: projectData.textsBelowPhotos || [],
         });
         // Sauvegarde le projet dans la base de donnée
         await newProject.save()

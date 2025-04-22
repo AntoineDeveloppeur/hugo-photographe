@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '../../atoms/Button/Button'
 import Textarea from '../../atoms/Textarea/Textarea'
 import { useState, useRef } from 'react'
+import InputFile from '../../molecules/InputFile/InputFile'
 
 export default function FormAjouterProjet() {
     // Référence pour le champ de fichier
@@ -92,8 +93,9 @@ export default function FormAjouterProjet() {
             <Input register={register} type='number' name='set1photo1height' label='hauteur en pixel' error={errors.set1photo1height?.message} defaultValue={123} />
             <Input register={register} type='number' name='set1photo1width' label='largueur en pixel' error={errors.set1photo1width?.message} defaultValue={123}  />
             
+            <InputFile label='mainPhoto' id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange} fileName={fileName} />
             {/* Champ pour télécharger une photo */}
-            <div className={styles.inputWrapper}>
+            {/* <div className={styles.inputWrapper}>
                 <label htmlFor="mainPhoto" className={styles.inputWrapper__label}>Photo principale</label>
                 <div className={styles.fileInputContainer}>
                     <input
@@ -112,7 +114,7 @@ export default function FormAjouterProjet() {
                         )}
                     </div>
                 </div>
-            </div>
+            </div> */}
             
             <div className={styles.form__buttonWrapper}>
                 <Button text={isSubmitting ? 'Chargement...' : 'Ajouter le projet'} type='submit' disabled={isSubmitting}/>

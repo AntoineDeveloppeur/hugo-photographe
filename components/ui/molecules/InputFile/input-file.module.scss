@@ -1,0 +1,16 @@
+.inputWrapper {
+    &__label{}
+    &__fileInputWrapper {
+        display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    }  
+    &__Input {
+        margin-bottom: 0.5rem;
+    }
+    &__Info {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 0.25rem;
+    }
+}

@@ -115,8 +115,9 @@ export default function FormAjouterProjet() {
                     </div>
                 </div>
             </div> */}
-  </div>
-hargement...' : 'Ajouter le projet'} type='submit' disabled={isSubmitting}/>
+            
+            <div className={styles.form__buttonWrapper}>
+                <Button text={isSubmitting ? 'Chargement...' : 'Ajouter le projet'} type='submit' disabled={isSubmitting}/>
             </div>
         </form>
     )

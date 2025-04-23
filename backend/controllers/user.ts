@@ -4,6 +4,8 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 
+
+
 // Créer d'abord l'objet contrôleur
 const userCtrl = {
     signIn: (req: Request, res: Response) => {
@@ -12,6 +14,7 @@ const userCtrl = {
         .then((user) => {
             if (!user) {
                 res.status(401).json({error: "l'utilisateur n'existe pas"})
+                return
             }
             bcrypt
                 .compare(req.body.password, user.password)
@@ -21,11 +24,12 @@ const userCtrl = {
                             error: 'mot de pass incorect',
                         })
                     } else {
+                        const secretPhraseToken = process.env.SECRETPHRASEFORTOKEN
                         res.status(200).json({
                             userId: user._id,
                             token: jwt.sign(
                                 { userId: user._id },
-                                process.env.SECRETPHRASEFORTOKEN, // C'est la clé secrète qui permet de générer le token
+                                secretPhraseToken, // C'est la clé secrète qui permet de générer le token
                                 { expiresIn: '48h' }
                             ),
                         })

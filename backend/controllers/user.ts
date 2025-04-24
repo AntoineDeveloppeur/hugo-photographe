@@ -13,8 +13,7 @@ const userCtrl = {
         User.findOne({email : req.body.email})
         .then((user) => {
             if (!user) {
-                res.status(401).json({error: "l'utilisateur n'existe pas"})
-                return
+                return res.status(401).json({error: "l'utilisateur n'existe pas"})
             }
             bcrypt
                 .compare(req.body.password, user.password)
@@ -24,12 +23,14 @@ const userCtrl = {
                             error: 'mot de pass incorect',
                         })
                     } else {
-                        const secretPhraseToken = process.env.SECRETPHRASEFORTOKEN
+                        if(!process.env.SECRETPHRASEFORTOKEN) {
+                            return res.status(500).json( {error: "La phrase pour la génération du token pour jsonWebToken n'est pas définie"})
+                        }
                         res.status(200).json({
                             userId: user._id,
                             token: jwt.sign(
                                 { userId: user._id },
-                                secretPhraseToken, // C'est la clé secrète qui permet de générer le token
+                                process.env.SECRETPHRASEFORTOKEN, // C'est la clé secrète qui permet de générer le token
                                 { expiresIn: '48h' }
                             ),
                         })

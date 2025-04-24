@@ -6,6 +6,9 @@ import { Request } from 'express'
 // Configuration du client S3
 
 const getS3Client = () => {
+    if (!process.env.AWS_REGION || !process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+        throw new Error("aws region or credentials in .env are undefined")
+    }
     return new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
@@ -32,7 +35,7 @@ interface ParsedForm {
 }
 
 //Fonction pour télécharger un fichier sur S3
-export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string> {
+export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string| unknown> {
     // Lecture du contenu du fichier
     try {
 
@@ -59,7 +62,7 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
         // Retourne l'URL du fichier télécahrgé
         return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`
     } catch(error) {
-        console.log( error)
+        return error
     }
 }
 
@@ -76,16 +79,16 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                 maxFileSize: 200 * 1024 * 1024, // 200MB
             });
             
-            console.log('Parsing du formulaire...');
             form.parse(req, (err, fields, files) => {
-                console.log('après form.parse')
-
                 if (err) {
-                    console.log('if (err) {')
                     return reject(err);
                 }
-                console.log('après if(err)')
-                console.log('Fichiers reçus:', Object.keys(files));
+                if (!fields) {
+                    throw new Error('formulaire vide')
+                }
+                if (!files) {
+                    throw new Error('formulaire sans fichier')
+                }
                 
                 resolve({
                     fields,

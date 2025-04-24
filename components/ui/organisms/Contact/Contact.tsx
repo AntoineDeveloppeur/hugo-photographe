@@ -14,7 +14,6 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
 import useReCaptcha from '@/hooks/useReCaptcha'
 import { ShowPresentationContext } from '@/components/Providers'
-import useIsMobile from '@/hooks/useIsMobile'
 
 export default function Contact() {
 
@@ -47,8 +46,6 @@ export default function Contact() {
     const email = "n'utilise pas le Recaptcha"
     const phone = "faux numéro"
 
-    const { isMobile } = useIsMobile()
-
     return (
         <section ref={containerRef} id="Contact" className={styles.contact}>
                 {!showPresentation && (
@@ -65,7 +62,6 @@ export default function Contact() {
                         />
                     </motion.div>
                 )}
-
 
                 {showPresentation && (
                     <motion.div 

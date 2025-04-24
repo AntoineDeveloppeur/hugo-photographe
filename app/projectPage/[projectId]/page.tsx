@@ -18,15 +18,13 @@ export default async function ProjectPage({
     const { projectId } = await params
     const project : projectsProps | undefined = data.projects.find((project) => project.id === projectId)
 
-    // Générer le blurDataURL en attendant la résolution de la promesse
-    const blur = await getBlurDataURL(project?.mainPhoto?.src)
 
     if (project) {
         return (
             <section className={styles.projectPage}>
                 <article className={styles.projectPage__largeScreen}>
                     <div className={styles.projectPage__largeScreen__photoWrapper}>
-                        <PhotoProjectPage photo={project.mainPhoto} hoverEffect={false} priority={true} blurDataURL={blur} sizes='100vw' mainPhoto={true}/>
+                        <PhotoProjectPage photo={project.mainPhoto} hoverEffect={false} priority={true} sizes='100vw' mainPhoto={true}/>
                     </div>
                     <div className={styles.projectPage__largeScreen__titleWrapper}>
                         <TitleProjectPage text={project.title} />

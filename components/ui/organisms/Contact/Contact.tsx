@@ -35,6 +35,7 @@ export default function Contact() {
 
     )
 
+    
     const springY = useSpring(transformedY, {
         stiffness: 400,
         damping: 20,

@@ -18,31 +18,6 @@ const getS3Client = () => {
     })
 }
 
-<VirtualHost *:80>
-    # Permet de gérer les requêtes depuis le nom de domaine indiqué
-    ServerName photographe-hugo-randez.fr
-    ServerAlias www.photographe-hugo-randez.fr
-    ServerAdmin webmaster@localhost
-
-    ProxyPreserveHost On
-    ProxyPass / http://localhost:3001/
-    ProxyPassReverse / http://localhost:3001/
-
-    ErrorLog ${APACHE_LOG_DIR}/lisa.error.log
-    CustomLog ${APACHE_LOG_DIR}/lisa.access.log combined
-
-    # Configuration nécessaire pour le certificat ssl
-    <Directory "/var/www/hugo-photographe/.well-known/acme-challenge">
-        Options None
-        AllowOverride None
-        Require all granted
-    </Directory>
-
-RewriteEngine on
-RewriteCond %{SERVER_NAME} =photographe-hugo-randez.fr [OR]
-RewriteCond %{SERVER_NAME} =www.photographe-hugo-randez.fr
-RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
-</VirtualHost>
 
 // Interface pour les fichiers téléchargés
 interface FormidableFile {

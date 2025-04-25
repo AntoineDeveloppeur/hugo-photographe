@@ -66,7 +66,6 @@ export default function FormAjouterProjet() {
             
             formData.append('project', JSON.stringify(projectData));
             
-            console.log('Envoi du formulaire avec image...');
             
             const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`, {
                 method: 'POST',
@@ -77,7 +76,6 @@ export default function FormAjouterProjet() {
                 throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`);
             }
             
-            console.log('Projet ajouté avec succès');
         }
         catch (error) {
             console.error(error);

@@ -35,10 +35,8 @@ interface ParsedForm {
 }
 
 //Fonction pour télécharger un fichier sur S3
-export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string| unknown> {
-    // Lecture du contenu du fichier
+export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string | unknown> {
     try {
-
         const fileContent = fs.readFileSync(file.filepath)
         
         // Génération d'un nom de fichier unique
@@ -51,13 +49,10 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
             Body: fileContent,
             ContentType: file.mimetype
         }
-        console.log('uploadParams déifni')
-
 
         // Envoi du fichier à S3
         const s3Client = getS3Client()
         await s3Client.send(new PutObjectCommand(uploadParams))
-        console.log('après envoie s3Client')
 
         // Retourne l'URL du fichier télécahrgé
         return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`
@@ -68,26 +63,23 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
 
 // Fonction pour parser le formulaire
 export async function parseForm(req: Request): Promise<ParsedForm> {
-        
     return new Promise((resolve, reject) => {
         try {
-            console.log('Création du formulaire formidable');
-            // Nouvelle façon d'utiliser formidable (v3+)
             const form = new IncomingForm({
                 keepExtensions: true,
                 multiples: true,
                 maxFileSize: 200 * 1024 * 1024, // 200MB
-            });
+            })
             
             form.parse(req, (err, fields, files) => {
                 if (err) {
                     return reject(err);
                 }
                 if (!fields) {
-                    throw new Error('formulaire vide')
+                    return reject(new Error('formulaire vide'))
                 }
                 if (!files) {
-                    throw new Error('formulaire sans fichier')
+                    return reject(new Error('formulaire sans fichier'))
                 }
                 
                 resolve({

@@ -88,8 +88,6 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                 });
             });
         } catch (error) {
-            console.log('Exception dans parseForm:', error);
-            console.error('Exception dans parseForm:', error);
             reject(error);
         }
     });

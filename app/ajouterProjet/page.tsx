@@ -5,12 +5,12 @@ import FormAjouterProjet from '@/components/ui/organisms/FormAjouterProjet/FormA
 export default function AjouterProjet() {
     return (
         <section className={styles.ajout}>
-            <div className={styles.ajout__largeScreen}>
+            {/* <div className={styles.ajout__largeScreen}>
                 <div className={styles.ajout__largeScreen__titleWrapper}>
                     <TitleProjectPage text="Ajouter un projet" />
                 </div>
                     <FormAjouterProjet/>
-            </div>
+            </div> */}
         </section>
     )
 }

@@ -40,7 +40,6 @@ export default function useReCaptcha() {
                 }
 
                 const data = await response.json()
-                console.log('API Response:', data)
                 setInfo(data)
             } catch (error) {
                 console.error('ReCaptcha verification failed:', error)

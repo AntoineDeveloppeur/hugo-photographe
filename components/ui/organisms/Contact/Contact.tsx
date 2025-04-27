@@ -4,7 +4,7 @@ import styles from './contact.module.scss'
 import { PhotoVariableProps} from '@/types/index'
 import ButtonBig from '../../atoms/ButtonBig/ButtonBig'
 import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
-import portraitHugo from '@/public/portrait-Hugo.jpg'
+import portraitHugo from '@/public/portrait-Hugo.webp'
 import Link from 'next/link'
 import IconMail from '../../atoms/IconMail/IconMail'
 import IconMap from '../../atoms/IconMap/IconMap'
@@ -14,7 +14,6 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
 import useReCaptcha from '@/hooks/useReCaptcha'
 import { ShowPresentationContext } from '@/components/Providers'
-import useIsMobile from '@/hooks/useIsMobile'
 
 export default function Contact() {
 
@@ -36,6 +35,7 @@ export default function Contact() {
 
     )
 
+    
     const springY = useSpring(transformedY, {
         stiffness: 400,
         damping: 20,
@@ -43,11 +43,9 @@ export default function Contact() {
         mass: 0.5
     })
 
-    // const { email, phone} = useReCaptcha()
-    const email = "n'utilise pas le Recaptcha"
-    const phone = "faux numéro"
-
-    const { isMobile } = useIsMobile()
+    const { email, phone} = useReCaptcha()
+    // const email = "n'utilise pas le Recaptcha"
+    // const phone = "faux numéro"
 
     return (
         <section ref={containerRef} id="Contact" className={styles.contact}>
@@ -65,7 +63,6 @@ export default function Contact() {
                         />
                     </motion.div>
                 )}
-
 
                 {showPresentation && (
                     <motion.div 

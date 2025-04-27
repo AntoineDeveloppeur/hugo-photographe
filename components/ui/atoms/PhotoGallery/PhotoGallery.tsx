@@ -8,6 +8,7 @@ import { useState } from 'react'
 import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
+import ServerImage from '../ServerImage/ServerImage'
 
 export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -22,9 +23,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
     const handleMouseEnter = () => {
         setIsLoading(true)
         setIsHovered(true)
-
     }
-    console.log(photo.alt, "priority", priority)
 
     return (
         <>
@@ -40,18 +39,8 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
                 }}
                 style={!isMobile ? {'cursor': 'pointer'} : undefined}
             >
-                <div className={styles.imageWrapper}>
-                    <NextImage
-                        className={styles.imageWrapper__image}
-                        src={photo.src}
-                        alt={photo.alt}
-                        width={photo.width}
-                        height={photo.height}
-                        quality={75}
-                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw,33vw"
-                        priority={priority ? priority : false}
-                    />
-                </div>
+                {/* Utilisation du Server Component */}
+                <ServerImage photo={photo} priority={priority} />
             </motion.div>
 
             <ModalPhoto

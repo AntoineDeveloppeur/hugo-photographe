@@ -19,13 +19,10 @@ export default function Portfolio() {
         if (typeof window === 'undefined') {
             return 'galeryMobile'}
         if (window.matchMedia('(max-width: 767px)').matches) {
-            console.log('galeryMobile choisie (initial)')
             return 'galeryMobile'
         } else if (window.matchMedia('(max-width: 1023px)').matches) {
-            console.log('galeryTablet choisie (initial)')
             return 'galeryTablet'
         } else {
-            console.log('galeryDesktop choisie (initial)')
             return 'galeryDesktop'
         }
     }
@@ -37,15 +34,12 @@ export default function Portfolio() {
     const checkDevice = () => {
         if (window.matchMedia('(max-width: 767px)').matches) {
             setGalery('galeryMobile')
-            console.log('galeryMobile choisie')
             return
         } else if (window.matchMedia('(max-width: 1023px)').matches) {
             setGalery('galeryTablet')
-            console.log('galeryTablet choisie')
             return
         } else {
             setGalery('galeryDesktop')
-            console.log('galeryDesktop choisie')
             return
         }
     }

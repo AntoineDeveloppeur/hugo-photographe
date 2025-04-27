@@ -49,7 +49,6 @@ export default function FormConnexion() {
             }
             if(response.token) {
                 window.localStorage.setItem('token', response.token)
-                console.log('token récupéré')
                 //redirection
             } else {
                 throw new Error('Token manquant dans la réponse')

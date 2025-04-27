@@ -6,6 +6,9 @@ import { Request } from 'express'
 // Configuration du client S3
 
 const getS3Client = () => {
+    if (!process.env.AWS_REGION || !process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+        throw new Error("aws region or credentials in .env are undefined")
+    }
     return new S3Client({
     region: process.env.AWS_REGION,
     credentials: {
@@ -32,10 +35,8 @@ interface ParsedForm {
 }
 
 //Fonction pour télécharger un fichier sur S3
-export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string> {
-    // Lecture du contenu du fichier
+export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string | unknown> {
     try {
-
         const fileContent = fs.readFileSync(file.filepath)
         
         // Génération d'un nom de fichier unique
@@ -48,44 +49,38 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
             Body: fileContent,
             ContentType: file.mimetype
         }
-        console.log('uploadParams déifni')
-
 
         // Envoi du fichier à S3
         const s3Client = getS3Client()
         await s3Client.send(new PutObjectCommand(uploadParams))
-        console.log('après envoie s3Client')
 
         // Retourne l'URL du fichier télécahrgé
         return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`
     } catch(error) {
-        console.log( error)
+        return error
     }
 }
 
 // Fonction pour parser le formulaire
 export async function parseForm(req: Request): Promise<ParsedForm> {
-        
     return new Promise((resolve, reject) => {
         try {
-            console.log('Création du formulaire formidable');
-            // Nouvelle façon d'utiliser formidable (v3+)
             const form = new IncomingForm({
                 keepExtensions: true,
                 multiples: true,
                 maxFileSize: 200 * 1024 * 1024, // 200MB
-            });
+            })
             
-            console.log('Parsing du formulaire...');
             form.parse(req, (err, fields, files) => {
-                console.log('après form.parse')
-
                 if (err) {
-                    console.log('if (err) {')
                     return reject(err);
                 }
-                console.log('après if(err)')
-                console.log('Fichiers reçus:', Object.keys(files));
+                if (!fields) {
+                    return reject(new Error('formulaire vide'))
+                }
+                if (!files) {
+                    return reject(new Error('formulaire sans fichier'))
+                }
                 
                 resolve({
                     fields,
@@ -93,8 +88,6 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                 });
             });
         } catch (error) {
-            console.log('Exception dans parseForm:', error);
-            console.error('Exception dans parseForm:', error);
             reject(error);
         }
     });

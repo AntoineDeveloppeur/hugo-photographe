@@ -8,8 +8,9 @@ import { useState } from 'react'
 import ModalPhoto from '../ModalPhoto/ModalPhoto'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
+import ServerImage from '../ServerImage/ServerImage'
 
-const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto, blurDataURL }: PhotoProps) => {
+const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto }: PhotoProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
@@ -22,7 +23,6 @@ const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto, blur
     const handleMouseEnter = () => {
         setIsLoading(true)
         setIsHovered(true)
-
     }
 
     return (
@@ -39,24 +39,14 @@ const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto, blur
                 }}
                 style={!isMobile ? {'cursor': 'pointer'} : undefined}
             >
-                <div className={styles.imageWrapper}>
-                    <NextImage
-                        className={styles.imageWrapper__image}
-                        src={photo.src}
-                        alt={photo.alt}
-                        width={photo.width}
-                        height={photo.height}
-                        placeholder={blurDataURL ? 'blur' : undefined}
-                        blurDataURL= {blurDataURL}
-                        quality={75}
-                        priority={priority}
-                        sizes={sizes}
-                        //Permet de donner une dimensions prédéfinis pour éviter le layout shifting sur la photo principale affichée above the fold
-                        // Ici il y a deux configurations disctinctes pour les photos portrait et paysage
-                        // Les autres photos ont le temps de chargé est donc de prendre la place qu'ils leurs faut
-                        style={mainPhoto ? (photo.height > photo.width ? {'height': '65vh', 'width': 'auto'} : {'height': 'auto', 'width': '100vw'}) : undefined}
-                    />
-                </div>
+                <ServerImage 
+                    photo={photo}
+                    priority={priority}
+                    sizes={sizes}
+                    mainPhoto={mainPhoto}
+                    className={styles.imageWrapper}
+                    imageClassName={styles.imageWrapper__image}
+                />
             </motion.div>
 
             <ModalPhoto

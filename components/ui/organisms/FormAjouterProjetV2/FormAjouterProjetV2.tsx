@@ -11,7 +11,8 @@ import { useState, useRef } from 'react'
 import InputFile from '../../molecules/InputFile/InputFile'
 
 export default function FormAjouterProjet() {
-
+    
+    //Il faudra créer le schéma en itérer sur la variable d'état
     const projectSchema = z.object({
         title: z.string().min(1),
         summary: z.string().min(1),
@@ -50,6 +51,18 @@ export default function FormAjouterProjet() {
                 width: data.set1photo1width,
                 textsAbovePhotos: data.textAbovePhotos
             };
+
+            // Comment itérer sur data ?
+            // Plutôt partir une rechercher avec des filtres ?
+            //Non Ca va être impossible à lire
+            // Il faut créer un tableau dans data : data.table qui contiendra
+            // tous les sets
+
+            // Je peux créer la constante en fonction de la variable d'état
+            const projectPhotosSets = {
+                //itérer sur la variable d'état 
+                data: 1
+            }
             
             formData.append('project', JSON.stringify(projectData));
             
@@ -75,6 +88,9 @@ export default function FormAjouterProjet() {
     // État pour afficher le nom du fichier sélectionné
     const [fileName, setFileName] = useState<string>('');
 
+    // Etat pour connaître le nombre de set et de photos
+    const [setAndPhotoNumber, setSetAndPhotoNumber] = useState<Array<Number>>([1])
+
     // Gestionnaire pour le changement de fichier
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0] || null;
@@ -82,36 +98,12 @@ export default function FormAjouterProjet() {
         setFileName(file ? file.name : '');
     };
 
-    const { photosSet, setPhotosSet} = useState([ // initie avec un set
-        new Set()
-    ])
-
-    class Set {
-        id: '',
-        photos: [{
-            alt: ''
-            width: '',
-            height: '',
-            ref: useRef(null) // pour avoir la référence du fichier
-        }] // tableau avec x éléments, x étant le nombre de photos
-    }
-
-    class photo {
-        alt: ''
-        width: '',
-        height: '',
-        ref: useRef(null) // pour avoir la référence du fichier
-    }
-
-
-    const handleAddASet() => {
-        setPhotosSet = photosSet.push(new Set)
-            
+    const handleAddASet= () => {
+        // Changer la variable d'état setAndPhotoNumber
         }
     }
-    const handleAddPhoto() => {
-        setPhotosSet = photosSet.push(new Set)
-            
+    const handleAddPhoto= () => {
+               // Changer la variable d'état setAndPhotoNumber
         }
 
     return (
@@ -126,11 +118,13 @@ export default function FormAjouterProjet() {
             <InputFile label='mainPhoto' id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange} fileName={fileName} />
             
             <Button text="Ajouter un set" onClick={handleAddASet}/>
-            {photosSet.forEach((photosSet) => (
+
+            {/* {Créé les set de photos} */}
+            {setAndPhotoNumber.map((count, setIndex) => (
                 <div className="set">
-                    <p className="set__p">{photosSet.id}</p>
-                    {photosSet.forEach((photo, index) => {
-                        <FormPhoto label={`photo ${index}`} id={`set${photosSet.id}photo${index}`} fileInputRef={ref}/>
+                    <p className="set__p">set n°{count}</p>
+                    {Array.from({length: count}).map((photo, photoIndex) => {
+                        <FormPhoto label={`photo ${photoIndex}`} id={`set${setIndex}photo${photoIndex}`} fileInputRef={ref} register={register}/>
                     })}
                 <Button text="Ajouter une photo" onClick={handleAddAPhoto}/>
                 </div>

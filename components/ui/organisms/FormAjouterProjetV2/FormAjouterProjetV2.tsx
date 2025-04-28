@@ -88,12 +88,11 @@ export default function FormAjouterProjet() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     // État pour afficher le nom du fichier sélectionné
     const [fileName, setFileName] = useState<string>('');
-
-    // État pour stocker les références des inputs de fichier pour chaque photo
-    const [photoRefs, setPhotoRefs] = useState<React.RefObject<HTMLInputElement>[]>([]);
-
+    
     // Etat pour connaître le nombre de set et de photos
     const [setAndPhotoNumber, setSetAndPhotoNumber] = useState<Array<number>>([1])
+    // État pour stocker les références des inputs de fichier pour chaque photo
+    const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>([[createRef<HTMLInputElement>()]]);
 
     // Gestionnaire pour le changement de fichier
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +104,7 @@ export default function FormAjouterProjet() {
     const handleAddASet = () => {
         setSetAndPhotoNumber([...setAndPhotoNumber, 1]);
         // Ajouter une nouvelle référence pour la nouvelle photo
-        setPhotoRefs([...photoRefs, createRef<HTMLInputElement>()]);
+        setPhotoRefs([...photoRefs, [createRef<HTMLInputElement>()]]);
     }
 
     const handleAddPhoto = (setIndex: number) => {
@@ -115,6 +114,9 @@ export default function FormAjouterProjet() {
         setSetAndPhotoNumber(newSetAndPhotoNumber);
         
         // Ajouter une nouvelle référence pour la nouvelle photo
+        const newPhotoRefs = [...photoRefs]
+        newPhotoRefs[setIndex].push(createRef<HTMLInputElement>())
+        // Changer la façon dont sont ajouté les références
         setPhotoRefs([...photoRefs, createRef<HTMLInputElement>()]);
     }
 

@@ -11,19 +11,6 @@ import { useState, useRef } from 'react'
 import InputFile from '../../molecules/InputFile/InputFile'
 
 export default function FormAjouterProjet() {
-    // Référence pour le champ de fichier
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    // État pour stocker le fichier sélectionné
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    // État pour afficher le nom du fichier sélectionné
-    const [fileName, setFileName] = useState<string>('');
-
-    // Gestionnaire pour le changement de fichier
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0] || null;
-        setSelectedFile(file);
-        setFileName(file ? file.name : '');
-    };
 
     const projectSchema = z.object({
         title: z.string().min(1),
@@ -81,6 +68,51 @@ export default function FormAjouterProjet() {
             console.error(error);
         }
     }
+    // Référence pour le champ de fichier
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    // État pour stocker le fichier sélectionné
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    // État pour afficher le nom du fichier sélectionné
+    const [fileName, setFileName] = useState<string>('');
+
+    // Gestionnaire pour le changement de fichier
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0] || null;
+        setSelectedFile(file);
+        setFileName(file ? file.name : '');
+    };
+
+    const { photosSet, setPhotosSet} = useState([ // initie avec un set
+        new Set()
+    ])
+
+    class Set {
+        id: '',
+        photos: [{
+            alt: ''
+            width: '',
+            height: '',
+            ref: useRef(null) // pour avoir la référence du fichier
+        }] // tableau avec x éléments, x étant le nombre de photos
+    }
+
+    class photo {
+        alt: ''
+        width: '',
+        height: '',
+        ref: useRef(null) // pour avoir la référence du fichier
+    }
+
+
+    const handleAddASet() => {
+        setPhotosSet = photosSet.push(new Set)
+            
+        }
+    }
+    const handleAddPhoto() => {
+        setPhotosSet = photosSet.push(new Set)
+            
+        }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -93,6 +125,18 @@ export default function FormAjouterProjet() {
             
             <InputFile label='mainPhoto' id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange} fileName={fileName} />
             
+            <Button text="Ajouter un set" onClick={handleAddASet}/>
+            {photosSet.forEach((photosSet) => (
+                <div className="set">
+                    <p className="set__p">{photosSet.id}</p>
+                    {photosSet.forEach((photo, index) => {
+                        <FormPhoto label={`photo ${index}`} id={`set ${photosSet.id} photo ${index}`} fileInputRef={ref}/>
+                    })
+                <Button text="Ajouter une photo" onClick={handleAddAPhoto}/>
+                </div>
+            ))}
+
+
             <div className={styles.form__buttonWrapper}>
                 <Button text={isSubmitting ? 'Chargement...' : 'Ajouter le projet'} type='submit' disabled={isSubmitting}/>
             </div>

@@ -1,3 +1,8 @@
+## Antoine's Note
+
+Toutes les branches qui sont présentes à distance et plus en local ont été supprimés car je pense que je n'ai plus besoin d'elles. A supprimer à l'avenir si je n'en trouve pas l'utilité pendant un laps de temps assez long
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

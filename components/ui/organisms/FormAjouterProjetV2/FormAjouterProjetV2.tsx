@@ -130,8 +130,8 @@ export default function FormAjouterProjet() {
                 <div className="set">
                     <p className="set__p">{photosSet.id}</p>
                     {photosSet.forEach((photo, index) => {
-                        <FormPhoto label={`photo ${index}`} id={`set ${photosSet.id} photo ${index}`} fileInputRef={ref}/>
-                    })
+                        <FormPhoto label={`photo ${index}`} id={`set${photosSet.id}photo${index}`} fileInputRef={ref}/>
+                    })}
                 <Button text="Ajouter une photo" onClick={handleAddAPhoto}/>
                 </div>
             ))}

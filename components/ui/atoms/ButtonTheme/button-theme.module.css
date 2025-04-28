@@ -1,0 +1,16 @@
+.container {
+  width: 40px;
+  height: 25px;
+  background-color: var(--color-button-theme-background);
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  padding: 5px;
+}
+
+.handle {
+  width: 15px;
+  height: 15px;
+  background-color: var(--color-button-theme);
+  border-radius: 50%;
+}/*# sourceMappingURL=button-theme.module.css.map */

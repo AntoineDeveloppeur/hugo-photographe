@@ -1,1 +1,1 @@
-{"version":3,"sources":["title-card.module.scss","title-card.module.css"],"names":[],"mappings":"AAAA;EACI,iBAAA;EACA,eAAA;ACCJ","file":"title-card.module.css"}
+{"version":3,"sources":["title-card.module.scss","title-card.module.css"],"names":[],"mappings":"AAAA;EACI,mCAAA;EACA,eAAA;EACA,6BAAA;ACCJ;;ADEA;EACI;IACI,iBAAA;ECCN;AACF","file":"title-card.module.css"}

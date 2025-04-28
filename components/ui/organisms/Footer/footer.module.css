@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--dark12);
+  background-color: var(--background-main);
   width: 100%;
   padding-top: 1rem;
   padding-left: 12rem;
@@ -26,4 +26,11 @@
   display: inline;
   color: var(--color-text-second);
   font-size: 1rem;
+}
+
+@media (max-width: 738px) {
+  .footer {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
 }/*# sourceMappingURL=footer.module.css.map */

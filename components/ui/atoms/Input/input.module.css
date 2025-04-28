@@ -1,0 +1,16 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.inputWrapper__label {
+  font-family: var(--font-paragraph);
+  font-size: 1.8rem;
+}
+.inputWrapper__input {
+  font-family: var(--font-paragraph);
+  font-size: 1.5rem;
+}
+.inputWrapper__p {
+  font-family: var(--font-paragraph);
+}/*# sourceMappingURL=input.module.css.map */

@@ -7,8 +7,9 @@ import { promise, z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '../../atoms/Button/Button'
 import Textarea from '../../atoms/Textarea/Textarea'
-import { useState, useRef } from 'react'
+import { useState, useRef, createRef } from 'react'
 import InputFile from '../../molecules/InputFile/InputFile'
+import FormPhoto from '../../molecules/FormPhoto/FormPhoto'
 
 export default function FormAjouterProjet() {
     
@@ -88,8 +89,11 @@ export default function FormAjouterProjet() {
     // État pour afficher le nom du fichier sélectionné
     const [fileName, setFileName] = useState<string>('');
 
+    // État pour stocker les références des inputs de fichier pour chaque photo
+    const [photoRefs, setPhotoRefs] = useState<React.RefObject<HTMLInputElement>[]>([]);
+
     // Etat pour connaître le nombre de set et de photos
-    const [setAndPhotoNumber, setSetAndPhotoNumber] = useState<Array<Number>>([1])
+    const [setAndPhotoNumber, setSetAndPhotoNumber] = useState<Array<number>>([1])
 
     // Gestionnaire pour le changement de fichier
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,13 +102,21 @@ export default function FormAjouterProjet() {
         setFileName(file ? file.name : '');
     };
 
-    const handleAddASet= () => {
-        // Changer la variable d'état setAndPhotoNumber
-        }
+    const handleAddASet = () => {
+        setSetAndPhotoNumber([...setAndPhotoNumber, 1]);
+        // Ajouter une nouvelle référence pour la nouvelle photo
+        setPhotoRefs([...photoRefs, createRef<HTMLInputElement>()]);
     }
-    const handleAddPhoto= () => {
-               // Changer la variable d'état setAndPhotoNumber
-        }
+
+    const handleAddPhoto = (setIndex: number) => {
+        // Créer une copie pour éviter de modifier directement l'état
+        const newSetAndPhotoNumber = [...setAndPhotoNumber];
+        newSetAndPhotoNumber[setIndex] += 1;
+        setSetAndPhotoNumber(newSetAndPhotoNumber);
+        
+        // Ajouter une nouvelle référence pour la nouvelle photo
+        setPhotoRefs([...photoRefs, createRef<HTMLInputElement>()]);
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -117,16 +129,22 @@ export default function FormAjouterProjet() {
             
             <InputFile label='mainPhoto' id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange} fileName={fileName} />
             
-            <Button text="Ajouter un set" onClick={handleAddASet}/>
+            <Button text="Ajouter un set" onclick={handleAddASet}/>
 
-            {/* {Créé les set de photos} */}
+            {/* {Créé les sets de photos} */}
             {setAndPhotoNumber.map((count, setIndex) => (
-                <div className="set">
+                <div className="set" key={`set${setIndex}`}>
                     <p className="set__p">set n°{count}</p>
-                    {Array.from({length: count}).map((photo, photoIndex) => {
-                        <FormPhoto label={`photo ${photoIndex}`} id={`set${setIndex}photo${photoIndex}`} fileInputRef={ref} register={register}/>
-                    })}
-                <Button text="Ajouter une photo" onClick={handleAddAPhoto}/>
+                    {Array.from({length: count}).map((photo, photoIndex) => (
+                        <FormPhoto 
+                            label={`photo ${photoIndex}`} 
+                            id={`set${setIndex}photo${photoIndex}`} 
+                            key={`set${setIndex}photo${photoIndex}`} 
+                            fileInputRef={photoRefs[setIndex * count + photoIndex] || fileInputRef} 
+                            register={register}
+                        />
+                    ))}
+                <Button text="Ajouter une photo" onclick={() => handleAddPhoto(setIndex)}/>
                 </div>
             ))}
 

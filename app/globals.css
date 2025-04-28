@@ -1,35 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
-  --dark0: #000000;
-  --dark5: #181818;
-  --dark10: #303030;
-  --dark12: #383838;
-  --dark15: #474747;
-  --dark20: #5e5e5e;
-  --dark30: #919191;
-  --dark40: #c8c8c8;
-  --dark50: #e5e5e5;
-  --dark100: white;
-  --background-main: var(--dark10);
-  --background-second: var(--dark12);
-  --color-text-main: var(--dark100);
-  --color-text-second: var(--dark50);
-}
-
-html {
-  font-size: 12px;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 /*
 *
 ******CSS reset begins*****
@@ -67,9 +38,12 @@ dd {
 }
 
 /* Set core body defaults */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100vh;
-  scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
 }
 
@@ -83,7 +57,6 @@ a {
 }
 
 a:visited {
-  color: inherit;
   text-decoration: none;
 }
 
@@ -110,27 +83,138 @@ select {
 ******CSS reset ends*****
 *
 */
-
-/* Hide reCAPTCHA v3 badge */
-.grecaptcha-badge,
-#grecaptcha-badge,
-iframe[title="reCAPTCHA"],
-iframe[src*="recaptcha"],
-.g-recaptcha {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-    display: none !important;
-    clip: rect(0 0 0 0) !important;
-    clip-path: inset(50%) !important;
-    height: 1px !important;
-    width: 1px !important;
-    position: absolute !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
-    border: 0 !important;
-    margin: -1px !important;
-    padding: 0 !important;
+:root {
+  --dark0: #000000;
+  --dark5: #181818;
+  --dark7: #282828;
+  --dark10: #303030;
+  --dark12: #383838;
+  --dark15: #474747;
+  --dark20: #5e5e5e;
+  --dark30: #919191;
+  --dark40: #c8c8c8;
+  --dark50: #e5e5e5;
+  --dark90: LIGHTGRAY;
+  --dark100: white;
+  --light0: #CC4E5C;
+  --light10: #D96E75;
+  --light50:#eec4c9;
+  --light60: #f0cace;
+  --light70:#faedef;
+  --light80: #FFF9F9;
+  --light90: #FFFDFD;
 }
 
-/*# sourceMappingURL=globals.css.map */
+/* Colors begins */
+:root, [data-theme=dark] {
+  --color-logo: var(--dark100);
+  --background-main: var(--dark10);
+  --background-second: var(--dark12);
+  --color-text-main: var(--dark100);
+  --color-text-second: var(--dark50);
+  --color-text-third: var(--dark100);
+  --color-text-button: var(--dark100);
+  --color-menu-highlight: var(--dark5);
+  --background-button:var(--dark0);
+  --background-button-second: var(--dark10);
+  --background-button-pagination: var(--dark0);
+  --color-text-pagination: var(--dark100);
+  --color-border: var(--dark0);
+  --color-border-photo: var(--dark0);
+  --color-shadow-main: rgba(0, 0, 0, 0.1);
+  --color-shadow-second: rgba(0, 0, 0, 0.04);
+  --color-card-highlight-top-before: var(--dark15);
+  --color-card-highlight-bottom-before: var(--dark10);
+  --color-card-highlight-top-after: var(--dark20);
+  --color-card-highlight-bottom-after: var(--dark15);
+  --color-card-line: var(--dark5);
+  --color-button-theme: var(--dark20);
+  --color-button-theme-background: var(--dark0);
+  --color-medal-primary: var(--dark50);
+  --color-medal-secondary: var(--dark30);
+  --color-medal-background: var(--dark10);
+}
+
+[data-theme=light] {
+  --color-logo: var(--light0);
+  --background-main: #fffdfdd4;
+  --background-second:var(--light80);
+  --color-text-main: var(--dark10);
+  --color-text-second: var(--dark10);
+  --color-text-third: var(--light0);
+  --color-text-button: var(--dark100);
+  --color-menu-highlight: var(--light0);
+  --background-button: var(--light0);
+  --background-button-second: var(--light10);
+  --background-button-pagination: var(--light80);
+  --color-text-pagination: var(--dark10);
+  --color-border: var(--light0);
+  --color-border-photo: var(--dark40);
+  --color-shadow-main: var(--light60);
+  --color-shadow-second: var(--light70);
+  --color-card-highlight-top-before: var(--light80);
+  --color-card-highlight-bottom-before: var(--light80);
+  --color-card-highlight-top-after: var(--light60);
+  --color-card-highlight-bottom-after: var(--light70);
+  --color-card-line: var(--dark15);
+  --color-button-theme: var(--light90);
+  --color-button-theme-background: var(--light60);
+  --color-medal-primary: var(--light10);
+  --color-medal-secondary: var(--light60);
+  --color-medal-background: var(--light80);
+}
+
+/* Colors ends */
+/* Font begins */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --font-title: "Merriweather", serif;
+  --font-paragraph: "Baskervville", serif;
+  --font-button: "Lora", serif;
+  --font-title-card: "Lora", serif;
+  --font-menu-mobile: "Lora", serif;
+  --font-contact-link: "Lora", serif;
+  --font-pagination: "Lora", serif;
+}
+
+/* Font ends */
+/* Police responsive begins */
+html {
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 8px;
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(8px + 4 * (100vw - 320px) / 1120);
+  }
+}
+@media screen and (min-width: 1440px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+h1 {
+  font-size: 18px;
+}
+@media screen and (min-width: 320px) {
+  h1 {
+    font-size: calc(18px + 14 * (100vw - 320px) / 1120);
+  }
+}
+@media screen and (min-width: 1440px) {
+  h1 {
+    font-size: 32px;
+  }
+}
+
+/* Police responsive ends */
+/* Cache le badge reCaptcha */
+.grecaptcha-badge {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}/*# sourceMappingURL=globals.css.map */

@@ -1,4 +1,11 @@
 .TitleCard {
-  font-family: var(--font-p);
+  font-family: var(--font-title-card);
   font-size: 2rem;
+  color: var(--color-text-main);
+}
+
+@media (max-width: 738px) {
+  .TitleCard {
+    font-size: 2.2rem;
+  }
 }/*# sourceMappingURL=title-card.module.css.map */

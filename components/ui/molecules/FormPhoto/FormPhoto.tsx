@@ -2,17 +2,18 @@ import styles from './form-photos.module.scss'
 import Input from '../../atoms/Input/Input'
 import InputFile from '../InputFile/InputFile'
 import {RefObject, ChangeEvent } from 'react'
+import { UseFormRegister, FieldValues } from 'react-hook-form'
 
-type FormPhotoTypes =  {
+type FormPhotoTypes<T extends FieldValues = FieldValues> =  {
     label: string
     id: string
-    register: 
+    register: UseFormRegister<T>
     fileInputRef: RefObject<HTMLInputElement>
     handleFileChange : (event: ChangeEvent<HTMLInputElement>) => void
     fileName: string
 }
 
-export default function FormPhoto({label, id, register, fileInputRef, handleFileChange, fileName} : FormPhotoTypes) {
+export default function FormPhoto<T extends FieldValues = FieldValues>({label, id, register, fileInputRef, handleFileChange, fileName} : FormPhotoTypes<T>) {
     return(
         <div className={styles.formPhoto}>
             <p className={styles.formPhoto__p}>{label}</p>

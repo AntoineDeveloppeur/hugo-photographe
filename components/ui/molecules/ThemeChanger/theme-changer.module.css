@@ -1,0 +1,11 @@
+.themeChanger {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+.themeChanger__p {
+  font-family: var(--font-menu-mobile);
+  font-size: 1.5rem;
+  color: var(--color-text-second);
+}/*# sourceMappingURL=theme-changer.module.css.map */

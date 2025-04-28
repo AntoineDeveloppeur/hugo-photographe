@@ -1,5 +1,5 @@
 .title {
-  color: var(--dark40);
-  font-family: var(--font-merriweather);
+  color: var(--color-text-second);
+  font-family: var(--font-title);
   font-size: 2rem;
 }/*# sourceMappingURL=title.module.css.map */

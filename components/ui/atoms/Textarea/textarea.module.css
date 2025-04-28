@@ -1,0 +1,27 @@
+.textareaWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.textareaWrapper__label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.textareaWrapper__textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+}
+.textareaWrapper__textarea:focus {
+  outline: none;
+  border-color: #000;
+}
+.textareaWrapper__p {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}/*# sourceMappingURL=textarea.module.css.map */

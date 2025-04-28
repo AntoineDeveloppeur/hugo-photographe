@@ -1,0 +1,10 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.pageWrapper__main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}/*# sourceMappingURL=providers.module.css.map */

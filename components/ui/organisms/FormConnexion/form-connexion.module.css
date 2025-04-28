@@ -1,0 +1,12 @@
+.form {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.form__buttonWrapper {
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+}/*# sourceMappingURL=form-connexion.module.css.map */

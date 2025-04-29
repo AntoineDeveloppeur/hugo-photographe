@@ -160,20 +160,21 @@ export default function FormAjouterProjet() {
             <Input register={register} type='text' name='title' label='Titre du projet' error={errors.title?.message} defaultValue='test'/>
             <Textarea register={register} name='summary' label='Sommaire' error={errors.summary?.message} rows={6} defaultValue='test' />
             <Input register={register} type='text' name='textAbovePhotos' label='Texte à afficher en dessous de la photo principale' error={errors.textAbovePhotos?.message} defaultValue='test' />
+            <p className={styles.form__photoPrincipale}>Photo principale</p>
+            <InputFile label='mainPhoto' id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange} fileName={fileName} />
             <Input register={register} type='text' name='set1photo1alt' label='description succinte de la photo' error={errors.set1photo1alt?.message} defaultValue='test'/>
             <Input register={register} type='number' name='set1photo1height' label='hauteur en pixel' error={errors.set1photo1height?.message} defaultValue={123} />
             <Input register={register} type='number' name='set1photo1width' label='largueur en pixel' error={errors.set1photo1width?.message} defaultValue={123}  />
             
-            <InputFile label='mainPhoto' id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange} fileName={fileName} />
             
 
             {/* {Créé les sets de photos} */}
             {photoRefs.map((set, setIndex) => (
-                <div className="set" key={`set${setIndex}`}>
-                    <p className="set__p">set n°{setIndex+1}</p>
+                <div className={styles.form__set} key={`set${setIndex}`}>
+                    <p className={styles.form__set__p}>Set n°{setIndex+1}</p>
                     {set.map((ref, photoIndex) => (
                         <FormPhoto 
-                            label={`photo n°${photoIndex+1}`} 
+                            label={`Photo n°${photoIndex+1}`} 
                             id={`set${setIndex}photo${photoIndex}`} 
                             key={`set${setIndex}photo${photoIndex}`} 
                             fileInputRef={ref} 

@@ -4,6 +4,22 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    &__photoPrincipale {
+        font-size: 1.8rem;
+        font-family: var(--font-title);
+        text-align: center;
+    }
+    &__set {
+        background-color: var(--background-second);
+        padding: 3rem;
+        &__p {
+            text-align: center;
+            font-size: 2rem;
+            font-family: var(--font-title)
+
+
+        }
+    }
     &__buttonWrapper {
         padding-top: 0.5rem;
         display: flex;

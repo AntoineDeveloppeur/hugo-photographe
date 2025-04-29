@@ -10,6 +10,7 @@ import Textarea from '../../atoms/Textarea/Textarea'
 import { useState, useEffect, useRef, createRef } from 'react'
 import InputFile from '../../molecules/InputFile/InputFile'
 import FormPhoto from '../../molecules/FormPhoto/FormPhoto'
+import ButtonAdd from '../../atoms/ButtonAdd/ButtonAdd'
 
 export default function FormAjouterProjet() {
     
@@ -165,24 +166,28 @@ export default function FormAjouterProjet() {
             
             <InputFile label='mainPhoto' id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange} fileName={fileName} />
             
-            <Button text="Ajouter un set" onclick={handleAddASet}/>
 
             {/* {Créé les sets de photos} */}
             {photoRefs.map((set, setIndex) => (
                 <div className="set" key={`set${setIndex}`}>
-                    <p className="set__p">set n°{setIndex}</p>
+                    <p className="set__p">set n°{setIndex+1}</p>
                     {set.map((ref, photoIndex) => (
                         <FormPhoto 
-                            label={`photo ${photoIndex}`} 
+                            label={`photo n°${photoIndex+1}`} 
                             id={`set${setIndex}photo${photoIndex}`} 
                             key={`set${setIndex}photo${photoIndex}`} 
                             fileInputRef={ref} 
                             register={register}
-                        />
-                    ))}
-                <Button text="Ajouter une photo" onclick={() => handleAddPhoto(setIndex)}/>
+                            />
+                        ))}
+                    <div className={styles.form__buttonWrapper}>
+                        <ButtonAdd text="Ajouter une photo" onclick={() => handleAddPhoto(setIndex)}/>
+                    </div>
                 </div>
             ))}
+            <div className={styles.form__buttonWrapper}>
+                <ButtonAdd text="Ajouter un set" onclick={handleAddASet}/>
+            </div>
 
 
             <div className={styles.form__buttonWrapper}>

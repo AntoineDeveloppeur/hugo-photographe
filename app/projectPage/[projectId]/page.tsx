@@ -19,7 +19,27 @@ export default async function ProjectPage({
     const project : projectsProps | undefined = data.projects.find((project) => project.id === projectId)
 
 
-    if (project) {
+    if (!project) {
+        // Si le projet n'est pas trouvé, renvoyer une page d'erreur
+        return (
+            <section className={styles.projectPage}>
+                <div className={styles.projectPage__largeScreen}>
+                    <div
+                        className={styles.projectPage__largeScreen__404Wrapper}
+                    >
+                        <p
+                            className={
+                                styles.projectPage__largeScreen__404Wrapper__text
+                            }
+                        >
+                            Le projet n&apos;a pas été trouvé.
+                        </p>
+                        <Button text="Retourner aux projets" link="/" />
+                    </div>
+                </div>
+            </section>
+        )
+    } else {
         return (
             <section className={styles.projectPage}>
                 <article className={styles.projectPage__largeScreen}>
@@ -50,27 +70,6 @@ export default async function ProjectPage({
                     </div>
                     <LinkBottomOfProjectPage/>
                 </article>
-            </section>
-        )
-    }
-    if (!project) {
-        // Si le projet n'est pas trouvé, renvoyer une page d'erreur
-        return (
-            <section className={styles.projectPage}>
-                <div className={styles.projectPage__largeScreen}>
-                    <div
-                        className={styles.projectPage__largeScreen__404Wrapper}
-                    >
-                        <p
-                            className={
-                                styles.projectPage__largeScreen__404Wrapper__text
-                            }
-                        >
-                            Le projet n&apos;a pas été trouvé.
-                        </p>
-                        <Button text="Retourner aux projets" link="/" />
-                    </div>
-                </div>
             </section>
         )
     }

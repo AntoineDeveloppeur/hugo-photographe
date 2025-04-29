@@ -7,22 +7,58 @@ import { promise, z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '../../atoms/Button/Button'
 import Textarea from '../../atoms/Textarea/Textarea'
-import { useState, useRef, createRef } from 'react'
+import { useState, useEffect, useRef, createRef } from 'react'
 import InputFile from '../../molecules/InputFile/InputFile'
 import FormPhoto from '../../molecules/FormPhoto/FormPhoto'
 
 export default function FormAjouterProjet() {
     
     //Il faudra créer le schéma en itérer sur la variable d'état
-    const projectSchema = z.object({
+    const [projectSchema, setProjectSchema] = useState(z.object({
         title: z.string().min(1),
         summary: z.string().min(1),
         textAbovePhotos: z.string().min(0),
-        set1photo1alt: z.string().min(2),
-        set1photo1height: z.coerce.number().min(3),
-        set1photo1width: z.coerce.number().min(3)
+        mainPhotoAlt: z.string().min(2),
+        mainPhotoHeight: z.coerce.number().min(3),
+        mainPhotoWidth: z.coerce.number().min(3)
         // Note: Nous ne validons pas le fichier avec Zod car il sera géré séparément
-    })
+    }))
+    
+    // État pour stocker les références des inputs de fichier pour chaque photo
+    const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>([[createRef<HTMLInputElement>()]]);
+
+    useEffect(() => {
+        const basicSchema = z.object({
+            title: z.string().min(1),
+            summary: z.string().min(1),
+            textAbovePhotos: z.string().min(0),
+            mainPhotoAlt: z.string().min(2),
+            mainPhotoHeight: z.coerce.number().min(3),
+            mainPhotoWidth: z.coerce.number().min(3)
+            // Note: Nous ne validons pas les fichier avec Zod car ils seront gérés séparément
+        })
+
+        const dynamicFields : Record<string, z.ZodTypeAny> = {}
+
+        photoRefs.forEach((set,setIndex) => {
+            set.forEach((_, photoIndex) => {
+                dynamicFields[`set${setIndex}photo${photoIndex}alt`]= z.string().min(2)
+                dynamicFields[`set${setIndex}photo${photoIndex}width`]= z.coerce.number().min(3)
+                dynamicFields[`set${setIndex}photo${photoIndex}height`]= z.coerce.number().min(3)
+            })
+        })
+
+        const dynamicFieldsSchema = z.object(dynamicFields)
+
+        setProjectSchema(basicSchema.merge(dynamicFieldsSchema))
+
+
+
+        // setProjectSchema(z.object({
+        //     ...basicSchema,
+        //     ...dynamicFields
+        // }))
+    }, [photoRefs])
 
     type FormFields = z.infer<typeof projectSchema>
 
@@ -46,10 +82,9 @@ export default function FormAjouterProjet() {
             const projectData = {
                 title: data.title,
                 summary: data.summary,
-                src: 'http://dfdq.com', // Cette valeur sera remplacée par l'URL de l'image uploadée
-                alt: data.set1photo1alt,
-                height: data.set1photo1height,
-                width: data.set1photo1width,
+                alt: data.mainPhotoAlt,
+                height: data.mainPhotoHeight,
+                width: data.mainPhotoWidth,
                 textsAbovePhotos: data.textAbovePhotos
             };
 
@@ -60,10 +95,19 @@ export default function FormAjouterProjet() {
             // tous les sets
 
             // Je peux créer la constante en fonction de la variable d'état
-            const projectPhotosSets = {
-                //itérer sur la variable d'état 
-                data: 1
-            }
+            // const projectPhotosSets = {}
+            //     //itérer sur la variable d'état 
+            //     photoRefs.forEach((set, setIndex) => (
+            //         set.forEach((photo, photoIndex) => {
+            //             Object.assign(projectPhotosSets, 
+            //                 { data`.set${setIndex}photo${photoIndex}alt`},
+            //                 { data`.set${setIndex}photo${photoIndex}width`},
+            //                 { data`.set${setIndex}photo${photoIndex}height`},
+            //             )
+
+            //         })
+            //     ))
+            // }
             
             formData.append('project', JSON.stringify(projectData));
             
@@ -89,10 +133,6 @@ export default function FormAjouterProjet() {
     // État pour afficher le nom du fichier sélectionné
     const [fileName, setFileName] = useState<string>('');
     
-    // Etat pour connaître le nombre de set et de photos
-    const [setAndPhotoNumber, setSetAndPhotoNumber] = useState<Array<number>>([1])
-    // État pour stocker les références des inputs de fichier pour chaque photo
-    const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>([[createRef<HTMLInputElement>()]]);
 
     // Gestionnaire pour le changement de fichier
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,22 +142,16 @@ export default function FormAjouterProjet() {
     };
 
     const handleAddASet = () => {
-        setSetAndPhotoNumber([...setAndPhotoNumber, 1]);
-        // Ajouter une nouvelle référence pour la nouvelle photo
         setPhotoRefs([...photoRefs, [createRef<HTMLInputElement>()]]);
     }
 
     const handleAddPhoto = (setIndex: number) => {
+
         // Créer une copie pour éviter de modifier directement l'état
-        const newSetAndPhotoNumber = [...setAndPhotoNumber];
-        newSetAndPhotoNumber[setIndex] += 1;
-        setSetAndPhotoNumber(newSetAndPhotoNumber);
-        
-        // Ajouter une nouvelle référence pour la nouvelle photo
         const newPhotoRefs = [...photoRefs]
         newPhotoRefs[setIndex].push(createRef<HTMLInputElement>())
         // Changer la façon dont sont ajouté les références
-        setPhotoRefs([...photoRefs, createRef<HTMLInputElement>()]);
+        setPhotoRefs(newPhotoRefs);
     }
 
     return (
@@ -134,15 +168,15 @@ export default function FormAjouterProjet() {
             <Button text="Ajouter un set" onclick={handleAddASet}/>
 
             {/* {Créé les sets de photos} */}
-            {setAndPhotoNumber.map((count, setIndex) => (
+            {photoRefs.map((set, setIndex) => (
                 <div className="set" key={`set${setIndex}`}>
-                    <p className="set__p">set n°{count}</p>
-                    {Array.from({length: count}).map((photo, photoIndex) => (
+                    <p className="set__p">set n°{setIndex}</p>
+                    {set.map((ref, photoIndex) => (
                         <FormPhoto 
                             label={`photo ${photoIndex}`} 
                             id={`set${setIndex}photo${photoIndex}`} 
                             key={`set${setIndex}photo${photoIndex}`} 
-                            fileInputRef={photoRefs[setIndex * count + photoIndex] || fileInputRef} 
+                            fileInputRef={ref} 
                             register={register}
                         />
                     ))}

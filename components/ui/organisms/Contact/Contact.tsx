@@ -43,9 +43,9 @@ export default function Contact() {
         mass: 0.5
     })
 
-    const { email, phone} = useReCaptcha()
-    // const email = "n'utilise pas le Recaptcha"
-    // const phone = "faux numéro"
+    // const { email, phone} = useReCaptcha()
+    const email = "n'utilise pas le Recaptcha"
+    const phone = "faux numéro"
 
     return (
         <section ref={containerRef} id="Contact" className={styles.contact}>

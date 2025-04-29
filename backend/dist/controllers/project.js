@@ -20,6 +20,7 @@ export default async function createProject(req, res) {
         if (mainPhotoUrl instanceof Error) {
             res.status(500).json({ error: `Erreur lors de l'upload sur s3: ${mainPhotoUrl.message}` });
         }
+        // Gérer les projets avec plusieurs set
         // Crée un nouveau projet
         const newProject = new Project({
             title: projectData.title,

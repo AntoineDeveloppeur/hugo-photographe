@@ -3,7 +3,7 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+
     &__photoPrincipale {
         font-size: 1.8rem;
         font-family: var(--font-title);
@@ -20,9 +20,21 @@
 
         }
     }
-    &__buttonWrapper {
-        padding-top: 0.5rem;
+    &__buttonWrapper__addAPhoto {
+        margin-top: 1rem;
+        margin-left: auto;
+        margin-right: auto;
         display: flex;
         justify-content: center;
     }
+    &__buttonWrapper__addASet {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+    &__buttonWrapper__saveProject{
+        margin-top: 2.5rem;
+        display: flex;
+        justify-content: center;
+}
 }

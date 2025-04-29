@@ -89,15 +89,6 @@ export default function FormAjouterProjet() {
                 textsAbovePhotos: data.textAbovePhotos
             };
 
-            // Comment itérer sur data ?
-            // Plutôt partir une rechercher avec des filtres ?
-            //Non Ca va être impossible à lire
-            // Il faut créer un tableau dans data : data.table qui contiendra
-            // tous les sets
-
-            // Je peux créer la constante en fonction de la variable d'état
-            // const projectPhotosSets = {}
-            //     //itérer sur la variable d'état 
             //     photoRefs.forEach((set, setIndex) => (
             //         set.forEach((photo, photoIndex) => {
             //             Object.assign(projectPhotosSets, 
@@ -147,7 +138,9 @@ export default function FormAjouterProjet() {
     }
 
     const handleAddPhoto = (setIndex: number) => {
-
+        if(photoRefs[setIndex].length > 2) {
+            return
+        }
         // Créer une copie pour éviter de modifier directement l'état
         const newPhotoRefs = [...photoRefs]
         newPhotoRefs[setIndex].push(createRef<HTMLInputElement>())
@@ -161,7 +154,7 @@ export default function FormAjouterProjet() {
             <Textarea register={register} name='summary' label='Sommaire' error={errors.summary?.message} rows={6} defaultValue='test' />
             <Input register={register} type='text' name='textAbovePhotos' label='Texte à afficher en dessous de la photo principale' error={errors.textAbovePhotos?.message} defaultValue='test' />
             <p className={styles.form__photoPrincipale}>Photo principale</p>
-            <InputFile label='mainPhoto' id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange} fileName={fileName} />
+            <InputFile id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange}/>
             <Input register={register} type='text' name='set1photo1alt' label='description succinte de la photo' error={errors.set1photo1alt?.message} defaultValue='test'/>
             <Input register={register} type='number' name='set1photo1height' label='hauteur en pixel' error={errors.set1photo1height?.message} defaultValue={123} />
             <Input register={register} type='number' name='set1photo1width' label='largueur en pixel' error={errors.set1photo1width?.message} defaultValue={123}  />
@@ -181,18 +174,18 @@ export default function FormAjouterProjet() {
                             register={register}
                             />
                         ))}
-                    <div className={styles.form__buttonWrapper}>
+                    <div className={styles.form__buttonWrapper__addAPhoto}>
                         <ButtonAdd text="Ajouter une photo" onclick={() => handleAddPhoto(setIndex)}/>
                     </div>
                 </div>
             ))}
-            <div className={styles.form__buttonWrapper}>
+            <div className={styles.form__buttonWrapper__addASet}>
                 <ButtonAdd text="Ajouter un set" onclick={handleAddASet}/>
             </div>
 
 
-            <div className={styles.form__buttonWrapper}>
-                <Button text={isSubmitting ? 'Chargement...' : 'Ajouter le projet'} type='submit' disabled={isSubmitting}/>
+            <div className={styles.form__buttonWrapper__saveProject}>
+                <Button text={isSubmitting ? 'Chargement...' : 'Enregistrer le projet'} type='submit' disabled={isSubmitting}/>
             </div>
         </form>
     )

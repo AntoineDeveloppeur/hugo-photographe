@@ -33,7 +33,7 @@ export default function Button({ text, link, onclick, type, disabled }: ButtonPr
     return (
         <motion.button
             className={styles.button}
-            whileHover={{ backgroundColor: 'var(--background-button-second)' }}
+            whileHover={{ backgroundColor: 'var(--background-button)' }}
             whileTap={{ scale: 0.9 }}
             disabled= {disabled ? disabled : false}
             type={type ? type : undefined}

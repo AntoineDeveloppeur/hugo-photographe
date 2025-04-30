@@ -82,17 +82,27 @@ export default function FormAjouterProjet() {
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
+
+            // Vérifier la présences des fichiers
             if (!selectedFile) {
-                alert('Veuillez sélectionner une image principale');
-                return;
+                alert('Veuillez sélectionner une image principale')
+                return
             }
+            photoRefs.forEach((set, setIndex) => {
+                set.forEach((photo, photoIndex) => {
+                    if (!photo.current?.files?.[0]) {
+                        alert(`Veuillez sélectionner l'image pour le set n°${setIndex+1} photo n°${photoIndex+1}`)
+                        return
+                    }
+                })
+            })
 
             const formData = new FormData();
             
-            // Ajouter le fichier à FormData
+            // Ajouter la photo principale à FormData
             formData.append('mainPhoto', selectedFile);
             
-            // Créer l'objet projectData
+            // Créer l'objet à envoyé basique sans les sets
             const projectBaseData = {
                 title: data.title,
                 summary: data.summary,
@@ -102,12 +112,14 @@ export default function FormAjouterProjet() {
                 textsAbovePhotos: data.textAbovePhotos
             };
 
+            // Ajoute les propriétés des sets et photos supplémentaires
+            const projectSetData = {}
             photoRefs.forEach((set, setIndex) => {
-                set.forEach((_, photoIndex) => {
+                set.forEach((photo, photoIndex) => {
                     const dynamicKeyAlt = `set${setIndex}photo${photoIndex}alt`
                     const dynamicKeyWidth = `set${setIndex}photo${photoIndex}width`
                     const dynamicKeyHeight = `set${setIndex}photo${photoIndex}height`
-                    Object.assign(projectBaseData, {
+                    Object.assign(projectSetData, {
                         [dynamicKeyAlt]: data[dynamicKeyAlt],
                         [dynamicKeyWidth]: data[dynamicKeyWidth],
                         [dynamicKeyHeight]: data[dynamicKeyHeight],
@@ -117,10 +129,21 @@ export default function FormAjouterProjet() {
                     )
                 })
             })
-
-            console.log(projectBaseData)
-                    
             formData.append('project', JSON.stringify(projectBaseData));
+
+            // Fichiers des sets
+            console.log('photoRefs', photoRefs)
+            // console.log('photoRefs', photoRefs[0][0].files[0])
+            console.log('photoRefs', photoRefs[0][0].current.files[0])
+
+            // Ajout des fichiers 
+            photoRefs.forEach((set, setIndex) => {
+                set.forEach((photo, photoIndex) => {
+                    formData.append(`set${setIndex+1}Photo${photoIndex+1}`, photo.current?.files?.[0])
+                })
+            })
+            
+            console.log('formData',formData)
             
             
             const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`, {
@@ -149,7 +172,6 @@ export default function FormAjouterProjet() {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0] || null;
         setSelectedFile(file);
-        setFileName(file ? file.name : '');
     };
     const handleAddASet = () => {
         setPhotoRefs([...photoRefs, [createRef<HTMLInputElement>()]]);

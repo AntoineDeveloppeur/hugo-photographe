@@ -24,6 +24,20 @@ export default function FormAjouterProjet() {
         mainPhotoWidth: z.coerce.number().min(3)
         // Note: Nous ne validons pas le fichier avec Zod car il sera géré séparément
     }))
+    // Comment créer/modifier FormFields Correctement ?
+    // type FormFields = z.infer<typeof projectSchema>
+    type FormFields = {
+        title: string;
+        summary: string;
+        textAbovePhotos: string;
+        mainPhotoAlt: string;
+        mainPhotoHeight: number;
+        mainPhotoWidth: number;
+        // Ajouter un index signature pour les champs dynamiques
+        [key: `set${number}photo${number}alt`]: string;
+        [key: `set${number}photo${number}width`]: number;
+        [key: `set${number}photo${number}height`]: number;
+    };
     
     // État pour stocker les références des inputs de fichier pour chaque photo
     const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>([[createRef<HTMLInputElement>()]]);
@@ -54,14 +68,13 @@ export default function FormAjouterProjet() {
         setProjectSchema(basicSchema.merge(dynamicFieldsSchema))
 
 
-
         // setProjectSchema(z.object({
         //     ...basicSchema,
         //     ...dynamicFields
         // }))
     }, [photoRefs])
 
-    type FormFields = z.infer<typeof projectSchema>
+  
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormFields>({
         resolver: zodResolver(projectSchema)
@@ -80,7 +93,7 @@ export default function FormAjouterProjet() {
             formData.append('mainPhoto', selectedFile);
             
             // Créer l'objet projectData
-            const projectData = {
+            const projectBaseData = {
                 title: data.title,
                 summary: data.summary,
                 alt: data.mainPhotoAlt,
@@ -89,19 +102,25 @@ export default function FormAjouterProjet() {
                 textsAbovePhotos: data.textAbovePhotos
             };
 
-            //     photoRefs.forEach((set, setIndex) => (
-            //         set.forEach((photo, photoIndex) => {
-            //             Object.assign(projectPhotosSets, 
-            //                 { data`.set${setIndex}photo${photoIndex}alt`},
-            //                 { data`.set${setIndex}photo${photoIndex}width`},
-            //                 { data`.set${setIndex}photo${photoIndex}height`},
-            //             )
+            photoRefs.forEach((set, setIndex) => {
+                set.forEach((_, photoIndex) => {
+                    const dynamicKeyAlt = `set${setIndex}photo${photoIndex}alt`
+                    const dynamicKeyWidth = `set${setIndex}photo${photoIndex}width`
+                    const dynamicKeyHeight = `set${setIndex}photo${photoIndex}height`
+                    Object.assign(projectBaseData, {
+                        [dynamicKeyAlt]: data[dynamicKeyAlt],
+                        [dynamicKeyWidth]: data[dynamicKeyWidth],
+                        [dynamicKeyHeight]: data[dynamicKeyHeight],
+                    }
 
-            //         })
-            //     ))
-            // }
-            
-            formData.append('project', JSON.stringify(projectData));
+                    
+                    )
+                })
+            })
+
+            console.log(projectBaseData)
+                    
+            formData.append('project', JSON.stringify(projectBaseData));
             
             
             const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`, {
@@ -123,7 +142,7 @@ export default function FormAjouterProjet() {
     // État pour stocker le fichier sélectionné
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     // État pour afficher le nom du fichier sélectionné
-    const [fileName, setFileName] = useState<string>('');
+    // const [fileName, setFileName] = useState<string>('');
     
 
     // Gestionnaire pour le changement de fichier
@@ -132,11 +151,9 @@ export default function FormAjouterProjet() {
         setSelectedFile(file);
         setFileName(file ? file.name : '');
     };
-
     const handleAddASet = () => {
         setPhotoRefs([...photoRefs, [createRef<HTMLInputElement>()]]);
     }
-
     const handleAddPhoto = (setIndex: number) => {
         if(photoRefs[setIndex].length > 2) {
             return
@@ -155,9 +172,9 @@ export default function FormAjouterProjet() {
             <Input register={register} type='text' name='textAbovePhotos' label='Texte à afficher en dessous de la photo principale' error={errors.textAbovePhotos?.message} defaultValue='test' />
             <p className={styles.form__photoPrincipale}>Photo principale</p>
             <InputFile id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange}/>
-            <Input register={register} type='text' name='set1photo1alt' label='description succinte de la photo' error={errors.set1photo1alt?.message} defaultValue='test'/>
-            <Input register={register} type='number' name='set1photo1height' label='hauteur en pixel' error={errors.set1photo1height?.message} defaultValue={123} />
-            <Input register={register} type='number' name='set1photo1width' label='largueur en pixel' error={errors.set1photo1width?.message} defaultValue={123}  />
+            <Input register={register} type='text' name='mainPhotoAlt' label='description succinte de la photo' error={errors.mainPhotoAlt?.message} defaultValue='test'/>
+            <Input register={register} type='number' name='mainPhotoHeight' label='hauteur en pixel' error={errors.mainPhotoHeight?.message} defaultValue={123} />
+            <Input register={register} type='number' name='mainPhotoWidth' label='largueur en pixel' error={errors.mainPhotoWidth?.message} defaultValue={123}  />
             
             
 
@@ -165,15 +182,22 @@ export default function FormAjouterProjet() {
             {photoRefs.map((set, setIndex) => (
                 <div className={styles.form__set} key={`set${setIndex}`}>
                     <p className={styles.form__set__p}>Set n°{setIndex+1}</p>
-                    {set.map((ref, photoIndex) => (
-                        <FormPhoto 
+                    {set.map((ref, photoIndex) => {
+                        const dynamicAlt: string = `set${setIndex}photo${photoIndex}alt`
+                        const dynamicWidth: string = `set${setIndex}photo${photoIndex}width`
+                        const dynamicHeight: string = `set${setIndex}photo${photoIndex}height`
+
+                        return <FormPhoto 
                             label={`Photo n°${photoIndex+1}`} 
                             id={`set${setIndex}photo${photoIndex}`} 
                             key={`set${setIndex}photo${photoIndex}`} 
                             fileInputRef={ref} 
                             register={register}
+                            errorAlt={errors[dynamicAlt]?.message}
+                            errorWidth={errors[dynamicWidth]?.message}
+                            errorHeight={errors[dynamicHeight]?.message}
                             />
-                        ))}
+                    })}
                     <div className={styles.form__buttonWrapper__addAPhoto}>
                         <ButtonAdd text="Ajouter une photo" onclick={() => handleAddPhoto(setIndex)}/>
                     </div>

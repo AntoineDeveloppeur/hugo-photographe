@@ -24,6 +24,9 @@ export default function FormAjouterProjet() {
         mainPhotoWidth: z.coerce.number().min(3)
         // Note: Nous ne validons pas le fichier avec Zod car il sera géré séparément
     }))
+    // État pour stocker les photos
+    const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>([[createRef<HTMLInputElement>()]]);
+    
     // Comment créer/modifier FormFields Correctement ?
     // type FormFields = z.infer<typeof projectSchema>
     type FormFields = {
@@ -39,9 +42,7 @@ export default function FormAjouterProjet() {
         [key: `set${number}photo${number}height`]: number;
     };
     
-    // État pour stocker les références des inputs de fichier pour chaque photo
-    const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>([[createRef<HTMLInputElement>()]]);
-
+    // Modifie dynamiquement le validateur Zod
     useEffect(() => {
         const basicSchema = z.object({
             title: z.string().min(1),
@@ -74,15 +75,36 @@ export default function FormAjouterProjet() {
         // }))
     }, [photoRefs])
 
-  
-
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormFields>({
         resolver: zodResolver(projectSchema)
     })
 
+    // Référence pour récupérerla photo principale
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    // État pour stocker le fichier sélectionné
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+    // Gestionnaire pour le changement de fichier de la photo principale
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0] || null;
+        setSelectedFile(file);
+    };
+    const handleAddASet = () => {
+        setPhotoRefs([...photoRefs, [createRef<HTMLInputElement>()]]);
+    }
+    const handleAddPhoto = (setIndex: number) => {
+        if(photoRefs[setIndex].length > 2) {
+            return
+        }
+        // Créer une copie pour éviter de modifier directement l'état
+        const newPhotoRefs = [...photoRefs]
+        newPhotoRefs[setIndex].push(createRef<HTMLInputElement>())
+        // Changer la façon dont sont ajouté les références
+        setPhotoRefs(newPhotoRefs);
+    }
+    
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
-
             // Vérifier la présences des fichiers
             if (!selectedFile) {
                 alert('Veuillez sélectionner une image principale')
@@ -98,10 +120,7 @@ export default function FormAjouterProjet() {
             })
 
             const formData = new FormData();
-            
-            // Ajouter la photo principale à FormData
-            formData.append('mainPhoto', selectedFile);
-            
+
             // Créer l'objet à envoyé basique sans les sets
             const projectBaseData = {
                 title: data.title,
@@ -129,14 +148,11 @@ export default function FormAjouterProjet() {
                     )
                 })
             })
+            // Ajout des inputs de type string et number au formulaire
             formData.append('project', JSON.stringify(projectBaseData));
-
-            // Fichiers des sets
-            console.log('photoRefs', photoRefs)
-            // console.log('photoRefs', photoRefs[0][0].files[0])
-            console.log('photoRefs', photoRefs[0][0].current.files[0])
-
-            // Ajout des fichiers 
+            // Ajouter de la photo principale
+            formData.append('mainPhoto', selectedFile);
+            // Ajout des photos des sets
             photoRefs.forEach((set, setIndex) => {
                 set.forEach((photo, photoIndex) => {
                     formData.append(`set${setIndex+1}Photo${photoIndex+1}`, photo.current?.files?.[0])
@@ -158,37 +174,13 @@ export default function FormAjouterProjet() {
         }
         catch (error) {
             console.error(error);
+            alert(`Malheureusement une erreur s'est produite. Contacter l'administrateur du site en lui communiquant cette erreur : ${error?.message ? error.message : error}`)
         }
-    }
-    // Référence pour le champ de fichier
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    // État pour stocker le fichier sélectionné
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    // État pour afficher le nom du fichier sélectionné
-    // const [fileName, setFileName] = useState<string>('');
-    
-
-    // Gestionnaire pour le changement de fichier
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0] || null;
-        setSelectedFile(file);
-    };
-    const handleAddASet = () => {
-        setPhotoRefs([...photoRefs, [createRef<HTMLInputElement>()]]);
-    }
-    const handleAddPhoto = (setIndex: number) => {
-        if(photoRefs[setIndex].length > 2) {
-            return
-        }
-        // Créer une copie pour éviter de modifier directement l'état
-        const newPhotoRefs = [...photoRefs]
-        newPhotoRefs[setIndex].push(createRef<HTMLInputElement>())
-        // Changer la façon dont sont ajouté les références
-        setPhotoRefs(newPhotoRefs);
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+            {/* {Crée la partie statique du formulaire} */}
             <Input register={register} type='text' name='title' label='Titre du projet' error={errors.title?.message} defaultValue='test'/>
             <Textarea register={register} name='summary' label='Sommaire' error={errors.summary?.message} rows={6} defaultValue='test' />
             <Input register={register} type='text' name='textAbovePhotos' label='Texte à afficher en dessous de la photo principale' error={errors.textAbovePhotos?.message} defaultValue='test' />
@@ -200,7 +192,7 @@ export default function FormAjouterProjet() {
             
             
 
-            {/* {Créé les sets de photos} */}
+            {/* {Créé la partie dynamique : les sets de photos} */}
             {photoRefs.map((set, setIndex) => (
                 <div className={styles.form__set} key={`set${setIndex}`}>
                     <p className={styles.form__set__p}>Set n°{setIndex+1}</p>
@@ -228,8 +220,6 @@ export default function FormAjouterProjet() {
             <div className={styles.form__buttonWrapper__addASet}>
                 <ButtonAdd text="Ajouter un set" onclick={handleAddASet}/>
             </div>
-
-
             <div className={styles.form__buttonWrapper__saveProject}>
                 <Button text={isSubmitting ? 'Chargement...' : 'Enregistrer le projet'} type='submit' disabled={isSubmitting}/>
             </div>

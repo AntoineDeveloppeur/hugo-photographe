@@ -176,7 +176,7 @@ export default function FormAjouterProjet() {
                 ).reduce((acc, file) => ({...acc, ...file}), {})
             }
 
-            formData.append('projectFiles', projectFiles)
+            formData.append('projectFiles', JSON.stringify(projectFiles))
             
             console.log('formData',formData)
             

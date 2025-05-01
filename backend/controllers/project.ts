@@ -13,29 +13,33 @@ export interface AuthRequest extends Request {
 export default async function createProject(req: AuthRequest, res: Response) {
     try {
         // Parse le formulaire avec formidable
-
         const {fields, files } = await parseForm(req)
-        if (!fields.project) {
+
+        //Vérification du formulaire
+        if (!fields.projectTexts) {
             return res.status(400).json({ message: 'Les données du projet sont requises' })
         }
-
-        const projectData = typeof fields.project[0] === 'string' 
-            ? JSON.parse(fields.project[0])
-            : fields.project
-
-        // Double vérification avec le frontend à supprimer
+        // A modifier avec la nouvelle forme des données
         if (!files.mainPhoto) {
             return res.status(400).json({ message: 'Une image principale est requise'})
         }
-
+        
+        // Upload des images sur S3 
+        const mainPhotoUrl = await uploadToS3(files.mainPhoto[0], 'projets')
+        if(mainPhotoUrl instanceof Error) {
+            res.status(500).json({error : `Erreur lors de l'upload sur s3: ${mainPhotoUrl.message}`})
+        }
+        
         // Upload l'image sur S3 
         const mainPhotoUrl = await uploadToS3(files.mainPhoto[0], 'projets')
         if(mainPhotoUrl instanceof Error) {
             res.status(500).json({error : `Erreur lors de l'upload sur s3: ${mainPhotoUrl.message}`})
         }
-
-        // Gérer les projets avec plusieurs set
-
+        
+        const projectData = typeof fields.projectTexts[0] === 'string' 
+        ? JSON.parse(fields.projectTexts[0])
+        : fields.projectTexts
+        
         // Crée un nouveau projet
         const newProject = new Project({
             title: projectData.title,

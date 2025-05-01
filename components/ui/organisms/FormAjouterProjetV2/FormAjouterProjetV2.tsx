@@ -134,10 +134,10 @@ export default function FormAjouterProjet() {
             // Ajoute les propriétés des sets et photos supplémentaires
             const projectSetData = {}
             photoRefs.forEach((set, setIndex) => {
-                set.forEach((photo, photoIndex) => {
-                    const dynamicKeyAlt = `set${setIndex}photo${photoIndex}alt`
-                    const dynamicKeyWidth = `set${setIndex}photo${photoIndex}width`
-                    const dynamicKeyHeight = `set${setIndex}photo${photoIndex}height`
+                set.forEach((_, photoIndex) => {
+                    const dynamicKeyAlt = `set${setIndex+1}photo${photoIndex+1}alt`
+                    const dynamicKeyWidth = `set${setIndex+1}photo${photoIndex+1}width`
+                    const dynamicKeyHeight = `set${setIndex+1}photo${photoIndex+1}height`
                     Object.assign(projectSetData, {
                         [dynamicKeyAlt]: data[dynamicKeyAlt],
                         [dynamicKeyWidth]: data[dynamicKeyWidth],
@@ -147,17 +147,36 @@ export default function FormAjouterProjet() {
                     
                     )
                 })
-            })
+            })  
+            const projectAllData = {...projectBaseData, ...projectSetData}
             // Ajout des inputs de type string et number au formulaire
-            formData.append('project', JSON.stringify(projectBaseData));
-            // Ajouter de la photo principale
-            formData.append('mainPhoto', selectedFile);
-            // Ajout des photos des sets
-            photoRefs.forEach((set, setIndex) => {
-                set.forEach((photo, photoIndex) => {
-                    formData.append(`set${setIndex+1}Photo${photoIndex+1}`, photo.current?.files?.[0])
-                })
-            })
+            formData.append('projectTexts', JSON.stringify(projectAllData));
+
+
+            // // Ajouter de la photo principale
+            // const projectMainPhotoFile = {
+            //     'mainPhoto': selectedFile
+            // }
+            // // Ajout des photos des sets
+            // const projectSetsFiles = {}
+            // photoRefs.forEach((set, setIndex) => {
+            //     set.forEach((photo, photoIndex) => {
+            //         Object.assign(projectSetsFiles, {[`set${setIndex+1}Photo${photoIndex+1}`]: photo.current?.files?.[0]})
+            //     })
+            // })
+            // const projectAllFiles = {...projectMainPhotoFile, ...projectSetsFiles}
+            // formData.append('projectAllFiles',JSON.stringify(projectAllFiles));
+
+            const projectFiles = {
+                'mainPhoto': selectedFile,
+                ...photoRefs.flatMap((set, setIndex) =>
+                    set.map((photo, photoIndex) => ({
+                        [`set${setIndex+1}Photo${photoIndex+1}`]: photo.current?.files?.[0]
+                    }))
+                ).reduce((acc, file) => ({...acc, ...file}), {})
+            }
+
+            formData.append('projectFiles', projectFiles)
             
             console.log('formData',formData)
             

@@ -153,20 +153,6 @@ export default function FormAjouterProjet() {
             formData.append('projectTexts', JSON.stringify(projectAllData));
 
 
-            // // Ajouter de la photo principale
-            // const projectMainPhotoFile = {
-            //     'mainPhoto': selectedFile
-            // }
-            // // Ajout des photos des sets
-            // const projectSetsFiles = {}
-            // photoRefs.forEach((set, setIndex) => {
-            //     set.forEach((photo, photoIndex) => {
-            //         Object.assign(projectSetsFiles, {[`set${setIndex+1}Photo${photoIndex+1}`]: photo.current?.files?.[0]})
-            //     })
-            // })
-            // const projectAllFiles = {...projectMainPhotoFile, ...projectSetsFiles}
-            // formData.append('projectAllFiles',JSON.stringify(projectAllFiles));
-
             const projectFiles = {
                 'mainPhoto': selectedFile,
                 ...photoRefs.flatMap((set, setIndex) =>
@@ -187,6 +173,7 @@ export default function FormAjouterProjet() {
             });
             
             if(!responseJSON.ok) {
+                console.log(await responseJSON.json())
                 throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`);
             }
             

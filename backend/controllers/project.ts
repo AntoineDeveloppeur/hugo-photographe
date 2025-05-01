@@ -14,22 +14,18 @@ export default async function createProject(req: AuthRequest, res: Response) {
     try {
         // Parse le formulaire avec formidable
         const {fields, files } = await parseForm(req)
-
+        console.log ('fields',fields)
+        console.log('files',files)
         //Vérification du formulaire
         if (!fields.projectTexts) {
             return res.status(400).json({ message: 'Les données du projet sont requises' })
         }
         // A modifier avec la nouvelle forme des données
-        if (!files.mainPhoto) {
+        if (!files.projectFiles.mainPhoto) {
             return res.status(400).json({ message: 'Une image principale est requise'})
         }
         
-        // Upload des images sur S3 
-        const mainPhotoUrl = await uploadToS3(files.mainPhoto[0], 'projets')
-        if(mainPhotoUrl instanceof Error) {
-            res.status(500).json({error : `Erreur lors de l'upload sur s3: ${mainPhotoUrl.message}`})
-        }
-        
+    
         // Upload l'image sur S3 
         const mainPhotoUrl = await uploadToS3(files.mainPhoto[0], 'projets')
         if(mainPhotoUrl instanceof Error) {

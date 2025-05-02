@@ -121,36 +121,57 @@ export default function FormAjouterProjet() {
 
             const formData = new FormData();
 
-            // Créer l'objet à envoyé basique sans les sets
-            const projectBaseData = {
+            // // Créer l'objet à envoyé basique sans les sets
+            // const projectBaseData = {
+            //     title: data.title,
+            //     summary: data.summary,
+            //     alt: data.mainPhotoAlt,
+            //     height: data.mainPhotoHeight,
+            //     width: data.mainPhotoWidth,
+            //     textsAbovePhotos: data.textAbovePhotos
+            // };
+
+            // // Ajoute les propriétés des sets et photos supplémentaires
+            // const projectSetData = {}
+            // photoRefs.forEach((set, setIndex) => {
+            //     set.forEach((_, photoIndex) => {
+            //         const dynamicKeyAlt = `set${setIndex+1}photo${photoIndex+1}alt`
+            //         const dynamicKeyWidth = `set${setIndex+1}photo${photoIndex+1}width`
+            //         const dynamicKeyHeight = `set${setIndex+1}photo${photoIndex+1}height`
+            //         Object.assign(projectSetData, {
+            //             [dynamicKeyAlt]: data[dynamicKeyAlt],
+            //             [dynamicKeyWidth]: data[dynamicKeyWidth],
+            //             [dynamicKeyHeight]: data[dynamicKeyHeight],
+            //         }
+
+                    
+            //         )
+            //     })
+            // })  
+            // const projectAllData = {...projectBaseData, ...projectSetData}
+            console.log('data',data)
+
+            const projectData = {
                 title: data.title,
                 summary: data.summary,
                 alt: data.mainPhotoAlt,
                 height: data.mainPhotoHeight,
                 width: data.mainPhotoWidth,
-                textsAbovePhotos: data.textAbovePhotos
-            };
+                textsAbovePhotos: data.textAbovePhotos,
+                ...photoRefs.flatMap((set, setIndex) => (
+                    set.map((photo, photoIndex) => (
+                        {
+                            [ `set${setIndex+1}photo${photoIndex+1}alt`] :  data[`set${setIndex}photo${photoIndex}alt`],
+                            [ `set${setIndex+1}photo${photoIndex+1}width`] :  data[`set${setIndex}photo${photoIndex}width`],
+                            [ `set${setIndex+1}photo${photoIndex+1}height`] :  data[`set${setIndex}photo${photoIndex}height`]                          
+                        }
+                    ))
+                ))
+                .reduce((acc, object) => ({...acc, ...object }))
+            }
 
-            // Ajoute les propriétés des sets et photos supplémentaires
-            const projectSetData = {}
-            photoRefs.forEach((set, setIndex) => {
-                set.forEach((_, photoIndex) => {
-                    const dynamicKeyAlt = `set${setIndex+1}photo${photoIndex+1}alt`
-                    const dynamicKeyWidth = `set${setIndex+1}photo${photoIndex+1}width`
-                    const dynamicKeyHeight = `set${setIndex+1}photo${photoIndex+1}height`
-                    Object.assign(projectSetData, {
-                        [dynamicKeyAlt]: data[dynamicKeyAlt],
-                        [dynamicKeyWidth]: data[dynamicKeyWidth],
-                        [dynamicKeyHeight]: data[dynamicKeyHeight],
-                    }
-
-                    
-                    )
-                })
-            })  
-            const projectAllData = {...projectBaseData, ...projectSetData}
             // Ajout des inputs de type string et number au formulaire
-            formData.append('projectTexts', JSON.stringify(projectAllData));
+            formData.append('projectTexts', JSON.stringify(projectData));
 
 
             const projectFiles = {
@@ -161,6 +182,8 @@ export default function FormAjouterProjet() {
                     }))
                 ).reduce((acc, file) => ({...acc, ...file}), {})
             }
+            console.log('projectData',projectData)
+            console.log('projectFiles', projectFiles)
 
             formData.append('projectFiles', JSON.stringify(projectFiles))
             

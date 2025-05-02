@@ -27,16 +27,14 @@ export default function FormAjouterProjet() {
     // État pour stocker les photos
     const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>([[createRef<HTMLInputElement>()]]);
     
-    // Comment créer/modifier FormFields Correctement ?
-    // type FormFields = z.infer<typeof projectSchema>
-    type FormFields = {
+    interface FormFields {
         title: string;
         summary: string;
         textAbovePhotos: string;
         mainPhotoAlt: string;
         mainPhotoHeight: number;
         mainPhotoWidth: number;
-        // Ajouter un index signature pour les champs dynamiques
+        // Propriété dynamiques des sets de photos
         [key: `set${number}photo${number}alt`]: string;
         [key: `set${number}photo${number}width`]: number;
         [key: `set${number}photo${number}height`]: number;
@@ -121,36 +119,7 @@ export default function FormAjouterProjet() {
 
             const formData = new FormData();
 
-            // // Créer l'objet à envoyé basique sans les sets
-            // const projectBaseData = {
-            //     title: data.title,
-            //     summary: data.summary,
-            //     alt: data.mainPhotoAlt,
-            //     height: data.mainPhotoHeight,
-            //     width: data.mainPhotoWidth,
-            //     textsAbovePhotos: data.textAbovePhotos
-            // };
-
-            // // Ajoute les propriétés des sets et photos supplémentaires
-            // const projectSetData = {}
-            // photoRefs.forEach((set, setIndex) => {
-            //     set.forEach((_, photoIndex) => {
-            //         const dynamicKeyAlt = `set${setIndex+1}photo${photoIndex+1}alt`
-            //         const dynamicKeyWidth = `set${setIndex+1}photo${photoIndex+1}width`
-            //         const dynamicKeyHeight = `set${setIndex+1}photo${photoIndex+1}height`
-            //         Object.assign(projectSetData, {
-            //             [dynamicKeyAlt]: data[dynamicKeyAlt],
-            //             [dynamicKeyWidth]: data[dynamicKeyWidth],
-            //             [dynamicKeyHeight]: data[dynamicKeyHeight],
-            //         }
-
-                    
-            //         )
-            //     })
-            // })  
-            // const projectAllData = {...projectBaseData, ...projectSetData}
-            console.log('data',data)
-
+            // Prépare le paquet données textuelles du projets
             const projectData = {
                 title: data.title,
                 summary: data.summary,
@@ -170,10 +139,9 @@ export default function FormAjouterProjet() {
                 .reduce((acc, object) => ({...acc, ...object }))
             }
 
-            // Ajout des inputs de type string et number au formulaire
             formData.append('projectTexts', JSON.stringify(projectData));
 
-
+            // Ajoute les fichiers du projet à l'objet FormData pour envoie
             const projectFiles = {
                 'mainPhoto': selectedFile,
                 ...photoRefs.flatMap((set, setIndex) =>
@@ -182,14 +150,9 @@ export default function FormAjouterProjet() {
                     }))
                 ).reduce((acc, file) => ({...acc, ...file}), {})
             }
-            console.log('projectData',projectData)
-            console.log('projectFiles', projectFiles)
-
             formData.append('projectFiles', JSON.stringify(projectFiles))
             
-            console.log('formData',formData)
-            
-            
+            // Envoie du formulaire
             const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`, {
                 method: 'POST',
                 body: formData

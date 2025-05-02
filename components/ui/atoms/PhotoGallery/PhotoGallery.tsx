@@ -48,8 +48,9 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
                 onClose={handleModalClose}
             >
                 <div className={styles.modalImageContainer}>
-                    {isLoading && <Loader />}
-                    <NextImage
+                {isLoading && <Loader />}
+                {/* {isLoading && Loading()} */}
+                <NextImage
                         className={`${styles.modalImage} ${!isLoading ? styles.loaded : ''}`}
                         src={photo.src}
                         alt={photo.alt}

@@ -7,7 +7,8 @@ const Loader = () => {
     return (
         <div className={styles.loader}>
             <Paragraphes texts={['Chargement de la photo en haute qualité']}/>
-            <div className={styles.spinner}></div>
+            <div className={styles.spinner}>
+            </div>
         </div>
     )
 }

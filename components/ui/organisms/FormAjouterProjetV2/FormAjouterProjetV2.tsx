@@ -127,7 +127,7 @@ export default function FormAjouterProjet() {
                 height: data.mainPhotoHeight,
                 width: data.mainPhotoWidth,
                 textsAbovePhotos: data.textAbovePhotos,
-                ...photoRefs.flatMap((set, setIndex) => (
+                photosSets: photoRefs.map((set, setIndex) => (
                     set.map((photo, photoIndex) => (
                         {
                             [ `set${setIndex+1}photo${photoIndex+1}alt`] :  data[`set${setIndex}photo${photoIndex}alt`],
@@ -136,9 +136,9 @@ export default function FormAjouterProjet() {
                         }
                     ))
                 ))
-                .reduce((acc, object) => ({...acc, ...object }))
             }
 
+            console.log('projectData',projectData)
             formData.append('projectTexts', JSON.stringify(projectData));
 
             // Ajoute les fichiers du projet à l'objet FormData pour envoie

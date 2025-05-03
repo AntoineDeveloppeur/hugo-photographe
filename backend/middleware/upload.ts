@@ -47,7 +47,8 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
             Bucket: process.env.AWS_S3_BUCKET_NAME,
             Key: key,
             Body: fileContent,
-            ContentType: file.mimetype
+            ContentType: file.mimetype,
+            ACL: 'public-read'
         }
 
         // Envoi du fichier à S3
@@ -70,7 +71,6 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                 multiples: true,
                 maxFileSize: 200 * 1024 * 1024, // 200MB
             })
-            
             form.parse(req, (err, fields, files) => {
                 if (err) {
                     return reject(err);

@@ -11,6 +11,7 @@ import { useState, useEffect, useRef, createRef } from 'react'
 import InputFile from '../../molecules/InputFile/InputFile'
 import FormPhoto from '../../molecules/FormPhoto/FormPhoto'
 import ButtonAdd from '../../atoms/ButtonAdd/ButtonAdd'
+import PhotosSets from '../../molecules/PhotosSets/PhotosSets'
 
 export default function FormAjouterProjet() {
     
@@ -128,11 +129,14 @@ export default function FormAjouterProjet() {
                 width: data.mainPhotoWidth,
                 textsAbovePhotos: data.textAbovePhotos,
                 photosSets: photoRefs.map((set, setIndex) => (
-                    set.map((photo, photoIndex) => (
+                    set.map((_, photoIndex) => (
                         {
-                            [ `set${setIndex+1}photo${photoIndex+1}alt`] :  data[`set${setIndex}photo${photoIndex}alt`],
-                            [ `set${setIndex+1}photo${photoIndex+1}width`] :  data[`set${setIndex}photo${photoIndex}width`],
-                            [ `set${setIndex+1}photo${photoIndex+1}height`] :  data[`set${setIndex}photo${photoIndex}height`]                          
+                            // [ `set${setIndex+1}photo${photoIndex+1}alt`] :  data[`set${setIndex}photo${photoIndex}alt`],
+                            // [ `set${setIndex+1}photo${photoIndex+1}width`] :  data[`set${setIndex}photo${photoIndex}width`],
+                            // [ `set${setIndex+1}photo${photoIndex+1}height`] :  data[`set${setIndex}photo${photoIndex}height`]                          
+                            alt :  data[`set${setIndex}photo${photoIndex}alt`],
+                            width :  data[`set${setIndex}photo${photoIndex}width`],
+                            height :  data[`set${setIndex}photo${photoIndex}height`]                          
                         }
                     ))
                 ))
@@ -140,17 +144,13 @@ export default function FormAjouterProjet() {
 
             console.log('projectData',projectData)
             formData.append('projectTexts', JSON.stringify(projectData));
+            formData.append('mainPhoto', selectedFile)
+            photoRefs.forEach((set, setIndex) => {
+                set.forEach((photo, photoIndex) => {
+                    formData.append(`set${setIndex+1}photo${photoIndex+1}`, photo.current?.files?.[0] )
+                })
+            })
 
-            // Ajoute les fichiers du projet à l'objet FormData pour envoie
-            const projectFiles = {
-                'mainPhoto': selectedFile,
-                ...photoRefs.flatMap((set, setIndex) =>
-                    set.map((photo, photoIndex) => ({
-                        [`set${setIndex+1}Photo${photoIndex+1}`]: photo.current?.files?.[0]
-                    }))
-                ).reduce((acc, file) => ({...acc, ...file}), {})
-            }
-            formData.append('projectFiles', JSON.stringify(projectFiles))
             
             // Envoie du formulaire
             const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`, {

@@ -25,7 +25,8 @@ export default async function uploadToS3(file, prefix = '') {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
             Key: key,
             Body: fileContent,
-            ContentType: file.mimetype
+            ContentType: file.mimetype,
+            ACL: 'public-read'
         };
         // Envoi du fichier à S3
         const s3Client = getS3Client();

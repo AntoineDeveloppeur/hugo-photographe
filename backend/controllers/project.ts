@@ -14,23 +14,31 @@ export default async function createProject(req: AuthRequest, res: Response) {
     try {
         // Parse le formulaire avec formidable
         const {fields, files } = await parseForm(req)
-        console.log ('fields',fields)
-        console.log('files',files)
+
         //Vérification du formulaire
         if (!fields.projectTexts) {
             return res.status(400).json({ message: 'Les données du projet sont requises' })
         }
-        // A modifier avec la nouvelle forme des données
-        if (!files.projectFiles.mainPhoto) {
-            return res.status(400).json({ message: 'Une image principale est requise'})
-        }
-        
-    
-        // Upload l'image sur S3 
-        const mainPhotoUrl = await uploadToS3(files.mainPhoto[0], 'projets')
-        if(mainPhotoUrl instanceof Error) {
-            res.status(500).json({error : `Erreur lors de l'upload sur s3: ${mainPhotoUrl.message}`})
-        }
+
+        // Je vais convertir l'upload de S3 en tableau contenant les url nécessaire à la création du projet
+        const photosUrlArray = await Promise.all(
+            Object.entries(files)
+                .map(async ([key,fileArray]) => {
+                    const url = await uploadToS3(fileArray[0],'projets')
+                    if (url instanceof Error) {
+                        res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
+                        return null
+                    }
+                    return { [key] : url}
+            })
+        )
+
+        const photosUrl = photosUrlArray
+        .reduce((acc, file) => {
+            return {...acc, ...file}
+        })
+
+        console.log('photosUrl',photosUrl)
         
         const projectData = typeof fields.projectTexts[0] === 'string' 
         ? JSON.parse(fields.projectTexts[0])
@@ -41,15 +49,23 @@ export default async function createProject(req: AuthRequest, res: Response) {
             title: projectData.title,
             summary: projectData.summary,
             mainPhoto: {
-                src: mainPhotoUrl,
+                url: photosUrl.mainPhoto,
                 alt: projectData.alt,
                 height: projectData.height || 800,
                 width: projectData.width || 1200
             },
             textsAbovePhotos: projectData.textsAbovePhotos || [],
-            photosSets: projectData.photosSets,
+            photosSets: projectData.photosSets.map((set, setIndex) => {
+                console.log('set',set)
+                return set.map((photo, photoIndex) => {
+                    console.log('photo',photo)
+                    console.log('photosUrl[`set${setIndex}photo${photoIndex}`]',photosUrl[`set${setIndex+1}photo${photoIndex+1}`])
+                    return {...photo, ...{url: photosUrl[`set${setIndex+1}photo${photoIndex+1}`]}}
+                })
+            }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],
         })
+        console.log('newProject', newProject)
 
         // Sauvegarde le projet dans la base de donnée
         await newProject.save()

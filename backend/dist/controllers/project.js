@@ -1,7 +1,7 @@
 import Project from '../models/project.js';
 import uploadToS3, { parseForm } from '../middleware/upload.js';
 // Exporter les fonctions individuellement
-export default async function createProject(req, res) {
+export async function createProject(req, res) {
     try {
         // Parse le formulaire avec formidable
         const { fields, files } = await parseForm(req);
@@ -57,4 +57,6 @@ export default async function createProject(req, res) {
     catch (error) {
         res.status(500).json({ message: "Erreur lors de la création du projet pour envoi", error: error });
     }
+}
+export async function getProjects(req, res) {
 }

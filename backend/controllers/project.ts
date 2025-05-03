@@ -10,7 +10,7 @@ export interface AuthRequest extends Request {
 }
 
 // Exporter les fonctions individuellement
-export default async function createProject(req: AuthRequest, res: Response) {
+export async function createProject(req: AuthRequest, res: Response) {
     try {
         // Parse le formulaire avec formidable
         const {fields, files } = await parseForm(req)
@@ -75,4 +75,8 @@ export default async function createProject(req: AuthRequest, res: Response) {
     catch (error) {
         res.status(500).json({message: "Erreur lors de la création du projet pour envoi", error: error})
     }
+}
+
+export async function getProjects(req: AuthRequest, res: Response) {
+
 }

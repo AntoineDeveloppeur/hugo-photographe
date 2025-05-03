@@ -3,9 +3,6 @@ import User from '../models/user.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-
-
-
 // Créer d'abord l'objet contrôleur
 const userCtrl = {
     signIn: (req: Request, res: Response) => {

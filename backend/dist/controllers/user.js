@@ -19,12 +19,12 @@ const userCtrl = {
                     });
                 }
                 else {
-                    if (!process.env.SECRETPHRASEFORTOKEN) {
+                    if (!process.env.SECRET_PHRASE_TOKEN) {
                         return res.status(500).json({ error: "La phrase pour la génération du token pour jsonWebToken n'est pas définie" });
                     }
                     res.status(200).json({
                         userId: user._id,
-                        token: jwt.sign({ userId: user._id }, process.env.SECRETPHRASEFORTOKEN, // C'est la clé secrète qui permet de générer le token
+                        token: jwt.sign({ userId: user._id }, process.env.SECRET_PHRASE_TOKEN, // C'est la clé secrète qui permet de générer le token
                         { expiresIn: '48h' }),
                     });
                 }

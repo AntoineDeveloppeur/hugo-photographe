@@ -1,5 +1,5 @@
 import { IncomingForm } from 'formidable';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, ObjectCannedACL } from '@aws-sdk/client-s3';
 import fs from 'fs';
 // Configuration du client S3
 const getS3Client = () => {
@@ -26,7 +26,7 @@ export default async function uploadToS3(file, prefix = '') {
             Key: key,
             Body: fileContent,
             ContentType: file.mimetype,
-            ACL: 'public-read'
+            ACL: ObjectCannedACL.public_read
         };
         // Envoi du fichier à S3
         const s3Client = getS3Client();

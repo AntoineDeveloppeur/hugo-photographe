@@ -48,7 +48,7 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
             Key: key,
             Body: fileContent,
             ContentType: file.mimetype,
-            ACL: 'public-read'
+            ACL: ObjectCannedACL.public_read
         }
 
         // Envoi du fichier à S3

@@ -1,5 +1,11 @@
 import Project from '../models/project.js';
 import uploadToS3, { parseForm } from '../middleware/upload.js';
+// Interface pour la requête authentifié
+// export interface AuthRequest extends Request {
+//     auth?: {
+//         userId: string
+//     }
+// }
 // Exporter les fonctions individuellement
 export async function createProject(req, res) {
     try {
@@ -9,13 +15,12 @@ export async function createProject(req, res) {
         if (!fields.projectTexts) {
             return res.status(400).json({ message: 'Les données du projet sont requises' });
         }
-        // Je vais convertir l'upload de S3 en tableau contenant les url nécessaire à la création du projet
+        // Upload vers s3
         const photosUrlArray = await Promise.all(Object.entries(files)
             .map(async ([key, fileArray]) => {
             const url = await uploadToS3(fileArray[0], 'projets');
             if (url instanceof Error) {
-                res.status(500).json({ message: `erreur lors de l'upload des fichiers : ${url.message}` });
-                return null;
+                return res.status(500).json({ message: `erreur lors de l'upload des fichiers : ${url.message}` });
             }
             return { [key]: url };
         }));

@@ -122,6 +122,7 @@ export default function FormAjouterProjet() {
 
             // Prépare le paquet données textuelles du projets
             const projectData = {
+                token: window.localStorage.get('token'),
                 title: data.title,
                 summary: data.summary,
                 alt: data.mainPhotoAlt,
@@ -131,9 +132,6 @@ export default function FormAjouterProjet() {
                 photosSets: photoRefs.map((set, setIndex) => (
                     set.map((_, photoIndex) => (
                         {
-                            // [ `set${setIndex+1}photo${photoIndex+1}alt`] :  data[`set${setIndex}photo${photoIndex}alt`],
-                            // [ `set${setIndex+1}photo${photoIndex+1}width`] :  data[`set${setIndex}photo${photoIndex}width`],
-                            // [ `set${setIndex+1}photo${photoIndex+1}height`] :  data[`set${setIndex}photo${photoIndex}height`]                          
                             alt :  data[`set${setIndex}photo${photoIndex}alt`],
                             width :  data[`set${setIndex}photo${photoIndex}width`],
                             height :  data[`set${setIndex}photo${photoIndex}height`]                          

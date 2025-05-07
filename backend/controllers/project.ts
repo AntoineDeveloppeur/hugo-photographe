@@ -48,7 +48,7 @@ export async function createProject(req: Request, res: Response) {
             title: projectData.title,
             summary: projectData.summary,
             mainPhoto: {
-                url: photosUrl.mainPhoto,
+                url: photosUrl['mainPhoto'],
                 alt: projectData.alt,
                 height: projectData.height || 800,
                 width: projectData.width || 1200

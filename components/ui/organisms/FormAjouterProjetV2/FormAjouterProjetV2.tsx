@@ -12,9 +12,11 @@ import InputFile from '../../molecules/InputFile/InputFile'
 import FormPhoto from '../../molecules/FormPhoto/FormPhoto'
 import ButtonAdd from '../../atoms/ButtonAdd/ButtonAdd'
 import PhotosSets from '../../molecules/PhotosSets/PhotosSets'
+import { useRouter } from 'next/navigation'
 
 export default function FormAjouterProjet() {
     
+    const router = useRouter()
     //Il faudra créer le schéma en itérer sur la variable d'état
     const [projectSchema, setProjectSchema] = useState(z.object({
         title: z.string().min(1),
@@ -106,14 +108,13 @@ export default function FormAjouterProjet() {
         try {
             // Vérifier la présences des fichiers
             if (!selectedFile) {
-                alert('Veuillez sélectionner une image principale')
-                return
+                throw new Error(`Veuillez sélectionner l'image principale`)
+
             }
             photoRefs.forEach((set, setIndex) => {
                 set.forEach((photo, photoIndex) => {
                     if (!photo.current?.files?.[0]) {
-                        alert(`Veuillez sélectionner l'image pour le set n°${setIndex+1} photo n°${photoIndex+1}`)
-                        return
+                        throw new Error(`Veuillez sélectionner l'image pour le set n°${setIndex+1} photo n°${photoIndex+1}`)
                     }
                 })
             })
@@ -122,7 +123,6 @@ export default function FormAjouterProjet() {
 
             // Prépare le paquet données textuelles du projets
             const projectData = {
-                token: window.localStorage.get('token'),
                 title: data.title,
                 summary: data.summary,
                 alt: data.mainPhotoAlt,
@@ -148,14 +148,23 @@ export default function FormAjouterProjet() {
                     formData.append(`set${setIndex+1}photo${photoIndex+1}`, photo.current?.files?.[0] )
                 })
             })
-
             
             // Envoie du formulaire
             const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`, {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+                },
                 body: formData
             });
             
+            if(responseJSON.status === 403 || '403') {
+                
+                router.push('/connexion')
+                throw new Error('Veuillez vous connecter pour ajouter un projet')
+
+            }
+
             if(!responseJSON.ok) {
                 console.log(await responseJSON.json())
                 throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`);
@@ -164,7 +173,7 @@ export default function FormAjouterProjet() {
         }
         catch (error) {
             console.error(error);
-            alert(`Malheureusement une erreur s'est produite. Contacter l'administrateur du site en lui communiquant cette erreur : ${error?.message ? error.message : error}`)
+            alert(error?.message ? error.message : error)
         }
     }
 

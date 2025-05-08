@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import Project from '../models/project.js'
-import uploadToS3, { parseForm } from '../middleware/upload.js'
+import uploadToS3, { parseForm, ParsedForm, FormidableFile } from '../middleware/upload.js'
+import { Interface } from 'readline'
 
 // Interface pour la requête authentifié
 // export interface AuthRequest extends Request {
@@ -13,7 +14,7 @@ import uploadToS3, { parseForm } from '../middleware/upload.js'
 export async function createProject(req: Request, res: Response) {
     try {
         // Parse le formulaire avec formidable
-        const {fields, files } = await parseForm(req)
+        const {fields, files }: ParsedForm = await parseForm(req)
 
         //Vérification du formulaire
         if (!fields.projectTexts) {
@@ -21,10 +22,10 @@ export async function createProject(req: Request, res: Response) {
         }
 
         // Upload vers s3
-        const photosUrlArray = await Promise.all(
+        const photosUrlArray: Array<object> = await Promise.all(
             Object.entries(files)
                 .map(async ([key,fileArray]) => {
-                    const url = await uploadToS3(fileArray[0],'projets')
+                    const url: string | unknown = await uploadToS3(fileArray[0],'projets')
                     if (url instanceof Error) {
                         return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
                     }
@@ -32,14 +33,31 @@ export async function createProject(req: Request, res: Response) {
             })
         )
 
-        const photosUrl = photosUrlArray
+        // interface ProjectUrl {
+        //     mainPhoto: string,
+        //     [key : `set${number}photo${number}`]: string
+
+        // }
+
+        const photosUrl: object = photosUrlArray
         .reduce((acc, file) => {
             return {...acc, ...file}
         })
 
-        console.log('photosUrl',photosUrl)
-        
-        const projectData = typeof fields.projectTexts[0] === 'string' 
+        interface ProjectData {
+            title: string,
+            summary: string,
+            alt: string,
+            height: number,
+            width: number,
+            textsAbovePhotos: string,
+            photosSets: string[][],
+            textsBelowPhotos: string
+        }
+
+        console.log(' typeof fields.projectTexts[0] === string',  typeof fields.projectTexts[0] === 'string' )
+        //Corriger le type
+        const projectData: ProjectData = typeof fields.projectTexts[0] === 'string' 
         ? JSON.parse(fields.projectTexts[0])
         : fields.projectTexts
         
@@ -54,12 +72,12 @@ export async function createProject(req: Request, res: Response) {
                 width: projectData.width || 1200
             },
             textsAbovePhotos: projectData.textsAbovePhotos || [],
-            photosSets: projectData.photosSets.map((set, setIndex) => {
+            photosSets: projectData.photosSets.map((set: Array<string>, setIndex) => {
                 console.log('set',set)
-                return set.map((photo, photoIndex) => {
+                return set.map((photo: string, photoIndex) => {
                     console.log('photo',photo)
                     console.log('photosUrl[`set${setIndex}photo${photoIndex}`]',photosUrl[`set${setIndex+1}photo${photoIndex+1}`])
-                    return {...photo, ...{url: photosUrl[`set${setIndex+1}photo${photoIndex+1}`]}}
+                    return {photo, ...{url: photosUrl[`set${setIndex+1}photo${photoIndex+1}`]}}
                 })
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],

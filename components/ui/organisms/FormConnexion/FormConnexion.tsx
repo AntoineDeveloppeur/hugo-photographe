@@ -6,8 +6,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import Button from '@/components/ui/atoms/Button/Button'
 import Input from '@/components/ui/atoms/Input/Input'
+import { useRouter } from 'next/navigation'
 
 export default function FormConnexion() {
+
+    const router = useRouter()
 
     const userSchema = z
     .object({
@@ -49,13 +52,14 @@ export default function FormConnexion() {
             }
             if(response.token) {
                 window.localStorage.setItem('token', response.token)
-                //redirection
+                router.push('/ajouterProjet')
             } else {
                 throw new Error('Token manquant dans la réponse')
             }
 
         } catch (error) {
-            setError('root', { message : error instanceof Error ? error.message : 'Une erreur est survenue' })
+            alert(error.message? error.message : error)
+            // setError('root', { message : error instanceof Error ? error.message : 'Une erreur est survenue' })
             // Reste à configurer le backend pour qu'il me renvoi les erreurs
         }
     }

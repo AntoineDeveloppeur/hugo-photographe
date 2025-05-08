@@ -5,12 +5,12 @@ import FormConnexion from '@/components/ui/organisms/FormConnexion/FormConnexion
 export default function Connexion() {
     return (
         <section className={styles.connexion}>
-            {/* <div className={styles.connexion__largeScreen}>
+            <div className={styles.connexion__largeScreen}>
                 <div className={styles.connexion__largeScreen__titleWrapper}>
                     <TitleProjectPage text="Connexion" />
                 </div>
                     <FormConnexion/>
-            </div> */}
+            </div>
         </section>
     )
 }

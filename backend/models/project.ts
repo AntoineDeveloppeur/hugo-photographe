@@ -5,7 +5,7 @@ const projectSchema = new mongoose.Schema({
     title: {type: String, required: true, unique: true},
     summary: {type: String, required: true},
     mainPhoto: {
-        url: {type: String, required: true},
+        url: {type: Object, required: true},       
         alt: {type: String, required: true},
         width: {type: Number, required: true},
         height: {type: Number, required: true},

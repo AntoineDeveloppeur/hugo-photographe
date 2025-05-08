@@ -170,16 +170,16 @@ export default function FormAjouterProjet() {
                 throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`);
             }
             
+            // redirection vers le succès d'ajout de projet
         }
         catch (error) {
-            console.error(error);
             alert(error?.message ? error.message : error)
         }
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            {/* {Crée la partie statique du formulaire} */}
+            {/* {partie statique du formulaire} */}
             <Input register={register} type='text' name='title' label='Titre du projet' error={errors.title?.message} defaultValue='test'/>
             <Textarea register={register} name='summary' label='Sommaire' error={errors.summary?.message} rows={6} defaultValue='test' />
             <Input register={register} type='text' name='textAbovePhotos' label='Texte à afficher en dessous de la photo principale' error={errors.textAbovePhotos?.message} defaultValue='test' />
@@ -191,7 +191,7 @@ export default function FormAjouterProjet() {
             
             
 
-            {/* {Créé la partie dynamique : les sets de photos} */}
+            {/* {partie dynamique : les sets de photos} */}
             {photoRefs.map((set, setIndex) => (
                 <div className={styles.form__set} key={`set${setIndex}`}>
                     <p className={styles.form__set__p}>Set n°{setIndex+1}</p>

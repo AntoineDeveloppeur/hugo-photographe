@@ -20,14 +20,14 @@ const getS3Client = () => {
 
 
 // Interface pour les fichiers téléchargés
-interface FormidableFile {
+export interface FormidableFile {
     filepath: string
     originalFilename: string
     mimetype: string
     [key:string]: any;
 }
 
-interface ParsedForm {
+export interface ParsedForm {
     fields: Fields
     files: {
         [key: string]: FormidableFile

@@ -24,11 +24,16 @@ export async function createProject(req, res) {
             }
             return { [key]: url };
         }));
+        // interface ProjectUrl {
+        //     mainPhoto: string,
+        //     [key : `set${number}photo${number}`]: string
+        // }
         const photosUrl = photosUrlArray
             .reduce((acc, file) => {
             return { ...acc, ...file };
         });
-        console.log('photosUrl', photosUrl);
+        console.log(' typeof fields.projectTexts[0] === string', typeof fields.projectTexts[0] === 'string');
+        //Corriger le type
         const projectData = typeof fields.projectTexts[0] === 'string'
             ? JSON.parse(fields.projectTexts[0])
             : fields.projectTexts;
@@ -48,7 +53,7 @@ export async function createProject(req, res) {
                 return set.map((photo, photoIndex) => {
                     console.log('photo', photo);
                     console.log('photosUrl[`set${setIndex}photo${photoIndex}`]', photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`]);
-                    return { ...photo, ...{ url: photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`] } };
+                    return { photo, ...{ url: photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`] } };
                 });
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],

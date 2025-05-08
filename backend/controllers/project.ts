@@ -27,7 +27,8 @@ export async function createProject(req: Request, res: Response) {
                 .map(async ([key,fileArray]) => {
                     const url: string | unknown = await uploadToS3(fileArray[0],'projets')
                     if (url instanceof Error) {
-                        return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
+                        // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
+                        throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`)
                     }
                     return { [key] : url}
             })

@@ -20,7 +20,8 @@ export async function createProject(req, res) {
             .map(async ([key, fileArray]) => {
             const url = await uploadToS3(fileArray[0], 'projets');
             if (url instanceof Error) {
-                return res.status(500).json({ message: `erreur lors de l'upload des fichiers : ${url.message}` });
+                // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
+                throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`);
             }
             return { [key]: url };
         }));
@@ -65,7 +66,7 @@ export async function createProject(req, res) {
             .catch((error) => res.status(400).json({ message: "Erreur lors de l'enregistrement du projet", error: error.message }));
     }
     catch (error) {
-        res.status(500).json({ message: "Erreur lors de la création du projet pour envoi", error: error });
+        res.status(500).json({ message: "Erreur lors de la création du projet pour envoi", error: error.message });
     }
 }
 export async function getProjects(req, res) {

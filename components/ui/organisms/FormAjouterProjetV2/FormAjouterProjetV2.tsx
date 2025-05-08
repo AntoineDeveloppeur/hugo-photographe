@@ -157,16 +157,15 @@ export default function FormAjouterProjet() {
                 },
                 body: formData
             });
-            
-            if(responseJSON.status === 403 || '403') {
-                
-                router.push('/connexion')
-                throw new Error('Veuillez vous connecter pour ajouter un projet')
+            console.log(await responseJSON.json())
 
-            }
+            // if(responseJSON.status === 403 || '403') {
+            //     console.log(await responseJSON.json())
+            //     router.push('/connexion')
+            //     throw new Error('Veuillez vous connecter pour ajouter un projet')
+            // }
 
             if(!responseJSON.ok) {
-                console.log(await responseJSON.json())
                 throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`);
             }
             
@@ -174,6 +173,7 @@ export default function FormAjouterProjet() {
         }
         catch (error) {
             alert(error?.message ? error.message : error)
+            console.log('error du catch', error)
         }
     }
 

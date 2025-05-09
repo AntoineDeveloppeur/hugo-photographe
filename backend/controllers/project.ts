@@ -21,8 +21,17 @@ export async function createProject(req: Request, res: Response) {
             return res.status(400).json({ message: 'Les données du projet sont requises' })
         }
 
+        
+        interface PhotosUrl {
+            mainPhoto?: string
+            [key: string ]: string | unknown
+        }
+        type PhotosUrlArray = {
+            [key: string ]: string | unknown
+        }[]
+        
         // Upload vers s3
-        const photosUrlArray: Array<object> = await Promise.all(
+        const photosUrlArray: PhotosUrlArray  = await Promise.all(
             Object.entries(files)
                 .map(async ([key,fileArray]) => {
                     const url: string | unknown = await uploadToS3(fileArray[0],'projets')
@@ -33,14 +42,7 @@ export async function createProject(req: Request, res: Response) {
                     return { [key] : url}
             })
         )
-
-        // interface ProjectUrl {
-        //     mainPhoto: string,
-        //     [key : `set${number}photo${number}`]: string
-
-        // }
-
-        const photosUrl: object = photosUrlArray
+        const photosUrl: PhotosUrl = photosUrlArray
         .reduce((acc, file) => {
             return {...acc, ...file}
         })

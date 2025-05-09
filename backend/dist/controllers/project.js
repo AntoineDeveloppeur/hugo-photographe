@@ -19,17 +19,12 @@ export async function createProject(req, res) {
         const photosUrlArray = await Promise.all(Object.entries(files)
             .map(async ([key, fileArray]) => {
             const url = await uploadToS3(fileArray[0], 'projets');
-            console.log('url',url)
             if (url instanceof Error) {
                 // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
                 throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`);
             }
             return { [key]: url };
         }));
-        // interface ProjectUrl {
-        //     mainPhoto: string,
-        //     [key : `set${number}photo${number}`]: string
-        // }
         const photosUrl = photosUrlArray
             .reduce((acc, file) => {
             return { ...acc, ...file };
@@ -55,7 +50,7 @@ export async function createProject(req, res) {
                 return set.map((photo, photoIndex) => {
                     console.log('photo', photo);
                     console.log('photosUrl[`set${setIndex}photo${photoIndex}`]', photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`]);
-                    return { ...photo, ...{ url: photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`] } };
+                    return { photo, ...{ url: photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`] } };
                 });
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],
@@ -67,7 +62,7 @@ export async function createProject(req, res) {
             .catch((error) => res.status(400).json({ message: "Erreur lors de l'enregistrement du projet", error: error.message }));
     }
     catch (error) {
-        res.status(500).json({ message: "Erreur lors de la création du projet pour envoi", error: error.message });
+        res.status(500).json({ message: "Erreur lors de la création du projet pour envoi", error: error });
     }
 }
 export async function getProjects(req, res) {

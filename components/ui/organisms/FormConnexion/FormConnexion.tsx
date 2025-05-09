@@ -58,7 +58,10 @@ export default function FormConnexion() {
             }
 
         } catch (error) {
-            alert(error.message? error.message : error)
+            const errorMessage = error instanceof Error
+            ? error.message
+            : String(error)
+            alert(errorMessage)
             // setError('root', { message : error instanceof Error ? error.message : 'Une erreur est survenue' })
             // Reste à configurer le backend pour qu'il me renvoi les erreurs
         }

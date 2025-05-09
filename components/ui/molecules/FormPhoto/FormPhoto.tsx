@@ -4,19 +4,18 @@ import InputFile from '../InputFile/InputFile'
 import {RefObject, ChangeEvent } from 'react'
 import { UseFormRegister, FieldValues } from 'react-hook-form'
 
-type FormPhotoTypes<T extends FieldValues = FieldValues> =  {
+type FormPhotoTypes<T extends FieldValues> =  {
     label: string
     id: string
     register: UseFormRegister<T>
     fileInputRef: RefObject<HTMLInputElement>
     handleFileChange : (event: ChangeEvent<HTMLInputElement>) => void
-    fileName: string
     errorAlt: any
     errorWidth: any
     errorHeight: any
 }
 
-export default function FormPhoto<T extends FieldValues = FieldValues>({label, id, register, fileInputRef, handleFileChange, errorAlt, errorWidth, errorHeight} : FormPhotoTypes<T>) {
+export default function FormPhoto<T extends FieldValues>({label, id, register, fileInputRef, handleFileChange, errorAlt, errorWidth, errorHeight} : FormPhotoTypes<T>) {
     return(
         <div className={styles.formPhoto}>
             <p className={styles.formPhoto__p}>{label}</p>

@@ -67,6 +67,7 @@ export default function FormAjouterProjet() {
 
         const dynamicFieldsSchema = z.object(dynamicFields)
 
+        // @ts-expect-error merge fonctionne mais apporte des problème de typages qui ne sont pas véritable
         setProjectSchema(basicSchema.merge(dynamicFieldsSchema))
 
 
@@ -111,14 +112,6 @@ export default function FormAjouterProjet() {
                 throw new Error(`Veuillez sélectionner l'image principale`)
 
             }
-            photoRefs.forEach((set, setIndex) => {
-                set.forEach((photo, photoIndex) => {
-                    if (!photo.current?.files?.[0]) {
-                        throw new Error(`Veuillez sélectionner l'image pour le set n°${setIndex+1} photo n°${photoIndex+1}`)
-                    }
-                })
-            })
-
             const formData = new FormData();
 
             // Prépare le paquet données textuelles du projets
@@ -140,11 +133,15 @@ export default function FormAjouterProjet() {
                 ))
             }
 
-            console.log('projectData',projectData)
             formData.append('projectTexts', JSON.stringify(projectData));
             formData.append('mainPhoto', selectedFile)
+
+            //Ajoute les fichiers des sets de photos
             photoRefs.forEach((set, setIndex) => {
                 set.forEach((photo, photoIndex) => {
+                    if (!photo.current?.files?.[0]) {
+                        throw new Error(`Veuillez sélectionner l'image pour le set n°${setIndex+1} photo n°${photoIndex+1}`)
+                    }
                     formData.append(`set${setIndex+1}photo${photoIndex+1}`, photo.current?.files?.[0] )
                 })
             })
@@ -172,8 +169,10 @@ export default function FormAjouterProjet() {
             // redirection vers le succès d'ajout de projet
         }
         catch (error) {
-            alert(error?.message ? error.message : error)
-            console.log('error du catch', error)
+            const errorMessage = error instanceof Error 
+            ? error.message 
+            : String(error)
+            alert(errorMessage)
         }
     }
 
@@ -199,15 +198,19 @@ export default function FormAjouterProjet() {
                         const dynamicAlt: string = `set${setIndex}photo${photoIndex}alt`
                         const dynamicWidth: string = `set${setIndex}photo${photoIndex}width`
                         const dynamicHeight: string = `set${setIndex}photo${photoIndex}height`
-
+                        // @ts-ignore
                         return <FormPhoto 
                             label={`Photo n°${photoIndex+1}`} 
                             id={`set${setIndex}photo${photoIndex}`} 
                             key={`set${setIndex}photo${photoIndex}`} 
                             fileInputRef={ref} 
+                            // @ts-ignore
                             register={register}
+                            // @ts-ignore
                             errorAlt={errors[dynamicAlt]?.message}
+                            // @ts-ignore
                             errorWidth={errors[dynamicWidth]?.message}
+                            // @ts-ignore
                             errorHeight={errors[dynamicHeight]?.message}
                             />
                     })}

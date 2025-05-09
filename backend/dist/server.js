@@ -31,16 +31,6 @@ app.use(cors({
     credentials: true
 }));
 // Routes
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'API de Hugo Photographe fonctionne correctement' });
-});
-// Créer un utilisateur
-//test
-// app.post('/auth',(req, res) => {
-//   console.log('req.body.user',req.body.user)
-//   console.log('req.body.password',req.body.password)
-//   res.status(200).json({message: "creditentals received"})
-// })
 app.use('/api/auth', userRoutes);
 app.use('/api/project', projectRoutes);
 // Démarrer le serveur

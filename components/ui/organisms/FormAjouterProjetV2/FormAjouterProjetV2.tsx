@@ -198,19 +198,19 @@ export default function FormAjouterProjet() {
                         const dynamicAlt: string = `set${setIndex}photo${photoIndex}alt`
                         const dynamicWidth: string = `set${setIndex}photo${photoIndex}width`
                         const dynamicHeight: string = `set${setIndex}photo${photoIndex}height`
-                        // @ts-ignore
+                        // @ts-expected To check later
                         return <FormPhoto 
                             label={`Photo n°${photoIndex+1}`} 
                             id={`set${setIndex}photo${photoIndex}`} 
                             key={`set${setIndex}photo${photoIndex}`} 
                             fileInputRef={ref} 
-                            // @ts-ignore
+                            // @ts-expected To check later
                             register={register}
-                            // @ts-ignore
+                            // @ts-expected To check later
                             errorAlt={errors[dynamicAlt]?.message}
-                            // @ts-ignore
+                            // @ts-expected To check later
                             errorWidth={errors[dynamicWidth]?.message}
-                            // @ts-ignore
+                            // @ts-expected To check later
                             errorHeight={errors[dynamicHeight]?.message}
                             />
                     })}

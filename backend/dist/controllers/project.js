@@ -66,4 +66,11 @@ export async function createProject(req, res) {
     }
 }
 export async function getProjects(req, res) {
+    Project.find()
+        .then((projects) => {
+        return res.status(200).json({ projects });
+    })
+        .catch((error) => {
+        res.status(404).json({ error });
+    });
 }

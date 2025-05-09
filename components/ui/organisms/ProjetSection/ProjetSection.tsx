@@ -5,16 +5,20 @@ import Subtitle from '../../atoms/Subtitle/Subtitle'
 import Title from '../../atoms/Title/Title'
 import CardPortrait from '../../molecules/CardPortrait/CardPortrait'
 import Button from '../../atoms/Button/Button'
-import data from '@/data/data.json'
 import { useState, useEffect } from 'react'
 import Pagination from '../../molecules/Pagination/Pagination'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projectsProps } from '@/types'
 import CardLandscape from '../../molecules/CardLandscape/CardLandscape'
 import useIsMobile from '@/hooks/useIsMobile'
+import useGetProjects from '@/hooks/useGetProjects'
 
 
 export default function ProjetSection() {
+
+
+    const { data }  = useGetProjects()
+    console.log('data',data)
 
     const isMobile = useIsMobile()
     // définir une constant qui dépend du nombre de projets

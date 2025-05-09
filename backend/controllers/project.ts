@@ -98,5 +98,11 @@ export async function createProject(req: Request, res: Response) {
 }
 
 export async function getProjects(req: Request, res: Response) {
-
+    Project.find()
+    .then((projects) => {
+        return res.status(200).json({projects})
+    })
+    .catch((error) => {
+        res.status(404).json({error})
+    })
 }

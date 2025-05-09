@@ -19,6 +19,7 @@ export async function createProject(req, res) {
         const photosUrlArray = await Promise.all(Object.entries(files)
             .map(async ([key, fileArray]) => {
             const url = await uploadToS3(fileArray[0], 'projets');
+            console.log('url',url)
             if (url instanceof Error) {
                 // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
                 throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`);
@@ -54,7 +55,7 @@ export async function createProject(req, res) {
                 return set.map((photo, photoIndex) => {
                     console.log('photo', photo);
                     console.log('photosUrl[`set${setIndex}photo${photoIndex}`]', photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`]);
-                    return { photo, ...{ url: photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`] } };
+                    return { ...photo, ...{ url: photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`] } };
                 });
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],

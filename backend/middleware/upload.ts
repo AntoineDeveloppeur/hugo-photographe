@@ -40,6 +40,7 @@ export interface ParsedForm {
 //Fonction pour télécharger un fichier sur S3
 export default async function uploadToS3(file: FormidableFile, prefix: string = ''): Promise<string | unknown> {
     try {
+        console.log('file.filepath',file.filepath)
         const fileContent = fs.readFileSync(file.filepath)
         
         // Génération d'un nom de fichier unique
@@ -124,6 +125,7 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                                 .toFile(webpFilePath);
                             
                             // Créer un nouvel objet file (immutable)
+                            console.log('webpFilePath',webpFilePath)
                             processedFiles[key] = {
                                 ...file,
                                 filepath: webpFilePath,
@@ -136,6 +138,7 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                     );
                     
                     // Résoudre avec les fichiers traités
+                    console.log('processedFiles',processedFiles)
                     resolve({
                         fields,
                         files: processedFiles

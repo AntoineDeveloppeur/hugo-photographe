@@ -20,6 +20,7 @@ const getS3Client = () => {
 //Fonction pour télécharger un fichier sur S3
 export default async function uploadToS3(file, prefix = '') {
     try {
+        console.log('file.filepath', file.filepath);
         const fileContent = fs.readFileSync(file.filepath);
         // Génération d'un nom de fichier unique
         const key = `${prefix ? prefix + '/' : ''}${Date.now()}-${file.originalFilename}`;
@@ -89,6 +90,7 @@ export async function parseForm(req) {
                         })
                             .toFile(webpFilePath);
                         // Créer un nouvel objet file (immutable)
+                        console.log('webpFilePath', webpFilePath);
                         processedFiles[key] = {
                             ...file,
                             filepath: webpFilePath,
@@ -99,6 +101,7 @@ export async function parseForm(req) {
                         };
                     }));
                     // Résoudre avec les fichiers traités
+                    console.log('processedFiles', processedFiles);
                     resolve({
                         fields,
                         files: processedFiles

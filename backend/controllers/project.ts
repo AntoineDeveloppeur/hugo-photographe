@@ -34,7 +34,8 @@ export async function createProject(req: Request, res: Response) {
         const photosUrlArray: PhotosUrlArray  = await Promise.all(
             Object.entries(files)
                 .map(async ([key,fileArray]) => {
-                    const url: string | unknown = await uploadToS3(fileArray[0],'projets')
+                    console.log('fileArray',fileArray)
+                    const url: string | unknown = await uploadToS3(fileArray,'projets')
                     if (url instanceof Error) {
                         // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
                         throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`)
@@ -46,6 +47,7 @@ export async function createProject(req: Request, res: Response) {
         .reduce((acc, file) => {
             return {...acc, ...file}
         })
+        console.log('PhotosUrl', photosUrl)
 
         interface ProjectData {
             title: string,
@@ -54,7 +56,7 @@ export async function createProject(req: Request, res: Response) {
             height: number,
             width: number,
             textsAbovePhotos: string,
-            photosSets: string[][],
+            photosSets: object[][],
             textsBelowPhotos: string
         }
 
@@ -93,7 +95,10 @@ export async function createProject(req: Request, res: Response) {
         .catch((error) => res.status(400).json({message: "Erreur lors de l'enregistrement du projet", error: error.message}))
     } 
     catch (error) {
-        res.status(500).json({message: "Erreur lors de la création du projet pour envoi", error: error})
+        const errorMessage = error instanceof Error
+        ? error.message
+        : String(error)
+        res.status(500).json({message: "Erreur lors de la création du projet pour envoi", error: errorMessage})
     }
 }
 

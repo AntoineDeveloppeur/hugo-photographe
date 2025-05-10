@@ -18,7 +18,8 @@ export async function createProject(req, res) {
         // Upload vers s3
         const photosUrlArray = await Promise.all(Object.entries(files)
             .map(async ([key, fileArray]) => {
-            const url = await uploadToS3(fileArray[0], 'projets');
+            console.log('fileArray', fileArray);
+            const url = await uploadToS3(fileArray, 'projets');
             if (url instanceof Error) {
                 // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
                 throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`);
@@ -29,6 +30,7 @@ export async function createProject(req, res) {
             .reduce((acc, file) => {
             return { ...acc, ...file };
         });
+        console.log('PhotosUrl', photosUrl);
         console.log(' typeof fields.projectTexts[0] === string', typeof fields.projectTexts[0] === 'string');
         //Corriger le type
         const projectData = typeof fields.projectTexts[0] === 'string'
@@ -62,7 +64,10 @@ export async function createProject(req, res) {
             .catch((error) => res.status(400).json({ message: "Erreur lors de l'enregistrement du projet", error: error.message }));
     }
     catch (error) {
-        res.status(500).json({ message: "Erreur lors de la création du projet pour envoi", error: error });
+        const errorMessage = error instanceof Error
+            ? error.message
+            : String(error);
+        res.status(500).json({ message: "Erreur lors de la création du projet pour envoi", error: errorMessage });
     }
 }
 export async function getProjects(req, res) {

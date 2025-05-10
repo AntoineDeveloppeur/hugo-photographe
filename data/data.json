@@ -188,7 +188,7 @@
     ],
     "projects": [
         {
-            "id": "qnrl",
+            "_id": "qnrl",
             "title": "Taïwan",
             "summary": "Quatre fois. Quatre c'est le nombre de fois où j'ai eu la chance de pouvoir me rendre à Taïwan, petite île au statut plutôt controversé, en plein cœur d'Asie de l'Est. Ces nombreuses allées et venues à Formose (ancien nom portugais de l'île) témoignent de mon attachement à ce charmant pays.",
             "mainPhoto": { "src": "/taiwanMain.webp", "alt": "lieux religieux", "width": 2341, "height": 3514 },

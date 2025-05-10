@@ -8,13 +8,35 @@ import PhotoProjectPage from '@/components/ui/atoms/PhotoProjectPage/PhotoProjec
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import { projectsProps } from '@/types'
 import getBlurDataURL from '@/utils/plaiceholder'
+import ResponseCache from 'next/dist/server/response-cache'
+
+
+export async function generateStaticParams() {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjecs`)
+    const data = response.json()
+    // il faudrait que je dise que les params possibles sont data.projects.id
+    const projectId = data.projects.map((project) => ({
+        projectId: project._id
+    }))
+}
+
+export async function getData() {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjecs`, {
+        next : { revalidate: 3600}
+    })
+    return response.json()
+}
+
 
 export default async function ProjectPage({
     params,
 }: {
     params: Promise<{ projectId: string }>
 }) {
-    // aller chercher dans data.json le projet correspondant à params. Le paramètres est l'id du projet
+    //est-ce que c'est mal de récupérer l'id de l'objet mongoDB pour le passer en paramètre dynamique ?
+    // Peut-être problème de sécurité ?
+
+    // ancienne méthode liée à la base de donnée locale data.json
     const { projectId } = await params
     const project : projectsProps | undefined = data.projects.find((project) => project.id === projectId)
 

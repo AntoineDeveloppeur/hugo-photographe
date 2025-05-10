@@ -75,12 +75,12 @@ export async function createProject(req: Request, res: Response) {
                 width: projectData.width || 1200
             },
             textsAbovePhotos: projectData.textsAbovePhotos || [],
-            photosSets: projectData.photosSets.map((set: Array<string>, setIndex) => {
+            photosSets: projectData.photosSets.map((set: object[], setIndex) => {
                 console.log('set',set)
-                return set.map((photo: string, photoIndex) => {
+                return set.map((photo: object, photoIndex) => {
                     console.log('photo',photo)
                     console.log('photosUrl[`set${setIndex}photo${photoIndex}`]',photosUrl[`set${setIndex+1}photo${photoIndex+1}`])
-                    return {photo, ...{src: photosUrl[`set${setIndex+1}photo${photoIndex+1}`]}}
+                    return {...photo, ...{src: photosUrl[`set${setIndex+1}photo${photoIndex+1}`]}}
                 })
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],

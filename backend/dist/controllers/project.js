@@ -50,7 +50,7 @@ export async function createProject(req, res) {
                 return set.map((photo, photoIndex) => {
                     console.log('photo', photo);
                     console.log('photosUrl[`set${setIndex}photo${photoIndex}`]', photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`]);
-                    return { photo, ...{ src: photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`] } };
+                    return { ...photo, ...{ src: photosUrl[`set${setIndex + 1}photo${photoIndex + 1}`] } };
                 });
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],

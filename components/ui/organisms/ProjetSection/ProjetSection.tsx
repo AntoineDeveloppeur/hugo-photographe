@@ -94,7 +94,7 @@ export default function ProjetSection() {
                         )
                         .map((project: projectsProps, index) => (
                             <motion.div
-                                key={project.id}
+                                key={`project${index}`}
                                 className={
                                     styles.projetSection__largeScreen__cards__cardPortraitWrapper__cardPortrait
                                 }

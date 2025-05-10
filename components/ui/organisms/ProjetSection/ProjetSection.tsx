@@ -119,7 +119,7 @@ export default function ProjetSection() {
                                         title={project.title}
                                         summary={project.summary}
                                         mainPhoto={project.mainPhoto}
-                                        id={project.id}
+                                        id={project._id}
                                     />
                             </motion.div>
                         ))}

@@ -12,16 +12,22 @@ import ResponseCache from 'next/dist/server/response-cache'
 
 
 export async function generateStaticParams() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjecs`)
-    const data = response.json()
+
+    interface Data {
+        projects: projectsProps[]
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`)
+    const data: Data = await response.json()
     // il faudrait que je dise que les params possibles sont data.projects.id
-    const projectId = data.projects.map((project) => ({
+    return data.projects.map((project) => ({
         projectId: project._id
     }))
+    // Donc generateStaticParams attends un tableau de tous les params
 }
 
 export async function getData() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjecs`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`, {
         next : { revalidate: 3600}
     })
     return response.json()
@@ -37,9 +43,18 @@ export default async function ProjectPage({
     // Peut-être problème de sécurité ?
 
     // ancienne méthode liée à la base de donnée locale data.json
-    const { projectId } = await params
-    const project : projectsProps | undefined = data.projects.find((project) => project.id === projectId)
+    // const { projectId } = await params
+    // const project : projectsProps | undefined = data.projects.find((project) => project.id === projectId)
 
+    interface Data {
+        projects: projectsProps[]
+    }
+
+    // Nouvelle méthode avec generateStaticParams
+    const { projectId } = await params
+    const data: Data = await getData()
+    console.log('data dans ProjectPage',data)
+    const project: projectsProps | undefined = data.projects.find((project) => project._id === projectId)
 
     if (!project) {
         // Si le projet n'est pas trouvé, renvoyer une page d'erreur

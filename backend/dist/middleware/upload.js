@@ -1,6 +1,9 @@
 import { IncomingForm } from 'formidable';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import fs from 'fs';
+import sharp from 'sharp';
+import path from 'path';
+import { v4 as uuidv4 } from 'uuid'; // Pour générer des noms de fichiers uniques
 // Configuration du client S3
 const getS3Client = () => {
     if (!process.env.AWS_REGION || !process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
@@ -47,7 +50,7 @@ export async function parseForm(req) {
                 multiples: true,
                 maxFileSize: 200 * 1024 * 1024, // 200MB
             });
-            form.parse(req, (err, fields, files) => {
+            form.parse(req, async (err, fields, files) => {
                 if (err) {
                     return reject(err);
                 }
@@ -57,10 +60,53 @@ export async function parseForm(req) {
                 if (!files) {
                     return reject(new Error('formulaire sans fichier'));
                 }
-                resolve({
-                    fields,
-                    files: files
-                });
+                // Convertir les images en WebP
+                const processedFiles = {};
+                try {
+                    await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
+                        const file = fileArray[0];
+                        // Fail-fast: Si ce n'est pas une image, conserver le fichier original
+                        if (!file.mimetype.startsWith('image/')) {
+                            processedFiles[key] = file;
+                            return;
+                        }
+                        // Si c'est déjà un WebP, conserver le fichier original
+                        if (file.mimetype === 'image/webp') {
+                            processedFiles[key] = file;
+                            return;
+                        }
+                        // Pour les autres types d'images, convertir en WebP
+                        const uniqueId = uuidv4();
+                        const webpFilePath = path.join(path.dirname(file.filepath), `${uniqueId}.webp`);
+                        // Obtenir les métadonnées de l'image originale
+                        const metadata = await sharp(file.filepath).metadata();
+                        // Convertir l'image en WebP
+                        await sharp(file.filepath)
+                            .webp({
+                            quality: 80,
+                            // Préserver les métadonnées importantes
+                            effort: 4 // Meilleur équilibre entre vitesse et compression
+                        })
+                            .toFile(webpFilePath);
+                        // Créer un nouvel objet file (immutable)
+                        processedFiles[key] = {
+                            ...file,
+                            filepath: webpFilePath,
+                            originalFilename: `${path.parse(file.originalFilename).name}.webp`,
+                            mimetype: 'image/webp',
+                            width: metadata.width,
+                            height: metadata.height,
+                        };
+                    }));
+                    // Résoudre avec les fichiers traités
+                    resolve({
+                        fields,
+                        files: processedFiles
+                    });
+                }
+                catch (conversionError) {
+                    reject(new Error(`Erreur lors de la conversion des images: ${conversionError.message}`));
+                }
             });
         }
         catch (error) {

@@ -17,7 +17,7 @@ import useGetProjects from '@/hooks/useGetProjects'
 export default function ProjetSection() {
 
 
-    const { data }  = useGetProjects()
+    const data = useGetProjects()
     console.log('data',data)
 
     const isMobile = useIsMobile()

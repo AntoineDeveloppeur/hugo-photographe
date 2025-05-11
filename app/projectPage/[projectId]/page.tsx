@@ -1,24 +1,17 @@
 import styles from './projectPage.module.scss'
-import data from '@/data/data.json'
+import dataFallBack from '@/data/data.json'
 import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjectPage'
 import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
 import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
 import LinkBottomOfProjectPage from '@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage'
 import PhotoProjectPage from '@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
-import { projectsProps } from '@/types'
+import { projectsProps, Data } from '@/types'
 import getBlurDataURL from '@/utils/plaiceholder'
-import ResponseCache from 'next/dist/server/response-cache'
 
 
 export async function generateStaticParams() {
-
-    interface Data {
-        projects: projectsProps[]
-    }
-
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`)
-    const data: Data = await response.json()
+    const data: Data = await getData()
     // il faudrait que je dise que les params possibles sont data.projects.id
     return data.projects.map((project) => ({
         projectId: project._id
@@ -27,31 +20,32 @@ export async function generateStaticParams() {
 }
 
 export async function getData() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`, {
-        next : { revalidate: 3600}
-    })
-    return response.json()
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`
+            // , {
+                // next : { revalidate: 3600}
+                // }   
+            )
+        if (!response.ok) {
+            return dataFallBack
+        }
+        return response.json()
+    } catch {
+        return dataFallBack
+    }
 }
 
 
 export default async function ProjectPage({
     params,
 }: {
-    params: Promise<{ projectId: string }>
+    params: { projectId: string }
 }) {
     //est-ce que c'est mal de récupérer l'id de l'objet mongoDB pour le passer en paramètre dynamique ?
     // Peut-être problème de sécurité ?
 
-    // ancienne méthode liée à la base de donnée locale data.json
-    // const { projectId } = await params
-    // const project : projectsProps | undefined = data.projects.find((project) => project.id === projectId)
-
-    interface Data {
-        projects: projectsProps[]
-    }
-
     // Nouvelle méthode avec generateStaticParams
-    const { projectId } = await params
+    const { projectId } = params
     const data: Data = await getData()
     console.log('data dans ProjectPage',data)
     const project: projectsProps | undefined = data.projects.find((project) => project._id === projectId)

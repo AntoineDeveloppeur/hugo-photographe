@@ -82,3 +82,7 @@ export interface projectsProps {
     photosSets: PhotoVariableProps[][] 
     textsBelowPhotos?: string[] 
 }
+
+export interface Data {
+    projects: projectsProps[]
+}

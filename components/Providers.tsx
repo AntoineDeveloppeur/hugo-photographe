@@ -40,7 +40,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     useEffect(() => {
        setMounted(true)
      }, [])
-
     if (!mounted) return null
 
     return (

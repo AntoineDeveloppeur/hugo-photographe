@@ -154,19 +154,22 @@ export default function FormAjouterProjet() {
                 },
                 body: formData
             });
-            console.log(await responseJSON.json())
+            
+            const response = await responseJSON.json()
+            console.log('response', response)
 
-            // if(responseJSON.status === 403 || '403') {
-            //     console.log(await responseJSON.json())
-            //     router.push('/connexion')
-            //     throw new Error('Veuillez vous connecter pour ajouter un projet')
-            // }
+            if(responseJSON.status === 403) {
+                router.push('/connexion')
+                throw new Error('Veuillez vous connecter pour ajouter un projet')
+            }
+
 
             if(!responseJSON.ok) {
-                throw new Error(`Erreur HTTP ${responseJSON.status}: ${responseJSON.statusText}`);
+                throw new Error(response.error);
             }
+            router.push('/succesAjoutProjet')
             
-            // redirection vers le succès d'ajout de projet
+
         }
         catch (error) {
             const errorMessage = error instanceof Error 

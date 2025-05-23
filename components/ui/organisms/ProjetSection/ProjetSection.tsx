@@ -134,7 +134,7 @@ export default function ProjetSection() {
                         pagesCount= {PagesCount}
                     />
                 ) : (
-                    projectsCount > 3 && (
+                    projectsCount > 4 && (
                         <div
                             onClick={clickOnAllProjects}
                             className={

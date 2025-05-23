@@ -14,7 +14,8 @@ const nextConfig: NextConfig = {
         hostname: 'photos-hugo.s3.eu-west-3.amazonaws.com',
         pathname: '/**',
       },
-    ],  }
+    ],  
+  }
 };
 
 export default nextConfig;

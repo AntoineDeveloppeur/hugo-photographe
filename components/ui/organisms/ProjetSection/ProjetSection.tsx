@@ -33,10 +33,10 @@ export default function ProjetSection() {
     
     
     //Enregistrer la page actuelle dans les données locales et supprimer lorsque la page est quittée
-    const currentPageStored = localStorage.getItem("currentPage") !== null ? Number(localStorage.getItem("currentPage")) : 1
+    const currentPageStored = window.localStorage.getItem("currentPage") !== null ? Number(window.localStorage.getItem("currentPage")) : 1
     const [currentPage, setCurrentPage] = useState<number>(currentPageStored)
     useEffect(() => {
-        localStorage.setItem('currentPage', currentPage.toString())
+        window.localStorage.setItem('currentPage', currentPage.toString())
     }, [currentPage])
     
     

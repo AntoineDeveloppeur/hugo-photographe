@@ -24,14 +24,14 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
     const [showPresentation, setShowPresentation] = useState(() => {
         if (typeof window !== 'undefined') {
-            const saved = localStorage.getItem('showPresentation')
+            const saved = window.localStorage.getItem('showPresentation')
             return saved ? JSON.parse(saved) : false
         }
         return false
     })
 
     useEffect(() => {
-        localStorage.setItem('showPresentation', JSON.stringify(showPresentation))
+        window.localStorage.setItem('showPresentation', JSON.stringify(showPresentation))
     }, [showPresentation])
 
     // Permet de return le composant seulement lorsque le html a été monté.

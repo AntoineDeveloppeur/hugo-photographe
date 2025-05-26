@@ -10,14 +10,16 @@ import { useMotionValueEvent, useScroll } from 'framer-motion'
 import Medal from '@/public/medal.json'
 import { useState, useRef } from 'react'
 import { useTheme } from 'next-themes'
+import IconDelete from '../../atoms/IconDelete/IconDelete'
 
-export default function CardLandscape({ id, title, summary, mainPhoto }: CardProps) {
+
+export default function CardLandscape({ id, title, summary, mainPhoto, deleteIcon }: CardProps) {
     const playerRef = useRef<Player>(null)
     const medalWrapper = useRef<HTMLDivElement>(null)
     const [isAnimationStarted, setIsAnimationStarted] = useState<boolean>(false)
     
     // Utiliser useTheme pour forcer un rendu quand le thème change
-    const { theme, systemTheme } = useTheme()
+    const { theme } = useTheme()
     
     // Utilise useScroll pour déclencher l'animation lorsque l'utilisateur se rapproche de la médaille
     const {scrollYProgress} = useScroll({
@@ -39,6 +41,12 @@ export default function CardLandscape({ id, title, summary, mainPhoto }: CardPro
 
     return (
         <div className={styles.cardWrapper}>
+            {deleteIcon && 
+            <div className={styles.cardWrapper__deleteWrapper}>
+                <IconDelete/>
+            </div>
+            }
+
             <Link className={styles.cardWrapper__card} href={`/projectPage/${id}`}>
                 <div ref={medalWrapper} className={styles.cardWrapper__card__medalWrapper}>
                     <Player 

@@ -111,3 +111,9 @@ export async function getProjects(req: Request, res: Response) {
         res.status(404).json({error})
     })
 }
+
+export async function deleteProject(req: Request, res: Response) {
+    Project.findOne({_id : req.body._id})
+    .then(() => res.status(201).json({message: 'id trouvé'})).
+    catch((error) => res.status(404).json({message: error}))
+}

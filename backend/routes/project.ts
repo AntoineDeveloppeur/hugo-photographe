@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express'
-import { createProject, getProjects } from '../controllers/project.js'
+import { createProject, getProjects, deleteProject } from '../controllers/project.js'
 import checkToken from '../middleware/checkToken.js'
 
 const router = express.Router()
@@ -14,5 +14,11 @@ router.post('/create',
 router.get('/getProjects', (req: Request, res: Response) => {
     getProjects(req, res)
 })
+
+router.delete('deleteProject',  
+    (req: Request, res: Response, next: NextFunction) => {
+        checkToken(req, res, next)}, 
+    (req: Request, res: Response) => {
+            deleteProject(req, res)})
 
 export default router

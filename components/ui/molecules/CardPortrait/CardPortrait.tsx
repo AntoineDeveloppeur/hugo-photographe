@@ -9,7 +9,7 @@ import ICON from '@/public/medal.json'
 
 export default function CardPortrait ({ id, title, summary, mainPhoto }: CardProps) {
 
-
+    console.log('`/projectPage/${id}`',`/projectPage/${id}`)
     return (
         <div
         className={styles.cardWrapper}

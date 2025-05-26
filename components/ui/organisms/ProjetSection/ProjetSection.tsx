@@ -71,14 +71,14 @@ export default function ProjetSection() {
                             title={data.projects[0].title}
                             summary={data.projects[0].summary}
                             mainPhoto={data.projects[0].mainPhoto}
-                            id={data.projects[0].id}
+                            id={data.projects[0]._id}
                             />
                             :
                             <CardLandscape
                             title={data.projects[0].title}
                             summary={data.projects[0].summary}
                             mainPhoto={data.projects[0].mainPhoto}
-                            id={data.projects[0].id}
+                            id={data.projects[0]._id}
                             />
                             }
                             </div>

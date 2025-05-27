@@ -12,20 +12,21 @@
     &:hover .cardWrapper__gradientLayer {
         opacity: 1;
     }
+    &:hover .cardWrapper__deleteWrapper {
+        opacity: 1;
+    }
     &__deleteWrapper {
         position: absolute;
         width: 100%;
         height: 100%;
         top: 0;
         left: 0;
-        background-color: RED;
         display: flex;
         justify-content: center;
         align-items: center;
         opacity: 0;
         transition: opacity 0.5s ease-in-out;
         z-index: 10;
-        pointer-events: none;
     }
     &__gradientLayer {
         position: absolute;

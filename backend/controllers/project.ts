@@ -47,7 +47,6 @@ export async function createProject(req: Request, res: Response) {
         .reduce((acc, file) => {
             return {...acc, ...file}
         })
-        console.log('PhotosUrl', photosUrl)
 
         interface ProjectData {
             title: string,
@@ -59,8 +58,6 @@ export async function createProject(req: Request, res: Response) {
             photosSets: object[][],
             textsBelowPhotos: string
         }
-
-        console.log(' typeof fields.projectTexts[0] === string',  typeof fields.projectTexts[0] === 'string' )
         //Corriger le type
         const projectData: ProjectData = typeof fields.projectTexts[0] === 'string' 
         ? JSON.parse(fields.projectTexts[0])
@@ -87,7 +84,6 @@ export async function createProject(req: Request, res: Response) {
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],
         })
-        console.log('newProject', newProject)
 
         // Sauvegarde le projet dans la base de donnée
         await newProject.save()

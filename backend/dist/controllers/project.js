@@ -30,8 +30,6 @@ export async function createProject(req, res) {
             .reduce((acc, file) => {
             return { ...acc, ...file };
         });
-        console.log('PhotosUrl', photosUrl);
-        console.log(' typeof fields.projectTexts[0] === string', typeof fields.projectTexts[0] === 'string');
         //Corriger le type
         const projectData = typeof fields.projectTexts[0] === 'string'
             ? JSON.parse(fields.projectTexts[0])
@@ -57,7 +55,6 @@ export async function createProject(req, res) {
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],
         });
-        console.log('newProject', newProject);
         // Sauvegarde le projet dans la base de donnée
         await newProject.save()
             .then(() => res.status(201).json({ message: 'Le projet a bien été créé' }))

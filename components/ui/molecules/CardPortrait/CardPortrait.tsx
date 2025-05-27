@@ -11,10 +11,10 @@ import useDeleteProject from '@/hooks/useDeleteProject'
 
 export default function CardPortrait ({ id, title, summary, mainPhoto, deleteIcon}: CardProps) {
 
-    console.log('`/projectPage/${id}`',`/projectPage/${id}`)
+    const { isLoading, isSuccess, deleteProject } = useDeleteProject()
 
     const handleDelete = () => {
-        const { isLoading, isSuccess } = useDeleteProject(id)
+        deleteProject(id)
     }
 
 

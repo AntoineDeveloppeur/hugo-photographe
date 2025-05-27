@@ -6,17 +6,24 @@ import TitleCard from '../../atoms/TitleCard/TitleCard'
 import Link from 'next/link'
 import { CardProps } from '@/types/index.js'
 import IconDelete from '../../atoms/IconDelete/IconDelete'
+import useDeleteProject from '@/hooks/useDeleteProject'
 
 
 export default function CardPortrait ({ id, title, summary, mainPhoto, deleteIcon}: CardProps) {
 
     console.log('`/projectPage/${id}`',`/projectPage/${id}`)
+
+    const handleDelete = () => {
+        const { isLoading, isSuccess } = useDeleteProject(id)
+    }
+
+
     return (
         <div
         className={styles.cardWrapper}
         >
             {deleteIcon && 
-            <div className={styles.cardWrapper__deleteWrapper}>
+            <div className={styles.cardWrapper__deleteWrapper} onClick={handleDelete}>
                 <IconDelete/>
             </div>
             }

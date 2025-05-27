@@ -15,7 +15,7 @@ router.get('/getProjects', (req: Request, res: Response) => {
     getProjects(req, res)
 })
 
-router.delete('deleteProject',  
+router.delete('/deleteProject',  
     (req: Request, res: Response, next: NextFunction) => {
         checkToken(req, res, next)}, 
     (req: Request, res: Response) => {

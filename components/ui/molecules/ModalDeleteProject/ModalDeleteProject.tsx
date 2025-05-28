@@ -17,7 +17,7 @@ export default function ModalDeleteProject({_id, title, isOpen, onClose} : Modal
 
     return(
         <Modal isOpen={isOpen} onClose={onClose}>
-            {isConfirmed && <Paragraphes texts={[`Supprimer ${title} définitivement ?`]}/>}
+            {!isConfirmed && <Paragraphes texts={[`Supprimer ${title} définitivement ?`]}/>}
             <Button text='Oui' onclick= {handleYes}/>
             <ButtonSecondary text='Non' onclick={handleNo}/>
         </Modal>

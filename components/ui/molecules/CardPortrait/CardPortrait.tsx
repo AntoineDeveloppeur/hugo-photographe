@@ -15,12 +15,10 @@ export default function CardPortrait ({ _id, title, summary, mainPhoto, deleteIc
 
     const { isLoading, isSuccess, deleteProject } = useDeleteProject()
     const [ isOpen, setIsOpen ] = useState<boolean>(false)
-    
-    const onClose = () => {}
 
     const handleDelete = () => {
         setIsOpen(true)
-        deleteProject(id)
+        // deleteProject(id)
     }
 
 
@@ -34,7 +32,7 @@ export default function CardPortrait ({ _id, title, summary, mainPhoto, deleteIc
             </div>
             }
             {isOpen &&
-            <ModalDeleteProject _id={id} title={title} isOpen={isOpen} onClose={() => setIsOpen(false)}  />
+            <ModalDeleteProject _id={_id} title={title} isOpen={isOpen} onClose={() => setIsOpen(false)}  />
             }
             <Link className={styles.cardWrapper__card} href={`/projectPage/${_id}`}>
                 <div className={styles.cardWrapper__gradientLayer}></div>

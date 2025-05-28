@@ -5,7 +5,7 @@ import { PhotoProps } from '@/types'
 import NextImage from 'next/image'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import ModalPhoto from '../ModalPhoto/ModalPhoto'
+import Modal from '../Modal/Modal'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
 import ServerImage from '../ServerImage/ServerImage'
@@ -49,7 +49,7 @@ const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto }: Ph
                 />
             </motion.div>
 
-            <ModalPhoto
+            <Modal
                 isOpen={isModalOpen}
                 onClose={handleModalClose}
             >
@@ -67,7 +67,7 @@ const PhotoProjectPage = ({ photo, hoverEffect, priority, sizes, mainPhoto }: Ph
                         style={{ objectFit: 'contain' }}
                     />
                 </div>
-            </ModalPhoto>
+            </Modal>
         </>
     )
 }

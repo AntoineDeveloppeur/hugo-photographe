@@ -60,7 +60,6 @@ export default function Supprimer() {
                 <motion.div 
                     className={styles.supprimer__largeScreen__cards}
                 >
-
                 <AnimatePresence mode="wait">
                         {currentPage === 1 && (
                             <div key="cardLandscape" className={styles.supprimer__largeScreen__cards__cardLandscapteWrapper}>

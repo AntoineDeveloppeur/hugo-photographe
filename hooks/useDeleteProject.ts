@@ -28,7 +28,6 @@ export default function useDeleteProject() {
         setIsSuccess(true)
 
         //@ts-expect-error ddd
-        alert(response.status)
         }
         catch (error) {
             const errorMessage = error instanceof Error

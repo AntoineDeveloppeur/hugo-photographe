@@ -1,4 +1,6 @@
 // types.ts
+import { ReactNode } from 'react'
+
 
 export interface PhotoVariableProps {
     src: string
@@ -21,6 +23,19 @@ export type photoSet = PhotoVariableProps[]
 
 export interface PhotosSetsProps {
     photosSets: PhotoVariableProps[][]
+}
+
+export interface ModalProps {
+    isOpen: boolean
+    onClose: () => void
+    children: ReactNode
+}
+
+export interface ModalDeleteProject {
+    _id: string
+    title: string
+    isOpen: boolean
+    onClose: () => void
 }
 
 export interface DataType {
@@ -66,7 +81,7 @@ export interface CardProps {
     title: string
     summary: string
     mainPhoto: PhotoVariableProps
-    id: string
+    _id: string
     deleteIcon?: boolean
 }
 

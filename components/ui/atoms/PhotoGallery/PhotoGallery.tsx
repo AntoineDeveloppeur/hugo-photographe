@@ -5,7 +5,7 @@ import { PhotoProps } from '@/types'
 import NextImage from 'next/image'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import ModalPhoto from '../ModalPhoto/ModalPhoto'
+import Modal from '../Modal/Modal'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
 import ServerImage from '../ServerImage/ServerImage'
@@ -43,7 +43,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
                 <ServerImage photo={photo} priority={priority} />
             </motion.div>
 
-            <ModalPhoto
+            <Modal
                 isOpen={isModalOpen}
                 onClose={handleModalClose}
             >
@@ -62,7 +62,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
                         style={{ objectFit: 'contain' }}
                     />
                 </div>
-            </ModalPhoto>
+            </Modal>
         </>
     )
 }

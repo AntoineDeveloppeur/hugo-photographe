@@ -13,7 +13,10 @@ import { useTheme } from 'next-themes'
 import IconDelete from '../../atoms/IconDelete/IconDelete'
 
 
-export default function CardLandscape({ id, title, summary, mainPhoto, deleteIcon }: CardProps) {
+export default function CardLandscape({ _id, title, summary, mainPhoto, deleteIcon }: CardProps) {
+
+
+
     const playerRef = useRef<Player>(null)
     const medalWrapper = useRef<HTMLDivElement>(null)
     const [isAnimationStarted, setIsAnimationStarted] = useState<boolean>(false)
@@ -47,7 +50,7 @@ export default function CardLandscape({ id, title, summary, mainPhoto, deleteIco
             </div>
             }
 
-            <Link className={styles.cardWrapper__card} href={`/projectPage/${id}`}>
+            <Link className={styles.cardWrapper__card} href={`/projectPage/${_id}`}>
                 <div ref={medalWrapper} className={styles.cardWrapper__card__medalWrapper}>
                     <Player 
                         ref={playerRef} 

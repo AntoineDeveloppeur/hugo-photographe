@@ -1,16 +1,10 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import styles from './modalPhoto.module.scss'
-import { ReactNode } from 'react'
+import styles from './modal.module.scss'
+import { ModalProps } from '@/types'
 
-interface ModalPhotoProps {
-    isOpen: boolean
-    onClose: () => void
-    children: ReactNode
-}
-
-const ModalPhoto = ({ isOpen, onClose, children }: ModalPhotoProps) => {
+const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -39,4 +33,4 @@ const ModalPhoto = ({ isOpen, onClose, children }: ModalPhotoProps) => {
     )
 }
 
-export default ModalPhoto
+export default Modal

@@ -9,6 +9,9 @@
     padding-left: 1.5rem;
     padding-right: 1.5em;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
     box-shadow: 0 4px 6px -1px var(--color-shadow-main),
     0 2px 4px -1px var(--color-shadow-second);
 

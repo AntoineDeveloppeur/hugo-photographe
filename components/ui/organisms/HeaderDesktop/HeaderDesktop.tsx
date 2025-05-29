@@ -1,7 +1,6 @@
 import styles from './header-desktop.module.scss'
 import LogoWithSignature from '../../molecules/LogoWithSignature/LogoWithSignature'
 import MenuDesktop from '../../molecules/MenuDesktop/MenuDesktop'
-import ThemeChanger from '../../molecules/ThemeChanger/ThemeChanger'
 
 const HeaderDesktop = () => {
     return (

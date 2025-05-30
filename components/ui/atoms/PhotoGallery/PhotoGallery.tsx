@@ -4,11 +4,14 @@ import styles from './photoGallery.module.scss'
 import { PhotoProps } from '@/types'
 import NextImage from 'next/image'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
-import Modal from '../Modal/Modal'
+import { useState, lazy} from 'react'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
 import ServerImage from '../ServerImage/ServerImage'
+import dynamic from 'next/dynamic'
+
+// const Modal = lazy(() => import('../Modal/Modal'))
+const Modal = dynamic(() => import('../Modal/Modal'))
 
 export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -49,7 +52,6 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
             >
                 <div className={styles.modalImageContainer}>
                 {isLoading && <Loader />}
-                {/* {isLoading && Loading()} */}
                 <NextImage
                         className={`${styles.modalImage} ${!isLoading ? styles.loaded : ''}`}
                         src={photo.src}

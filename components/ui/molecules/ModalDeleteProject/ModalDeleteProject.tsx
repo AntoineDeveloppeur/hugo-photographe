@@ -5,23 +5,36 @@ import { useState } from 'react'
 import Paragraphes from '../Paragraphes/Paragraphes'
 import Button from '../../atoms/Button/Button'
 import ButtonSecondary from '../../atoms/ButtonSecondary/ButtonSecondary'
+import useDeleteProject from '@/hooks/useDeleteProject'
+import Loader from '../../atoms/Loader/Loader'
 
 
 export default function ModalDeleteProject({_id, title, isOpen, onClose} : ModalDeleteProject) {
 
     const [ isConfirmed, setIsConfirmed ] = useState<boolean>(false)
+    const { isLoading, isSuccess, deleteProject } = useDeleteProject()
 
-    const handleYes = () => {}
-    const handleNo = () => {}
+    const handleYes = () => {
+        setIsConfirmed(false)
+        deleteProject(_id)
+        
+    }
+    const handleNo = () => {
+        onClose()
+    }
 
 
     return(
-        <Modal className={styles.modal} isOpen={isOpen} onClose={onClose}>
-            <div className={styles.modal}>
-            {!isConfirmed && <Paragraphes texts={[`Supprimer ${title} définitivement ?`]}/>}
-            <Button text='Oui' onclick= {handleYes}/>
+        <Modal isOpen={isOpen} onClose={onClose}>
+            {!isConfirmed && 
+            <div className={styles.buttonsWrapper} onClick={(e) => e.stopPropagation()}>
+            <Paragraphes texts={[`Supprimer ${title} définitivement ?`]}/>
+            <Button text='Oui' onclick={handleYes}/>
             <ButtonSecondary text='Non' onclick={handleNo}/>
             </div>
+            }
+            {isLoading && <Loader/>}
+            {isSuccess && <Paragraphes texts={['Suppression confirmé']}/>}
         </Modal>
     )
 }

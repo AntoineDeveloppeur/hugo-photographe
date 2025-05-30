@@ -21,6 +21,9 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.5, opacity: 0 }}
                         transition={{ duration: 0.3 }}
+                        drag
+                        dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                        onDragEnd={() => onClose()}
                     >
                         <button className={styles.closeButton} onClick={onClose} aria-label='Close'>
                             ✕

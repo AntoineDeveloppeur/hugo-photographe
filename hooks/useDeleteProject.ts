@@ -3,11 +3,12 @@ import Router from 'next/router'
 
 export default function useDeleteProject() {
 
-    const [ isLoading, setIsLoading ] = useState<boolean>(true)
+    const [ isLoading, setIsLoading ] = useState<boolean>(false)
     const [ isSuccess, setIsSuccess ] = useState<boolean>(false)
 
     async function deleteProject(_id: string) {
         try {
+            setIsLoading(true)
             const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/deleteProject`, {
             method: 'DELETE',
             headers: {

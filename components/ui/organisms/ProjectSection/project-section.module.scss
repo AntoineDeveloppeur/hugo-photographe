@@ -1,4 +1,4 @@
-.projetSection {
+.projectSection {
     background-color: var(--background-second);
     width: 100%;
     padding-top: 6rem;
@@ -64,7 +64,7 @@
 }
 
 @media (max-width: 739px) {
-    .projetSection {
+    .projectSection {
         &__largeScreen {
             padding-left: 2rem;
             padding-right: 2rem;

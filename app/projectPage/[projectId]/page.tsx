@@ -45,7 +45,7 @@ export default async function ProjectPage({
     // Peut-être problème de sécurité ?
 
     // Nouvelle méthode avec generateStaticParams
-    const { projectId } = params
+    const { projectId } = await params
     const data: Data = await getData()
     console.log('data dans ProjectPage',data)
     const project: projectsProps | undefined = data.projects.find((project) => project._id === projectId)

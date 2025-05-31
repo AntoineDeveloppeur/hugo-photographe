@@ -4,11 +4,12 @@ import styles from './photoGallery.module.scss'
 import { PhotoProps } from '@/types'
 import NextImage from 'next/image'
 import { motion } from 'framer-motion'
-import { useState, lazy} from 'react'
+import { useState, useEffect} from 'react'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
 import ServerImage from '../ServerImage/ServerImage'
 import dynamic from 'next/dynamic'
+import imageURL from '@/utils/imageURL'
 
 // const Modal = lazy(() => import('../Modal/Modal'))
 const Modal = dynamic(() => import('../Modal/Modal'))
@@ -27,6 +28,34 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
         setIsLoading(true)
         setIsHovered(true)
     }
+
+// Préchargement de la photo dans la modale
+    useEffect(()=> {
+        // Lorsque le navigateur est disponible
+
+        // if ('requestIdleCallback' in window) {       
+        if (false) {
+            const requestIdleCallbackId = window.requestIdleCallback(() => {
+                const image = new Image()
+                image.src = imageURL(photo.width, 100, photo.src)
+            })
+
+            if ( 'cancelIdleCallback' in window) 
+                return () => window.cancelIdleCallback(requestIdleCallbackId)
+    
+        } 
+        // Après un timer si le chargement du reste de la page est trop long ou 
+        // si requestIdleCallback n'est pas supporté
+        else {
+            const timeout = setTimeout(() => {
+                const image = new Image()
+                image.src = imageURL(3840, 100, photo.src)
+            },3000)
+            return () => clearTimeout(timeout)
+        }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
 
     return (
         <>

@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './projet-section.module.scss'
+import styles from './project-section.module.scss'
 import Subtitle from '../../atoms/Subtitle/Subtitle'
 import Title from '../../atoms/Title/Title'
 import CardPortrait from '../../molecules/CardPortrait/CardPortrait'
@@ -14,11 +14,10 @@ import useIsMobile from '@/hooks/useIsMobile'
 import useGetProjects from '@/hooks/useGetProjects'
 
 
-export default function ProjetSection() {
+export default function ProjectSection() {
 
 
     const data = useGetProjects()
-    console.log('data',data)
 
     const isMobile = useIsMobile()
     // définir une constant qui dépend du nombre de projets
@@ -54,18 +53,18 @@ export default function ProjetSection() {
 
 
     return (
-        <section id="Projects" className={styles.projetSection}>
-            <div className={styles.projetSection__largeScreen}>
-                <div className={styles.projetSection__largeScreen__titleAndSubtitle}>
+        <section id="Projects" className={styles.projectSection}>
+            <div className={styles.projectSection__largeScreen}>
+                <div className={styles.projectSection__largeScreen__titleAndSubtitle}>
                         <Title text="PROJETS" />
                         <Subtitle text="VOYAGEZ A TRAVERS MES PROJETS" />
                 </div>
                 <motion.div 
-                    className={styles.projetSection__largeScreen__cards}
+                    className={styles.projectSection__largeScreen__cards}
                 >
                     <AnimatePresence mode="wait">
                         {currentPage === 1 && (
-                            <div key="cardLandscape" className={styles.projetSection__largeScreen__cards__cardLandscapteWrapper}>
+                            <div key="cardLandscape" className={styles.projectSection__largeScreen__cards__cardLandscapteWrapper}>
                             { isMobile ?                            
                             <CardPortrait
                             title={data.projects[0].title}
@@ -83,7 +82,7 @@ export default function ProjetSection() {
                             }
                             </div>
                         )}
-                        <div key="cardPortrait" className={styles.projetSection__largeScreen__cards__cardPortraitWrapper}>
+                        <div key="cardPortrait" className={styles.projectSection__largeScreen__cards__cardPortraitWrapper}>
 
                         {(data.projects as projectsProps[])
                         .slice(
@@ -96,7 +95,7 @@ export default function ProjetSection() {
                             <motion.div
                                 key={`project${index}`}
                                 className={
-                                    styles.projetSection__largeScreen__cards__cardPortraitWrapper__cardPortrait
+                                    styles.projectSection__largeScreen__cards__cardPortraitWrapper__cardPortrait
                                 }
                                 initial={{ opacity: 0 }}
                                 animate={{ 
@@ -138,7 +137,7 @@ export default function ProjetSection() {
                         <div
                             onClick={clickOnAllProjects}
                             className={
-                                styles.projetSection__largeScreen__moreProjectsWrapper
+                                styles.projectSection__largeScreen__moreProjectsWrapper
                             }
                         >
                             <Button text="Voir Plus de projets" />

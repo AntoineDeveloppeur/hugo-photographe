@@ -1,4 +1,4 @@
-.projetSection {
+.projectSection {
   background-color: var(--background-second);
   width: 100%;
   padding-top: 6rem;
@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
 }
-.projetSection__largeScreen {
+.projectSection__largeScreen {
   width: 100%;
   max-width: 1440px;
   padding-left: 4rem;
@@ -15,26 +15,26 @@
   display: flex;
   flex-direction: column;
 }
-.projetSection__largeScreen__moreProjectsWrapper {
+.projectSection__largeScreen__moreProjectsWrapper {
   margin-top: 3rem;
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.projetSection__largeScreen__titleAndSubtitle {
+.projectSection__largeScreen__titleAndSubtitle {
   margin-bottom: 3rem;
 }
-.projetSection__largeScreen__cards {
+.projectSection__largeScreen__cards {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem;
 }
-.projetSection__largeScreen__cards__cardLandscapeWrapper {
+.projectSection__largeScreen__cards__cardLandscapeWrapper {
   display: flex;
   justify-content: center;
 }
-.projetSection__largeScreen__cards__cardPortraitWrapper {
+.projectSection__largeScreen__cards__cardPortraitWrapper {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -42,28 +42,28 @@
   gap: 3rem;
   flex-wrap: wrap;
 }
-.projetSection__largeScreen__cards__cardPortraitWrapper__cardPortrait {
+.projectSection__largeScreen__cards__cardPortraitWrapper__cardPortrait {
   flex: 1 1 calc(33.333% - 5rem);
   min-width: 300px;
   max-width: 500px;
 }
-.projetSection__largeScreen__pagination {
+.projectSection__largeScreen__pagination {
   margin-top: 3rem;
   width: 100%;
   display: flex;
   justify-content: center;
   gap: 2rem;
 }
-.projetSection__largeScreen__pagination__previous {
+.projectSection__largeScreen__pagination__previous {
   transform: rotate(180deg);
 }
-.projetSection__largeScreen__pagination__p {
+.projectSection__largeScreen__pagination__p {
   font-size: 16px;
   font-family: var(--font-pagination);
 }
 
 @media (max-width: 739px) {
-  .projetSection__largeScreen {
+  .projectSection__largeScreen {
     padding-left: 2rem;
     padding-right: 2rem;
   }

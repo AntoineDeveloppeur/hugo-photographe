@@ -40,7 +40,6 @@ export default function CardLandscape({ _id, title, summary, mainPhoto, deleteIc
             setIsAnimationStarted(false)
         }
     });
-        console.log('`/projectPage/${id}Landscape`',`/projectPage/${_id}`)
 
     return (
         <div className={styles.cardWrapper}>

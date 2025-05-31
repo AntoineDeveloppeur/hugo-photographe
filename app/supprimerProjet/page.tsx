@@ -17,7 +17,6 @@ import useGetProjects from '@/hooks/useGetProjects'
 export default function Supprimer() {
 
         const data = useGetProjects()
-        console.log('data',data)
     
         const isMobile = useIsMobile()
         // définir une constant qui dépend du nombre de projets

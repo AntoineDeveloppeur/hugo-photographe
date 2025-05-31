@@ -33,11 +33,10 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
     useEffect(()=> {
         // Lorsque le navigateur est disponible
 
-        // if ('requestIdleCallback' in window) {       
-        if (false) {
+        if ('requestIdleCallback' in window) {       
             const requestIdleCallbackId = window.requestIdleCallback(() => {
                 const image = new Image()
-                image.src = imageURL(photo.width, 100, photo.src)
+                image.src = imageURL(3840, 100, photo.src)
             })
 
             if ( 'cancelIdleCallback' in window) 
@@ -60,6 +59,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
     return (
         <>
             <motion.div 
+                className={styles.imageWrapper}
                 onClick={() => !isMobile && setIsModalOpen(true)}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={() => setIsHovered(false)}

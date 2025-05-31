@@ -37,6 +37,7 @@ export default function ServerImage({
     <div className={`${styles.imageWrapper} ${className || ''}`}>
       <NextImage
         className={`${styles.imageWrapper__image} ${imageClassName || ''}`}
+        // className={`${styles.image} ${imageClassName || ''}`}
         src={photo.src}
         alt={photo.alt}
         width={photo.width || 4000}

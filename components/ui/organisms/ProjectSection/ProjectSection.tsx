@@ -70,14 +70,14 @@ export default function ProjectSection() {
                             title={data.projects[0].title}
                             summary={data.projects[0].summary}
                             mainPhoto={data.projects[0].mainPhoto}
-                            id={data.projects[0]._id}
+                            _id={data.projects[0]._id}
                             />
                             :
                             <CardLandscape
                             title={data.projects[0].title}
                             summary={data.projects[0].summary}
                             mainPhoto={data.projects[0].mainPhoto}
-                            id={data.projects[0]._id}
+                            _id={data.projects[0]._id}
                             />
                             }
                             </div>
@@ -118,7 +118,7 @@ export default function ProjectSection() {
                                         title={project.title}
                                         summary={project.summary}
                                         mainPhoto={project.mainPhoto}
-                                        id={project._id}
+                                        _id={project._id}
                                     />
                             </motion.div>
                         ))}

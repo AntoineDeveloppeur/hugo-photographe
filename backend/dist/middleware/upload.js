@@ -67,12 +67,12 @@ export async function parseForm(req) {
                     await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
                         const file = fileArray[0];
                         // Fail-fast: Si ce n'est pas une image, conserver le fichier original
-                        if (!file.mimetype.startsWith('image/')) {
+                        if (!file?.mimetype?.startsWith('image/')) {
                             processedFiles[key] = file;
                             return;
                         }
                         // Si c'est déjà un WebP, conserver le fichier original
-                        if (file.mimetype === 'image/webp') {
+                        if (file?.mimetype === 'image/webp') {
                             processedFiles[key] = file;
                             return;
                         }
@@ -94,7 +94,7 @@ export async function parseForm(req) {
                         processedFiles[key] = {
                             ...file,
                             filepath: webpFilePath,
-                            originalFilename: `${path.parse(file.originalFilename).name}.webp`,
+                            originalFilename: `${path.parse(file?.originalFilename).name}.webp`,
                             mimetype: 'image/webp',
                             width: metadata.width,
                             height: metadata.height,
@@ -108,7 +108,7 @@ export async function parseForm(req) {
                     });
                 }
                 catch (conversionError) {
-                    reject(new Error(`Erreur lors de la conversion des images: ${conversionError.message}`));
+                    reject(new Error(`Erreur lors de la conversion des images: ${conversionError?.message}`));
                 }
             });
         }

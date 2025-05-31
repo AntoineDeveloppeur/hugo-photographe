@@ -2,10 +2,10 @@
     "galeryDesktop": [
         [           
             {
-                "src": "/LogoHR.png",
+                "src": "/taiwan7.webp",
                 "alt": "paysage avec une personne de dos au loin",
-                "width": 55,
-                "height": 66,
+                "width": 3702,
+                "height": 2468,
                 "priority": true
             },
             {
@@ -73,10 +73,10 @@
     "galeryTablet": [
         [           
             {
-                "src": "/LogoHR.png",
+                "src": "/taiwan7.webp",
                 "alt": "paysage avec une personne de dos au loin",
-                "width": 55,
-                "height": 66,
+                "width": 3702,
+                "height": 2468,
                 "priority": true
             },
             {

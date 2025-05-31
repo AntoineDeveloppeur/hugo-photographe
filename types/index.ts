@@ -31,7 +31,7 @@ export interface ModalProps {
     children: ReactNode
 }
 
-export interface ModalDeleteProject {
+export interface ModalDeleteProjectProps {
     _id: string
     title: string
     isOpen: boolean

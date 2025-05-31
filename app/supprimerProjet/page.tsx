@@ -67,7 +67,7 @@ export default function Supprimer() {
                             title={data.projects[0].title}
                             summary={data.projects[0].summary}
                             mainPhoto={data.projects[0].mainPhoto}
-                            id={data.projects[0]._id}
+                            _id={data.projects[0]._id}
                             deleteIcon={true}
                             />
                             :
@@ -75,7 +75,7 @@ export default function Supprimer() {
                             title={data.projects[0].title}
                             summary={data.projects[0].summary}
                             mainPhoto={data.projects[0].mainPhoto}
-                            id={data.projects[0]._id}
+                            _id={data.projects[0]._id}
                             deleteIcon={true}
                             />
                             }
@@ -117,7 +117,7 @@ export default function Supprimer() {
                                         title={project.title}
                                         summary={project.summary}
                                         mainPhoto={project.mainPhoto}
-                                        id={project._id}
+                                        _id={project._id}
                                         deleteIcon={true}
                                     />
                             </motion.div>

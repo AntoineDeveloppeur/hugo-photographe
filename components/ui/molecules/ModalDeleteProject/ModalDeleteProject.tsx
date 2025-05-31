@@ -1,5 +1,5 @@
 import styles from './modal-delete-project.module.scss'
-import { ModalProps, ModalDeleteProject } from '@/types'
+import { ModalProps, ModalDeleteProjectProps } from '@/types'
 import Modal from '../../atoms/Modal/Modal'
 import { useState } from 'react'
 import Paragraphes from '../Paragraphes/Paragraphes'
@@ -9,7 +9,7 @@ import useDeleteProject from '@/hooks/useDeleteProject'
 import Loader from '../../atoms/Loader/Loader'
 
 
-export default function ModalDeleteProject({_id, title, isOpen, onClose} : ModalDeleteProject) {
+export default function ModalDeleteProject({_id, title, isOpen, onClose} : ModalDeleteProjectProps) {
 
     const [ isConfirmed, setIsConfirmed ] = useState<boolean>(false)
     const { isLoading, isSuccess, deleteProject } = useDeleteProject()

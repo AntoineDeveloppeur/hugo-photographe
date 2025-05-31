@@ -48,7 +48,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
         else {
             const timeout = setTimeout(() => {
                 const image = new Image()
-                image.src = imageURL(3840, 100, photo.src)
+                image.src = imageURL(photo.width, 80, photo.src)
             },3000)
             return () => clearTimeout(timeout)
         }
@@ -87,7 +87,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
                         alt={photo.alt}
                         width={photo.width}
                         height={photo.height}
-                        quality={100}
+                        quality={80}
                         priority={isHovered || isModalOpen}
                         onLoadingComplete={() => setIsLoading(false)}
                         style={{ objectFit: 'contain' }}

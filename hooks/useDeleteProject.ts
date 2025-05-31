@@ -21,14 +21,11 @@ export default function useDeleteProject() {
 
         const response = await responseJSON.json()
         console.log('response',response)
-        //@ts-expect-error ddd
         if(response.status === 403) {
             alert("L'authentification est nécessaire pour supprimer un projet")
             Router.push('/connexion')
         }
         setIsSuccess(true)
-
-        //@ts-expect-error ddd
         }
         catch (error) {
             const errorMessage = error instanceof Error

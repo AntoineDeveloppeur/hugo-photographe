@@ -10,7 +10,7 @@ import { projectsProps, Data } from '@/types'
 import getBlurDataURL from '@/utils/plaiceholder'
 
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ projectId: string }[]> {
     const data: Data = await getData()
     // il faudrait que je dise que les params possibles sont data.projects.id
     return data.projects.map((project) => ({
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
     // Donc generateStaticParams attends un tableau de tous les params
 }
 
-export async function getData() {
+async function getData(): Promise<Data> {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`
             // , {
@@ -29,7 +29,8 @@ export async function getData() {
         if (!response.ok) {
             return dataFallBack
         }
-        return response.json()
+        const data: Data = await response.json()
+        return data
     } catch {
         return dataFallBack
     }
@@ -37,7 +38,7 @@ export async function getData() {
 
 
 export default async function ProjectPage({
-    params,
+    params
 }: {
     params: { projectId: string }
 }) {
@@ -45,7 +46,7 @@ export default async function ProjectPage({
     // Peut-être problème de sécurité ?
 
     // Nouvelle méthode avec generateStaticParams
-    const { projectId } = await params
+    const { projectId } = params
     const data: Data = await getData()
     console.log('data dans ProjectPage',data)
     const project: projectsProps | undefined = data.projects.find((project) => project._id === projectId)

@@ -25,8 +25,8 @@ const getS3Client = () => {
 // Interface pour les fichiers téléchargés
 export interface FormidableFile {
     filepath: string
-    originalFilename: string
-    mimetype: string
+    originalFilename: string | null
+    mimetype: string | null
     [key:string]: any;
 }
 
@@ -57,6 +57,7 @@ export default async function uploadToS3(file: FormidableFile, prefix: string = 
 
         // Envoi du fichier à S3
         const s3Client = getS3Client()
+        //@ts-ignore
         await s3Client.send(new PutObjectCommand(uploadParams))
 
         // Retourne l'URL du fichier télécahrgé
@@ -91,10 +92,10 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                 try {
                     await Promise.all(
                         Object.entries(files).map(async ([key, fileArray]) => {
-                            const file = fileArray[0];
+                            const file = (fileArray as FormidableFile[])?.[0];
                             
                             // Fail-fast: Si ce n'est pas une image, conserver le fichier original
-                            if (!file?.mimetype?.startsWith('image/')) {
+                            if (!file.mimetype?.startsWith('image/')) {
                                 processedFiles[key] = file;
                                 return;
                             }
@@ -129,6 +130,7 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                             processedFiles[key] = {
                                 ...file,
                                 filepath: webpFilePath,
+                                //@ts-ignore
                                 originalFilename: `${path.parse(file?.originalFilename).name}.webp`,
                                 mimetype: 'image/webp',
                                 width: metadata.width,
@@ -144,7 +146,7 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                         files: processedFiles
                     });
                 } catch (conversionError) {
-                    reject(new Error(`Erreur lors de la conversion des images: ${conversionError?.message}`));
+                    reject(new Error(`Erreur lors de la conversion des images: ${conversionError instanceof Error ? conversionError?.message : conversionError}`));
                 }
             });
         } catch (error) {

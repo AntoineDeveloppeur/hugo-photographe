@@ -201,19 +201,19 @@ export default function FormAjouterProjet() {
                         const dynamicAlt: string = `set${setIndex}photo${photoIndex}alt`
                         const dynamicWidth: string = `set${setIndex}photo${photoIndex}width`
                         const dynamicHeight: string = `set${setIndex}photo${photoIndex}height`
-                        // @ts-expected To check later
-                        return <FormPhoto 
+                            return <FormPhoto 
                             label={`Photo n°${photoIndex+1}`} 
                             id={`set${setIndex}photo${photoIndex}`} 
                             key={`set${setIndex}photo${photoIndex}`} 
                             fileInputRef={ref} 
-                            // @ts-expected To check later
+                            //@ts-expect-error ddd
                             register={register}
                             // @ts-expected To check later
+                            //@ts-expect-error ddd
                             errorAlt={errors[dynamicAlt]?.message}
-                            // @ts-expected To check later
+                            //@ts-expect-error ddd
                             errorWidth={errors[dynamicWidth]?.message}
-                            // @ts-expected To check later
+                            //@ts-expect-error ddd
                             errorHeight={errors[dynamicHeight]?.message}
                             />
                     })}

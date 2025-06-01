@@ -32,11 +32,10 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
 // Préchargement de la photo dans la modale
     useEffect(()=> {
         // Lorsque le navigateur est disponible
-
         if ('requestIdleCallback' in window) {       
             const requestIdleCallbackId = window.requestIdleCallback(() => {
                 const image = new Image()
-                image.src = imageURL(3840, 100, photo.src)
+                image.src = imageURL(photo.width, 100, photo.src)
             })
 
             if ( 'cancelIdleCallback' in window) 
@@ -80,17 +79,17 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
                 onClose={handleModalClose}
             >
                 <div className={styles.modalImageContainer}>
-                {isLoading && <Loader />}
-                <NextImage
-                        className={`${styles.modalImage} ${!isLoading ? styles.loaded : ''}`}
-                        src={photo.src}
-                        alt={photo.alt}
-                        width={photo.width}
-                        height={photo.height}
-                        quality={80}
-                        priority={isHovered || isModalOpen}
-                        onLoadingComplete={() => setIsLoading(false)}
-                        style={{ objectFit: 'contain' }}
+                    {isLoading && <Loader />}
+                    <NextImage
+                            className={`${styles.modalImage} ${!isLoading ? styles.loaded : ''}`}
+                            src={photo.src}
+                            alt={photo.alt}
+                            width={photo.width}
+                            height={photo.height}
+                            quality={80}
+                            priority={isHovered || isModalOpen}
+                            onLoadingComplete={() => setIsLoading(false)}
+                            style={{ objectFit: 'contain' }}
                     />
                 </div>
             </Modal>

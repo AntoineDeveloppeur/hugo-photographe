@@ -40,15 +40,14 @@ async function getData(): Promise<Data> {
 export default async function ProjectPage({
     params
 }: {
-    params: { projectId: string }
+    params: Promise<{ projectId: string }>
 }) {
     //est-ce que c'est mal de récupérer l'id de l'objet mongoDB pour le passer en paramètre dynamique ?
     // Peut-être problème de sécurité ?
 
     // Nouvelle méthode avec generateStaticParams
-    const { projectId } = params
+    const { projectId } = await params
     const data: Data = await getData()
-    console.log('data dans ProjectPage',data)
     const project: projectsProps | undefined = data.projects.find((project) => project._id === projectId)
 
     if (!project) {

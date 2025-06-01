@@ -35,7 +35,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
         if ('requestIdleCallback' in window) {       
             const requestIdleCallbackId = window.requestIdleCallback(() => {
                 const image = new Image()
-                image.src = imageURL(photo.width, 100, photo.src)
+                image.src = imageURL(photo.width, 80, photo.src, window.devicePixelRatio || 2)
             })
 
             if ( 'cancelIdleCallback' in window) 
@@ -47,7 +47,7 @@ export default function PhotoGallery ({ photo, hoverEffect, priority }: PhotoPro
         else {
             const timeout = setTimeout(() => {
                 const image = new Image()
-                image.src = imageURL(photo.width, 80, photo.src)
+                image.src = imageURL(photo.width, 80, photo.src,  window.devicePixelRatio || 2)
             },3000)
             return () => clearTimeout(timeout)
         }

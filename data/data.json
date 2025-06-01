@@ -80,17 +80,17 @@
                 "priority": true
             },
             {
-                "src": "/concert.webp",
+                "src": "/1200x630.webp",
                 "alt": "concert avec un guitariste",
-                "width": 6000,
-                "height": 4000,
+                "width": 1200,
+                "height": 630,
                 "priority": true
             },
             {
-                "src": "/concert2.webp",
+                "src": "/150x150.jpg",
                 "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert",
-                "width": 3936,
-                "height": 2624,
+                "width": 150,
+                "height": 150,
                 "priority": true
             },
             {

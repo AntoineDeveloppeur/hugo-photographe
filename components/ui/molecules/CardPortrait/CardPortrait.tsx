@@ -15,10 +15,11 @@ export default function CardPortrait ({ _id, title, summary, mainPhoto, deleteIc
 
     const { isLoading, isSuccess, deleteProject } = useDeleteProject()
     const [ isOpen, setIsOpen ] = useState<boolean>(false)
+    console.log('id dans cardPortrait',_id)
 
     const handleDelete = () => {
         setIsOpen(true)
-        // deleteProject(id)
+
     }
 
 

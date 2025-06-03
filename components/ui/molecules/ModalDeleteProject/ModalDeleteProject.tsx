@@ -16,12 +16,12 @@ export default function ModalDeleteProject({_id, title, isOpen, onClose} : Modal
 
     const handleYes = () => {
         setIsConfirmed(true)
+
         deleteProject(_id)
     }
     const handleNo = () => {
         onClose()
     }
-
 
     return(
         <Modal isOpen={isOpen} onClose={onClose}>

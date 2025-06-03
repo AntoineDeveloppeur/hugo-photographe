@@ -77,14 +77,13 @@ export async function getProjects(req, res) {
     });
 }
 export async function deleteProject(req, res) {
-    Project.findOne({ _id: req.body._id })
-        .then((_id) => {
-        res.status(201).json({ message: 'id trouvé' });
-        // Project.deleteOne(_id)
-        // .then(() => {
-        //     res.status(201).json({message: `Projet ${_id} supprimé avec succès`})
-        // })
-        // .catch((error) => res.status(500).json({ error }))
+    Project.findOne({ _id: req.params.id })
+        .then((project) => {
+        Project.deleteOne({ _id: req.params.id })
+            .then(() => {
+            res.status(201).json({ message: `Projet ${project.title} supprimé avec succès` });
+        })
+            .catch((error) => res.status(500).json({ error }));
     })
         .catch((error) => res.status(404).json({ message: error }));
 }

@@ -11,7 +11,7 @@ export default function useGetProjects() {
                 method: 'GET'
             })
             const response = await responseJSON.json()
-            setData(response)     
+            setData(response)   
             } catch (error) {
                 const errorMessage = error instanceof Error
                 ? error.message

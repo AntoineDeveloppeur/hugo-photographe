@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 export default function checkToken(req, res, next) {
     const authHeader = req.headers.authorization;
+    console.log('req.body dans checktoken', req.body);
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ message: "Authentification requise" });
     }

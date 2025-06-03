@@ -11,17 +11,18 @@ export default function useDeleteProject() {
 
     async function deleteProject(_id: string) {
         try {
+            console.log('id utilisé dans delete',_id)
+
             if(!window.localStorage.getItem('token')) {
                 Router.push('/connexion')
                 throw new Error('Veuillez vous connecter')
             }
             setIsLoading(true)
-            const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/deleteProject`, {
+            const responseJSON = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/deleteProject/${_id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${window.localStorage.getItem('token')}`
             },            
-            body: JSON.stringify({_id: _id })
         })
         
         const response = await responseJSON.json()

@@ -81,7 +81,7 @@ export async function deleteProject(req, res) {
         .then((project) => {
         Project.deleteOne({ _id: req.params.id })
             .then(() => {
-            res.status(201).json({ message: `Projet ${project.title} supprimé avec succès` });
+            res.status(201).json({ message: `Projet ${project?.title} supprimé avec succès` });
         })
             .catch((error) => res.status(500).json({ error }));
     })

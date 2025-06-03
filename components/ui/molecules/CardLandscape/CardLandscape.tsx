@@ -11,10 +11,16 @@ import Medal from '@/public/medal.json'
 import { useState, useRef } from 'react'
 import { useTheme } from 'next-themes'
 import IconDelete from '../../atoms/IconDelete/IconDelete'
+import ModalDeleteProject from '../ModalDeleteProject/ModalDeleteProject'
 
 
 export default function CardLandscape({ _id, title, summary, mainPhoto, deleteIcon }: CardProps) {
 
+    
+    const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
+    const handleDelete = () => {
+        setIsModalOpen(true)
+    }
 
 
     const playerRef = useRef<Player>(null)
@@ -44,11 +50,13 @@ export default function CardLandscape({ _id, title, summary, mainPhoto, deleteIc
     return (
         <div className={styles.cardWrapper}>
             {deleteIcon && 
-            <div className={styles.cardWrapper__deleteWrapper}>
+            <div className={styles.cardWrapper__deleteWrapper} onClick={handleDelete}>
                 <IconDelete/>
             </div>
             }
-
+            {isModalOpen &&
+            <ModalDeleteProject _id={_id} title={title} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}  />
+            }
             <Link className={styles.cardWrapper__card} href={`/projectPage/${_id}`}>
                 <div ref={medalWrapper} className={styles.cardWrapper__card__medalWrapper}>
                     <Player 

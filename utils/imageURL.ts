@@ -1,4 +1,3 @@
-
 export default function imageURL(width: number,quality: number,src : string, densityPixelRatio: number) {
 
     // Next ne permet pas d'avoir toutes les tailles d'images
@@ -8,14 +7,12 @@ export default function imageURL(width: number,quality: number,src : string, den
         const deviceSizes = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
         const imageSizes = [16, 32, 48, 64, 96, 128, 160, 256, 384]
         const widthPanel = [0,...imageSizes, ...deviceSizes] // le 0 a été ajouté pour que la boucle for fonctionne
-        console.log(widthPanel)
         //Je prends la liste en partant de la fin
         // Pour que chaque élément je le soustrait à width
         //Si le résultat est > 0 je continu
         //Lorsque le résultat est < 0 la width à prendre est celle de l'index précédent
     
         for( let i = widthPanel.length - 2; i >-2; i--) {
-            console.log('i',i)
             if (widthPanel[i] - width * densityPixelRatio <= 0) return widthPanel[i+1]
         }
     }
@@ -23,8 +20,6 @@ export default function imageURL(width: number,quality: number,src : string, den
 
     const srcCorrected = src.slice(1)
     const URL = `${process.env.NEXT_PUBLIC_BASE_URL}/_next/image?url=%2F${srcCorrected}&w=${widthAcceptedByNextJs(width)}&q=${quality}`
-    console.log('URL', URL)
-    // Il faut enlever le premier '/' de la source
     return URL
 
 }

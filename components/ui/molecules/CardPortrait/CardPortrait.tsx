@@ -6,20 +6,16 @@ import TitleCard from '../../atoms/TitleCard/TitleCard'
 import Link from 'next/link'
 import { CardProps } from '@/types/index.js'
 import IconDelete from '../../atoms/IconDelete/IconDelete'
-import useDeleteProject from '@/hooks/useDeleteProject'
 import { useState } from 'react'
 import ModalDeleteProject from '../ModalDeleteProject/ModalDeleteProject'
 
 
 export default function CardPortrait ({ _id, title, summary, mainPhoto, deleteIcon}: CardProps) {
 
-    const { isLoading, isSuccess, deleteProject } = useDeleteProject()
-    const [ isOpen, setIsOpen ] = useState<boolean>(false)
-    console.log('id dans cardPortrait',_id)
+    const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
 
     const handleDelete = () => {
-        setIsOpen(true)
-
+        setIsModalOpen(true)
     }
 
 
@@ -32,8 +28,8 @@ export default function CardPortrait ({ _id, title, summary, mainPhoto, deleteIc
                 <IconDelete/>
             </div>
             }
-            {isOpen &&
-            <ModalDeleteProject _id={_id} title={title} isOpen={isOpen} onClose={() => setIsOpen(false)}  />
+            {isModalOpen &&
+            <ModalDeleteProject _id={_id} title={title} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}  />
             }
             <Link className={styles.cardWrapper__card} href={`/projectPage/${_id}`}>
                 <div className={styles.cardWrapper__gradientLayer}></div>

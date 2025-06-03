@@ -33,8 +33,12 @@ mongoose
     .catch(() => console.log('Connexion à MongoDB échouée !'))
 
 // Configuration CORS
+const originCORS: string | string[] | undefined = process.env.NODE_ENV === 'production' 
+? process.env.DOMAIN_NAME 
+: [ 'http://localhost:3000', 'http://localhost:3001']
+
 app.use(cors({
-  origin: process.env.DOMAIN_NAME || 'http://localhost:3000',
+  origin: originCORS,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

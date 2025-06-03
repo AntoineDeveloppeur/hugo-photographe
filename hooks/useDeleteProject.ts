@@ -11,8 +11,6 @@ export default function useDeleteProject() {
 
     async function deleteProject(_id: string) {
         try {
-            console.log('id utilisé dans delete',_id)
-
             if(!window.localStorage.getItem('token')) {
                 Router.push('/connexion')
                 throw new Error('Veuillez vous connecter')
@@ -26,9 +24,8 @@ export default function useDeleteProject() {
         })
         
         const response = await responseJSON.json()
-        console.log('responseJSON.status',responseJSON.status)
         
-        if(responseJSON.status === 403 || 401) {
+        if(responseJSON.status === 403 || responseJSON.status === 401) {
                 Router.push('/connexion')
                 throw new Error(response.message)
             }
@@ -37,6 +34,9 @@ export default function useDeleteProject() {
         }
         setIsLoading(false)     
         setIsSuccess(true)
+        setTimeout(() => Router.refresh(), 1000)
+
+
         }
         catch (error) {
             const errorMessage = error instanceof Error

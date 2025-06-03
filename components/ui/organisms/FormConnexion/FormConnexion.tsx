@@ -52,7 +52,7 @@ export default function FormConnexion() {
             }
             if(response.token) {
                 window.localStorage.setItem('token', response.token)
-                router.push('/ajouterProjet')
+                router.push('/administrateur')
             } else {
                 throw new Error('Token manquant dans la réponse')
             }

@@ -15,9 +15,8 @@ export default function ModalDeleteProject({_id, title, isOpen, onClose} : Modal
     const { isLoading, isSuccess, deleteProject } = useDeleteProject()
 
     const handleYes = () => {
-        setIsConfirmed(false)
+        setIsConfirmed(true)
         deleteProject(_id)
-        
     }
     const handleNo = () => {
         onClose()
@@ -34,7 +33,7 @@ export default function ModalDeleteProject({_id, title, isOpen, onClose} : Modal
             </div>
             }
             {isLoading && <Loader/>}
-            {isSuccess && <Paragraphes texts={['Suppression confirmé']}/>}
+            {isSuccess && <Paragraphes texts={['Suppression réussie']}/>}
         </Modal>
     )
 }

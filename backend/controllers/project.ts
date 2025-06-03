@@ -110,6 +110,13 @@ export async function getProjects(req: Request, res: Response) {
 
 export async function deleteProject(req: Request, res: Response) {
     Project.findOne({_id : req.body._id})
-    .then(() => res.status(201).json({message: 'id trouvé'})).
-    catch((error) => res.status(404).json({message: error}))
+    .then((_id) => {
+        res.status(201).json( {message : 'id trouvé'})
+        // Project.deleteOne(_id)
+        // .then(() => {
+        //     res.status(201).json({message: `Projet ${_id} supprimé avec succès`})
+        // })
+        // .catch((error) => res.status(500).json({ error }))
+    })
+    .catch((error) => res.status(404).json({message: error}))
 }

@@ -43,9 +43,9 @@ export default function Contact() {
         mass: 0.5
     })
 
-    // const { email, phone} = useReCaptcha()
-    const email = "n'utilise pas le Recaptcha"
-    const phone = "faux numéro"
+    const { email, phone} = useReCaptcha()
+    // const email = "n'utilise pas le Recaptcha"
+    // const phone = "faux numéro"
 
     return (
         <section ref={containerRef} id="Contact" className={styles.contact}>
@@ -77,10 +77,7 @@ export default function Contact() {
                         <div className={styles.contact__presentation__text}>
                             <TitleProjectPage text="HUGO RANDEZ" />
                             <p className={styles.contact__presentation__text__p}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
+                            Spécialisé dans les récits visuels de voyage, je capture des moments uniques à travers le monde. Mon expertise s'étend également au plan local, où je collabore avec la mairie de ma ville.                            </p>
                             <div
                                 className={styles.contact__presentation__text__details}
                             >

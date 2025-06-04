@@ -2,10 +2,10 @@
     "galeryDesktop": [
         [           
             {
-                "src": "/LogoHR.png",
+                "src": "/taiwan7.webp",
                 "alt": "paysage avec une personne de dos au loin",
-                "width": 55,
-                "height": 66,
+                "width": 3702,
+                "height": 2468,
                 "priority": true
             },
             {
@@ -73,24 +73,24 @@
     "galeryTablet": [
         [           
             {
-                "src": "/LogoHR.png",
+                "src": "/taiwan7.webp",
                 "alt": "paysage avec une personne de dos au loin",
-                "width": 55,
-                "height": 66,
+                "width": 3702,
+                "height": 2468,
                 "priority": true
             },
             {
-                "src": "/1200x630.webp",
+                "src": "/concert.webp",
                 "alt": "concert avec un guitariste",
-                "width": 1200,
-                "height": 630,
+                "width": 6000,
+                "height": 4000,
                 "priority": true
             },
             {
-                "src": "/150x150.jpg",
+                "src": "/concert2.webp",
                 "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert",
-                "width": 150,
-                "height": 150,
+                "width": 3936,
+                "height": 2624,
                 "priority": true
             },
             {

@@ -14,7 +14,7 @@ export default function Connexion() {
                     <TitleProjectPage text="Le projet a bien été ajouté à la base de donnée" />
                 </div>
                 <div className={styles.succes__largeScreen__buttons}>
-                    <Button text="Retourner aux projetS" link="/#Projects" />
+                    <Button text="Retourner aux projets" link="/#Projects" />
                     <Button text="Ajouter un autre projet" link="/ajouterProjet" />
                 </div>
             </div>

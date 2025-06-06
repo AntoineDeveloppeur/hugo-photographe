@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
 import projectRoutes from './routes/project.js';
 import userRoutes from './routes/user.js';
+import recaptchaRoute from './routes/recaptcha.js';
 // Configuration des variables d'environnement
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,14 +29,16 @@ mongoose
 const originCORS = process.env.NODE_ENV === 'production'
     ? process.env.DOMAIN_NAME
     : ['http://localhost:3000', 'http://localhost:3001'];
+console.log(originCORS);
 app.use(cors({
-    origin: originCORS,
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
 // Routes
 app.use('/api/auth', userRoutes);
 app.use('/api/project', projectRoutes);
+app.use('/api/recaptcha', recaptchaRoute);
 // Démarrer le serveur
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur le port ${PORT}`);

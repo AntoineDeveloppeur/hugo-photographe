@@ -10,7 +10,7 @@ import { projectsProps, Data } from '@/types'
 import getBlurDataURL from '@/utils/plaiceholder'
 
 
-export async function generateStaticParams(): Promise<{ projectId: string }[]> {
+export async function generateStaticParams() {
     const data: Data = await getData()
     // il faudrait que je dise que les params possibles sont data.projects.id
     return data.projects.map((project) => ({

@@ -27,7 +27,7 @@ export default function useReCaptcha() {
             try {
                 const token = await executeRecaptcha()
 
-                const response = await fetch('/api', {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/recaptcha`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

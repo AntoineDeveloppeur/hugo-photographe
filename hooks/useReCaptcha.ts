@@ -26,13 +26,14 @@ export default function useReCaptcha() {
 
             try {
                 const token = await executeRecaptcha()
+                console.log('token',token)
 
                 const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/recaptcha`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(token)
+                    body: JSON.stringify({token: token})
                 })
 
                 if (!response.ok) {

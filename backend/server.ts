@@ -40,7 +40,7 @@ const originCORS: string | string[] | undefined = process.env.NODE_ENV === 'prod
 console.log(originCORS)
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: originCORS,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));

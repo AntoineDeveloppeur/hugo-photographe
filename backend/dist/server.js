@@ -31,7 +31,7 @@ const originCORS = process.env.NODE_ENV === 'production'
     : ['http://localhost:3000', 'http://localhost:3001'];
 console.log(originCORS);
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: originCORS,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));

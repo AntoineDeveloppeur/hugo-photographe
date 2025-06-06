@@ -4,14 +4,14 @@ export default async function recaptcha(req, res) {
             success: false,
             error: 'Format de requête invalide'
         };
-        res.status(400).json(responseToClient);
+        return res.status(400).json(responseToClient);
     }
     if (!process.env.RECAPTCHA_SECRET_KEY) {
         const responseToClient = {
             success: false,
             error: 'Configuration du serveur manquante'
         };
-        res.status(500).json(responseToClient);
+        return res.status(500).json(responseToClient);
     }
     const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${req.body.token}`;
     try {
@@ -29,7 +29,7 @@ export default async function recaptcha(req, res) {
                 phone: '',
                 error: `Échec de la vérification ReCAPTCHA:' ${data['error-codes']}`
             };
-            res.status(500).json(responseToClient);
+            return res.status(500).json(responseToClient);
         }
         if (data.score <= 0.5) {
             const responseToClient = {
@@ -38,7 +38,7 @@ export default async function recaptcha(req, res) {
                 phone: '',
                 error: 'Score ReCAPTCHA trop faible:'
             };
-            res.status(403).json(responseToClient);
+            return res.status(403).json(responseToClient);
         }
         // Toute les erreurs vérifiées
         const responseToClient = {
@@ -46,12 +46,12 @@ export default async function recaptcha(req, res) {
             email: process.env.HUGO_EMAIL,
             phone: process.env.HUGO_PHONE
         };
-        res.status(200).json(responseToClient);
+        return res.status(200).json(responseToClient);
     }
     catch (error) {
         const errorToClient = error instanceof Error
             ? error.message :
             error;
-        res.status(502).json({ error: errorToClient });
+        return res.status(502).json({ error: errorToClient });
     }
 }

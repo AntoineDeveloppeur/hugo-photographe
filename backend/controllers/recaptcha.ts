@@ -55,7 +55,7 @@ export default async function recaptcha(req: Request, res: Response) {
             email: process.env.HUGO_EMAIL,
             phone: process.env.HUGO_PHONE
         }
-         return res.status(200).json(responseToClient)
+        return res.status(200).json(responseToClient)
     } catch (error) {
         const errorToClient = error instanceof Error 
         ? error.message :

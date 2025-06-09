@@ -23,8 +23,7 @@ export default function FormAjouterProjet() {
         summary: z.string().min(1),
         textAbovePhotos: z.string().min(0),
         mainPhotoAlt: z.string().min(2),
-        mainPhotoHeight: z.coerce.number().min(3),
-        mainPhotoWidth: z.coerce.number().min(3)
+
         // Note: Nous ne validons pas le fichier avec Zod car il sera géré séparément
     }))
     // État pour stocker les photos
@@ -35,12 +34,8 @@ export default function FormAjouterProjet() {
         summary: string;
         textAbovePhotos: string;
         mainPhotoAlt: string;
-        mainPhotoHeight: number;
-        mainPhotoWidth: number;
         // Propriété dynamiques des sets de photos
         [key: `set${number}photo${number}alt`]: string;
-        [key: `set${number}photo${number}width`]: number;
-        [key: `set${number}photo${number}height`]: number;
     };
     
     // Modifie dynamiquement le validateur Zod
@@ -50,8 +45,6 @@ export default function FormAjouterProjet() {
             summary: z.string().min(1),
             textAbovePhotos: z.string().min(0),
             mainPhotoAlt: z.string().min(2),
-            mainPhotoHeight: z.coerce.number().min(3),
-            mainPhotoWidth: z.coerce.number().min(3)
             // Note: Nous ne validons pas les fichier avec Zod car ils seront gérés séparément
         })
 
@@ -60,8 +53,6 @@ export default function FormAjouterProjet() {
         photoRefs.forEach((set,setIndex) => {
             set.forEach((_, photoIndex) => {
                 dynamicFields[`set${setIndex}photo${photoIndex}alt`]= z.string().min(2)
-                dynamicFields[`set${setIndex}photo${photoIndex}width`]= z.coerce.number().min(3)
-                dynamicFields[`set${setIndex}photo${photoIndex}height`]= z.coerce.number().min(3)
             })
         })
 
@@ -119,15 +110,11 @@ export default function FormAjouterProjet() {
                 title: data.title,
                 summary: data.summary,
                 alt: data.mainPhotoAlt,
-                height: data.mainPhotoHeight,
-                width: data.mainPhotoWidth,
                 textsAbovePhotos: data.textAbovePhotos,
                 photosSets: photoRefs.map((set, setIndex) => (
                     set.map((_, photoIndex) => (
                         {
-                            alt :  data[`set${setIndex}photo${photoIndex}alt`],
-                            width :  data[`set${setIndex}photo${photoIndex}width`],
-                            height :  data[`set${setIndex}photo${photoIndex}height`]                          
+                            alt :  data[`set${setIndex}photo${photoIndex}alt`],                        
                         }
                     ))
                 ))
@@ -187,10 +174,6 @@ export default function FormAjouterProjet() {
             <p className={styles.form__photoPrincipale}>Photo principale</p>
             <InputFile id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange}/>
             <Input register={register} type='text' name='mainPhotoAlt' label='description succinte de la photo' error={errors.mainPhotoAlt?.message} defaultValue='test'/>
-            <Input register={register} type='number' name='mainPhotoHeight' label='hauteur en pixel' error={errors.mainPhotoHeight?.message} defaultValue={123} />
-            <Input register={register} type='number' name='mainPhotoWidth' label='largueur en pixel' error={errors.mainPhotoWidth?.message} defaultValue={123}  />
-            
-            
 
             {/* {partie dynamique : les sets de photos} */}
             {photoRefs.map((set, setIndex) => (
@@ -198,8 +181,6 @@ export default function FormAjouterProjet() {
                     <p className={styles.form__set__p}>Set n°{setIndex+1}</p>
                     {set.map((ref, photoIndex) => {
                         const dynamicAlt: string = `set${setIndex}photo${photoIndex}alt`
-                        const dynamicWidth: string = `set${setIndex}photo${photoIndex}width`
-                        const dynamicHeight: string = `set${setIndex}photo${photoIndex}height`
                             return <FormPhoto 
                             label={`Photo n°${photoIndex+1}`} 
                             id={`set${setIndex}photo${photoIndex}`} 
@@ -210,10 +191,6 @@ export default function FormAjouterProjet() {
                             // @ts-expected To check later
                             //@ts-expect-error ddd
                             errorAlt={errors[dynamicAlt]?.message}
-                            //@ts-expect-error ddd
-                            errorWidth={errors[dynamicWidth]?.message}
-                            //@ts-expect-error ddd
-                            errorHeight={errors[dynamicHeight]?.message}
                             />
                     })}
                     <div className={styles.form__buttonWrapper__addAPhoto} onClick={(e) => e.stopPropagation()}>

@@ -40,8 +40,8 @@ export async function createProject(req, res) {
             mainPhoto: {
                 src: photosUrl['mainPhoto'],
                 alt: projectData.alt,
-                height: files.mainPhoto.width || 800,
-                width: files.mainPhoto.height || 1200
+                height: files.mainPhoto.height || 800,
+                width: files.mainPhoto.width || 1200
             },
             textsAbovePhotos: projectData.textsAbovePhotos || [],
             photosSets: projectData.photosSets.map((set, setIndex) => {

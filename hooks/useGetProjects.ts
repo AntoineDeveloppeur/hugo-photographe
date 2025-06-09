@@ -16,7 +16,6 @@ export default function useGetProjects() {
                 const errorMessage = error instanceof Error
                 ? error.message
                 : String(error)
-                console.log(errorMessage)
             }
         }   
         fetchProjects()

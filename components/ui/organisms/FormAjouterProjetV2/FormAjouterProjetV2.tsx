@@ -156,7 +156,6 @@ export default function FormAjouterProjet() {
             });
             
             const response = await responseJSON.json()
-            console.log('response', response)
 
             if(responseJSON.status === 403) {
                 router.push('/connexion')
@@ -175,7 +174,7 @@ export default function FormAjouterProjet() {
             const errorMessage = error instanceof Error 
             ? error.message 
             : String(error)
-            alert(errorMessage)
+            // alert(errorMessage)
         }
     }
 
@@ -217,12 +216,12 @@ export default function FormAjouterProjet() {
                             errorHeight={errors[dynamicHeight]?.message}
                             />
                     })}
-                    <div className={styles.form__buttonWrapper__addAPhoto}>
-                        <ButtonAdd text="Ajouter une photo" onclick={() => handleAddPhoto(setIndex)}/>
+                    <div className={styles.form__buttonWrapper__addAPhoto} onClick={(e) => e.stopPropagation()}>
+                        <ButtonAdd text="Ajouter une photo" onclick={() => {handleAddPhoto(setIndex)}}/>
                     </div>
                 </div>
             ))}
-            <div className={styles.form__buttonWrapper__addASet}>
+            <div className={styles.form__buttonWrapper__addASet} onClick={(e) => e.stopPropagation()}>
                 <ButtonAdd text="Ajouter un set" onclick={handleAddASet}/>
             </div>
             <div className={styles.form__buttonWrapper__saveProject}>

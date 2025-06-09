@@ -169,8 +169,8 @@ export default function FormAjouterProjet() {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             {/* {partie statique du formulaire} */}
             <Input register={register} type='text' name='title' label='Titre du projet' error={errors.title?.message} defaultValue='test'/>
-            <Textarea register={register} name='summary' label='Sommaire' error={errors.summary?.message} rows={6} defaultValue='test' />
-            <Input register={register} type='text' name='textAbovePhotos' label='Texte à afficher en dessus de la photo principale' error={errors.textAbovePhotos?.message} defaultValue='test' />
+            <Textarea register={register} name='summary' label='Sommaire, afficher dans la vignette' error={errors.summary?.message} rows={6} defaultValue='test' />
+            <Input register={register} type='text' name='textAbovePhotos' label='Texte à afficher en dessous de la photo principale' error={errors.textAbovePhotos?.message} defaultValue='test' />
             <p className={styles.form__photoPrincipale}>Photo principale</p>
             <InputFile id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange}/>
             <Input register={register} type='text' name='mainPhotoAlt' label='description succinte de la photo' error={errors.mainPhotoAlt?.message} defaultValue='test'/>

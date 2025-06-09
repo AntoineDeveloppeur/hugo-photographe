@@ -20,7 +20,6 @@ export async function createProject(req: Request, res: Response) {
         if (!fields.projectTexts) {
             return res.status(400).json({ message: 'Les données du projet sont requises' })
         }
-
         
         interface PhotosUrl {
             mainPhoto?: string
@@ -34,7 +33,6 @@ export async function createProject(req: Request, res: Response) {
         const photosUrlArray: PhotosUrlArray  = await Promise.all(
             Object.entries(files)
                 .map(async ([key,fileArray]) => {
-                    console.log('fileArray',fileArray)
                     const url: string | unknown = await uploadToS3(fileArray,'projets')
                     if (url instanceof Error) {
                         // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
@@ -70,16 +68,19 @@ export async function createProject(req: Request, res: Response) {
             mainPhoto: {
                 src: photosUrl['mainPhoto'],
                 alt: projectData.alt,
-                height: projectData.height || 800,
-                width: projectData.width || 1200
+                height: files.mainPhoto.width || 800,
+                width: files.mainPhoto.height || 1200
             },
             textsAbovePhotos: projectData.textsAbovePhotos || [],
             photosSets: projectData.photosSets.map((set: object[], setIndex) => {
-                console.log('set',set)
                 return set.map((photo: object, photoIndex) => {
-                    console.log('photo',photo)
-                    console.log('photosUrl[`set${setIndex}photo${photoIndex}`]',photosUrl[`set${setIndex+1}photo${photoIndex+1}`])
-                    return {...photo, ...{src: photosUrl[`set${setIndex+1}photo${photoIndex+1}`]}}
+                    return {
+                        ...photo, 
+                        ...{src: photosUrl[`set${setIndex+1}photo${photoIndex+1}`]},
+                        // Informations liés à la taille directement pris dans les informations du fichier
+                        width: files[`set${setIndex+1}photo${photoIndex+1}`].width,
+                        height: files[`set${setIndex+1}photo${photoIndex+1}`].height
+                    }
                 })
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],

@@ -29,7 +29,6 @@ mongoose
 const originCORS = process.env.NODE_ENV === 'production'
     ? process.env.DOMAIN_NAME
     : ['http://localhost:3000', 'http://localhost:3001'];
-console.log(originCORS);
 app.use(cors({
     origin: originCORS,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],

@@ -39,7 +39,7 @@ export default function FormAjouterProjet() {
     interface FormFields {
         title: string;
         summary: string;
-        textAbovePhotos: string;
+        textAbovePhotos: [string];
         mainPhotoAlt: string;
         // Propriété dynamiques des sets de photos
         [key: `set${number}photo${number}alt`]: string;
@@ -52,7 +52,7 @@ export default function FormAjouterProjet() {
         const basicSchema = z.object({
             title: z.string().min(1),
             summary: z.string().min(1),
-            textAbovePhotos: z.string().min(0),
+            // textAbovePhotos: z.string().min(0),
             mainPhotoAlt: z.string().min(2),
             // Note: Nous ne validons pas les fichier avec Zod car ils seront gérés séparément
         })
@@ -104,8 +104,7 @@ export default function FormAjouterProjet() {
         setPhotoRefs(newPhotoRefs);
     }
     const handleAddParagraph = () => {
-        const tempParagraph = [...paragraphArray]
-        setParagraphArray([...tempParagraph,''])
+        setParagraphArray([...paragraphArray,''])
     }
     
     const onSubmit: SubmitHandler<FormFields> = async (data) => {

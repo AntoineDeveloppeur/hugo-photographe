@@ -12,6 +12,7 @@ import { projectsProps, Data } from '@/types'
 export async function generateStaticParams() {
     const data: Data = await getData()
     // il faudrait que je dise que les params possibles sont data.projects.id
+    console.log('data de generateStaticParams', data)
     return data.projects.map((project) => ({
         projectId: project._id
     }))
@@ -26,6 +27,7 @@ async function getData(): Promise<Data> {
                 // }   
             )
         if (!response.ok) {
+            console.log('if(!response.ok de getData')
             return dataFallBack
         }
         const data: Data = await response.json()
@@ -46,9 +48,12 @@ export default async function ProjectPage({
 
     // Nouvelle méthode avec generateStaticParams
     const { projectId } = await params
+    console.log('projectId dans ProjectPage', projectId)
     const data: Data = await getData()
-    const project: projectsProps | undefined = data.projects.find((project) => project._id === projectId)
+    console.log('data ProjectPage', data)
 
+    const project: projectsProps | undefined = data.projects.find((project) => project._id === projectId)
+    console.log('project dans ProjectPage',project)
     if (!project) {
         // Si le projet n'est pas trouvé, renvoyer une page d'erreur
         return (

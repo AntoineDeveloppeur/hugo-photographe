@@ -11,9 +11,9 @@ export default function useGetProjects() {
                 method: 'GET'
             })
             const response = await responseJSON.json()
-            if (response.projects.length>0) {
+            // if (response.projects.length>0) {
                 setData(response)   
-            } 
+            // } 
             }
             catch (error) {
                 const errorMessage = error instanceof Error

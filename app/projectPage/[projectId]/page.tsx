@@ -7,7 +7,6 @@ import LinkBottomOfProjectPage from '@/components/ui/molecules/LinkBottomOfProje
 import PhotoProjectPage from '@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import { projectsProps, Data } from '@/types'
-import getBlurDataURL from '@/utils/plaiceholder'
 
 
 export async function generateStaticParams() {

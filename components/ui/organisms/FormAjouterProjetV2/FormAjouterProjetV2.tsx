@@ -107,13 +107,8 @@ export default function FormAjouterProjet() {
     const handleAddParagraph = () => {
         setParagraphArray([...paragraphArray,''])
     }
-
-    useEffect(() => {
-        console.log("Form errors:", errors);
-      }, [errors]);
     
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
-        console.log('dans le onSubmit')
         try {
             // Vérifier la présences des fichiers
             if (!selectedFile) {

@@ -22,7 +22,7 @@ export default function FormAjouterProjet() {
     const [projectSchema, setProjectSchema] = useState(z.object({
         title: z.string().min(1),
         summary: z.string().min(1),
-        textAbovePhotos: z.string().min(0),
+        // textAbovePhotos: z.array(z.string().min(0)),
         mainPhotoAlt: z.string().min(2),
 
         // Note: Nous ne validons pas le fichier avec Zod car il sera géré séparément
@@ -39,7 +39,7 @@ export default function FormAjouterProjet() {
     interface FormFields {
         title: string;
         summary: string;
-        textAbovePhotos: [string];
+        textAbovePhotos?: string[];
         mainPhotoAlt: string;
         // Propriété dynamiques des sets de photos
         [key: `set${number}photo${number}alt`]: string;
@@ -53,6 +53,7 @@ export default function FormAjouterProjet() {
             title: z.string().min(1),
             summary: z.string().min(1),
             // textAbovePhotos: z.string().min(0),
+            // textAbovePhotos: z.array(z.string()),
             mainPhotoAlt: z.string().min(2),
             // Note: Nous ne validons pas les fichier avec Zod car ils seront gérés séparément
         })
@@ -106,8 +107,13 @@ export default function FormAjouterProjet() {
     const handleAddParagraph = () => {
         setParagraphArray([...paragraphArray,''])
     }
+
+    useEffect(() => {
+        console.log("Form errors:", errors);
+      }, [errors]);
     
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
+        console.log('dans le onSubmit')
         try {
             // Vérifier la présences des fichiers
             if (!selectedFile) {
@@ -127,7 +133,7 @@ export default function FormAjouterProjet() {
                 photosSets: photoRefs.map((set, setIndex) => (
                     set.map((_, photoIndex) => (
                         {
-                            alt :  data[`set${setIndex}photo${photoIndex}alt`],                        
+                            alt :  data[`set${setIndex+1}photo${photoIndex+1}alt`],                        
                         }
                     ))
                 ))
@@ -174,7 +180,7 @@ export default function FormAjouterProjet() {
             const errorMessage = error instanceof Error 
             ? error.message 
             : String(error)
-            // alert(errorMessage)
+            alert(errorMessage)
         }
     }
 
@@ -196,7 +202,7 @@ export default function FormAjouterProjet() {
                 <Input name={`paragraph${index+1}`} key={`paragraph${index+1}`} register={register} type='text' label={`paragraphe n°${index+1}`} error={errors.textAbovePhotos?.message} defaultValue='test' />
             )}
             <div className={styles.form__buttonWrapper__addAParagraph} onClick={(e) => e.stopPropagation()}>
-                <ButtonAdd text="Ajouter un paragraphe" onclick={() => {handleAddParagraph()}}/>
+                <ButtonAdd text="Ajouter un paragraphe" onclick={handleAddParagraph}/>
             </div>
 
             {/* {partie dynamique : les sets de photos} */}
@@ -204,15 +210,14 @@ export default function FormAjouterProjet() {
                 <div className={styles.form__set} key={`set${setIndex+1}`}>
                     <p className={styles.form__set__p}>Set n°{setIndex+1}</p>
                     {set.map((ref, photoIndex) => {
-                        const dynamicAlt: string = `set${setIndex}photo${photoIndex}alt`
+                        const dynamicAlt: string = `set${setIndex+1}photo${photoIndex+1}alt`
                             return <FormPhoto 
                             label={`Photo n°${photoIndex+1}`} 
-                            id={`set${setIndex}photo${photoIndex}`} 
-                            key={`set${setIndex}photo${photoIndex}`} 
+                            id={`set${setIndex+1}photo${photoIndex+1}`} 
+                            key={`set${setIndex+1}photo${photoIndex+1}`} 
                             fileInputRef={ref} 
                             //@ts-expect-error ddd
                             register={register}
-                            // @ts-expected To check later
                             //@ts-expect-error ddd
                             errorAlt={errors[dynamicAlt]?.message}
                             />

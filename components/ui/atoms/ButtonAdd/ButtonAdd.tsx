@@ -36,7 +36,7 @@ export default function Button({ text, link, onclick, type, disabled }: ButtonPr
             whileHover={{ backgroundColor: 'var(--background-button)' }}
             whileTap={{ scale: 0.9 }}
             disabled= {disabled ? disabled : false}
-            type={type ? type : undefined}
+            type={type ? type : "button"}
             onClick={handleClick}
         >
             <AnimatePresence>

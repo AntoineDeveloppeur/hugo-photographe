@@ -196,7 +196,7 @@ export default function FormAjouterProjet() {
             {paragraphArray.map((_,index) => 
                 <Input name={`paragraph${index+1}`} key={`paragraph${index+1}`} register={register} type='text' label={`paragraphe n°${index+1}`} error={errors.textAbovePhotos?.message} defaultValue='test' />
             )}
-            <div className={styles.form__buttonWrapper__addAParagraph} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.form__buttonWrapper__addAParagraph} >
                 <ButtonAdd text="Ajouter un paragraphe" onclick={handleAddParagraph}/>
             </div>
 
@@ -217,12 +217,12 @@ export default function FormAjouterProjet() {
                             errorAlt={errors[dynamicAlt]?.message}
                             />
                     })}
-                    <div className={styles.form__buttonWrapper__addAPhoto} onClick={(e) => e.stopPropagation()}>
+                    <div className={styles.form__buttonWrapper__addAPhoto}>
                         <ButtonAdd text="Ajouter une photo" onclick={() => {handleAddPhoto(setIndex)}}/>
                     </div>
                 </div>
             ))}
-            <div className={styles.form__buttonWrapper__addASet} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.form__buttonWrapper__addASet}>
                 <ButtonAdd text="Ajouter un set" onclick={handleAddASet}/>
             </div>
             <div className={styles.form__buttonWrapper__saveProject}>

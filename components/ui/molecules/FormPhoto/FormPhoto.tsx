@@ -3,6 +3,7 @@ import Input from '../../atoms/Input/Input'
 import InputFile from '../InputFile/InputFile'
 import {RefObject, ChangeEvent } from 'react'
 import { UseFormRegister, FieldValues } from 'react-hook-form'
+import { NumberExpression } from 'mongoose'
 
 type FormPhotoTypes<T extends FieldValues> =  {
     label: string
@@ -13,7 +14,7 @@ type FormPhotoTypes<T extends FieldValues> =  {
     errorAlt: any
 }
 
-export default function FormPhoto<T extends FieldValues>({label, id, register, fileInputRef, handleFileChange, errorAlt, errorWidth, errorHeight} : FormPhotoTypes<T>) {
+export default function FormPhoto<T extends FieldValues>({label, id, register, fileInputRef, handleFileChange, errorAlt} : FormPhotoTypes<T>) {
     return(
         <div className={styles.formPhoto}>
             <p className={styles.formPhoto__p}>{label}</p>

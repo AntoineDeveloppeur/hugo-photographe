@@ -14,7 +14,7 @@ export default function checkToken(req, res, next) {
         return;
     }
     catch (error) {
-        return res.status(403).json({ message: "Vous n'êtes pas autorisé à créer un projet, veuillez vous connecter. Si le problème persiste, contacter votre administrateur web", error: error });
+        return res.status(403).json({ message: "Vous n'êtes pas autorisé, veuillez vous connecter. Si le problème persiste, contacter votre administrateur web", error: error });
         // Ajouter au frontend la redirection vers la page de connexion
     }
 }

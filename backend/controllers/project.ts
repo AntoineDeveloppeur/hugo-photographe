@@ -52,7 +52,7 @@ export async function createProject(req: Request, res: Response) {
             alt: string,
             height: number,
             width: number,
-            textsAbovePhotos: string,
+            textsAbovePhotos: string[],
             photosSets: object[][],
             textsBelowPhotos: string
         }

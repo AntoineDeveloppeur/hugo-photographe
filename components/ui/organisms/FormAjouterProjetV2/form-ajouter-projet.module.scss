@@ -4,8 +4,17 @@
     display: flex;
     flex-direction: column;
 
-    &__photoPrincipale {
+    &__titre {
         font-size: 1.8rem;
+        font-family: var(--font-title);
+        text-align: center;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    &__sousTitre {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
         font-family: var(--font-title);
         text-align: center;
     }
@@ -21,21 +30,30 @@
 
         }
     }
-    &__buttonWrapper__addAPhoto {
-        margin-top: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        justify-content: center;
+    &__buttonWrapper {
+        &__addAParagraph {
+            margin-bottom: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+        }
+        &__addAPhoto {
+            margin-top: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+        }
+        &__addASet {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+        &__saveProject{
+            margin-top: 2.5rem;
+            display: flex;
+            justify-content: center;
+        }
     }
-    &__buttonWrapper__addASet {
-        margin-top: 1rem;
-        display: flex;
-        justify-content: center;
-    }
-    &__buttonWrapper__saveProject{
-        margin-top: 2.5rem;
-        display: flex;
-        justify-content: center;
-}
 }

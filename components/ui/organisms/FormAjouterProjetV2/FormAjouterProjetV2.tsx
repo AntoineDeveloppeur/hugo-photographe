@@ -13,6 +13,7 @@ import FormPhoto from '../../molecules/FormPhoto/FormPhoto'
 import ButtonAdd from '../../atoms/ButtonAdd/ButtonAdd'
 import PhotosSets from '../../molecules/PhotosSets/PhotosSets'
 import { useRouter } from 'next/navigation'
+import Paragraphes from '../../molecules/Paragraphes/Paragraphes'
 
 export default function FormAjouterProjet() {
     
@@ -27,7 +28,13 @@ export default function FormAjouterProjet() {
         // Note: Nous ne validons pas le fichier avec Zod car il sera géré séparément
     }))
     // État pour stocker les photos
-    const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>([[createRef<HTMLInputElement>()]]);
+    const [photoRefs, setPhotoRefs] = useState<Array<Array<React.RefObject<HTMLInputElement>>>>(
+        [[createRef<HTMLInputElement>()]]
+    )
+    // État pour stocker les paragraphs
+    const [paragraphArray, setParagraphArray] = useState<string[]>(
+        ['']
+    )
     
     interface FormFields {
         title: string;
@@ -36,10 +43,12 @@ export default function FormAjouterProjet() {
         mainPhotoAlt: string;
         // Propriété dynamiques des sets de photos
         [key: `set${number}photo${number}alt`]: string;
+        [key: `paragraph${number}`]: string;
     };
     
     // Modifie dynamiquement le validateur Zod
     useEffect(() => {
+        // Initialise avec le schéma de base
         const basicSchema = z.object({
             title: z.string().min(1),
             summary: z.string().min(1),
@@ -48,25 +57,22 @@ export default function FormAjouterProjet() {
             // Note: Nous ne validons pas les fichier avec Zod car ils seront gérés séparément
         })
 
+        //Ajoute les parties dynamiques
         const dynamicFields : Record<string, z.ZodTypeAny> = {}
-
         photoRefs.forEach((set,setIndex) => {
             set.forEach((_, photoIndex) => {
-                dynamicFields[`set${setIndex}photo${photoIndex}alt`]= z.string().min(2)
+                dynamicFields[`set${setIndex+1}photo${photoIndex+1}alt`]= z.string().min(2)
             })
         })
+        paragraphArray.forEach((_,index) =>
+            dynamicFields[`paragraph${index+1}`]= z.string().min(2)
+        )
 
         const dynamicFieldsSchema = z.object(dynamicFields)
 
         // @ts-expect-error merge fonctionne mais apporte des problème de typages qui ne sont pas véritable
         setProjectSchema(basicSchema.merge(dynamicFieldsSchema))
-
-
-        // setProjectSchema(z.object({
-        //     ...basicSchema,
-        //     ...dynamicFields
-        // }))
-    }, [photoRefs])
+    }, [photoRefs, paragraphArray])
 
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormFields>({
         resolver: zodResolver(projectSchema)
@@ -82,6 +88,8 @@ export default function FormAjouterProjet() {
         const file = event.target.files?.[0] || null;
         setSelectedFile(file);
     };
+
+    // Gestionnaire pour l'ajout d'inputs
     const handleAddASet = () => {
         setPhotoRefs([...photoRefs, [createRef<HTMLInputElement>()]]);
     }
@@ -94,6 +102,10 @@ export default function FormAjouterProjet() {
         newPhotoRefs[setIndex].push(createRef<HTMLInputElement>())
         // Changer la façon dont sont ajouté les références
         setPhotoRefs(newPhotoRefs);
+    }
+    const handleAddParagraph = () => {
+        const tempParagraph = [...paragraphArray]
+        setParagraphArray([...tempParagraph,''])
     }
     
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
@@ -110,7 +122,9 @@ export default function FormAjouterProjet() {
                 title: data.title,
                 summary: data.summary,
                 alt: data.mainPhotoAlt,
-                textsAbovePhotos: data.textAbovePhotos,
+                textsAbovePhotos: paragraphArray.map((_,index) =>
+                    data[`paragraph${index+1}`]
+                ),
                 photosSets: photoRefs.map((set, setIndex) => (
                     set.map((_, photoIndex) => (
                         {
@@ -168,16 +182,27 @@ export default function FormAjouterProjet() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             {/* {partie statique du formulaire} */}
+            <p className={styles.form__titre}>Vignette</p>
+
             <Input register={register} type='text' name='title' label='Titre du projet' error={errors.title?.message} defaultValue='test'/>
-            <Textarea register={register} name='summary' label='Sommaire, afficher dans la vignette' error={errors.summary?.message} rows={6} defaultValue='test' />
-            <Input register={register} type='text' name='textAbovePhotos' label='Texte à afficher en dessous de la photo principale' error={errors.textAbovePhotos?.message} defaultValue='test' />
-            <p className={styles.form__photoPrincipale}>Photo principale</p>
+            <Textarea register={register} name='summary' label='Sommaire' error={errors.summary?.message} rows={6} defaultValue='test' />
+            <p className={styles.form__titre}>Photo principale</p>
             <InputFile id='mainPhoto' fileInputRef={fileInputRef} handleFileChange={handleFileChange}/>
             <Input register={register} type='text' name='mainPhotoAlt' label='description succinte de la photo' error={errors.mainPhotoAlt?.message} defaultValue='test'/>
+            <p className={styles.form__titre}>Page Projet</p>
+            <p className={styles.form__sousTitre}>Texte à afficher en dessous de la photo principale</p>
+
+            {/* {partie dynamique : les paragraphes} */}
+            {paragraphArray.map((_,index) => 
+                <Input name={`paragraph${index+1}`} key={`paragraph${index+1}`} register={register} type='text' label={`paragraphe n°${index+1}`} error={errors.textAbovePhotos?.message} defaultValue='test' />
+            )}
+            <div className={styles.form__buttonWrapper__addAParagraph} onClick={(e) => e.stopPropagation()}>
+                <ButtonAdd text="Ajouter un paragraphe" onclick={() => {handleAddParagraph()}}/>
+            </div>
 
             {/* {partie dynamique : les sets de photos} */}
             {photoRefs.map((set, setIndex) => (
-                <div className={styles.form__set} key={`set${setIndex}`}>
+                <div className={styles.form__set} key={`set${setIndex+1}`}>
                     <p className={styles.form__set__p}>Set n°{setIndex+1}</p>
                     {set.map((ref, photoIndex) => {
                         const dynamicAlt: string = `set${setIndex}photo${photoIndex}alt`

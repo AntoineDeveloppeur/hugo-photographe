@@ -11,7 +11,8 @@ export default function useGetProjects() {
                 method: 'GET'
             })
             const response = await responseJSON.json()
-            if (response.projects.length()>0) {
+            console.log('response.projects',response.projects)
+            if (response.projects.length>0) {
                 setData(response)   
             } 
             }

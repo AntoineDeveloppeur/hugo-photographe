@@ -21,10 +21,9 @@ export async function generateStaticParams() {
 
 async function getData(): Promise<Data> {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`
-            // , {
-                // next : { revalidate: 3600}
-                // }   
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`,
+            { cache: 'no-store' }
+  
             )
         if (!response.ok) {
             console.log('if(!response.ok de getData')

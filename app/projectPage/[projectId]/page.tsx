@@ -7,104 +7,80 @@ import LinkBottomOfProjectPage from '@/components/ui/molecules/LinkBottomOfProje
 import PhotoProjectPage from '@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage'
 import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
 import { projectsProps, Data } from '@/types'
-
+import getProjects from '@/utils/getProjects'
 
 export async function generateStaticParams() {
-    const data: Data = await getData()
-    // il faudrait que je dise que les params possibles sont data.projects.id
-    console.log('data de generateStaticParams', data)
-    return data.projects.map((project) => ({
-        projectId: project._id
-    }))
-    // Donc generateStaticParams attends un tableau de tous les params
+  const data: Data = await getProjects()
+  // il faudrait que je dise que les params possibles sont data.projects.id
+  console.log('data de generateStaticParams', data)
+  return data.projects.map((project) => ({
+    projectId: project._id,
+  }))
+  // Donc generateStaticParams attends un tableau de tous les params
 }
-
-async function getData(): Promise<Data> {
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`,
-            { cache: 'no-store' }
-  
-            )
-        if (!response.ok) {
-            console.log('if(!response.ok de getData')
-            return dataFallBack
-        }
-        const data: Data = await response.json()
-        return data
-    } catch {
-        return dataFallBack
-    }
-}
-
 
 export default async function ProjectPage({
-    params
+  params,
 }: {
-    params: Promise<{ projectId: string }>
+  params: Promise<{ projectId: string }>
 }) {
-    //est-ce que c'est mal de récupérer l'id de l'objet mongoDB pour le passer en paramètre dynamique ?
-    // Peut-être problème de sécurité ?
+  //est-ce que c'est mal de récupérer l'id de l'objet mongoDB pour le passer en paramètre dynamique ?
+  // Peut-être problème de sécurité ?
 
-    // Nouvelle méthode avec generateStaticParams
-    const { projectId } = await params
-    console.log('projectId dans ProjectPage', projectId)
-    const data: Data = await getData()
-    console.log('data ProjectPage', data)
+  // Nouvelle méthode avec generateStaticParams
+  const { projectId } = await params
+  console.log('projectId dans ProjectPage', projectId)
+  const data: Data = await getProjects()
+  console.log('data ProjectPage', data)
 
-    const project: projectsProps | undefined = data.projects.find((project) => project._id === projectId)
-    console.log('project dans ProjectPage',project)
-    if (!project) {
-        // Si le projet n'est pas trouvé, renvoyer une page d'erreur
-        return (
-            <section className={styles.projectPage}>
-                <div className={styles.projectPage__largeScreen}>
-                    <div
-                        className={styles.projectPage__largeScreen__404Wrapper}
-                    >
-                        <p
-                            className={
-                                styles.projectPage__largeScreen__404Wrapper__text
-                            }
-                        >
-                            Le projet n&apos;a pas été trouvé.
-                        </p>
-                        <Button text="Retourner aux projets" link="/" />
-                    </div>
-                </div>
-            </section>
-        )
-    } else {
-        return (
-            <section className={styles.projectPage}>
-                <article className={styles.projectPage__largeScreen}>
-                    <div className={styles.projectPage__largeScreen__photoWrapper}>
-                        <PhotoProjectPage photo={project.mainPhoto} hoverEffect={false} priority={true} sizes='100vw' mainPhoto={true}/>
-                    </div>
-                    <div className={styles.projectPage__largeScreen__titleWrapper}>
-                        <TitleProjectPage text={project.title} />
-                    </div>
-                    <div
-                        className={
-                            styles.projectPage__largeScreen__paragraphesWrapper
-                        }
-                    >
-                        {project.textsAbovePhotos && (
-                            <Paragraphes texts={project.textsAbovePhotos} />
-                        )}
-                    </div>
-                    <PhotosSets photosSets={project.photosSets} />
-                    <div
-                        className={
-                            styles.projectPage__largeScreen__paragraphesWrapper
-                        }
-                    >
-                        {project.textsBelowPhotos && (
-                            <Paragraphes texts={project.textsBelowPhotos} />
-                        )}
-                    </div>
-                    <LinkBottomOfProjectPage/>
-                </article>
-            </section>
-        )
-    }
+  const project: projectsProps | undefined = data.projects.find(
+    (project) => project._id === projectId
+  )
+  console.log('project dans ProjectPage', project)
+  if (!project) {
+    // Si le projet n'est pas trouvé, renvoyer une page d'erreur
+    return (
+      <section className={styles.projectPage}>
+        <div className={styles.projectPage__largeScreen}>
+          <div className={styles.projectPage__largeScreen__404Wrapper}>
+            <p className={styles.projectPage__largeScreen__404Wrapper__text}>
+              Le projet n&apos;a pas été trouvé.
+            </p>
+            <Button text="Retourner aux projets" link="/" />
+          </div>
+        </div>
+      </section>
+    )
+  } else {
+    return (
+      <section className={styles.projectPage}>
+        <article className={styles.projectPage__largeScreen}>
+          <div className={styles.projectPage__largeScreen__photoWrapper}>
+            <PhotoProjectPage
+              photo={project.mainPhoto}
+              hoverEffect={false}
+              priority={true}
+              sizes="100vw"
+              mainPhoto={true}
+            />
+          </div>
+          <div className={styles.projectPage__largeScreen__titleWrapper}>
+            <TitleProjectPage text={project.title} />
+          </div>
+          <div className={styles.projectPage__largeScreen__paragraphesWrapper}>
+            {project.textsAbovePhotos && (
+              <Paragraphes texts={project.textsAbovePhotos} />
+            )}
+          </div>
+          <PhotosSets photosSets={project.photosSets} />
+          <div className={styles.projectPage__largeScreen__paragraphesWrapper}>
+            {project.textsBelowPhotos && (
+              <Paragraphes texts={project.textsBelowPhotos} />
+            )}
+          </div>
+          <LinkBottomOfProjectPage />
+        </article>
+      </section>
+    )
+  }
 }

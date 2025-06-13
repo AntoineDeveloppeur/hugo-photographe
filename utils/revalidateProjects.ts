@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
-export default function revalidateProjects() {
+export default async function revalidateProjects() {
   revalidatePath(
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`
   )

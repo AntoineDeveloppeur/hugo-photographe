@@ -12,7 +12,6 @@ import getProjects from '@/utils/getProjects'
 export async function generateStaticParams() {
   const data: Data = await getProjects()
   // il faudrait que je dise que les params possibles sont data.projects.id
-  console.log('data de generateStaticParams', data)
   return data.projects.map((project) => ({
     projectId: project._id,
   }))
@@ -29,14 +28,11 @@ export default async function ProjectPage({
 
   // Nouvelle méthode avec generateStaticParams
   const { projectId } = await params
-  console.log('projectId dans ProjectPage', projectId)
   const data: Data = await getProjects()
-  console.log('data ProjectPage', data)
 
   const project: projectsProps | undefined = data.projects.find(
     (project) => project._id === projectId
   )
-  console.log('project dans ProjectPage', project)
   if (!project) {
     // Si le projet n'est pas trouvé, renvoyer une page d'erreur
     return (

@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { revalidateTag } from 'next/cache'
 
 export default function useDeleteProject() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -37,7 +36,6 @@ export default function useDeleteProject() {
       }
       setIsLoading(false)
       setIsSuccess(true)
-      revalidateTag('ProjectData')
       setTimeout(() => Router.refresh(), 1000)
     } catch (error) {
       const errorMessage =

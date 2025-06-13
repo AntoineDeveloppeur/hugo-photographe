@@ -12,7 +12,7 @@ import InputFile from '../../molecules/InputFile/InputFile'
 import FormPhoto from '../../molecules/FormPhoto/FormPhoto'
 import ButtonAdd from '../../atoms/ButtonAdd/ButtonAdd'
 import { useRouter } from 'next/navigation'
-import { revalidateTag } from 'next/cache'
+import revalidateProjects from '@/utils/revalidateProjects'
 
 export default function FormAjouterProjet() {
   const router = useRouter()
@@ -174,7 +174,8 @@ export default function FormAjouterProjet() {
       if (!responseJSON.ok) {
         throw new Error(response.error)
       }
-      revalidateTag('projectsData')
+      //Réinitialise le cache serveur des données
+      // revalidateProjects()
       router.push('/succesAjoutProjet')
     } catch (error) {
       const errorMessage =

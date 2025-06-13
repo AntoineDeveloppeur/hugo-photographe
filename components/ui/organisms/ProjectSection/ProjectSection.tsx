@@ -12,9 +12,12 @@ import { projectsProps } from '@/types'
 import CardLandscape from '../../molecules/CardLandscape/CardLandscape'
 import useIsMobile from '@/hooks/useIsMobile'
 import useGetProjects from '@/hooks/useGetProjects'
+import getProjects from '@/utils/getProjects'
+
+const data = await getProjects()
 
 export default function ProjectSection() {
-  const data = useGetProjects()
+  // const data = useGetProjects()
 
   const isMobile = useIsMobile()
   // définir une constant qui dépend du nombre de projets

@@ -8,9 +8,7 @@ import { useState, Suspense } from 'react'
 import Modal from '../Modal/Modal'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
-import ServerImage from '../ServerImage/ServerImage'
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Image from '../Image/Image'
 
 const PhotoProjectPage = ({
   photo,
@@ -47,7 +45,7 @@ const PhotoProjectPage = ({
         }}
         style={!isMobile ? { cursor: 'pointer' } : undefined}
       >
-        <ServerImage
+        <Image
           photo={photo}
           priority={priority}
           sizes={sizes}

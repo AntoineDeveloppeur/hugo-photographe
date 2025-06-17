@@ -1,6 +1,7 @@
 import NextImage from 'next/image'
 import { PhotoProps } from '@/types'
 import styles from './serverImage.module.scss'
+import { useState } from 'react'
 
 type ServerImageProps = {
   photo: PhotoProps['photo']
@@ -33,11 +34,16 @@ export default function ServerImage({
   // Combinaison des styles personnalisés et des styles mainPhoto
   const combinedStyle = mainPhoto ? { ...mainPhotoStyle, ...style } : style
 
+  const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false)
+
   return (
-    <div className={`${styles.imageWrapper} ${className || ''}`}>
+    <div
+      className={`${styles.imageWrapper} 
+      ${className || ''} 
+      ${!isImageLoaded ? styles.skeleton : ''}`}
+    >
       <NextImage
         className={`${styles.imageWrapper__image} ${imageClassName || ''}`}
-        // className={`${styles.image} ${imageClassName || ''}`}
         src={photo.src}
         alt={photo.alt}
         width={photo.width || 4000}
@@ -46,6 +52,7 @@ export default function ServerImage({
         sizes={sizes}
         priority={priority}
         style={combinedStyle}
+        onLoadingComplete={() => setIsImageLoaded(true)}
       />
     </div>
   )

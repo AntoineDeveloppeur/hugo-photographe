@@ -47,20 +47,14 @@ const PhotoProjectPage = ({
         }}
         style={!isMobile ? { cursor: 'pointer' } : undefined}
       >
-        <Suspense
-          fallback={
-            <Skeleton height="100%" width="100%" className={styles.skeleton} />
-          }
-        >
-          <ServerImage
-            photo={photo}
-            priority={priority}
-            sizes={sizes}
-            mainPhoto={mainPhoto}
-            className={styles.imageWrapper}
-            imageClassName={styles.imageWrapper__image}
-          />
-        </Suspense>
+        <ServerImage
+          photo={photo}
+          priority={priority}
+          sizes={sizes}
+          mainPhoto={mainPhoto}
+          className={styles.imageWrapper}
+          imageClassName={styles.imageWrapper__image}
+        />
       </motion.div>
 
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>

@@ -77,12 +77,11 @@ export default function PhotoGallery({
         whileHover={hoverEffect ? { scale: 1.08 } : undefined}
         whileTap={hoverEffect ? { scale: 1.08 } : undefined}
         transition={{
-          duration: 5,
+          duration: 3,
           ease: [0.215, 0.61, 0.355, 1],
         }}
         style={!isMobile ? { cursor: 'pointer' } : undefined}
       >
-        {/* Utilisation du Server Component */}
         <Image photo={photo} priority={priority} />
       </motion.div>
 

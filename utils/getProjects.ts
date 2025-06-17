@@ -5,7 +5,7 @@ export default async function getProjects(): Promise<Data> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`,
-      { next: { revalidate: false } }
+      { next: { revalidate: 3600 } }
       // { cache: 'force-cache', next: { revalidate: false } }
     )
 

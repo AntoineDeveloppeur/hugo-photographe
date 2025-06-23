@@ -44,7 +44,7 @@ next-env.d.ts
 
 # photos
 /public
-!public/fonts
+!/public/fonts
 
 # Dossier d'aide à la suppression des photos dans le dépôt distant
 /git-cleanup

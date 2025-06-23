@@ -43,8 +43,9 @@ yarn-error.log*
 next-env.d.ts
 
 # photos
-/public
+/public/images
 !/public/fonts
+!/public/icons
 
 # Dossier d'aide à la suppression des photos dans le dépôt distant
 /git-cleanup

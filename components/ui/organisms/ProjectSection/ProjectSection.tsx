@@ -1,18 +1,17 @@
-'use client'
+"use client"
 
-import styles from './project-section.module.scss'
-import Subtitle from '../../atoms/Subtitle/Subtitle'
-import Title from '../../atoms/Title/Title'
-import CardPortrait from '../../molecules/CardPortrait/CardPortrait'
-import Button from '../../atoms/Button/Button'
-import { useState, useEffect } from 'react'
-import Pagination from '../../molecules/Pagination/Pagination'
-import { motion, AnimatePresence } from 'framer-motion'
-import { projectsProps } from '@/types'
-import CardLandscape from '../../molecules/CardLandscape/CardLandscape'
-import useIsMobile from '@/hooks/useIsMobile'
-import useGetProjects from '@/hooks/useGetProjects'
-import getProjects from '@/utils/getProjects'
+import styles from "./project-section.module.scss"
+import Subtitle from "../../atoms/Subtitle/Subtitle"
+import Title from "../../atoms/Title/Title"
+import CardPortrait from "../../molecules/CardPortrait/CardPortrait"
+import Button from "../../atoms/Button/Button"
+import { useState, useEffect } from "react"
+import Pagination from "../../molecules/Pagination/Pagination"
+import { motion, AnimatePresence } from "framer-motion"
+import { projectsProps } from "@/types"
+import CardLandscape from "../../molecules/CardLandscape/CardLandscape"
+import useIsMobile from "@/hooks/useIsMobile"
+import getProjects from "@/utils/getProjects"
 
 const data = await getProjects()
 
@@ -31,12 +30,12 @@ export default function ProjectSection() {
 
   //Enregistrer la page actuelle dans les données locales et supprimer lorsque la page est quittée
   const currentPageStored =
-    window.localStorage.getItem('currentPage') !== null
-      ? Number(window.localStorage.getItem('currentPage'))
+    window.localStorage.getItem("currentPage") !== null
+      ? Number(window.localStorage.getItem("currentPage"))
       : 1
   const [currentPage, setCurrentPage] = useState<number>(currentPageStored)
   useEffect(() => {
-    window.localStorage.setItem('currentPage', currentPage.toString())
+    window.localStorage.setItem("currentPage", currentPage.toString())
   }, [currentPage])
 
   function clickOnAllProjects() {
@@ -44,15 +43,18 @@ export default function ProjectSection() {
   }
   function previousPage() {
     setCurrentPage(((currentPage - 2 + PagesCount) % PagesCount) + 1)
-    document.getElementById('Projects')?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" })
   }
   function nextPage() {
     setCurrentPage((currentPage % PagesCount) + 1)
-    document.getElementById('Projects')?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <section id="Projects" className={styles.projectSection}>
+    <section
+      id="Projects"
+      className={styles.projectSection}
+    >
       <div className={styles.projectSection__largeScreen}>
         <div className={styles.projectSection__largeScreen__titleAndSubtitle}>
           <Title text="PROJETS" />
@@ -111,14 +113,14 @@ export default function ProjectSection() {
                       transition: {
                         duration: 0.5,
                         delay: index * 0.2,
-                        ease: 'easeOut',
+                        ease: "easeOut",
                       },
                     }}
                     exit={{
                       opacity: 0,
                       transition: {
                         duration: 0.3,
-                        ease: 'easeIn',
+                        ease: "easeIn",
                       },
                     }}
                   >

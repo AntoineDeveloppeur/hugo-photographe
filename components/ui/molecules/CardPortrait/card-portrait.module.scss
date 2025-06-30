@@ -1,104 +1,110 @@
 .cardWrapper {
-    position: relative;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  background: linear-gradient(
+    to bottom right,
+    var(--color-card-highlight-top-before),
+    var(--color-card-highlight-bottom-before) 90%
+  );
+  transition: background 0.2s ease-in;
+  &:hover .cardWrapper__gradientLayer {
+    opacity: 1;
+  }
+  &:hover .cardWrapper__deleteWrapper {
+    opacity: 1;
+  }
+  &__deleteWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 3;
+    cursor: pointer;
+  }
+  &__gradientLayer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     border-radius: 5px;
     background: linear-gradient(
-        to bottom right,
-        var(--color-card-highlight-top-before),
-        var(--color-card-highlight-bottom-before) 90%
+      to bottom right,
+      var(--color-card-highlight-top-after),
+      var(--color-card-highlight-bottom-after) 90%
     );
-    transition: background 0.2s ease-in;
-    &:hover .cardWrapper__gradientLayer {
-        opacity: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 0;
+    pointer-events: none;
+  }
+  &__card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+    color: var(--color-text-main);
+    &__imageWrapper {
+      z-index: 2;
+      overflow: hidden;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      &__image {
+        width: auto;
+        max-height: 50vh;
+        border: 1px solid var(--color-border-photo);
+        user-select: none;
+        -webkit-user-select: none;
+      }
     }
-    &:hover .cardWrapper__deleteWrapper {
-        opacity: 1;
+
+    &__title {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      z-index: 2;
     }
-    &__deleteWrapper {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-        z-index: 3;
+    &__line {
+      height: 1px;
+      width: 50%;
+      border-radius: 1px;
+      background-color: var(--color-card-line);
+      margin-bottom: 2rem;
+      z-index: 2;
+    }
+    &__summary {
+      z-index: 2;
+      font-size: 1.6rem;
+      display: inline;
+      font-family: var(--font-paragraph);
+      font-weight: 100;
+      &__text {
+        color: var(--color-text-second);
+      }
+      &__dots {
+        color: var(--color-text-second);
+        display: inline;
+      }
+      &__seeMore {
+        text-decoration: underline;
+        color: var(--color-text-third);
+        display: inline;
         cursor: pointer;
+      }
     }
-    &__gradientLayer {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        border-radius: 5px;
-        background: linear-gradient(
-            to bottom right,
-            var(--color-card-highlight-top-after),
-            var(--color-card-highlight-bottom-after) 90%
-        );
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-        z-index: 0;
-        pointer-events: none;
-    }
-    &__card {
-        display: flex;
-        flex-direction: column;
-        padding: 1rem;
-        padding-bottom: 1.5rem;
-        color: var(--color-text-main);
-
-
-    
-        &__title {
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-            z-index: 2;
-        }
-        &__line {
-            height: 1px;
-            width: 50%;
-            border-radius: 1px;
-            background-color: var(--color-card-line);
-            margin-bottom: 2rem;
-            z-index: 2;
-        }
-        &__summary {
-            z-index: 2;
-            font-size: 1.6rem;
-            display: inline;
-            font-family: var(--font-paragraph);
-            font-weight: 100;
-            &__text {
-
-                color: var(--color-text-second);
-            }
-            &__dots {
-
-                color: var(--color-text-second);
-                display: inline;
-            }
-            &__seeMore {
-                text-decoration: underline;
-                color: var(--color-text-third);
-                display: inline;
-                cursor: pointer;
-
-            }
-        }
-    }
+  }
 }
 
-
 @media (max-width: 738px) {
-    .cardWrapper__card__summary {
-        font-size: 2rem;
-        
-    }
-        
+  .cardWrapper__card__summary {
+    font-size: 2rem;
+  }
 }

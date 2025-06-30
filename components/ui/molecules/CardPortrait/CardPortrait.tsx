@@ -49,6 +49,8 @@ export default function CardPortrait({
         <Image
           photo={mainPhoto}
           sizes="(max-width: 684px) 100vw, (max-width: 1094px) 45vw, 30vw"
+          className={styles.cardWrapper__card__imageWrapper}
+          imageClassName={styles.cardWrapper__card__imageWrapper__image}
         />
         <div className={styles.cardWrapper__card__title}>
           <TitleCard text={title} />

@@ -1,6 +1,4 @@
-import { render, screen } from "@testing-library/react"
 import imageURL from "@/utils/imageURL"
-import getProjects from "@/utils/getProjects"
 import { widthAcceptedByNextJs } from "@/utils/imageURL"
 
 describe("Get the url of the image to preload the modal test unit", () => {

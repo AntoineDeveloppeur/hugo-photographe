@@ -31,6 +31,6 @@ describe("PhotoGallery", () => {
   it("should open the modal", async () => {
     const user = userEvent.setup()
     await user.click(screen.getByTestId("PhotoGalleryImageWrapper"))
-    expect(screen.getByTestId("ModalPhotoGallery")).toBeInTheDocument()
+    expect(screen.queryByTestId("ModalPhotoGallery")).toBeInTheDocument()
   })
 })

@@ -1,9 +1,12 @@
 import { screen, render } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import { userEvent } from "@testing-library/user-event"
+import userEvent from "@testing-library/user-event"
 import PhotoGallery from "@/components/ui/atoms/PhotoGallery/PhotoGallery"
 
-// beforeEach(() => render(<PhotoGallery />))
+// Mock du hook useIsMobile
+jest.mock("@/hooks/useIsMobile", () => {
+  return jest.fn().mockReturnValue(false) // Simuler un appareil non-mobile
+})
 
 const photo = {
   src: "/images/taiwan7.webp",
@@ -12,15 +15,22 @@ const photo = {
   height: 2468,
   priority: true,
 }
+beforeEach(() =>
+  render(
+    <PhotoGallery
+      photo={photo}
+      priority={true}
+    />
+  )
+)
 
 describe("PhotoGallery", () => {
   it("should show a photo ", () => {
-    const { container } = render(
-      <PhotoGallery
-        photo={photo}
-        priority={true}
-      />
-    )
-    expect(container.querySelector(".imageWrapper")).toBeInTheDocument()
+    expect(screen.getByTestId("photoBasic")).toBeInTheDocument()
+  })
+  it("should open the modal", async () => {
+    const user = userEvent.setup()
+    await user.click(screen.getByTestId("PhotoGalleryImageWrapper"))
+    expect(screen.getByTestId("ModalPhotoGallery")).toBeInTheDocument()
   })
 })

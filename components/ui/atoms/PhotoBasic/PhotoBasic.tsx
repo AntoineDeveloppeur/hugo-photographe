@@ -43,6 +43,7 @@ export default function PhotoBasic({
       ${!isImageLoaded ? styles.skeleton : ""}`}
     >
       <NextImage
+        data-testid="photoBasic"
         className={`${styles.imageWrapper__image} ${imageClassName || ""}`}
         src={photo.src}
         alt={photo.alt}

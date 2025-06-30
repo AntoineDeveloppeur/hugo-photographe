@@ -72,6 +72,7 @@ export default function PhotoGallery({
   return (
     <>
       <motion.div
+        data-testid="PhotoGalleryImageWrapper"
         className={styles.imageWrapper}
         onClick={() => !isMobile && setIsModalOpen(true)}
         onMouseEnter={handleMouseEnter}

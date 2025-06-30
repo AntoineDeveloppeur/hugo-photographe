@@ -17,9 +17,22 @@
     align-items: center;
     gap: 4rem;
     &__photoWrapper {
-      height: 100%;
-      display: flex;
-      align-items: center;
+      &__imageWrapper {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        overflow: hidden;
+        margin: auto;
+        &__image {
+          width: auto;
+          max-height: 50vh;
+          border: 1px solid var(--color-border-photo);
+          user-select: none;
+          -webkit-user-select: none;
+        }
+      }
     }
     &__text {
       display: flex;

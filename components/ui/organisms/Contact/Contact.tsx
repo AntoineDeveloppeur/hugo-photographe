@@ -1,24 +1,25 @@
-'use client'
+"use client"
 
-import styles from './contact.module.scss'
-import { PhotoVariableProps } from '@/types/index'
-import ButtonBig from '../../atoms/ButtonBig/ButtonBig'
-import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
-import portraitHugo from '@/public/images/portrait-Hugo.webp'
-import Link from 'next/link'
-import IconMail from '../../atoms/IconMail/IconMail'
-import IconMap from '../../atoms/IconMap/IconMap'
-import IconPhone from '../../atoms/IconPhone/IconPhone'
-import { useRef, useContext } from 'react'
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import TitleProjectPage from '../../atoms/TitleProjectPage/TitleProjectPage'
-import useReCaptcha from '@/hooks/useReCaptcha'
-import { ShowPresentationContext } from '@/components/Providers'
+import styles from "./contact.module.scss"
+import { PhotoVariableProps } from "@/types/index"
+import ButtonBig from "../../atoms/ButtonBig/ButtonBig"
+import PhotoBasic from "../../atoms/PhotoBasic/PhotoBasic"
+import Image from "@/components/ui/atoms/Image/Image"
+import portraitHugo from "@/public/images/portrait-Hugo.webp"
+import Link from "next/link"
+import IconMail from "../../atoms/IconMail/IconMail"
+import IconMap from "../../atoms/IconMap/IconMap"
+import IconPhone from "../../atoms/IconPhone/IconPhone"
+import { useRef, useContext } from "react"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import TitleProjectPage from "../../atoms/TitleProjectPage/TitleProjectPage"
+import useReCaptcha from "@/hooks/useReCaptcha"
+import { ShowPresentationContext } from "@/components/Providers"
 
 export default function Contact() {
   const example: PhotoVariableProps = {
     src: portraitHugo.src,
-    alt: 'Hugo Randez',
+    alt: "Hugo Randez",
     width: 1943,
     height: 1880,
   }
@@ -31,7 +32,7 @@ export default function Contact() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   })
 
   const transformedY = useTransform(scrollYProgress, [0.1, 1], [-130, 280])
@@ -48,12 +49,16 @@ export default function Contact() {
   // const phone = "faux numéro"
 
   return (
-    <section ref={containerRef} id="Contact" className={styles.contact}>
+    <section
+      ref={containerRef}
+      id="Contact"
+      className={styles.contact}
+    >
       {!showPresentation && (
         <motion.div
           style={{
             y: springY,
-            position: 'relative',
+            position: "relative",
             zIndex: 1,
           }}
         >
@@ -67,12 +72,31 @@ export default function Contact() {
       {showPresentation && (
         <motion.div
           className={styles.contact__presentation}
-          initial={{ opacity: 0, x: '50vw' }}
+          initial={{ opacity: 0, x: "50vw" }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
+          {/* <div className={styles.contact__presentation__photoWrapper}>
+            <PhotoBasic
+              photo={example}
+              sizes="250px"
+            />
+          </div> */}
           <div className={styles.contact__presentation__photoWrapper}>
-            <PhotoBasic photo={example} sizes="250px" />
+            {/* <PhotoBasic
+              photo={example}
+              sizes="250px"
+            /> */}
+            <Image
+              photo={example}
+              sizes="250px"
+              className={
+                styles.contact__presentation__photoWrapper__imageWrapper
+              }
+              imageClassName={
+                styles.contact__presentation__photoWrapper__imageWrapper__image
+              }
+            />
           </div>
           <div className={styles.contact__presentation__text}>
             <TitleProjectPage text="HUGO RANDEZ" />
@@ -80,7 +104,7 @@ export default function Contact() {
               Spécialisé dans les récits visuels de voyage, je capture des
               moments uniques à travers le monde. Mon expertise s'étend
               également au plan local, où je collabore avec la mairie de ma
-              ville.{' '}
+              ville.{" "}
             </p>
             <div className={styles.contact__presentation__text__details}>
               <IconPhone />

@@ -8,7 +8,7 @@ import { useState, Suspense } from 'react'
 import Modal from '../Modal/Modal'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
-import Image from '../Image/Image'
+import PhotoBasic from '../PhotoBasic/PhotoBasic'
 
 const PhotoProjectPage = ({
   photo,
@@ -45,7 +45,7 @@ const PhotoProjectPage = ({
         }}
         style={!isMobile ? { cursor: 'pointer' } : undefined}
       >
-        <Image
+        <PhotoBasic
           photo={photo}
           priority={priority}
           sizes={sizes}

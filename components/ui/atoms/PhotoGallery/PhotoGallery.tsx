@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Loader from '../Loader/Loader'
 import useIsMobile from '@/hooks/useIsMobile'
-import Image from '../Image/Image'
+import PhotoBasic from '../PhotoBasic/PhotoBasic'
 import dynamic from 'next/dynamic'
 import imageURL from '@/utils/imageURL'
 
@@ -84,7 +84,7 @@ export default function PhotoGallery({
         }}
         style={!isMobile ? { cursor: 'pointer' } : undefined}
       >
-        <Image photo={photo} priority={priority} />
+        <PhotoBasic photo={photo} priority={priority} />
       </motion.div>
 
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>

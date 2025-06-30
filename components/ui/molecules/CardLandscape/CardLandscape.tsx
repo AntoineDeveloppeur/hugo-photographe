@@ -1,7 +1,7 @@
 "use client"
 
 import styles from "./card-landscape.module.scss"
-import Image from "@/components/ui/atoms/Image/Image"
+import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
 import TitleCard from "../../atoms/TitleCard/TitleCard"
 import Link from "next/link"
 import { CardProps } from "@/types/index.js"
@@ -88,7 +88,7 @@ export default function CardLandscape({
           />
         </div>
         <div className={styles.cardWrapper__card__gradientLayer}></div>
-        <Image
+        <PhotoBasic
           photo={mainPhoto}
           sizes="(max-width: 767px) 100vw, 45vw"
           className={styles.cardWrapper__card__imageWrapper}

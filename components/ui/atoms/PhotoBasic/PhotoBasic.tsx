@@ -1,9 +1,9 @@
 import NextImage from 'next/image'
 import { PhotoProps } from '@/types'
-import styles from './image.module.scss'
+import styles from './photo-basic.module.scss'
 import { useState } from 'react'
 
-type ImageProps = {
+type PhotoBasicProps = {
   photo: PhotoProps['photo']
   priority?: boolean
   sizes?: string
@@ -14,7 +14,7 @@ type ImageProps = {
   quality?: number
 }
 
-export default function Image({
+export default function PhotoBasic({
   photo,
   priority = false,
   sizes = '(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw',
@@ -23,7 +23,7 @@ export default function Image({
   imageClassName,
   style,
   quality = 75,
-}: ImageProps) {
+}: PhotoBasicProps) {
   // Calcul du style conditionnel pour les photos principales (mainPhoto)
   const mainPhotoStyle = mainPhoto
     ? photo.height > photo.width

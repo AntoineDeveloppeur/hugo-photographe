@@ -1,14 +1,13 @@
 "use client"
 
 import styles from "./card-portrait.module.scss"
-import PhotoBasic from "../../atoms/PhotoBasic/PhotoBasic"
 import TitleCard from "../../atoms/TitleCard/TitleCard"
 import Link from "next/link"
 import { CardProps } from "@/types/index.js"
 import IconDelete from "../../atoms/IconDelete/IconDelete"
 import { useState } from "react"
 import ModalDeleteProject from "../ModalDeleteProject/ModalDeleteProject"
-import Image from "@/components/ui/atoms/Image/Image"
+import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
 
 export default function CardPortrait({
   _id,
@@ -46,7 +45,7 @@ export default function CardPortrait({
         href={`/projectPage/${_id}`}
       >
         <div className={styles.cardWrapper__gradientLayer}></div>
-        <Image
+        <PhotoBasic
           photo={mainPhoto}
           sizes="(max-width: 684px) 100vw, (max-width: 1094px) 45vw, 30vw"
           className={styles.cardWrapper__card__imageWrapper}

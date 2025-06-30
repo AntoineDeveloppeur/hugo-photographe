@@ -1,0 +1,263 @@
+{
+  "galeryDesktop": [
+    [
+      {
+        "src": "/images/taiwan7.webp",
+        "alt": "paysage avec une personne de dos au loin",
+        "width": 3702,
+        "height": 2468,
+        "priority": true
+      },
+      {
+        "src": "/images/concert.webp",
+        "alt": "concert avec un guitariste",
+        "width": 6000,
+        "height": 4000,
+        "priority": true
+      },
+      {
+        "src": "/images/concert2.webp",
+        "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert",
+        "width": 3936,
+        "height": 2624,
+        "priority": true
+      }
+    ],
+    [
+      {
+        "src": "/images/paysage.webp",
+        "alt": "paysage d'un lac avec une maison seule",
+        "width": 4032,
+        "height": 1960,
+        "priority": true
+      },
+      {
+        "src": "/images/chien.webp",
+        "alt": "chien qui court dans la nature",
+        "width": 4402,
+        "height": 2885,
+        "priority": true
+      },
+      {
+        "src": "/images/gym.webp",
+        "alt": "deux gymnastes en pleine représentation avec des ballons",
+        "width": 5568,
+        "height": 3712,
+        "priority": true
+      }
+    ],
+    [
+      {
+        "src": "/images/maquillage.webp",
+        "alt": "Une femme se maquille devant un mirroir",
+        "width": 3936,
+        "height": 2624,
+        "priority": true
+      },
+      {
+        "src": "/images/taureau.webp",
+        "alt": "une personne dans une arène cour pour échapper à un taureau",
+        "width": 6000,
+        "height": 4000,
+        "priority": true
+      },
+      {
+        "src": "/images/cuisine.webp",
+        "alt": "Un cuisinier cuisine en extérieur",
+        "width": 6016,
+        "height": 4016,
+        "priority": true
+      }
+    ]
+  ],
+  "galeryTablet": [
+    [
+      {
+        "src": "/images/taiwan7.webp",
+        "alt": "paysage avec une personne de dos au loin",
+        "width": 3702,
+        "height": 2468,
+        "priority": true
+      },
+      {
+        "src": "/images/concert.webp",
+        "alt": "concert avec un guitariste",
+        "width": 6000,
+        "height": 4000,
+        "priority": true
+      },
+      {
+        "src": "/images/concert2.webp",
+        "alt": "gros plan sur une femme chanteuse et percutioniste lors d'un concert",
+        "width": 3936,
+        "height": 2624,
+        "priority": true
+      },
+      {
+        "src": "/images/cuisine.webp",
+        "alt": "Un cuisinier cuisine en extérieur",
+        "width": 6016,
+        "height": 4016,
+        "priority": true
+      }
+    ],
+    [
+      {
+        "src": "/images/paysage.webp",
+        "alt": "paysage d'un lac avec une maison seule",
+        "width": 4032,
+        "height": 1960,
+        "priority": true
+      },
+      {
+        "src": "/images/chien.webp",
+        "alt": "chien qui court dans la nature",
+        "width": 4402,
+        "height": 2885,
+        "priority": true
+      },
+      {
+        "src": "/images/gym.webp",
+        "alt": "deux gymnastes en pleine représentation avec des ballons",
+        "width": 5568,
+        "height": 3712,
+        "priority": true
+      },
+      {
+        "src": "/images/maquillage.webp",
+        "alt": "Une femme se maquille devant un mirroir",
+        "width": 3936,
+        "height": 2624,
+        "priority": true
+      },
+      {
+        "src": "/images/taureau.webp",
+        "alt": "une personne dans une arène cour pour échapper à un taureau",
+        "width": 6000,
+        "height": 4000,
+        "priority": true
+      }
+    ]
+  ],
+  "galeryMobile": [
+    [
+      {
+        "src": "/images/taiwan7.webp",
+        "alt": "paysage avec une personne de dos au loin",
+        "width": 3702,
+        "height": 2468,
+        "priority": true
+      },
+      {
+        "src": "/images/concert.webp",
+        "alt": "concert avec un guitariste",
+        "width": 6000,
+        "height": 4000,
+        "priority": true
+      },
+      {
+        "src": "/images/cuisine.webp",
+        "alt": "Un cuisinier cuisine en extérieur",
+        "width": 6016,
+        "height": 4016,
+        "priority": true
+      },
+      {
+        "src": "/images/paysage.webp",
+        "alt": "paysage d'un lac avec une maison seule",
+        "width": 4032,
+        "height": 1960,
+        "priority": false
+      },
+      {
+        "src": "/images/maquillage.webp",
+        "alt": "Une femme se maquille devant un mirroir",
+        "width": 3936,
+        "height": 2624,
+        "priority": false
+      },
+      {
+        "src": "/images/taureau.webp",
+        "alt": "une personne dans une arène cour pour échapper à un taureau",
+        "width": 6000,
+        "height": 4000,
+        "priority": false
+      }
+    ]
+  ],
+  "projects": [
+    {
+      "_id": "qnrl",
+      "title": "Taïwan",
+      "summary": "Quatre fois. Quatre c'est le nombre de fois où j'ai eu la chance de pouvoir me rendre à Taïwan, petite île au statut plutôt controversé, en plein cœur d'Asie de l'Est. Ces nombreuses allées et venues à Formose (ancien nom portugais de l'île) témoignent de mon attachement à ce charmant pays.",
+      "mainPhoto": {
+        "src": "/images/taiwanMain.webp",
+        "alt": "lieux religieux",
+        "width": 2341,
+        "height": 3514
+      },
+      "textsAbovePhotos": [
+        "Quatre fois.",
+        "Quatre c'est le nombre de fois où j'ai eu la chance de pouvoir me rendre à Taïwan, petite île au statut plutôt controversé, en plein cœur d'Asie de l'Est. Ces nombreuses allées et venues à Formose (ancien nom portugais de l'île) témoignent de mon attachement à ce charmant pays.",
+        "Se retrouvant sur mon itinéraire par la force des choses lors de mon tour du monde en 2019, ma première visite a surtout consisté à faire le tour de l'île à vélo et d'avoir un assez bon aperçu de l'éventail culturel et panoramique du lieu. L'hospitalité des Taïwanais (ainsi que la nourriture très abordable) ont fini de me convaincre qu'il fallait que j'y retourne tôt ou tard.",
+        "Ce fut plus tôt que tard étant donné que dès 2021, me revoilà à Taïwan avec mon frère pour un PVT (programme vacances travail) dans le but de me familiariser un peu plus avec ce pays. Manque de chance, le Covid-19 qui sévissait alors un peu partout dans le monde ne nous aura pas fait de cadeaux et c'est une île plus ou moins désertée, calfeutrée, qui nous accueille.",
+        "Loin de me décourager suite à cette expérience en demi-teinte, j'y retourne une nouvelle fois en 2023, et cette fois-ci sans restrictions, dans le cadre d'une bourse d'étude afin d'y étudier le mandarin. Cette troisième visite me convainc définitivement de mon attachement pour ce pays et des habitants adorables qui y vivent.",
+        "Enfin, ma dernière venue ici, plus courte cette fois, me permet de vous partager quelques clichés de lieux qui m'avaient échappés lors de mes expéditions précédentes !"
+      ],
+      "photosSets": [
+        [
+          {
+            "src": "/images/taiwan5.webp",
+            "alt": "cascade",
+            "width": 3936,
+            "height": 2624
+          },
+          {
+            "src": "/images/taiwan6.webp",
+            "alt": "couché de soleil",
+            "width": 3605,
+            "height": 2404
+          }
+        ],
+        [
+          {
+            "src": "/images/taiwan2.webp",
+            "alt": "pont",
+            "width": 2604,
+            "height": 3646
+          }
+        ],
+        [
+          {
+            "src": "/images/taiwan3.webp",
+            "alt": "vu d'un pont",
+            "width": 3698,
+            "height": 2466
+          },
+          {
+            "src": "/images/taiwan4.webp",
+            "alt": "pont pédestre",
+            "width": 3936,
+            "height": 2624
+          }
+        ],
+        [
+          {
+            "src": "/images/taiwan7.webp",
+            "alt": "paysage au couché de soleil",
+            "width": 3702,
+            "height": 2468
+          }
+        ],
+        [
+          {
+            "src": "/images/taiwan1.webp",
+            "alt": "Boutique dans la rue",
+            "width": 3936,
+            "height": 2624
+          }
+        ]
+      ]
+    }
+  ]
+}

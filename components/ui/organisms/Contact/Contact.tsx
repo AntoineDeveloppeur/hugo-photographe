@@ -3,7 +3,6 @@
 import styles from "./contact.module.scss"
 import { PhotoVariableProps } from "@/types/index"
 import ButtonBig from "../../atoms/ButtonBig/ButtonBig"
-import PhotoBasic from "../../atoms/PhotoBasic/PhotoBasic"
 import Image from "@/components/ui/atoms/Image/Image"
 import portraitHugo from "@/public/images/portrait-Hugo.webp"
 import Link from "next/link"
@@ -76,17 +75,7 @@ export default function Contact() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {/* <div className={styles.contact__presentation__photoWrapper}>
-            <PhotoBasic
-              photo={example}
-              sizes="250px"
-            />
-          </div> */}
           <div className={styles.contact__presentation__photoWrapper}>
-            {/* <PhotoBasic
-              photo={example}
-              sizes="250px"
-            /> */}
             <Image
               photo={example}
               sizes="250px"

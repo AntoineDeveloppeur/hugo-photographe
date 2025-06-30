@@ -6,7 +6,7 @@ import PhotoGallery from "@/components/ui/atoms/PhotoGallery/PhotoGallery"
 // beforeEach(() => render(<PhotoGallery />))
 
 describe("Main Page", () => {
-  it("should show ", () => {
+  it("should show a photo ", () => {
     const photo = {
       src: "/images/taiwan7.webp",
       alt: "paysage avec une personne de dos au loin",

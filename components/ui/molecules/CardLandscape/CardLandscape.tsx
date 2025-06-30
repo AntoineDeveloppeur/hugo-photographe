@@ -1,17 +1,17 @@
-'use client'
+"use client"
 
-import styles from './card-landscape.module.scss'
-import PhotoBasic from '../../atoms/PhotoBasic/PhotoBasic'
-import TitleCard from '../../atoms/TitleCard/TitleCard'
-import Link from 'next/link'
-import { CardProps } from '@/types/index.js'
-import { Player } from '@lordicon/react'
-import { useMotionValueEvent, useScroll } from 'framer-motion'
-import Medal from '@/public/icons/medal.json'
-import { useState, useRef } from 'react'
-import { useTheme } from 'next-themes'
-import IconDelete from '../../atoms/IconDelete/IconDelete'
-import ModalDeleteProject from '../ModalDeleteProject/ModalDeleteProject'
+import styles from "./card-landscape.module.scss"
+import Image from "@/components/ui/atoms/Image/Image"
+import TitleCard from "../../atoms/TitleCard/TitleCard"
+import Link from "next/link"
+import { CardProps } from "@/types/index.js"
+import { Player } from "@lordicon/react"
+import { useMotionValueEvent, useScroll } from "framer-motion"
+import Medal from "@/public/icons/medal.json"
+import { useState, useRef } from "react"
+import { useTheme } from "next-themes"
+import IconDelete from "../../atoms/IconDelete/IconDelete"
+import ModalDeleteProject from "../ModalDeleteProject/ModalDeleteProject"
 
 export default function CardLandscape({
   _id,
@@ -35,11 +35,11 @@ export default function CardLandscape({
   // Utilise useScroll pour déclencher l'animation lorsque l'utilisateur se rapproche de la médaille
   const { scrollYProgress } = useScroll({
     target: medalWrapper,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   })
 
   // Surveiller le changement de valeur avec useMotionValueEvent
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (latest > 0.2 && !isAnimationStarted) {
       playerRef.current?.playFromBeginning()
       setIsAnimationStarted(true)
@@ -67,7 +67,10 @@ export default function CardLandscape({
           onClose={() => setIsModalOpen(false)}
         />
       )}
-      <Link className={styles.cardWrapper__card} href={`/projectPage/${_id}`}>
+      <Link
+        className={styles.cardWrapper__card}
+        href={`/projectPage/${_id}`}
+      >
         <div
           ref={medalWrapper}
           className={styles.cardWrapper__card__medalWrapper}
@@ -78,19 +81,19 @@ export default function CardLandscape({
             size={64}
             state="in-reveal"
             colors={
-              theme === 'light'
-                ? 'primary:#D96E75,secondary:#f0cace'
-                : 'primary:#e5e5e5,secondary:#919191'
+              theme === "light"
+                ? "primary:#D96E75,secondary:#f0cace"
+                : "primary:#e5e5e5,secondary:#919191"
             }
           />
         </div>
         <div className={styles.cardWrapper__card__gradientLayer}></div>
-        <div className={styles.cardWrapper__card__photoWrapper}>
-          <PhotoBasic
-            photo={mainPhoto}
-            sizes="(max-width: 767px) 100vw, 45vw"
-          />
-        </div>
+        <Image
+          photo={mainPhoto}
+          sizes="(max-width: 767px) 100vw, 45vw"
+          className={styles.cardWrapper__card__imageWrapper}
+          imageClassName={styles.cardWrapper__card__imageWrapper__image}
+        />
         <div className={styles.cardWrapper__card__text}>
           <div className={styles.cardWrapper__card__text__title}>
             <TitleCard text={title} />
@@ -101,7 +104,7 @@ export default function CardLandscape({
               {summary}
             </p>
             <p className={styles.cardWrapper__card__text__summary__dots}>
-              ...{' '}
+              ...{" "}
             </p>
             <p className={styles.cardWrapper__card__text__summary__seeMore}>
               voir plus

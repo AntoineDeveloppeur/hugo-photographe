@@ -1,10 +1,10 @@
-import NextImage from 'next/image'
-import { PhotoProps } from '@/types'
-import styles from './photo-basic.module.scss'
-import { useState } from 'react'
+import NextImage from "next/image"
+import { PhotoProps } from "@/types"
+import styles from "./photo-basic.module.scss"
+import { useState } from "react"
 
 type PhotoBasicProps = {
-  photo: PhotoProps['photo']
+  photo: PhotoProps["photo"]
   priority?: boolean
   sizes?: string
   mainPhoto?: boolean
@@ -17,7 +17,7 @@ type PhotoBasicProps = {
 export default function PhotoBasic({
   photo,
   priority = false,
-  sizes = '(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw',
+  sizes = "(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw",
   mainPhoto = false,
   className,
   imageClassName,
@@ -27,8 +27,8 @@ export default function PhotoBasic({
   // Calcul du style conditionnel pour les photos principales (mainPhoto)
   const mainPhotoStyle = mainPhoto
     ? photo.height > photo.width
-      ? { height: '65vh', width: 'auto' }
-      : { height: 'auto', width: '100vw' }
+      ? { height: "65vh", width: "auto" }
+      : { height: "auto", width: "100vw" }
     : undefined
 
   // Combinaison des styles personnalisés et des styles mainPhoto
@@ -39,11 +39,11 @@ export default function PhotoBasic({
   return (
     <div
       className={`${styles.imageWrapper} 
-      ${className || ''} 
-      ${!isImageLoaded ? styles.skeleton : ''}`}
+      ${className || ""} 
+      ${!isImageLoaded ? styles.skeleton : ""}`}
     >
       <NextImage
-        className={`${styles.imageWrapper__image} ${imageClassName || ''}`}
+        className={`${styles.imageWrapper__image} ${imageClassName || ""}`}
         src={photo.src}
         alt={photo.alt}
         width={photo.width || 4000}
@@ -52,7 +52,7 @@ export default function PhotoBasic({
         sizes={sizes}
         priority={priority}
         style={combinedStyle}
-        onLoadingComplete={() => setIsImageLoaded(true)}
+        onLoad={() => setIsImageLoaded(true)}
       />
     </div>
   )

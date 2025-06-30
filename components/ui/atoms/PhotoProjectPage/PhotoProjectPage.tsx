@@ -1,14 +1,14 @@
-'use client'
+"use client"
 
-import styles from './photo-project-page.module.scss'
-import { PhotoProps } from '@/types'
-import NextImage from 'next/image'
-import { motion } from 'framer-motion'
-import { useState, Suspense } from 'react'
-import Modal from '../Modal/Modal'
-import Loader from '../Loader/Loader'
-import useIsMobile from '@/hooks/useIsMobile'
-import PhotoBasic from '../PhotoBasic/PhotoBasic'
+import styles from "./photo-project-page.module.scss"
+import { PhotoProps } from "@/types"
+import NextImage from "next/image"
+import { motion } from "framer-motion"
+import { useState, Suspense } from "react"
+import Modal from "../Modal/Modal"
+import Loader from "../Loader/Loader"
+import useIsMobile from "@/hooks/useIsMobile"
+import PhotoBasic from "../PhotoBasic/PhotoBasic"
 
 const PhotoProjectPage = ({
   photo,
@@ -43,7 +43,7 @@ const PhotoProjectPage = ({
           duration: 5,
           ease: [0.215, 0.61, 0.355, 1],
         }}
-        style={!isMobile ? { cursor: 'pointer' } : undefined}
+        style={!isMobile ? { cursor: "pointer" } : undefined}
       >
         <PhotoBasic
           photo={photo}
@@ -55,12 +55,15 @@ const PhotoProjectPage = ({
         />
       </motion.div>
 
-      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+      >
         <div className={styles.modalImageContainer}>
           {isLoading && <Loader />}
           <NextImage
             className={`${styles.modalImage} ${
-              !isLoading ? styles.loaded : ''
+              !isLoading ? styles.loaded : ""
             }`}
             src={photo.src}
             alt={photo.alt}
@@ -68,8 +71,8 @@ const PhotoProjectPage = ({
             height={photo.height}
             quality={100}
             priority={isHovered || isModalOpen}
-            onLoadingComplete={() => setIsLoading(false)}
-            style={{ objectFit: 'contain' }}
+            onLoad={() => setIsLoading(false)}
+            style={{ objectFit: "contain" }}
           />
         </div>
       </Modal>

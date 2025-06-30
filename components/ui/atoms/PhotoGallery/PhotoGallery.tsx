@@ -1,18 +1,18 @@
-'use client'
+"use client"
 
-import styles from './photoGallery.module.scss'
-import { PhotoProps } from '@/types'
-import NextImage from 'next/image'
-import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import Loader from '../Loader/Loader'
-import useIsMobile from '@/hooks/useIsMobile'
-import PhotoBasic from '../PhotoBasic/PhotoBasic'
-import dynamic from 'next/dynamic'
-import imageURL from '@/utils/imageURL'
+import styles from "./photoGallery.module.scss"
+import { PhotoProps } from "@/types"
+import NextImage from "next/image"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import Loader from "../Loader/Loader"
+import useIsMobile from "@/hooks/useIsMobile"
+import PhotoBasic from "../PhotoBasic/PhotoBasic"
+import dynamic from "next/dynamic"
+import imageURL from "@/utils/imageURL"
 
 // const Modal = lazy(() => import('../Modal/Modal'))
-const Modal = dynamic(() => import('../Modal/Modal'))
+const Modal = dynamic(() => import("../Modal/Modal"))
 
 export default function PhotoGallery({
   photo,
@@ -36,7 +36,7 @@ export default function PhotoGallery({
   // Préchargement de la photo dans la modale
   useEffect(() => {
     // Lorsque le navigateur est disponible
-    if ('requestIdleCallback' in window) {
+    if ("requestIdleCallback" in window) {
       const requestIdleCallbackId = window.requestIdleCallback(() => {
         //@ts-expect-error ddd
         const image = new Image()
@@ -48,7 +48,7 @@ export default function PhotoGallery({
         )
       })
 
-      if ('cancelIdleCallback' in window)
+      if ("cancelIdleCallback" in window)
         return () => window.cancelIdleCallback(requestIdleCallbackId)
     }
     // Après un timer si le chargement du reste de la page est trop long ou
@@ -82,17 +82,23 @@ export default function PhotoGallery({
           duration: 3,
           ease: [0.215, 0.61, 0.355, 1],
         }}
-        style={!isMobile ? { cursor: 'pointer' } : undefined}
+        style={!isMobile ? { cursor: "pointer" } : undefined}
       >
-        <PhotoBasic photo={photo} priority={priority} />
+        <PhotoBasic
+          photo={photo}
+          priority={priority}
+        />
       </motion.div>
 
-      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+      >
         <div className={styles.modalImageContainer}>
           {isLoading && <Loader />}
           <NextImage
             className={`${styles.modalImage} ${
-              !isLoading ? styles.loaded : ''
+              !isLoading ? styles.loaded : ""
             }`}
             src={photo.src}
             alt={photo.alt}
@@ -100,8 +106,8 @@ export default function PhotoGallery({
             height={photo.height}
             quality={80}
             priority={isHovered || isModalOpen}
-            onLoadingComplete={() => setIsLoading(false)}
-            style={{ objectFit: 'contain' }}
+            onLoad={() => setIsLoading(false)}
+            style={{ objectFit: "contain" }}
           />
         </div>
       </Modal>

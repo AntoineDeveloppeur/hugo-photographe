@@ -1,18 +1,49 @@
 import getProjects from "@/utils/getProjects"
-
+import dataFallBack from "@/data/data"
 // Je voudrais tester que la fonction getProjects me renvoi un objet contenant la clé projects
 
+global.fetch = jest.fn()
 describe("getProjects", () => {
-  it("should return something", async () => {
-    await expect(getProjects()).resolves.toBeDefined()
-    await expect(getProjects()).rejects.toBeDefined()
+  beforeEach(() => {
+    jest.clearAllMocks()
   })
-  it("should return an object which contain 'projects'", async () => {
-    const data = await getProjects()
-    expect(data.projects).toBeDefined()
+  it("should return data when API responds succesfully", async () => {
+    // Arrage
+    const mockData = { projects: [{ title: "test", summary: "testTest" }] }
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockData,
+    })
 
-    console.log("data", data)
+    // Act
+    const result = await getProjects()
 
-    // await expect(getProjects()).resolves.toContain(/projects/)
+    // Assert
+    expect(result).toEqual(mockData)
+    expect(fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it("should return dataFallBack when API reponse is not ok", async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: false,
+    })
+    const result = await getProjects()
+    expect(result).toEqual(dataFallBack)
+  })
+  // tester lorsque la requête renvoie une erreur
+  it("should return dataFallBack when fetch throws an Error", async () => {
+    global.fetch.mockRejectedValueOnce(new Error("Network Error"))
+    const result = await getProjects()
+    expect(result).toEqual(dataFallBack)
+  })
+  it("should return an object which contain 'projects' which is an array", async () => {
+    const mockData = { projects: [{ title: "test" }] }
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockData,
+    })
+
+    const result = await getProjects()
+    expect(Array.isArray(result.projects)).toBe(true)
   })
 })

@@ -18,25 +18,25 @@ describe("useReCaptcha", () => {
   })
   it("should return success: false if fetch is rejected", async () => {
     // Arrange
-    global.fetch.mockRejectedValueOnce(new Error("HTTP error! status:"))
+    global.fetch.mockRejectedValueOnce()
 
     // Act
-    // Il faudrait un outil pour dire qu'il faut attendre les réponses asynchones
-    const { result } = renderHook(() => useReCaptcha())
+    renderHook(() => useReCaptcha())
     await waitFor(() => {
+      // Assert
       expect(console.error).toHaveBeenCalled()
     })
 
     // Assert
     expect(global.fetch).toHaveBeenCalledWith(
       "https://test-url.com/api/recaptcha",
-      expect.objectContaining({
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: expect.any(String),
-      })
+        body: JSON.stringify({ token: "mock-token" }),
+      }
     )
   })
 })

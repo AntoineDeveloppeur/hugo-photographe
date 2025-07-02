@@ -1,0 +1,46 @@
+stages:
+  - test
+  - build
+
+# Cache des dépendances pour accélérer les jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .next/cache/
+
+# Job pour les tests unitaires
+unit-tests:
+  stage: test
+  image: node:20-alpine
+  script:
+    - npm ci
+    - npm run test
+  artifacts:
+    reports:
+      junit: junit.xml
+    when: always
+
+# Job pour le linting
+lint:
+  stage: test
+  image: node:20-alpine
+  script:
+    - npm ci
+    - npm run lint
+  allow_failure: true
+
+# Job pour le build
+build:
+  stage: build
+  image: node:20-alpine
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - .next/
+    expire_in: 1 week
+  only:
+    - main
+    - develop

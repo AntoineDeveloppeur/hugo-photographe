@@ -14,7 +14,7 @@ unit-tests:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run test
   artifacts:
     reports:
@@ -26,7 +26,7 @@ lint:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run lint
   allow_failure: true
 
@@ -35,7 +35,7 @@ build:
   stage: build
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run build
   artifacts:
     paths:

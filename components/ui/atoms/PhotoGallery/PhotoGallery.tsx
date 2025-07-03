@@ -38,7 +38,6 @@ export default function PhotoGallery({
     // Lorsque le navigateur est disponible
     if ("requestIdleCallback" in window) {
       const requestIdleCallbackId = window.requestIdleCallback(() => {
-        //@ts-expect-error ddd
         const image = new Image()
         image.src = imageURL(
           photo.width,
@@ -55,7 +54,6 @@ export default function PhotoGallery({
     // si requestIdleCallback n'est pas supporté
     else {
       const timeout = setTimeout(() => {
-        //@ts-expect-error ddd
         const image = new Image()
         image.src = imageURL(
           photo.width,

@@ -9,6 +9,7 @@
     "dev": "nodemon dist/server.js",
     "build": "tsc",
     "watch": "tsc --watch",
+    "type-check": "tsc --noEmit",
     "postinstall": "npm run build"
   },
   "dependencies": {

@@ -3,8 +3,8 @@ import styles from "./pagination.module.scss"
 import ButtonArrow from "@/components/ui/atoms/ButtonArrow/ButtonArrow"
 
 interface PaginationTypes {
-  previousPage: number
-  nextPage: number
+  previousPage: () => void
+  nextPage: () => void
   currentPage: number
   pagesCount: number
 }

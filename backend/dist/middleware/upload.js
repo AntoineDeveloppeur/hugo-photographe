@@ -1,28 +1,16 @@
-import { IncomingForm } from 'formidable';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import fs from 'fs';
-import sharp from 'sharp';
-import path from 'path';
-import { v4 as uuidv4 } from 'uuid'; // Pour générer des noms de fichiers uniques
-// Configuration du client S3
-const getS3Client = () => {
-    if (!process.env.AWS_REGION || !process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
-        throw new Error("aws region or credentials in .env are undefined");
-    }
-    return new S3Client({
-        region: process.env.AWS_REGION,
-        credentials: {
-            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        }
-    });
-};
+import { IncomingForm } from "formidable";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import getS3Client from "../utils/getS3Client.js";
+import fs from "fs";
+import sharp from "sharp";
+import path from "path";
+import { v4 as uuidv4 } from "uuid"; // Pour générer des noms de fichiers uniques
 //Fonction pour télécharger un fichier sur S3
-export default async function uploadToS3(file, prefix = '') {
+export default async function uploadToS3(file, prefix = "") {
     try {
         const fileContent = fs.readFileSync(file.filepath);
         // Génération d'un nom de fichier unique
-        const key = `${prefix ? prefix + '/' : ''}${Date.now()}-${file.originalFilename}`;
+        const key = `${prefix ? prefix + "/" : ""}${Date.now()}-${file.originalFilename}`;
         // Paramètres pour l'upload
         const uploadParams = {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
@@ -56,10 +44,10 @@ export async function parseForm(req) {
                     return reject(err);
                 }
                 if (!fields) {
-                    return reject(new Error('formulaire vide'));
+                    return reject(new Error("formulaire vide"));
                 }
                 if (!files) {
-                    return reject(new Error('formulaire sans fichier'));
+                    return reject(new Error("formulaire sans fichier"));
                 }
                 // Convertir les images en WebP
                 const processedFiles = {};
@@ -67,12 +55,12 @@ export async function parseForm(req) {
                     await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
                         const file = fileArray?.[0];
                         // Fail-fast: Si ce n'est pas une image, conserver le fichier original
-                        if (!file.mimetype?.startsWith('image/')) {
+                        if (!file.mimetype?.startsWith("image/")) {
                             processedFiles[key] = file;
                             return;
                         }
                         // Si c'est déjà un WebP, conserver le fichier original
-                        if (file?.mimetype === 'image/webp') {
+                        if (file?.mimetype === "image/webp") {
                             processedFiles[key] = file;
                             return;
                         }
@@ -86,7 +74,7 @@ export async function parseForm(req) {
                             .webp({
                             quality: 80,
                             // Préserver les métadonnées importantes
-                            effort: 4 // Meilleur équilibre entre vitesse et compression
+                            effort: 4, // Meilleur équilibre entre vitesse et compression
                         })
                             .toFile(webpFilePath);
                         // Créer un nouvel objet file (immutable)
@@ -95,7 +83,7 @@ export async function parseForm(req) {
                             filepath: webpFilePath,
                             //@ts-ignore
                             originalFilename: `${path.parse(file?.originalFilename).name}.webp`,
-                            mimetype: 'image/webp',
+                            mimetype: "image/webp",
                             width: metadata.width,
                             height: metadata.height,
                         };
@@ -103,11 +91,13 @@ export async function parseForm(req) {
                     // Résoudre avec les fichiers traités
                     resolve({
                         fields,
-                        files: processedFiles
+                        files: processedFiles,
                     });
                 }
                 catch (conversionError) {
-                    reject(new Error(`Erreur lors de la conversion des images: ${conversionError instanceof Error ? conversionError?.message : conversionError}`));
+                    reject(new Error(`Erreur lors de la conversion des images: ${conversionError instanceof Error
+                        ? conversionError?.message
+                        : conversionError}`));
                 }
             });
         }

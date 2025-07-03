@@ -6,6 +6,7 @@ import uploadToS3, {
   FormidableFile,
 } from "./middleware/upload.js"
 import { Interface } from "readline"
+import deletePhotosFromDB from "./utils/deletePhotosFromDB.js"
 
 // Interface pour la requête authentifié
 // export interface AuthRequest extends Request {
@@ -129,6 +130,11 @@ export async function deleteProject(req: Request, res: Response) {
     .then((project) => {
       Project.deleteOne({ _id: req.params.id })
         .then(() => {
+          // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
+          // Ajouter un moyen de logger cette erreur
+          if (!deletePhotosFromDB(project)) {
+            console.error("les photos n'ont pas été supprimé")
+          }
           res
             .status(201)
             .json({ message: `Projet ${project?.title} supprimé avec succès` })

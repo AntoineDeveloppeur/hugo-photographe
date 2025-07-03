@@ -8,7 +8,7 @@ import Button from "../../atoms/Button/Button"
 import { useState, useEffect } from "react"
 import Pagination from "../../molecules/Pagination/Pagination"
 import { motion, AnimatePresence } from "framer-motion"
-import { projectsProps } from "@/types"
+import { ProjectsProps } from "@/types"
 import CardLandscape from "../../molecules/CardLandscape/CardLandscape"
 import useIsMobile from "@/hooks/useIsMobile"
 import getProjects from "@/utils/getProjects"
@@ -92,7 +92,7 @@ export default function ProjectSection() {
                 styles.projectSection__largeScreen__cards__cardPortraitWrapper
               }
             >
-              {(data.projects as projectsProps[])
+              {(data.projects as ProjectsProps[])
                 .slice(
                   currentPage === 1
                     ? 1
@@ -101,7 +101,7 @@ export default function ProjectSection() {
                     ? projectCountPerPage + 1
                     : (currentPage - 1) * projectsPerPage + projectCountPerPage
                 )
-                .map((project: projectsProps, index) => (
+                .map((project: ProjectsProps, index) => (
                   <motion.div
                     key={`project${index}`}
                     className={

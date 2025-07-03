@@ -1,13 +1,12 @@
-import styles from './projectPage.module.scss'
-import dataFallBack from '@/data/data.json'
-import TitleProjectPage from '@/components/ui/atoms/TitleProjectPage/TitleProjectPage'
-import Paragraphes from '@/components/ui/molecules/Paragraphes/Paragraphes'
-import PhotosSets from '@/components/ui/molecules/PhotosSets/PhotosSets'
-import LinkBottomOfProjectPage from '@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage'
-import PhotoProjectPage from '@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage'
-import Button from '@/components/ui/atoms/ButtonBig/ButtonBig'
-import { projectsProps, Data } from '@/types'
-import getProjects from '@/utils/getProjects'
+import styles from "./projectPage.module.scss"
+import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjectPage"
+import Paragraphes from "@/components/ui/molecules/Paragraphes/Paragraphes"
+import PhotosSets from "@/components/ui/molecules/PhotosSets/PhotosSets"
+import LinkBottomOfProjectPage from "@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage"
+import PhotoProjectPage from "@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage"
+import Button from "@/components/ui/atoms/ButtonBig/ButtonBig"
+import { projectsProps, Data } from "@/types"
+import getProjects from "@/utils/getProjects"
 
 export async function generateStaticParams() {
   const data: Data = await getProjects()
@@ -42,7 +41,10 @@ export default async function ProjectPage({
             <p className={styles.projectPage__largeScreen__404Wrapper__text}>
               Le projet n&apos;a pas été trouvé.
             </p>
-            <Button text="Retourner aux projets" link="/" />
+            <Button
+              text="Retourner aux projets"
+              link="/"
+            />
           </div>
         </div>
       </section>

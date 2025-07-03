@@ -43,7 +43,8 @@ yarn-error.log*
 next-env.d.ts
 
 # photos
-/public/images
+# Après réflexion, les données nécessaires à l'affichage du site sont ajoutées au repo
+!/public/images
 !/public/fonts
 !/public/icons
 

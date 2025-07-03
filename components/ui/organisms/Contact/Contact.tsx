@@ -91,7 +91,7 @@ export default function Contact() {
             <TitleProjectPage text="HUGO RANDEZ" />
             <p className={styles.contact__presentation__text__p}>
               Spécialisé dans les récits visuels de voyage, je capture des
-              moments uniques à travers le monde. Mon expertise s'étend
+              moments uniques à travers le monde. Mon expertise s&apos;étend
               également au plan local, où je collabore avec la mairie de ma
               ville.{" "}
             </p>

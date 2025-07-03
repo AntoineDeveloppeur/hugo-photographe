@@ -1,18 +1,17 @@
-'use client'
+"use client"
 
-import styles from './form-ajouter-projet.module.scss'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import Input from '../../atoms/Input/Input'
-import { promise, z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import Button from '../../atoms/Button/Button'
-import Textarea from '../../atoms/Textarea/Textarea'
-import { useState, useEffect, useRef, createRef } from 'react'
-import InputFile from '../../molecules/InputFile/InputFile'
-import FormPhoto from '../../molecules/FormPhoto/FormPhoto'
-import ButtonAdd from '../../atoms/ButtonAdd/ButtonAdd'
-import { useRouter } from 'next/navigation'
-import revalidateProjects from '@/utils/revalidateProjects'
+import styles from "./form-ajouter-projet.module.scss"
+import { SubmitHandler, useForm } from "react-hook-form"
+import Input from "../../atoms/Input/Input"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import Button from "../../atoms/Button/Button"
+import Textarea from "../../atoms/Textarea/Textarea"
+import { useState, useEffect, useRef, createRef } from "react"
+import InputFile from "../../molecules/InputFile/InputFile"
+import FormPhoto from "../../molecules/FormPhoto/FormPhoto"
+import ButtonAdd from "../../atoms/ButtonAdd/ButtonAdd"
+import { useRouter } from "next/navigation"
 
 export default function FormAjouterProjet() {
   const router = useRouter()
@@ -29,7 +28,7 @@ export default function FormAjouterProjet() {
     Array<Array<React.RefObject<HTMLInputElement>>>
   >([[createRef<HTMLInputElement>()]])
   // État pour stocker les paragraphs
-  const [paragraphArray, setParagraphArray] = useState<string[]>([''])
+  const [paragraphArray, setParagraphArray] = useState<string[]>([""])
 
   interface FormFields {
     title: string
@@ -106,7 +105,7 @@ export default function FormAjouterProjet() {
     setPhotoRefs(newPhotoRefs)
   }
   const handleAddParagraph = () => {
-    setParagraphArray([...paragraphArray, ''])
+    setParagraphArray([...paragraphArray, ""])
   }
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
@@ -132,8 +131,8 @@ export default function FormAjouterProjet() {
         ),
       }
 
-      formData.append('projectTexts', JSON.stringify(projectData))
-      formData.append('mainPhoto', selectedFile)
+      formData.append("projectTexts", JSON.stringify(projectData))
+      formData.append("mainPhoto", selectedFile)
 
       //Ajoute les fichiers des sets de photos
       photoRefs.forEach((set, setIndex) => {
@@ -156,9 +155,9 @@ export default function FormAjouterProjet() {
       const responseJSON = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
           },
           body: formData,
         }
@@ -167,8 +166,8 @@ export default function FormAjouterProjet() {
       const response = await responseJSON.json()
 
       if (responseJSON.status === 403) {
-        router.push('/connexion')
-        throw new Error('Veuillez vous connecter pour ajouter un projet')
+        router.push("/connexion")
+        throw new Error("Veuillez vous connecter pour ajouter un projet")
       }
 
       if (!responseJSON.ok) {
@@ -176,7 +175,7 @@ export default function FormAjouterProjet() {
       }
       //Réinitialise le cache serveur des données
       // revalidateProjects()
-      router.push('/succesAjoutProjet')
+      router.push("/succesAjoutProjet")
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error)
@@ -185,7 +184,10 @@ export default function FormAjouterProjet() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.form}
+    >
       {/* {partie statique du formulaire} */}
       <p className={styles.form__titre}>Vignette</p>
 
@@ -237,12 +239,18 @@ export default function FormAjouterProjet() {
         />
       ))}
       <div className={styles.form__buttonWrapper__addAParagraph}>
-        <ButtonAdd text="Ajouter un paragraphe" onclick={handleAddParagraph} />
+        <ButtonAdd
+          text="Ajouter un paragraphe"
+          onclick={handleAddParagraph}
+        />
       </div>
 
       {/* {partie dynamique : les sets de photos} */}
       {photoRefs.map((set, setIndex) => (
-        <div className={styles.form__set} key={`set${setIndex + 1}`}>
+        <div
+          className={styles.form__set}
+          key={`set${setIndex + 1}`}
+        >
           <p className={styles.form__set__p}>Set n°{setIndex + 1}</p>
           {set.map((ref, photoIndex) => {
             const dynamicAlt: string = `set${setIndex + 1}photo${
@@ -272,11 +280,14 @@ export default function FormAjouterProjet() {
         </div>
       ))}
       <div className={styles.form__buttonWrapper__addASet}>
-        <ButtonAdd text="Ajouter un set" onclick={handleAddASet} />
+        <ButtonAdd
+          text="Ajouter un set"
+          onclick={handleAddASet}
+        />
       </div>
       <div className={styles.form__buttonWrapper__saveProject}>
         <Button
-          text={isSubmitting ? 'Chargement...' : 'Enregistrer le projet'}
+          text={isSubmitting ? "Chargement..." : "Enregistrer le projet"}
           type="submit"
           disabled={isSubmitting}
         />

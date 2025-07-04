@@ -1,5 +1,6 @@
 import Project from "../models/project.js";
 import uploadToS3, { parseForm, } from "../middleware/upload.js";
+import deletePhotosFromDB from "../utils/deletePhotosFromDB.js";
 // Interface pour la requête authentifié
 // export interface AuthRequest extends Request {
 //     auth?: {
@@ -34,6 +35,7 @@ export async function createProject(req, res) {
             ? JSON.parse(fields.projectTexts[0])
             : fields.projectTexts;
         // Crée un nouveau projet
+        console.log("files", files);
         const newProject = new Project({
             title: projectData.title,
             summary: projectData.summary,
@@ -62,18 +64,14 @@ export async function createProject(req, res) {
         await newProject
             .save()
             .then(() => res.status(201).json({ message: "Le projet a bien été créé" }))
-            .catch((error) => res
-            .status(400)
-            .json({
+            .catch((error) => res.status(400).json({
             message: "Erreur lors de l'enregistrement du projet",
             error: error.message,
         }));
     }
     catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        res
-            .status(500)
-            .json({
+        res.status(500).json({
             message: "Erreur lors de la création du projet pour envoi",
             error: errorMessage,
         });
@@ -93,6 +91,11 @@ export async function deleteProject(req, res) {
         .then((project) => {
         Project.deleteOne({ _id: req.params.id })
             .then(() => {
+            // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
+            // Ajouter un moyen de logger cette erreur
+            if (!deletePhotosFromDB(project)) {
+                console.error("les photos n'ont pas été supprimé");
+            }
             res
                 .status(201)
                 .json({ message: `Projet ${project?.title} supprimé avec succès` });

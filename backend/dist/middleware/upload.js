@@ -59,16 +59,25 @@ export async function parseForm(req) {
                             processedFiles[key] = file;
                             return;
                         }
+                        // Obtenir les métadonnées de l'image originale
+                        const metadata = await sharp(file.filepath).metadata();
+                        console.log("metadata", metadata);
+                        console.log("metadatda.width", metadata.width);
                         // Si c'est déjà un WebP, conserver le fichier original
                         if (file?.mimetype === "image/webp") {
-                            processedFiles[key] = file;
+                            // Créer un nouvel objet file (immutable)
+                            processedFiles[key] = {
+                                ...file,
+                                //@ts-ignore
+                                originalFilename: `${path.parse(file?.originalFilename).name}.webp`,
+                                width: metadata.width,
+                                height: metadata.height,
+                            };
                             return;
                         }
                         // Pour les autres types d'images, convertir en WebP
                         const uniqueId = uuidv4();
                         const webpFilePath = path.join(path.dirname(file.filepath), `${uniqueId}.webp`);
-                        // Obtenir les métadonnées de l'image originale
-                        const metadata = await sharp(file.filepath).metadata();
                         // Convertir l'image en WebP
                         await sharp(file.filepath)
                             .webp({

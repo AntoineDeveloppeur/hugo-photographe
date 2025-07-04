@@ -88,12 +88,12 @@ export type GaleryType = "galeryDesktop" | "galeryTablet" | "galeryMobile"
 export type Theme = "light" | "dark"
 
 export interface ProjectsProps {
-  _id: string
+  _id: string | object
   title: string
   summary: string
   mainPhoto: PhotoVariableProps
   textsAbovePhotos?: string[]
-  photosSets: PhotoVariableProps[][]
+  photosSets: PhotoVariableProps[]
   textsBelowPhotos?: string[]
 }
 

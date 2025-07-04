@@ -1,5 +1,6 @@
 import Project from "../models/project.js";
-import uploadToS3, { parseForm, } from "../middleware/upload.js";
+import uploadToS3, { parseForm } from "../middleware/upload.js";
+import deletePhotosFromDB from "../utils/deletePhotosFromDB.js";
 // Interface pour la requête authentifié
 // export interface AuthRequest extends Request {
 //     auth?: {
@@ -57,23 +58,19 @@ export async function createProject(req, res) {
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],
         });
-        console.log("newProject.photosSets", newProject.photosSets);
+        console.log("newProject photoSet", newProject.title);
         // Sauvegarde le projet dans la base de donnée
         await newProject
             .save()
             .then(() => res.status(201).json({ message: "Le projet a bien été créé" }))
-            .catch((error) => res
-            .status(400)
-            .json({
+            .catch((error) => res.status(400).json({
             message: "Erreur lors de l'enregistrement du projet",
             error: error.message,
         }));
     }
     catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
-        res
-            .status(500)
-            .json({
+        res.status(500).json({
             message: "Erreur lors de la création du projet pour envoi",
             error: errorMessage,
         });
@@ -91,11 +88,15 @@ export async function getProjects(req, res) {
 export async function deleteProject(req, res) {
     Project.findOne({ _id: req.params.id })
         .then((project) => {
+        if (!deletePhotosFromDB(project)) {
+            // Gérer cet erreur côté administrateur pas de message à l'utilisateur
+            console.error("Une ou plusieurs photos n'ont pas été supprimé de la base de donnée");
+        }
         Project.deleteOne({ _id: req.params.id })
             .then(() => {
-            res
-                .status(201)
-                .json({ message: `Projet ${project?.title} supprimé avec succès` });
+            res.status(201).json({
+                message: `Projet ${project?.title} supprimé avec succès`,
+            });
         })
             .catch((error) => res.status(500).json({ error }));
     })

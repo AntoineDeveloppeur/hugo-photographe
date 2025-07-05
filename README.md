@@ -1,13 +1,30 @@
-## Antoine's Note
+## Objectif du projet
 
-Toutes les branches qui sont présentes à distance et plus en local ont été supprimés car je pense que je n'ai plus besoin d'elles. A supprimer à l'avenir si je n'en trouve pas l'utilité pendant un laps de temps assez long
+Ce projet a pour but de mettre en valeur le travail de Hugo Randez, Photographe
+globe trotter. Il s'agit de mettre en avant son travail à travers un design
+simple et épuré.
 
+photographe-hugo-randez.fr
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Ajouter des badges: Languages FrameWorks Next.js, Node, MongoDB, AWS S3
+Librairie les plus importantes : Express, Motion pour les animations
 
-## Getting Started
+## Fonctionnalités Client
 
-First, run the development server:
+Le photographe peut, en toute autonomie, ajouter des projets à la partie blog.
+Ce projet sont constitué de photos et de texte portant sur un voyage, un thème
+particulier. Pour servir cette fonctionnalité le projet comporte :
+
+- Une page d'authentification : librairie bcrypt pour crypter les mots de passe
+- Une page d'ajout de projet : librairie React-hook-form et zod pour la
+  validation des données
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with
+[`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Faire fonctionner le projet sur votre machine
+
+La partie frontend va fonctionner sur votre machine avec des data en fallback
 
 ```bash
 npm run dev
@@ -19,23 +36,5 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+result.

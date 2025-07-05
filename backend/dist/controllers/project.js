@@ -1,6 +1,6 @@
 import Project from "../models/project.js";
 import uploadToS3, { parseForm, } from "../middleware/upload.js";
-import deletePhotosFromDB from "../utils/deletePhotosFromDB.js";
+import deletePhotos, { deleteOnePhotoFromDB } from "../utils/deletePhotos.js";
 // Interface pour la requête authentifié
 // export interface AuthRequest extends Request {
 //     auth?: {
@@ -93,7 +93,7 @@ export async function deleteProject(req, res) {
             .then(() => {
             // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
             // Ajouter un moyen de logger cette erreur
-            if (!deletePhotosFromDB(project)) {
+            if (!deletePhotos(project, deleteOnePhotoFromDB)) {
                 console.error("les photos n'ont pas été supprimé");
             }
             res

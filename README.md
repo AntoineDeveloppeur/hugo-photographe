@@ -12,10 +12,12 @@
 [![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
+
 ## 🎯 Présentation du projet
 
 Ce projet a pour objectif de mettre en valeur le travail de Hugo Randez,
 photographe globe-trotter, à travers un design simple et épuré.
+
 
 ## ✨ Fonctionnalités
 
@@ -25,8 +27,7 @@ Le photographe peut, en toute autonomie, gérer le contenu de son portfolio :
   mots de passe et jsonWebToken pour la gestion des sessions
 - 📝 **Gestion de projets** : Interface d'ajout de nouveaux projets avec
   React-hook-form et Zod pour la validation des données
-- 🖼️ **Galeries photo** : Présentation des projets constitués de photos et de
-  textes portant sur des voyages ou thèmes particuliers
+
 
 ## 🚀 Installation et démarrage
 
@@ -51,6 +52,7 @@ bun dev
 
 Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour
 voir le résultat.
+
 
 ## 🛠️ Technologies utilisées
 

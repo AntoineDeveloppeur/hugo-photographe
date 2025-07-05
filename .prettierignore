@@ -1,0 +1,9 @@
+# Ignorer les fichiers README.md
+README.md
+*.md
+
+# Autres fichiers à ignorer potentiellement
+node_modules
+build
+dist
+.next

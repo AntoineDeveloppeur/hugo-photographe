@@ -1,7 +1,7 @@
 import getS3Client from "./getS3Client.js"
 import { DeleteObjectCommand } from "@aws-sdk/client-s3"
 
-export async function deleteOnePhoto(url: string): Promise<boolean> {
+export async function deleteOnePhotoFromDB(url: string): Promise<boolean> {
   const s3Client = getS3Client()
 
   // Récupérer la clé de la photo à supprimer
@@ -24,10 +24,10 @@ export async function deleteOnePhoto(url: string): Promise<boolean> {
   return true
 }
 
-export default async function deletePhotosFromDB(
+export default async function deletePhotos(
   project,
-  deleteOnePhoto
-): boolean {
+  deleteOnePhotoFromDB
+): Promise<boolean> {
   // Mise en forme des url
   const urlTable = [
     project.mainPhoto.src,
@@ -35,7 +35,7 @@ export default async function deletePhotosFromDB(
   ]
 
   const response = await Promise.all(
-    urlTable.map(async (url) => await deleteOnePhoto(url))
+    urlTable.map(async (url) => await deleteOnePhotoFromDB(url))
   )
   return response.every((element) => element === true)
 }

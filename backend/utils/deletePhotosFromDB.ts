@@ -1,7 +1,7 @@
 import getS3Client from "./getS3Client.js"
 import { DeleteObjectCommand } from "@aws-sdk/client-s3"
 
-async function deleteOnePhoto(url: string): Promise<boolean> {
+export async function deleteOnePhoto(url: string): Promise<boolean> {
   const s3Client = getS3Client()
 
   // Récupérer la clé de la photo à supprimer
@@ -21,19 +21,19 @@ async function deleteOnePhoto(url: string): Promise<boolean> {
     return false
   }
 
-  // Gueule de l'url
-  //https://photos-hugo.s3.eu-west-3.amazonaws.com/projets/1749562350115-taïwan6.webp
-
-  // Il faut Vérifier
-
   return true
 }
 
-export default async function deletePhotosFromDB(project) {
+export default async function deletePhotosFromDB(
+  project,
+  deleteOnePhoto
+): boolean {
+  // Mise en forme des url
   const urlTable = [
     project.mainPhoto.src,
     ...project.photosSets.flat().map((photo) => photo.src),
   ]
+
   const response = await Promise.all(
     urlTable.map(async (url) => await deleteOnePhoto(url))
   )

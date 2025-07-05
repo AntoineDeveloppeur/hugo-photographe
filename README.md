@@ -1,40 +1,60 @@
-## Objectif du projet
+# 📸 Hugo Randez - Portfolio de Photographie
 
-Ce projet a pour but de mettre en valeur le travail de Hugo Randez, Photographe
-globe trotter. Il s'agit de mettre en avant son travail à travers un design
-simple et épuré.
+> Portfolio professionnel mettant en valeur le travail de Hugo Randez,
+> photographe globe-trotter.
 
-photographe-hugo-randez.fr
+[photographe-hugo-randez.fr](https://photographe-hugo-randez.fr)
 
-Ajouter des badges: Languages FrameWorks Next.js, Node, MongoDB, AWS S3
-Librairie les plus importantes : Express, Motion pour les animations
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![AWS S3](https://img.shields.io/badge/AWS_S3-569A31?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/s3/)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-## Fonctionnalités Client
+## 🎯 Présentation du projet
 
-Le photographe peut, en toute autonomie, ajouter des projets à la partie blog.
-Ce projet sont constitué de photos et de texte portant sur un voyage, un thème
-particulier. Pour servir cette fonctionnalité le projet comporte :
+Ce projet a pour objectif de mettre en valeur le travail de Hugo Randez,
+photographe globe-trotter, à travers un design simple et épuré.
 
-- Une page d'authentification : librairie bcrypt pour crypter les mots de passe
-- Une page d'ajout de projet : librairie React-hook-form et zod pour la
-  validation des données
+## ✨ Fonctionnalités
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with
-[`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Le photographe peut, en toute autonomie, gérer le contenu de son portfolio :
 
-## Faire fonctionner le projet sur votre machine
+- 🔐 **Authentification sécurisée** : Utilisation de bcrypt pour le hachage des
+  mots de passe et jsonWebToken pour la gestion des sessions
+- 📝 **Gestion de projets** : Interface d'ajout de nouveaux projets avec
+  React-hook-form et Zod pour la validation des données
+- 🖼️ **Galeries photo** : Présentation des projets constitués de photos et de
+  textes portant sur des voyages ou thèmes particuliers
 
-La partie frontend va fonctionner sur votre machine avec des data en fallback
+## 🚀 Installation et démarrage
+
+### Prérequis
+
+- Node.js (version 16 ou supérieure)
+- npm, yarn, pnpm ou bun
+
+### Démarrage du projet
+
+La partie frontend fonctionne avec des données en fallback :
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour
+voir le résultat.
+
+## 🛠️ Technologies utilisées
+
+- **Frontend** : Next.js, Framer Motion
+- **Backend** : Node.js, Express
+- **Base de données** : MongoDB
+- **Stockage** : AWS S3

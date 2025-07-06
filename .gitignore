@@ -42,6 +42,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# fichiers js générés
+/backend/dist
+
 # photos
 # Après réflexion, les données nécessaires à l'affichage du site sont ajoutées au repo
 !/public/images

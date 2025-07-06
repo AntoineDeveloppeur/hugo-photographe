@@ -134,7 +134,7 @@ export async function deleteProject(req: Request, res: Response) {
       Project.deleteOne({ _id: req.params.id })
         .then(() => {
           // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
-          // Ajouter un moyen de logger cette erreur
+          // Ajouter un moyen de logger cette erreur.
           if (!deletePhotos(project, deleteOnePhotoFromDB)) {
             console.error("les photos n'ont pas été supprimé")
           }

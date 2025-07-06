@@ -43,7 +43,7 @@ yarn-error.log*
 next-env.d.ts
 
 # fichiers js générés
-/backend/dist
+#/backend/dist
 
 # photos
 # Après réflexion, les données nécessaires à l'affichage du site sont ajoutées au repo

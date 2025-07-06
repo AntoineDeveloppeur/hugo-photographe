@@ -5,7 +5,7 @@ import PhotosSets from "@/components/ui/molecules/PhotosSets/PhotosSets"
 import LinkBottomOfProjectPage from "@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage"
 import PhotoProjectPage from "@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage"
 import Button from "@/components/ui/atoms/ButtonBig/ButtonBig"
-import { projectsProps, Data } from "@/types"
+import { ProjectsProps, Data } from "@/types"
 import getProjects from "@/utils/getProjects"
 
 export async function generateStaticParams() {
@@ -29,7 +29,7 @@ export default async function ProjectPage({
   const { projectId } = await params
   const data: Data = await getProjects()
 
-  const project: projectsProps | undefined = data.projects.find(
+  const project: ProjectsProps | undefined = data.projects.find(
     (project) => project._id === projectId
   )
   if (!project) {

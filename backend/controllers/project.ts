@@ -158,7 +158,7 @@ export async function deleteProject(req: Request, res: Response) {
           // Ajouter un moyen de logger cette erreur.
           if (
             !deletePhotos(
-              projectWithStringId as ProjectDeletePhotos,
+              projectWithStringId as unknown as ProjectDeletePhotos,
               deleteOnePhotoFromDB
             )
           ) {

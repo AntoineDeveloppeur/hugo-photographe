@@ -101,7 +101,9 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                   ...file,
                   //@ts-ignore
                   originalFilename: `${
+                    //@ts-ignore
                     path.parse(file?.originalFilename).name
+                    //@ts-ignore
                   }.webp`,
                   width: metadata.width,
                   height: metadata.height,

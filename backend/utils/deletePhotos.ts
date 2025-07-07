@@ -1,6 +1,6 @@
 import getS3Client from "./getS3Client.js"
 import { DeleteObjectCommand } from "@aws-sdk/client-s3"
-import ProjectsProps from "../../types/index.js"
+import { ProjectsProps } from "../../types/index.js"
 
 export async function deleteOnePhotoFromDB(url: string): Promise<boolean> {
   const s3Client = getS3Client()
@@ -26,10 +26,8 @@ export async function deleteOnePhotoFromDB(url: string): Promise<boolean> {
 }
 
 export default async function deletePhotos(
-  // @ts-expected-error ddd
   project: ProjectsProps,
-  // @ts-expected-error ddd
-  deleteOnePhotoFromDB
+  deleteOnePhotoFromDB: (url: string) => Promise<boolean>
 ): Promise<boolean> {
   // Mise en forme des url
   const urlTable = [

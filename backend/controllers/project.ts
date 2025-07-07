@@ -126,7 +126,7 @@ export async function getProjects(req: Request, res: Response) {
         const projectObj = project.toObject()
         return {
           ...projectObj,
-          _id: projectObj._id.toString(),
+          _id: projectObj._id?.toString() || "",
         }
       })
       return res.status(200).json({ projects: projectsWithStringIds })
@@ -139,18 +139,32 @@ export async function getProjects(req: Request, res: Response) {
 export async function deleteProject(req: Request, res: Response) {
   Project.findOne({ _id: req.params.id })
     .then((project) => {
+      if (!project) {
+        return res.status(404).json({ message: "Projet non trouvé" })
+      }
+
       Project.deleteOne({ _id: req.params.id })
         .then(() => {
+          const projectObject = project.toObject()
+
+          const projectWithStringId = {
+            ...projectObject,
+            _id: projectObject._id?.toString() || "",
+          }
           // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
           // Ajouter un moyen de logger cette erreur.
-          if (!deletePhotos(project, deleteOnePhotoFromDB)) {
+          if (!deletePhotos(projectWithStringId as any, deleteOnePhotoFromDB)) {
             console.error("les photos n'ont pas été supprimé")
           }
           res
-            .status(201)
-            .json({ message: `Projet ${project?.title} supprimé avec succès` })
+            .status(200)
+            .json({ message: "Projet supprimé avec succès", project })
         })
-        .catch((error) => res.status(500).json({ error }))
+        .catch((error) => {
+          res.status(400).json({ error })
+        })
     })
-    .catch((error) => res.status(404).json({ message: error }))
+    .catch((error) => {
+      res.status(500).json({ error })
+    })
 }

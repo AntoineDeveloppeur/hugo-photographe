@@ -131,9 +131,9 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               processedFiles[key] = {
                 ...file,
                 filepath: webpFilePath,
-                //@ts-ignore
                 originalFilename: `${
-                  path.parse(file?.originalFilename).name
+                  //@ts-expect-error ddddd
+                  path.parse(file?.originalFilename)?.name
                 }.webp`,
                 mimetype: "image/webp",
                 width: metadata.width,

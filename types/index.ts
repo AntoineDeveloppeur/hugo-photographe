@@ -93,7 +93,7 @@ export interface ProjectsProps {
   summary: string
   mainPhoto: PhotoVariableProps
   textsAbovePhotos?: string[]
-  photosSets: PhotoVariableProps[]
+  photosSets: PhotoVariableProps[][]
   textsBelowPhotos?: string[]
 }
 

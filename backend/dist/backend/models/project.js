@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 const projectSchema = new mongoose.Schema({
     //Prendre en compte l'_id de mongoose pour répondre à une requête get
+    _id: { type: String },
     title: { type: String, required: true, unique: true },
     summary: { type: String, required: true },
     mainPhoto: {
-        src: { type: String, required: true },
+        src: { type: Object, required: true },
         alt: { type: String, required: true },
         width: { type: Number, required: true },
         height: { type: Number, required: true },
@@ -24,8 +25,6 @@ const projectSchema = new mongoose.Schema({
     },
     textsBelowPhotos: { type: [String], required: false },
 });
-// Tentative d'exporter le type du schéma sans succès
-export { projectSchema };
 // Gestion des erreurs d'unicité sans plugin externe
 projectSchema.post("save", function (error, doc, next) {
     if (error.name === "MongoServerError" && error.code === 11000) {

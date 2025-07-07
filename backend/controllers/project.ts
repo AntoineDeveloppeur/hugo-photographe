@@ -6,7 +6,10 @@ import uploadToS3, {
   FormidableFile,
 } from "../middleware/upload.js"
 import { Interface } from "readline"
-import deletePhotos, { deleteOnePhotoFromDB } from "../utils/deletePhotos.js"
+import deletePhotos, {
+  deleteOnePhotoFromDB,
+  ProjectDeletePhotos,
+} from "../utils/deletePhotos.js"
 
 // Interface pour la requête authentifié
 // export interface AuthRequest extends Request {
@@ -153,7 +156,12 @@ export async function deleteProject(req: Request, res: Response) {
           }
           // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
           // Ajouter un moyen de logger cette erreur.
-          if (!deletePhotos(projectWithStringId as any, deleteOnePhotoFromDB)) {
+          if (
+            !deletePhotos(
+              projectWithStringId as ProjectDeletePhotos,
+              deleteOnePhotoFromDB
+            )
+          ) {
             console.error("les photos n'ont pas été supprimé")
           }
           res

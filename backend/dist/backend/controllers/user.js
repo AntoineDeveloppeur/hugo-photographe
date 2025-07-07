@@ -1,6 +1,6 @@
-import User from "../models/user.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import User from '../models/user.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 // Créer d'abord l'objet contrôleur
 const userCtrl = {
     signIn: (req, res) => {
@@ -15,19 +15,17 @@ const userCtrl = {
                 .then((valid) => {
                 if (!valid) {
                     res.status(401).json({
-                        error: "mot de pass incorect",
+                        error: 'mot de pass incorect',
                     });
                 }
                 else {
                     if (!process.env.SECRET_PHRASE_TOKEN) {
-                        return res.status(500).json({
-                            error: "La phrase pour la génération du token pour jsonWebToken n'est pas définie",
-                        });
+                        return res.status(500).json({ error: "La phrase pour la génération du token pour jsonWebToken n'est pas définie" });
                     }
                     res.status(200).json({
                         userId: user._id,
                         token: jwt.sign({ userId: user._id }, process.env.SECRET_PHRASE_TOKEN, // C'est la clé secrète qui permet de générer le token
-                        { expiresIn: "48h" }),
+                        { expiresIn: '48h' }),
                     });
                 }
             })
@@ -35,7 +33,7 @@ const userCtrl = {
                 res.status(500).json({ error });
             });
         })
-            .catch((error) => res.status(400).json({ error }));
+            .catch(error => res.status(400).json({ error }));
     },
     modifyPassword: (req, res) => {
         // À implémenter - pour le moment juste un placeholder
@@ -50,14 +48,12 @@ const userCtrl = {
                 .then((hash) => {
                 // Mise à jour du mot de passe de l'utilisateur avec le hash
                 User.updateOne({ email: req.body.email }, { password: hash })
-                    .then(() => res
-                    .status(200)
-                    .json({ message: "Mot de passe modifié avec succès" }))
-                    .catch((error) => res.status(500).json({ error }));
+                    .then(() => res.status(200).json({ message: 'Mot de passe modifié avec succès' }))
+                    .catch(error => res.status(500).json({ error }));
             })
-                .catch((error) => res.status(500).json({ error }));
+                .catch(error => res.status(500).json({ error }));
         })
-            .catch((error) => res.status(500).json({ error }));
-    },
+            .catch(error => res.status(500).json({ error }));
+    }
 };
 export default userCtrl;

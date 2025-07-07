@@ -25,8 +25,13 @@ export async function deleteOnePhotoFromDB(url: string): Promise<boolean> {
   return true
 }
 
+export interface ProjectDeletePhotos {
+  mainPhoto: { src: string }
+  photosSets: { src: string }[][]
+}
+
 export default async function deletePhotos(
-  project: ProjectsProps,
+  project: ProjectDeletePhotos,
   deleteOnePhotoFromDB: (url: string) => Promise<boolean>
 ): Promise<boolean> {
   // Mise en forme des url

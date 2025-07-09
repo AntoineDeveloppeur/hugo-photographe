@@ -1,4 +1,4 @@
-@use 'sass:math';
+@use "sass:math";
 
 @tailwind base;
 @tailwind components;
@@ -121,7 +121,7 @@ select {
 /* Colors begins */
 
 :root,
-[data-theme='dark'] {
+[data-theme="dark"] {
   --color-logo: var(--dark100);
 
   --background-main: var(--dark10);
@@ -161,7 +161,7 @@ select {
   --color-medal-background: var(--dark10);
 }
 
-[data-theme='light'] {
+[data-theme="light"] {
   --color-logo: var(--light0);
 
   --background-main: #fffdfdd4;
@@ -208,13 +208,13 @@ body {
 }
 
 :root {
-  --font-title: 'Merriweather', serif;
-  --font-paragraph: 'Baskervville', serif;
-  --font-button: 'Lora', serif;
-  --font-title-card: 'Lora', serif;
-  --font-menu-mobile: 'Lora', serif;
-  --font-contact-link: 'Lora', serif;
-  --font-pagination: 'Lora', serif;
+  --font-title: "Merriweather", serif;
+  --font-paragraph: "Baskervville", serif;
+  --font-button: "Lora", serif;
+  --font-title-card: "Lora", serif;
+  --font-menu-mobile: "Lora", serif;
+  --font-contact-link: "Lora", serif;
+  --font-pagination: "Lora", serif;
 }
 
 /* Font ends */
@@ -251,7 +251,7 @@ body {
 html {
   line-height: 1.5;
   font-weight: 400;
-  @include responsive-font(8px, 12px);
+  @include responsive-font(12px, 12px);
 }
 h1 {
   @include responsive-font(18px, 32px);

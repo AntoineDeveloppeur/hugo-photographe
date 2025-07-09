@@ -1,4 +1,6 @@
 .logo {
-    height: 72px;
-    fill: var(--color-logo)
+  height: 72px;
+  min-height: 72px;
+
+  fill: var(--color-logo);
 }

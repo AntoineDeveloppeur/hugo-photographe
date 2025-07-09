@@ -141,7 +141,7 @@ const sidebarVariants = {
     },
   }),
   closed: {
-    clipPath: "circle(0px at 140px 60px)",
+    clipPath: "circle(0px at 155px 55px)",
     transition: {
       delay: 0.07,
       type: "spring",

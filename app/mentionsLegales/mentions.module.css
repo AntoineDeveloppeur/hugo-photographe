@@ -24,7 +24,7 @@
   margin-top: 1rem;
   margin-bottom: 3rem;
   margin-left: 3rem;
-  font-size: 1.5rem;
+  font-size: var(--font-size-p);
   color: var(--color-text-second);
   font-family: var(--font-paragraph);
-}/*# sourceMappingURL=mentions.module.css.map */
+} /*# sourceMappingURL=mentions.module.css.map */

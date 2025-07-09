@@ -6,6 +6,6 @@
 }
 .themeChanger__p {
   font-family: var(--font-menu-mobile);
-  font-size: 1.5rem;
+  font-size: var(--font-size-p);
   color: var(--color-text-second);
-}/*# sourceMappingURL=theme-changer.module.css.map */
+} /*# sourceMappingURL=theme-changer.module.css.map */

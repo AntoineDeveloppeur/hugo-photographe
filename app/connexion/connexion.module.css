@@ -25,8 +25,8 @@
   margin-top: 1rem;
   margin-bottom: 3rem;
   margin-left: 3rem;
-  font-size: 1.5rem;
+  font-size: var(--font-size-p);
   color: var(--color-text-second);
   font-family: var(--font-paragraph);
   max-width: 60rem;
-}/*# sourceMappingURL=connexion.module.css.map */
+} /*# sourceMappingURL=connexion.module.css.map */

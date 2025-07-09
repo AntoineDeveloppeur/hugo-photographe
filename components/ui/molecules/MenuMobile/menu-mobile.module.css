@@ -26,8 +26,8 @@
   outline: none;
   border: none;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   cursor: pointer;
   position: absolute;
   top: 48px;
@@ -61,8 +61,8 @@
 }
 
 .text {
-  font-size: 1.5rem;
+  font-size: var(--font-size-p);
   font-family: var(--font-menu-mobile);
   width: 200px;
   color: var(--color-text-second);
-}/*# sourceMappingURL=menu-mobile.module.css.map */
+} /*# sourceMappingURL=menu-mobile.module.css.map */

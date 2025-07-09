@@ -92,6 +92,7 @@ select {
 *
 */
 
+// Variables globales
 :root {
   //Color palet :
   --dark0: #000000;
@@ -114,8 +115,6 @@ select {
   --light70: #faedef;
   --light80: #fff9f9;
   --light90: #fffdfd;
-
-  // Variables globales
 }
 
 /* Colors begins */
@@ -251,12 +250,12 @@ body {
 html {
   line-height: 1.5;
   font-weight: 400;
-  @include responsive-font(12px, 12px);
-}
-h1 {
-  @include responsive-font(18px, 32px);
+  @include responsive-font(8px, 12px);
 }
 
+:root {
+  --font-size-p: 16px;
+}
 /* Police responsive ends */
 
 /* Cache le badge reCaptcha */

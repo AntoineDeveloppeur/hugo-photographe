@@ -41,7 +41,7 @@
       &__p {
         max-width: 30rem;
         font-family: var(--font-paragraph);
-        font-size: 1.5rem;
+        font-size: var(--font-size-p);
         color: var(--color-text-second);
         margin-top: 1rem;
         margin-bottom: 2rem;
@@ -53,12 +53,12 @@
         margin-bottom: 0.5rem;
         &__link {
           font-family: var(--font-paragraph);
-          font-size: 1.5rem;
+          font-size: var(--font-size-p);
           color: var(--color-text-second);
         }
         &__linkNumber {
           font-family: Times;
-          font-size: 1.4rem;
+          font-size: var(--font-size-p);
           color: var(--color-text-number);
         }
       }

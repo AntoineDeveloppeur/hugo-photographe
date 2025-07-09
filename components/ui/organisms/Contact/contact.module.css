@@ -30,7 +30,7 @@
 .contact__presentation__text__p {
   max-width: 30rem;
   font-family: var(--font-paragraph);
-  font-size: 1.5rem;
+  font-size: var(--font-size-p);
   color: var(--color-text-second);
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -43,7 +43,7 @@
 }
 .contact__presentation__text__details__link {
   font-family: ebGaramond;
-  font-size: 1.5rem;
+  font-size: var(--font-size-p);
   font-weight: 300;
   color: var(--color-text-second);
 }
@@ -60,4 +60,4 @@
     height: auto;
     width: 100%;
   }
-}/*# sourceMappingURL=contact.module.css.map */
+} /*# sourceMappingURL=contact.module.css.map */

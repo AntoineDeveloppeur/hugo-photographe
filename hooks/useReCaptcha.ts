@@ -1,3 +1,5 @@
+"use client"
+
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { useState, useEffect } from "react"
 

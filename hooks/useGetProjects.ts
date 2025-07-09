@@ -1,7 +1,9 @@
-import dataFallBack from '@/data/data.json'
-import { Data } from '@/types'
-import getProjects from '@/utils/getProjects'
-import { useState, useEffect } from 'react'
+"use client"
+
+import dataFallBack from "@/data/data.json"
+import { Data } from "@/types"
+import getProjects from "@/utils/getProjects"
+import { useState, useEffect } from "react"
 
 export default function useGetProjects() {
   // Récupérer les projets depuis MongoDB

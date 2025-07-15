@@ -3,16 +3,9 @@ import "@testing-library/jest-dom"
 import AjouterProjet from "@/app/ajouterProjet/page"
 
 jest.mock("next/navigation", () => ({
-  useRouter() {
-    return {
-      push: jest.fn(),
-      back: jest.fn(),
-      forward: jest.fn(),
-      refresh: jest.fn(),
-      replace: jest.fn(),
-      prefetch: jest.fn(),
-    }
-  },
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
 }))
 
 describe("ajouterProjet", () => {

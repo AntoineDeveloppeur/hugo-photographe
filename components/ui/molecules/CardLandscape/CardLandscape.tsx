@@ -64,7 +64,8 @@ export default function CardLandscape({
           _id={_id}
           title={title}
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          // Solution pas élégante, à revoir
+          onClose={() => (window.location.href = "/supprimerProjet")}
         />
       )}
       <Link

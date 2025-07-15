@@ -8,6 +8,7 @@ import IconDelete from "../../atoms/IconDelete/IconDelete"
 import { useState } from "react"
 import ModalDeleteProject from "../ModalDeleteProject/ModalDeleteProject"
 import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
+import { useRouter } from "next/navigation"
 
 export default function CardPortrait({
   _id,
@@ -21,6 +22,8 @@ export default function CardPortrait({
   const handleDelete = () => {
     setIsModalOpen(true)
   }
+
+  const Router = useRouter()
 
   return (
     <div className={styles.cardWrapper}>
@@ -37,7 +40,8 @@ export default function CardPortrait({
           _id={_id}
           title={title}
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          // Solution pas élégante, à revoir
+          onClose={() => (window.location.href = "/supprimerProjet")}
         />
       )}
       <Link

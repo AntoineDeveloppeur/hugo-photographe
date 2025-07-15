@@ -32,12 +32,10 @@ export default function useDeleteProject() {
         throw new Error(response.message)
       }
       if (!responseJSON.ok) {
-        Router.refresh()
         throw new Error("Contacter votre administrateur")
       }
       setIsLoading(false)
       setIsSuccess(true)
-      setTimeout(() => Router.refresh(), 1000)
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error)

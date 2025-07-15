@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function useDeleteProject() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -10,17 +10,17 @@ export default function useDeleteProject() {
 
   async function deleteProject(_id: string) {
     try {
-      if (!window.localStorage.getItem('token')) {
-        Router.push('/connexion')
-        throw new Error('Veuillez vous connecter')
+      if (!window.localStorage.getItem("token")) {
+        Router.push("/connexion")
+        throw new Error("Veuillez vous connecter")
       }
       setIsLoading(true)
       const responseJSON = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/deleteProject/${_id}`,
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
-            Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
           },
         }
       )
@@ -28,11 +28,12 @@ export default function useDeleteProject() {
       const response = await responseJSON.json()
 
       if (responseJSON.status === 403 || responseJSON.status === 401) {
-        Router.push('/connexion')
+        Router.push("/connexion")
         throw new Error(response.message)
       }
       if (!responseJSON.ok) {
-        throw new Error('Contacter votre administrateur')
+        Router.refresh()
+        throw new Error("Contacter votre administrateur")
       }
       setIsLoading(false)
       setIsSuccess(true)

@@ -10,12 +10,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ProjectsProps } from "@/types"
 import CardLandscape from "@/components/ui/molecules/CardLandscape/CardLandscape"
 import useIsMobile from "@/hooks/useIsMobile"
-import getProjects from "@/utils/getProjects"
-
-const data = await getProjects()
+import useGetProjects from "@/hooks/useGetProjects"
 
 export default function Supprimer() {
-  // const data = useGetProjects()
+  const data = useGetProjects()
 
   const isMobile = useIsMobile()
   // définir une constant qui dépend du nombre de projets

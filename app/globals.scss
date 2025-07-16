@@ -218,7 +218,11 @@ body {
 
 /* Font ends */
 
-/* Police responsive begins */
+/* Responsive font size begins
+* 
+* La taille augmente pour les titres et la signature en fonction de la taille de l'écran
+* De même pour les paragraphes avec un minimum de 16 px
+*/
 
 @mixin responsive-font(
   $min-size,
@@ -226,8 +230,10 @@ body {
   $min-width: 320px,
   $max-width: 1440px
 ) {
+  // taille minimum
   font-size: $min-size;
 
+  // tailles intermédiaire
   @media screen and (min-width: $min-width) {
     font-size: calc(
       (
@@ -237,6 +243,7 @@ body {
     );
   }
 
+  // taille maximum
   @media screen and (min-width: $max-width) {
     font-size: $max-size;
   }
@@ -254,9 +261,14 @@ html {
 }
 
 :root {
-  --font-size-p: 16px;
+  --font-size-p: 1.6rem;
+  --font-size-project-page: 1.8rem;
+  @media (max-width: 769px) {
+    --font-size-p: 16px;
+    --font-size-project-page: 16px;
+  }
 }
-/* Police responsive ends */
+/* Responsive font size ends */
 
 /* Cache le badge reCaptcha */
 .grecaptcha-badge {

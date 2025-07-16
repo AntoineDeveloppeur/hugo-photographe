@@ -1,11 +1,11 @@
 .themeChanger {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    cursor: pointer;
-    &__p {
-        font-family: var(--font-menu-mobile);
-        font-size: 1.5rem;
-        color: var(--color-text-second);
-    }
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  &__p {
+    font-family: var(--font-menu-mobile);
+    font-size: var(--font-size-p);
+    color: var(--color-text-second);
+  }
 }

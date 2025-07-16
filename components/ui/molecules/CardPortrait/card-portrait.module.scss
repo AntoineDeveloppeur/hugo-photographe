@@ -82,7 +82,7 @@
     }
     &__summary {
       z-index: 2;
-      font-size: 1.6rem;
+      font-size: var(--font-size-p);
       display: inline;
       font-family: var(--font-paragraph);
       font-weight: 100;
@@ -100,11 +100,5 @@
         cursor: pointer;
       }
     }
-  }
-}
-
-@media (max-width: 738px) {
-  .cardWrapper__card__summary {
-    font-size: 2rem;
   }
 }

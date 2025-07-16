@@ -9,11 +9,12 @@
   padding-left: 1.5rem;
   padding-right: 1.5em;
   display: flex;
-  box-shadow: 0 4px 6px -1px var(--color-shadow-main), 0 2px 4px -1px var(--color-shadow-second);
+  box-shadow: 0 4px 6px -1px var(--color-shadow-main),
+    0 2px 4px -1px var(--color-shadow-second);
 }
 .button__p {
   color: var(--color-text-button);
-  font-size: 1.5rem;
+  font-size: var(--font-size-p);
   font-family: var(--font-button);
   position: relative;
   z-index: 1;
@@ -25,4 +26,4 @@
   transform: translate(-50%, -50%);
   transform-origin: center;
   pointer-events: none;
-}/*# sourceMappingURL=button.module.css.map */
+} /*# sourceMappingURL=button.module.css.map */

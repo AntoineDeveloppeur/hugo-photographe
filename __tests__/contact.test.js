@@ -40,6 +40,6 @@ jest.mock("@/hooks/useReCaptcha", () =>
 beforeEach(() => render(<Contact />))
 describe("Contact section", () => {
   it("should show mobile number with spaces between number", () => {
-    expect(screen.getByText(/dans/i)).toBeInTheDocument()
+    expect(screen.getByText(mockPhone)).toBeInTheDocument()
   })
 })

@@ -7,6 +7,7 @@ import { Request } from "express"
 import sharp from "sharp"
 import path from "path"
 import { v4 as uuidv4 } from "uuid" // Pour générer des noms de fichiers uniques
+import calculateResizeDimensions from "../utils/resizePhoto.js"
 
 // Interface pour les fichiers téléchargés
 export interface FormidableFile {
@@ -94,15 +95,30 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               console.log("metadata", metadata)
               console.log("metadatda.width", metadata.width)
 
+              // Modifier la taille si nécessaire
+              const newDimensions = calculateResizeDimensions(
+                metadata.width,
+                metadata.height
+              )
+              const uniqueId = uuidv4()
+              const resizedFilePath = path.join(
+                path.dirname(file.filepath),
+                `${uniqueId}.webp`
+              )
+              await sharp(file.filepath)
+                .resize(newDimensions.width, newDimensions.height)
+                .toFile(resizedFilePath)
+              const resizedFile = { ...file, filePath: resizedFilePath }
+
               // Si c'est déjà un WebP, conserver le fichier original
-              if (file?.mimetype === "image/webp") {
+              if (resizedFile?.mimetype === "image/webp") {
                 // Créer un nouvel objet file (immutable)
                 processedFiles[key] = {
-                  ...file,
+                  ...resizedFile,
                   //@ts-ignore
                   originalFilename: `${
                     //@ts-ignore
-                    path.parse(file?.originalFilename).name
+                    path.parse(resizedFile?.originalFilename).name
                     //@ts-ignore
                   }.webp`,
                   width: metadata.width,
@@ -112,28 +128,27 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               }
 
               // Pour les autres types d'images, convertir en WebP
-              const uniqueId = uuidv4()
+              const uniqueId2 = uuidv4()
               const webpFilePath = path.join(
-                path.dirname(file.filepath),
-                `${uniqueId}.webp`
+                path.dirname(resizedFile.filepath),
+                `${uniqueId2}.webp`
               )
 
               // Convertir l'image en WebP
-              await sharp(file.filepath)
+              await sharp(resizedFile.filepath)
                 .webp({
                   quality: 80,
-                  // Préserver les métadonnées importantes
                   effort: 4, // Meilleur équilibre entre vitesse et compression
                 })
                 .toFile(webpFilePath)
 
               // Créer un nouvel objet file (immutable)
               processedFiles[key] = {
-                ...file,
+                ...resizedFile,
                 filepath: webpFilePath,
                 originalFilename: `${
-                  file?.originalFilename
-                    ? path.parse(file.originalFilename).name
+                  resizedFile?.originalFilename
+                    ? path.parse(resizedFile.originalFilename).name
                     : "image"
                 }.webp`,
                 mimetype: "image/webp",

@@ -20,16 +20,22 @@ export const calculateResizeDimensions = (width: number, height: number) => {
 }
 
 type resizePhoto = {
-  metadata: { format?: string | undefined }
+  metadata: { format?: string | undefined; width: number; height: number }
   file: { filepath: string; mimetype: string; originalFilename: string }
   newDimensions: { width: number; height: number }
 }
 
-export const resizePhoto = async ({
-  metadata,
-  file,
-  newDimensions,
-}: resizePhoto) => {
+export const resizePhoto = async ({ metadata, file }: resizePhoto) => {
+  const newDimensions = calculateResizeDimensions(
+    metadata.width,
+    metadata.height
+  )
+  if (
+    newDimensions.width === metadata.width &&
+    newDimensions.height === metadata.height
+  )
+    return { ...file }
+
   const uniqueId = uuidv4()
   const resizedFilePath = path.join(
     path.dirname(file.filepath),

@@ -7,7 +7,7 @@ import { Request } from "express"
 import sharp from "sharp"
 import path from "path"
 import { v4 as uuidv4 } from "uuid" // Pour générer des noms de fichiers uniques
-import calculateResizeDimensions from "../utils/resizePhoto.js"
+import { calculateResizeDimensions, resizePhoto } from "../utils/resizePhoto.js"
 
 // Interface pour les fichiers téléchargés
 export interface FormidableFile {
@@ -95,20 +95,22 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               console.log("metadata", metadata)
               console.log("metadatda.width", metadata.width)
 
-              // Modifier la taille si nécessaire
-              const newDimensions = calculateResizeDimensions(
-                metadata.width,
-                metadata.height
-              )
-              const uniqueId = uuidv4()
-              const resizedFilePath = path.join(
-                path.dirname(file.filepath),
-                `${uniqueId}.webp`
-              )
-              await sharp(file.filepath)
-                .resize(newDimensions.width, newDimensions.height)
-                .toFile(resizedFilePath)
-              const resizedFile = { ...file, filePath: resizedFilePath }
+              // Modifier la taille si metadata disponible
+              const newDimensions =
+                metadata.width && metadata.height
+                  ? calculateResizeDimensions(
+                      metadata.width as number,
+                      metadata.height as number
+                    )
+                  : undefined
+
+              // Créer le fichier redimensionné si nécessaire
+              const resizedFile =
+                newDimensions === undefined ||
+                (newDimensions.width === metadata.width &&
+                  newDimensions.height === metadata.height)
+                  ? { ...file } // Pas de redimensionnement nécessaire
+                  : await resizePhoto({ metadata, file, newDimensions })
 
               // Si c'est déjà un WebP, conserver le fichier original
               if (resizedFile?.mimetype === "image/webp") {
@@ -121,8 +123,8 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                     path.parse(resizedFile?.originalFilename).name
                     //@ts-ignore
                   }.webp`,
-                  width: metadata.width,
-                  height: metadata.height,
+                  width: newDimensions.width,
+                  height: newDimensions.height,
                 }
                 return
               }
@@ -152,8 +154,8 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                     : "image"
                 }.webp`,
                 mimetype: "image/webp",
-                width: metadata.width,
-                height: metadata.height,
+                width: newDimensions.width,
+                height: newDimensions.height,
               }
             })
           )

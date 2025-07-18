@@ -96,21 +96,11 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               console.log("metadatda.width", metadata.width)
 
               // Modifier la taille si metadata disponible
-              const newDimensions =
-                metadata.width && metadata.height
-                  ? calculateResizeDimensions(
-                      metadata.width as number,
-                      metadata.height as number
-                    )
-                  : undefined
-
               // Créer le fichier redimensionné si nécessaire
               const resizedFile =
-                newDimensions === undefined ||
-                (newDimensions.width === metadata.width &&
-                  newDimensions.height === metadata.height)
-                  ? { ...file } // Pas de redimensionnement nécessaire
-                  : await resizePhoto({ metadata, file, newDimensions })
+                metadata.width && metadata.height
+                  ? await resizePhoto({ metadata, file })
+                  : { ...file }
 
               // Si c'est déjà un WebP, conserver le fichier original
               if (resizedFile?.mimetype === "image/webp") {

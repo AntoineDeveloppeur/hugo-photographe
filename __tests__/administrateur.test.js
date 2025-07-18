@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
 import Administrateur from "@/app/administrateur/page"
-import { userEvent } from "@testing-library/user-event"
 
 beforeEach(() => {
   render(<Administrateur />)

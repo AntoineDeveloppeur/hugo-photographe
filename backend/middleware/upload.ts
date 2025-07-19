@@ -7,9 +7,9 @@ import { Request } from "express"
 import sharp from "sharp"
 import path from "path"
 import { v4 as uuidv4 } from "uuid" // Pour générer des noms de fichiers uniques
-import { calculateResizeDimensions, resizePhoto } from "../utils/resizePhoto.js"
+import { resizePhoto } from "../utils/resizePhoto.js"
+import { convertToWebp } from "../utils/convertToWebp.js"
 
-// Interface pour les fichiers téléchargés
 export interface FormidableFile {
   filepath: string
   originalFilename: string | null
@@ -24,7 +24,8 @@ export interface ParsedForm {
   }
 }
 
-//Fonction pour télécharger un fichier sur S3
+// Fonction pour télécharger un fichier sur S3
+// prefix is the name of the bucket
 export default async function uploadToS3(
   file: FormidableFile,
   prefix: string = ""
@@ -92,16 +93,13 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               }
               // Obtenir les métadonnées de l'image originale
               const metadata = await sharp(file.filepath).metadata()
-              console.log("metadata", metadata)
-              console.log("metadatda.width", metadata.width)
-
               // Modifier la taille si metadata disponible
               const resizedFile =
                 metadata.width && metadata.height
                   ? await resizePhoto({ metadata, file })
                   : { ...file }
 
-              // Si c'est déjà un WebP, conserver le fichier original
+              // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp
               if (resizedFile?.mimetype === "image/webp") {
                 // Créer un nouvel objet file (immutable)
                 processedFiles[key] = {
@@ -117,31 +115,8 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               }
 
               // Pour les autres types d'images, convertir en WebP
-              const uniqueId2 = uuidv4()
-              const webpFilePath = path.join(
-                path.dirname(resizedFile.filepath),
-                `${uniqueId2}.webp`
-              )
-
-              // Convertir l'image en WebP
-              await sharp(resizedFile.filepath)
-                .webp({
-                  quality: 80,
-                  effort: 4, // Meilleur équilibre entre vitesse et compression
-                })
-                .toFile(webpFilePath)
-
               // Créer un nouvel objet file (immutable)
-              processedFiles[key] = {
-                ...resizedFile,
-                filepath: webpFilePath,
-                originalFilename: `${
-                  resizedFile?.originalFilename
-                    ? path.parse(resizedFile.originalFilename).name
-                    : "image"
-                }.webp`,
-                mimetype: "image/webp",
-              }
+              processedFiles[key] = await convertToWebp(resizedFile)
             })
           )
 

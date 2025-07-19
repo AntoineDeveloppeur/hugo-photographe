@@ -78,7 +78,7 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
           return reject(new Error("formulaire sans fichier"))
         }
 
-        // Convertir les images en WebP
+        // Traitement des images
         const processedFiles: { [key: string]: FormidableFile } = {}
         try {
           await Promise.all(
@@ -96,7 +96,6 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               console.log("metadatda.width", metadata.width)
 
               // Modifier la taille si metadata disponible
-              // Créer le fichier redimensionné si nécessaire
               const resizedFile =
                 metadata.width && metadata.height
                   ? await resizePhoto({ metadata, file })
@@ -113,8 +112,6 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                     path.parse(resizedFile?.originalFilename).name
                     //@ts-ignore
                   }.webp`,
-                  width: newDimensions.width,
-                  height: newDimensions.height,
                 }
                 return
               }
@@ -144,8 +141,6 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
                     : "image"
                 }.webp`,
                 mimetype: "image/webp",
-                width: newDimensions.width,
-                height: newDimensions.height,
               }
             })
           )

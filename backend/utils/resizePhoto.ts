@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid" // Pour générer des noms de fichiers uniqu
 import path from "path"
 import sharp from "sharp"
 
-export const calculateResizeDimensions = (width: number, height: number) => {
+const calculateResizeDimensions = (width: number, height: number) => {
   const maxWidth = 3840
   const maxHeight = 2160
   if (width <= maxWidth && height <= maxHeight) {
@@ -30,12 +30,14 @@ export const resizePhoto = async ({ metadata, file }: resizePhoto) => {
     metadata.width,
     metadata.height
   )
+  // Renvoie le fichier s'il est déjà aux bonne dimenssions
   if (
     newDimensions.width === metadata.width &&
     newDimensions.height === metadata.height
   )
-    return { ...file }
+    return { ...file, width: metadata.width, height: metadata.height }
 
+  // Crée un chemin unique
   const uniqueId = uuidv4()
   const resizedFilePath = path.join(
     path.dirname(file.filepath),
@@ -46,5 +48,10 @@ export const resizePhoto = async ({ metadata, file }: resizePhoto) => {
   await sharp(file.filepath)
     .resize(newDimensions.width, newDimensions.height)
     .toFile(resizedFilePath)
-  return { ...file, filepath: resizedFilePath }
+  return {
+    ...file,
+    filepath: resizedFilePath,
+    width: newDimensions.width,
+    height: newDimensions.height,
+  }
 }

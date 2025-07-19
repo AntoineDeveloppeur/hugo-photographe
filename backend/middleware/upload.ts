@@ -80,16 +80,28 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
         }
 
         // Traitement des images
-        const processedFiles: { [key: string]: FormidableFile } = {}
         try {
-          await Promise.all(
+          const processedFilesArray = await Promise.all(
+            // l'objet files ressemble à
+            // files = {
+            //  set1photo1: file[0]
+            //  set1photo2: file[0]
+
+            //}
             Object.entries(files).map(async ([key, fileArray]) => {
+              // avec map je peux renvoyer
+              // [{key: file},{key2: file 2}]
+              // avec reduce je peux construire mon objet
+              // xx.reduce((object) => {
+              //  return {...acc, ...object}
+              //})
+              // J'obtient
+              // { key: file, key2: file 2}
               const file = (fileArray as FormidableFile[])?.[0]
 
               // Fail-fast: Si ce n'est pas une image, conserver le fichier original
               if (!file.mimetype?.startsWith("image/")) {
-                processedFiles[key] = file
-                return
+                return { [key]: file }
               }
               // Obtenir les métadonnées de l'image originale
               const metadata = await sharp(file.filepath).metadata()
@@ -102,28 +114,34 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp
               if (resizedFile?.mimetype === "image/webp") {
                 // Créer un nouvel objet file (immutable)
-                processedFiles[key] = {
-                  ...resizedFile,
-                  //@ts-ignore
-                  originalFilename: `${
+                return {
+                  [key]: {
+                    ...resizedFile,
                     //@ts-ignore
-                    path.parse(resizedFile?.originalFilename).name
-                    //@ts-ignore
-                  }.webp`,
+                    originalFilename: `${
+                      //@ts-ignore
+                      path.parse(resizedFile?.originalFilename).name
+                      //@ts-ignore
+                    }.webp`,
+                  },
                 }
-                return
               }
 
               // Pour les autres types d'images, convertir en WebP
-              // Créer un nouvel objet file (immutable)
-              processedFiles[key] = await convertToWebp(resizedFile)
+              return { [key]: await convertToWebp(resizedFile) }
             })
           )
 
           // Résoudre avec les fichiers traités
           resolve({
             fields,
-            files: processedFiles,
+            files: processedFilesArray.reduce((acc, object) => {
+              return { ...acc, ...object }
+            }),
+            // files doit ressembler à
+            // files = {
+            //    set1photo1: file
+            //}
           })
         } catch (conversionError) {
           reject(

@@ -1,13 +1,3 @@
-// mock uuidv4
-const mockUuidValue = "abc123"
-jest.mock(
-  "uuid",
-  () => ({
-    v4: jest.fn(() => mockUuidValue),
-  }),
-  { virtual: true }
-)
-
 import {
   resizePhoto,
   calculateResizeDimensions,
@@ -34,6 +24,12 @@ describe("calculateResizeDimensions", () => {
     expect(calculateResizeDimensions(5000, 4000).height).toBe(2160)
   })
 })
+
+// mock uuidv4
+const mockUuidValue = "abc123"
+jest.mock("uuid", () => ({
+  v4: jest.fn(() => mockUuidValue),
+}))
 
 describe("resizePhoto", () => {
   //mock file

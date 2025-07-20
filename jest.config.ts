@@ -15,6 +15,13 @@ const customJestConfig: Config = {
   // Spécifier explicitement les fichiers de test
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
 
+  // Configuration pour résoudre les modules depuis plusieurs répertoires
+  moduleDirectories: [
+    "node_modules",
+    "<rootDir>/node_modules",
+    "<rootDir>/backend/node_modules",
+  ],
+
   collectCoverageFrom: [
     // "**/*.{js,jsx,ts,tsx}",
     // "!**/*.d.ts",

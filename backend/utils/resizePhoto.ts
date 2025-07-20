@@ -21,14 +21,14 @@ export const calculateResizeDimensions = (
     height: Math.round(height * ratio),
   }
 }
+type Metadata = { format?: string | undefined; width: number; height: number }
+type File = { filepath: string; mimetype: string; originalFilename: string }
+type Resize = Metadata & File
 
-type resizePhoto = {
-  metadata: { format?: string | undefined; width: number; height: number }
-  file: { filepath: string; mimetype: string; originalFilename: string }
-  newDimensions: { width: number; height: number }
-}
-
-export const resizePhoto = async ({ metadata, file }: resizePhoto) => {
+export const resizePhoto = async (
+  metadata: Metadata,
+  file: File
+): Promise<Resize> => {
   const newDimensions = calculateResizeDimensions(
     metadata.width,
     metadata.height
@@ -54,7 +54,7 @@ export const resizePhoto = async ({ metadata, file }: resizePhoto) => {
   return {
     ...file,
     filepath: resizedFilePath,
-    newWidth: newDimensions.width,
-    newHeight: newDimensions.height,
+    width: newDimensions.width,
+    height: newDimensions.height,
   }
 }

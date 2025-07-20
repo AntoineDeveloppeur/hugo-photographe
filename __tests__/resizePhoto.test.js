@@ -1,7 +1,17 @@
-import resizePhoto, {
+// mock uuidv4
+const mockUuidValue = "abc123"
+jest.mock(
+  "uuid",
+  () => ({
+    v4: jest.fn(() => mockUuidValue),
+  }),
+  { virtual: true }
+)
+
+import {
+  resizePhoto,
   calculateResizeDimensions,
 } from "@/backend/utils/resizePhoto"
-import "@testing-library/jest-dom"
 
 describe("calculateResizeDimensions", () => {
   it("should return something", () => {
@@ -22,5 +32,27 @@ describe("calculateResizeDimensions", () => {
   })
   it("the height should be at maxHeight", () => {
     expect(calculateResizeDimensions(5000, 4000).height).toBe(2160)
+  })
+})
+
+describe("resizePhoto", () => {
+  //mock file
+  const file = {
+    filepath: "local/testimage.jpg",
+    mimetype: "image/jpg",
+  }
+
+  it("should return the same width and height", async () => {
+    const metadata = {
+      width: 3840,
+      height: 2160,
+      format: "webp",
+    }
+    const result = await resizePhoto(metadata, file)
+    expect(result).toEqual({
+      ...file,
+      width: metadata.width,
+      height: metadata.height,
+    })
   })
 })

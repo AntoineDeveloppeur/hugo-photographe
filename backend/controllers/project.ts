@@ -1,22 +1,10 @@
 import { Request, Response } from "express"
 import Project from "../models/project.js"
-import uploadToS3, {
-  parseForm,
-  ParsedForm,
-  FormidableFile,
-} from "../middleware/upload.js"
-import { Interface } from "readline"
+import uploadToS3, { parseForm, ParsedForm } from "../middleware/upload.js"
 import deletePhotos, {
   deleteOnePhotoFromDB,
   ProjectDeletePhotos,
 } from "../utils/deletePhotos.js"
-
-// Interface pour la requête authentifié
-// export interface AuthRequest extends Request {
-//     auth?: {
-//         userId: string
-//     }
-// }
 
 // Exporter les fonctions individuellement
 export async function createProject(req: Request, res: Response) {

@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid" // Pour générer des noms de fichiers uniqu
 import path from "path"
 import sharp from "sharp"
 
-const calculateResizeDimensions = (width: number, height: number) => {
+export const calculateResizeDimensions = (width: number, height: number) => {
   const maxWidth = 3840
   const maxHeight = 2160
   if (width <= maxWidth && height <= maxHeight) {
@@ -51,7 +51,7 @@ export const resizePhoto = async ({ metadata, file }: resizePhoto) => {
   return {
     ...file,
     filepath: resizedFilePath,
-    width: newDimensions.width,
-    height: newDimensions.height,
+    newWidth: newDimensions.width,
+    newHeight: newDimensions.height,
   }
 }

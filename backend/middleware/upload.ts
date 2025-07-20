@@ -6,7 +6,6 @@ import fs from "fs"
 import { Request } from "express"
 import sharp from "sharp"
 import path from "path"
-import { v4 as uuidv4 } from "uuid" // Pour générer des noms de fichiers uniques
 import { resizePhoto } from "../utils/resizePhoto.js"
 import { convertToWebp } from "../utils/convertToWebp.js"
 
@@ -113,7 +112,6 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
 
               // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp
               if (resizedFile?.mimetype === "image/webp") {
-                // Créer un nouvel objet file (immutable)
                 return {
                   [key]: {
                     ...resizedFile,

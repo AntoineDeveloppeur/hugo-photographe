@@ -2,11 +2,14 @@ import { v4 as uuidv4 } from "uuid" // Pour générer des noms de fichiers uniqu
 import path from "path"
 import sharp from "sharp"
 
-export const calculateResizeDimensions = (width: number, height: number) => {
+export const calculateResizeDimensions = (
+  width: number,
+  height: number
+): { width: number; height: number } => {
   const maxWidth = 3840
   const maxHeight = 2160
   if (width <= maxWidth && height <= maxHeight) {
-    return { width, height }
+    return { width: width, height: height }
   }
 
   const widthRatio = maxWidth / width

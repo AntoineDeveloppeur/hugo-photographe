@@ -33,6 +33,7 @@ const customJestConfig: Config = {
     // "!<rootDir>/coverage/**",
     // "!<rootDir>/jest.setup.js",
   ],
+  clearMocks: true,
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     // https://jestjs.io/docs/webpack#mocking-css-modules

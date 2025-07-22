@@ -1,7 +1,23 @@
 import {
-  resizePhoto,
   calculateResizeDimensions,
+  resizePhoto,
 } from "@/backend/utils/resizePhoto"
+
+// mock uuidv4
+const mockUuidValue = "abc123"
+jest.mock("uuid", () => ({
+  v4: jest.fn(() => mockUuidValue),
+}))
+
+// mock sharp
+jest.mock("sharp", () => {
+  const mockSharp = () => ({
+    resize: () => ({
+      toFile: jest.fn().mockResolvedValue(undefined),
+    }),
+  })
+  return { default: mockSharp }
+})
 
 describe("calculateResizeDimensions", () => {
   it("should return something", () => {
@@ -25,17 +41,11 @@ describe("calculateResizeDimensions", () => {
   })
 })
 
-// mock uuidv4
-const mockUuidValue = "abc123"
-jest.mock("uuid", () => ({
-  v4: jest.fn(() => mockUuidValue),
-}))
-
 describe("resizePhoto", () => {
   //mock file
   const file = {
-    filepath: "local/testimage.jpg",
-    mimetype: "image/jpg",
+    filepath: "local/testimage.png",
+    mimetype: "image/png",
   }
 
   it("should return the same width and height", async () => {
@@ -50,5 +60,14 @@ describe("resizePhoto", () => {
       width: metadata.width,
       height: metadata.height,
     })
+  })
+  it("should return a specific file path with metadata.format available", async () => {
+    const metadata = {
+      width: 2000,
+      height: 1500,
+      format: "webp",
+    }
+    const result = await resizePhoto(metadata, file)
+    expect(result.filepath).toBe(`local/testimage${mockUuidValue}.png`)
   })
 })

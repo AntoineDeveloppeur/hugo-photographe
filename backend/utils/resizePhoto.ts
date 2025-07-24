@@ -33,12 +33,13 @@ export const resizePhoto = async (
     metadata.width,
     metadata.height
   )
-  // Renvoie le fichier s'il est déjà aux bonne dimenssions
-  // if (
-  //   newDimensions.width === metadata.width &&
-  //   newDimensions.height === metadata.height
-  // )
-  //   return { ...file, width: metadata.width, height: metadata.height }
+  // Renvoie le fichier s'il est déjà aux bonnes dimenssions
+  if (
+    newDimensions.width === metadata.width &&
+    newDimensions.height === metadata.height
+  ) {
+    return { ...file, width: metadata.width, height: metadata.height }
+  }
 
   // Crée un chemin unique
   const uniqueId = uuidv4()

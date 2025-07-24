@@ -11,6 +11,7 @@ import {
   calculateResizeDimensions,
   resizePhoto,
 } from "@/backend/utils/resizePhoto"
+import sharp from "sharp"
 
 describe("calculateResizeDimensions", () => {
   it("should return something", () => {
@@ -42,12 +43,16 @@ describe("resizePhoto", () => {
   }
 
   it("should return the same width and height", async () => {
+    // Arrange
     const metadata = {
       width: 3840,
       height: 2160,
       format: "webp",
     }
+    // Act
     const result = await resizePhoto(metadata, file)
+
+    // Assert
     expect(result).toEqual({
       ...file,
       width: metadata.width,
@@ -55,12 +60,18 @@ describe("resizePhoto", () => {
     })
   })
   it("should return a specific file path with metadata.format available", async () => {
+    // Arrange
     const metadata = {
-      width: 2000,
-      height: 1500,
+      width: 4000,
+      height: 6000,
       format: "webp",
     }
+
+    // Act
     const result = await resizePhoto(metadata, file)
-    expect(result.filepath).toBe(`local/testimage${mockUuidValue}.png`)
+
+    // Assert
+    expect(sharp).toHaveBeenCalledTimes(1)
+    expect(result.filepath).toBe(`local\\${mockUuidValue}.webp`)
   })
 })

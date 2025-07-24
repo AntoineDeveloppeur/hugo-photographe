@@ -1,7 +1,5 @@
-import {
-  calculateResizeDimensions,
-  resizePhoto,
-} from "@/backend/utils/resizePhoto"
+// mock sharp - utilise automatiquement __mocks__/sharp.js
+jest.mock("sharp")
 
 // mock uuidv4
 const mockUuidValue = "abc123"
@@ -9,15 +7,10 @@ jest.mock("uuid", () => ({
   v4: jest.fn(() => mockUuidValue),
 }))
 
-// mock sharp
-jest.mock("sharp", () => {
-  const mockSharp = () => ({
-    resize: () => ({
-      toFile: jest.fn().mockResolvedValue(undefined),
-    }),
-  })
-  return { default: mockSharp }
-})
+import {
+  calculateResizeDimensions,
+  resizePhoto,
+} from "@/backend/utils/resizePhoto"
 
 describe("calculateResizeDimensions", () => {
   it("should return something", () => {

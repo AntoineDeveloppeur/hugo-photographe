@@ -107,7 +107,7 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               // Modifier la taille si metadata disponible
               const resizedFile =
                 metadata.width && metadata.height
-                  ? await resizePhoto({ metadata, file })
+                  ? await resizePhoto(metadata, file)
                   : { ...file }
 
               // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp

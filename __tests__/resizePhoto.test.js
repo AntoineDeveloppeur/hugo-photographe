@@ -74,4 +74,36 @@ describe("resizePhoto", () => {
     expect(sharp).toHaveBeenCalledTimes(1)
     expect(result.filepath).toBe(`local\\${mockUuidValue}.webp`)
   })
+  it("with and height of returned object should be the same is result from calculateResizeDimensions fonction", async () => {
+    // Arrange
+    const metadata1 = {
+      width: 4000,
+      height: 6000,
+      format: "webp",
+    }
+
+    const metadata2 = {
+      width: 6000,
+      height: 2000,
+      format: "webp",
+    }
+    // Act
+    const result1 = await resizePhoto(metadata1, file)
+    const result2 = await resizePhoto(metadata2, file)
+
+    // Assert
+    expect(sharp).toHaveBeenCalledTimes(2)
+    expect(result1.width).toBe(
+      calculateResizeDimensions(metadata1.width, metadata1.height).width
+    )
+    expect(result1.height).toBe(
+      calculateResizeDimensions(metadata1.width, metadata1.height).height
+    )
+    expect(result2.width).toBe(
+      calculateResizeDimensions(metadata2.width, metadata2.height).width
+    )
+    expect(result2.height).toBe(
+      calculateResizeDimensions(metadata2.width, metadata2.height).height
+    )
+  })
 })

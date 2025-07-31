@@ -9,7 +9,7 @@ const createJestConfig = nextJest({
 // Configuration Jest personnalisée
 const customJestConfig: Config = {
   // Add more setup options before each test is run
-  // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   collectCoverage: true,
   // on node 14.x coverage provider v8 offers good speed and more or less good report
   // Spécifier explicitement les fichiers de test

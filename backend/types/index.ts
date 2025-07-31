@@ -1,5 +1,6 @@
 // types.ts
 import { ReactNode } from "react"
+import { Fields } from "formidable"
 
 export interface PhotoVariableProps {
   src: string
@@ -35,4 +36,19 @@ export interface ProjectsProps {
 
 export interface Data {
   projects: ProjectsProps[]
+}
+
+// Types pour formidable
+export interface FormidableFile {
+  filepath: string
+  originalFilename: string | null
+  mimetype: string | null
+  [key: string]: any
+}
+
+export interface ParsedForm {
+  fields: Fields
+  files: {
+    [key: string]: FormidableFile
+  }
 }

@@ -1,16 +1,18 @@
 import { Request, Response } from "express"
-import Project from "../models/project.js"
-import uploadToS3, { parseForm, ParsedForm } from "../middleware/upload.js"
+import Project from "@/backend/models/project.js"
+import uploadToS3, { parseForm } from "../middleware/upload.js"
+import { ParsedForm } from "@/backend/types/index.js"
 import deletePhotos, {
   deleteOnePhotoFromDB,
   ProjectDeletePhotos,
-} from "../utils/deletePhotos.js"
+} from "@/backend/utils/deletePhotos.js"
 
 // Exporter les fonctions individuellement
 export async function createProject(req: Request, res: Response) {
   try {
     // Parse le formulaire avec formidable
     const { fields, files }: ParsedForm = await parseForm(req)
+    console.log("fields", fields)
 
     //Vérification du formulaire
     if (!fields.projectTexts) {

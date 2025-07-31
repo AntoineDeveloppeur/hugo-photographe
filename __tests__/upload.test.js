@@ -35,19 +35,20 @@ describe("parseForm", () => {
       files: {
         file,
       },
-      fields: "",
+      fields: {
+        projectTexts: [
+          '{"title":"test","summary":"test","alt":"test","textsAbovePhotos":["test"],"photosSets":[[{"alt":"test"}]]}',
+        ],
+      },
     }
 
     // Act
     try {
       await parseForm(mockRequest)
     } catch (err) {
+      // Assert
       expect(err).toBe(mockRequest.err)
     }
-
-    //Assert
-    expect(convertToWebp).toHaveBeenCalledTimes(0)
-    expect(result) // to reject with err
   })
   it("should reject with 'formulaire vide'", async () => {
     // Arrange

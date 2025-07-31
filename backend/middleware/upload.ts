@@ -6,7 +6,7 @@ import fs from "fs"
 import { Request } from "express"
 import sharp from "sharp"
 import path from "path"
-import { resizePhoto } from "../utils/resizePhoto.js"
+import { resizePhoto, Metadata } from "../utils/resizePhoto.js"
 import { convertToWebp } from "../utils/convertToWebp.js"
 
 export interface FormidableFile {
@@ -30,6 +30,7 @@ export default async function uploadToS3(
   prefix: string = ""
 ): Promise<string | unknown> {
   try {
+    console.log("qqcdddddddddddddddddd")
     const fileContent = fs.readFileSync(file.filepath)
 
     // Génération d'un nom de fichier unique
@@ -107,7 +108,7 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
               // Modifier la taille si metadata disponible
               const resizedFile =
                 metadata.width && metadata.height
-                  ? await resizePhoto(metadata, file)
+                  ? await resizePhoto(metadata as Metadata, file)
                   : { ...file }
 
               // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp

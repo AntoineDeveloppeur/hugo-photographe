@@ -21,7 +21,11 @@ export const calculateResizeDimensions = (
     height: Math.round(height * ratio),
   }
 }
-type Metadata = { format?: string | undefined; width: number; height: number }
+export type Metadata = {
+  format?: string | undefined
+  width: number
+  height: number
+}
 type File = { filepath: string; mimetype: string; originalFilename: string }
 type Resize = Metadata & File
 

@@ -1,12 +1,6 @@
 import Project from "../models/project.js";
-import uploadToS3, { parseForm, } from "../middleware/upload.js";
-import deletePhotos, { deleteOnePhotoFromDB } from "../utils/deletePhotos.js";
-// Interface pour la requête authentifié
-// export interface AuthRequest extends Request {
-//     auth?: {
-//         userId: string
-//     }
-// }
+import uploadToS3, { parseForm } from "../middleware/upload.js";
+import deletePhotos, { deleteOnePhotoFromDB, } from "../utils/deletePhotos.js";
 // Exporter les fonctions individuellement
 export async function createProject(req, res) {
     try {
@@ -80,7 +74,15 @@ export async function createProject(req, res) {
 export async function getProjects(req, res) {
     Project.find()
         .then((projects) => {
-        return res.status(200).json({ projects });
+        // Convertir les _id en chaînes de caractères
+        const projectsWithStringIds = projects.map((project) => {
+            const projectObj = project.toObject();
+            return {
+                ...projectObj,
+                _id: projectObj._id?.toString() || "",
+            };
+        });
+        return res.status(200).json({ projects: projectsWithStringIds });
     })
         .catch((error) => {
         res.status(404).json({ error });
@@ -89,18 +91,30 @@ export async function getProjects(req, res) {
 export async function deleteProject(req, res) {
     Project.findOne({ _id: req.params.id })
         .then((project) => {
+        if (!project) {
+            return res.status(404).json({ message: "Projet non trouvé" });
+        }
         Project.deleteOne({ _id: req.params.id })
             .then(() => {
+            const projectObject = project.toObject();
+            const projectWithStringId = {
+                ...projectObject,
+                _id: projectObject._id?.toString() || "",
+            };
             // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
             // Ajouter un moyen de logger cette erreur.
-            if (!deletePhotos(project, deleteOnePhotoFromDB)) {
+            if (!deletePhotos(projectWithStringId, deleteOnePhotoFromDB)) {
                 console.error("les photos n'ont pas été supprimé");
             }
             res
-                .status(201)
-                .json({ message: `Projet ${project?.title} supprimé avec succès` });
+                .status(200)
+                .json({ message: "Projet supprimé avec succès", project });
         })
-            .catch((error) => res.status(500).json({ error }));
+            .catch((error) => {
+            res.status(400).json({ error });
+        });
     })
-        .catch((error) => res.status(404).json({ message: error }));
+        .catch((error) => {
+        res.status(500).json({ error });
+    });
 }

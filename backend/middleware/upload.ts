@@ -30,7 +30,6 @@ export default async function uploadToS3(
   prefix: string = ""
 ): Promise<string | unknown> {
   try {
-    console.log("qqcdddddddddddddddddd")
     const fileContent = fs.readFileSync(file.filepath)
 
     // Génération d'un nom de fichier unique

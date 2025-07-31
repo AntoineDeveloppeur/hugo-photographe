@@ -61,7 +61,6 @@ export async function createProject(req: Request, res: Response) {
         : fields.projectTexts
 
     // Crée un nouveau projet
-    console.log("files", files)
     const newProject = new Project({
       title: projectData.title,
       summary: projectData.summary,
@@ -85,8 +84,6 @@ export async function createProject(req: Request, res: Response) {
       }),
       textsBelowPhotos: projectData.textsBelowPhotos || [],
     })
-
-    console.log("newProject.photosSets", newProject.photosSets)
 
     // Sauvegarde le projet dans la base de donnée
     await newProject

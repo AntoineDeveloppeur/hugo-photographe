@@ -1,4 +1,4 @@
-import { IncomingForm, Fields } from "formidable"
+import { IncomingForm } from "formidable"
 import { PutObjectCommand } from "@aws-sdk/client-s3"
 import getS3Client from "@/backend/utils/getS3Client.js"
 

@@ -1,6 +1,11 @@
-import { parseForm } from "@/backend/middleware/upload"
+import { parseForm } from "@/backend/dist/middleware/upload"
 
 jest.mock("sharp")
+
+// Mocker partiel de formidable
+jest.mock("formidable", () => ({
+  IncomingForm: jest.fn().mockImplementation(() => ({ parse: jest.fn() })),
+}))
 
 // Mocker file
 const file = {
@@ -10,6 +15,21 @@ const file = {
     mimetype: "image/png",
   },
 }
+// Mocker une requête avec une erreur
+const mockRequest = {
+  body: {
+    err: "il y a bien une erreur",
+    files: {
+      file,
+    },
+    fields: {
+      projectTexts: [
+        '{"title":"test","summary":"test","alt":"test","textsAbovePhotos":["test"],"photosSets":[[{"alt":"test"}]]}',
+      ],
+    },
+  },
+}
+
 const metadata = { width: 3000, height: 1500 }
 
 //Mocker resizePhoto
@@ -29,25 +49,16 @@ const convertToWebp = jest.fn(async (file) => ({
 describe("parseForm", () => {
   it("should reject with an err", async () => {
     // Arrange
-    // Mocker une requête avec une erreur
-    const mockRequest = {
-      err: "il y a bien une erreur",
-      files: {
-        file,
-      },
-      fields: {
-        projectTexts: [
-          '{"title":"test","summary":"test","alt":"test","textsAbovePhotos":["test"],"photosSets":[[{"alt":"test"}]]}',
-        ],
-      },
-    }
-
+    const { IncomingForm } = require("formidable")
+    IncomingForm().parse.mockImplementation((req, callback) => {
+      callback(new Error("il y a bien une erreur"), null, null)
+    })
     // Act
     try {
-      await parseForm(mockRequest)
+      parseForm(mockRequest)
     } catch (err) {
       // Assert
-      expect(err).toBe(mockRequest.err)
+      expect(err).toBe(mockRequest.body.err)
     }
   })
   it("should reject with 'formulaire vide'", async () => {

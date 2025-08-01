@@ -1,5 +1,10 @@
-import mongoose from "mongoose";
-const projectSchema = new mongoose.Schema({
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const projectSchema = new mongoose_1.default.Schema({
     //Prendre en compte l'_id de mongoose pour répondre à une requête get
     // _id: { type: String },
     title: { type: String, required: true, unique: true },
@@ -34,5 +39,5 @@ projectSchema.post("save", function (error, doc, next) {
         next(error);
     }
 });
-const Project = mongoose.model("Projet", projectSchema);
-export default Project;
+const Project = mongoose_1.default.model("Projet", projectSchema);
+exports.default = Project;

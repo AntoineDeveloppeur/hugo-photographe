@@ -1,16 +1,23 @@
-import { IncomingForm } from "formidable";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import getS3Client from "@/backend/utils/getS3Client";
-import fs from "fs";
-import sharp from "sharp";
-import path from "path";
-import { resizePhoto } from "@/backend/utils/resizePhoto";
-import { convertToWebp } from "@/backend/utils/convertToWebp";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = uploadToS3;
+exports.parseForm = parseForm;
+const formidable_1 = require("formidable");
+const client_s3_1 = require("@aws-sdk/client-s3");
+const getS3Client_1 = __importDefault(require("@/backend/utils/getS3Client"));
+const fs_1 = __importDefault(require("fs"));
+const sharp_1 = __importDefault(require("sharp"));
+const path_1 = __importDefault(require("path"));
+const resizePhoto_1 = require("@/backend/utils/resizePhoto");
+const convertToWebp_1 = require("@/backend/utils/convertToWebp");
 // Fonction pour télécharger un fichier sur S3
 // prefix is the name of the bucket
-export default async function uploadToS3(file, prefix = "") {
+async function uploadToS3(file, prefix = "") {
     try {
-        const fileContent = fs.readFileSync(file.filepath);
+        const fileContent = fs_1.default.readFileSync(file.filepath);
         // Génération d'un nom de fichier unique
         const key = `${prefix ? prefix + "/" : ""}${Date.now()}-${file.originalFilename}`;
         // Paramètres pour l'upload
@@ -22,9 +29,9 @@ export default async function uploadToS3(file, prefix = "") {
             // ACL: ObjectCannedACL.public_read
         };
         // Envoi du fichier à S3
-        const s3Client = getS3Client();
+        const s3Client = (0, getS3Client_1.default)();
         //@ts-ignore
-        await s3Client.send(new PutObjectCommand(uploadParams));
+        await s3Client.send(new client_s3_1.PutObjectCommand(uploadParams));
         // Retourne l'URL du fichier télécahrgé
         return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
     }
@@ -33,10 +40,10 @@ export default async function uploadToS3(file, prefix = "") {
     }
 }
 // Fonction pour parser le formulaire
-export async function parseForm(req) {
+async function parseForm(req) {
     return new Promise((resolve, reject) => {
         try {
-            const form = new IncomingForm({
+            const form = new formidable_1.IncomingForm({
                 keepExtensions: true,
                 multiples: true,
                 maxFileSize: 200 * 1024 * 1024, // 200MB
@@ -74,10 +81,10 @@ export async function parseForm(req) {
                             return { [key]: file };
                         }
                         // Obtenir les métadonnées de l'image originale
-                        const metadata = await sharp(file.filepath).metadata();
+                        const metadata = await (0, sharp_1.default)(file.filepath).metadata();
                         // Modifier la taille si metadata disponible
                         const resizedFile = metadata.width && metadata.height
-                            ? await resizePhoto(metadata, file)
+                            ? await (0, resizePhoto_1.resizePhoto)(metadata, file)
                             : { ...file };
                         // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp
                         if (resizedFile?.mimetype === "image/webp") {
@@ -87,14 +94,14 @@ export async function parseForm(req) {
                                     //@ts-ignore
                                     originalFilename: `${
                                     //@ts-ignore
-                                    path.parse(resizedFile?.originalFilename).name
+                                    path_1.default.parse(resizedFile?.originalFilename).name
                                     //@ts-ignore
                                     }.webp`,
                                 },
                             };
                         }
                         // Pour les autres types d'images, convertir en WebP
-                        return { [key]: await convertToWebp(resizedFile) };
+                        return { [key]: await (0, convertToWebp_1.convertToWebp)(resizedFile) };
                     }));
                     // Résoudre avec les fichiers traités
                     resolve({

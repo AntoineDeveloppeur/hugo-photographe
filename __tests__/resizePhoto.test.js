@@ -7,10 +7,7 @@ jest.mock("uuid", () => ({
   v4: jest.fn(() => mockUuidValue),
 }))
 
-import {
-  calculateResizeDimensions,
-  resizePhoto,
-} from "@/backend/utils/resizePhoto"
+import { calculateResizeDimensions, resizePhoto } from "@/utils/resizePhoto"
 import sharp from "sharp"
 
 describe("calculateResizeDimensions", () => {

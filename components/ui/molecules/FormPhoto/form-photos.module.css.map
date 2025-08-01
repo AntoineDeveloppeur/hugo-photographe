@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"form-photos.module.css"}
+{"version":3,"sources":["form-photos.module.scss","form-photos.module.css"],"names":[],"mappings":"AAAA;EACI,gBAAA;ACCJ;ADAI;EACI,iBAAA;EACA,mBAAA;EACA,8BAAA;ACER","file":"form-photos.module.css"}

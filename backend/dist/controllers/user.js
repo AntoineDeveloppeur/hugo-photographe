@@ -20,9 +20,7 @@ const userCtrl = {
                 }
                 else {
                     if (!process.env.SECRET_PHRASE_TOKEN) {
-                        return res
-                            .status(500)
-                            .json({
+                        return res.status(500).json({
                             error: "La phrase pour la génération du token pour jsonWebToken n'est pas définie",
                         });
                     }

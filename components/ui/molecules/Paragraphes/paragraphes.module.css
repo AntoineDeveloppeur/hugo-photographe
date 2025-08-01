@@ -4,7 +4,7 @@
   gap: 1rem;
 }
 .paragraphes__text {
-  font-size: 1.8rem;
+  font-size: var(--font-size-project-page);
   font-family: var(--font-paragraph);
   width: auto;
   color: var(--color-text-second);

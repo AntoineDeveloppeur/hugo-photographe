@@ -5,12 +5,15 @@
 }
 .inputWrapper__label {
   font-family: var(--font-paragraph);
-  font-size: 1.8rem;
+  font-size: 1.3rem;
 }
 .inputWrapper__input {
   font-family: var(--font-paragraph);
-  font-size: var(--font-size-p);
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  padding-left: 0.5rem;
+  border: 1px solid var(--color-button-theme);
 }
 .inputWrapper__p {
   font-family: var(--font-paragraph);
-} /*# sourceMappingURL=input.module.css.map */
+}/*# sourceMappingURL=input.module.css.map */

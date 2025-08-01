@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -43,7 +44,7 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100svh;
   text-rendering: optimizeSpeed;
 }
 
@@ -96,17 +97,18 @@ select {
   --dark50: #e5e5e5;
   --dark90: LIGHTGRAY;
   --dark100: white;
-  --light0: #CC4E5C;
-  --light10: #D96E75;
-  --light50:#eec4c9;
+  --light0: #cc4e5c;
+  --light10: #d96e75;
+  --light50: #eec4c9;
   --light60: #f0cace;
-  --light70:#faedef;
-  --light80: #FFF9F9;
-  --light90: #FFFDFD;
+  --light70: #faedef;
+  --light80: #fff9f9;
+  --light90: #fffdfd;
 }
 
 /* Colors begins */
-:root, [data-theme=dark] {
+:root,
+[data-theme=dark] {
   --color-logo: var(--dark100);
   --background-main: var(--dark10);
   --background-second: var(--dark12);
@@ -114,8 +116,9 @@ select {
   --color-text-second: var(--dark50);
   --color-text-third: var(--dark100);
   --color-text-button: var(--dark100);
+  --color-text-number: var(--dark90);
   --color-menu-highlight: var(--dark5);
-  --background-button:var(--dark0);
+  --background-button: var(--dark0);
   --background-button-second: var(--dark10);
   --background-button-pagination: var(--dark0);
   --color-text-pagination: var(--dark100);
@@ -138,11 +141,12 @@ select {
 [data-theme=light] {
   --color-logo: var(--light0);
   --background-main: #fffdfdd4;
-  --background-second:var(--light80);
+  --background-second: var(--light80);
   --color-text-main: var(--dark10);
   --color-text-second: var(--dark10);
   --color-text-third: var(--light0);
   --color-text-button: var(--dark100);
+  --color-text-number: var(--dark15);
   --color-menu-highlight: var(--light0);
   --background-button: var(--light0);
   --background-button-second: var(--light10);
@@ -181,7 +185,11 @@ body {
 }
 
 /* Font ends */
-/* Police responsive begins */
+/* Responsive font size begins
+* 
+* La taille augmente pour les titres et la signature en fonction de la taille de l'écran
+* De même pour les paragraphes avec un minimum de 16 px
+*/
 html {
   line-height: 1.5;
   font-weight: 400;
@@ -198,21 +206,18 @@ html {
   }
 }
 
-h1 {
-  font-size: 18px;
+:root {
+  --font-size-p: 1.6rem;
+  --font-size-project-page: 1.8rem;
 }
-@media screen and (min-width: 320px) {
-  h1 {
-    font-size: calc(18px + 14 * (100vw - 320px) / 1120);
-  }
-}
-@media screen and (min-width: 1440px) {
-  h1 {
-    font-size: 32px;
+@media (max-width: 769px) {
+  :root {
+    --font-size-p: 16px;
+    --font-size-project-page: 16px;
   }
 }
 
-/* Police responsive ends */
+/* Responsive font size ends */
 /* Cache le badge reCaptcha */
 .grecaptcha-badge {
   visibility: hidden !important;

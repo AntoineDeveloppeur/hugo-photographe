@@ -1,5 +1,11 @@
-import jwt from 'jsonwebtoken';
-export default function checkToken(req, res, next) {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = checkToken;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+function checkToken(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ message: "Authentification requise" });
@@ -9,7 +15,7 @@ export default function checkToken(req, res, next) {
         return res.status(500).json({ message: "variable d'environnement manquante: jwt secret phrase" });
     }
     try {
-        jwt.verify(token, process.env.SECRET_PHRASE_TOKEN);
+        jsonwebtoken_1.default.verify(token, process.env.SECRET_PHRASE_TOKEN);
         next();
         return;
     }

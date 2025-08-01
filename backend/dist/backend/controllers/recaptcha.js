@@ -1,4 +1,7 @@
-export default async function recaptcha(req, res) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = recaptcha;
+async function recaptcha(req, res) {
     if (!req.body.token) {
         const responseToClient = {
             success: false,

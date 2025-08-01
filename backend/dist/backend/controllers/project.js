@@ -1,11 +1,52 @@
-import Project from "../models/project.js";
-import uploadToS3, { parseForm } from "../middleware/upload.js";
-import deletePhotos, { deleteOnePhotoFromDB, } from "../utils/deletePhotos.js";
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createProject = createProject;
+exports.getProjects = getProjects;
+exports.deleteProject = deleteProject;
+const project_1 = __importDefault(require("@/backend/models/project"));
+const upload_js_1 = __importStar(require("../middleware/upload.js"));
+const deletePhotos_1 = __importStar(require("@/backend/utils/deletePhotos"));
 // Exporter les fonctions individuellement
-export async function createProject(req, res) {
+async function createProject(req, res) {
     try {
         // Parse le formulaire avec formidable
-        const { fields, files } = await parseForm(req);
+        const { fields, files } = await (0, upload_js_1.parseForm)(req);
         console.log("fields", fields);
         //Vérification du formulaire
         if (!fields.projectTexts) {
@@ -15,7 +56,7 @@ export async function createProject(req, res) {
         }
         // Upload vers s3
         const photosUrlArray = await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
-            const url = await uploadToS3(fileArray, "projets");
+            const url = await (0, upload_js_1.default)(fileArray, "projets");
             if (url instanceof Error) {
                 // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
                 throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`);
@@ -30,7 +71,7 @@ export async function createProject(req, res) {
             ? JSON.parse(fields.projectTexts[0])
             : fields.projectTexts;
         // Crée un nouveau projet
-        const newProject = new Project({
+        const newProject = new project_1.default({
             title: projectData.title,
             summary: projectData.summary,
             mainPhoto: {
@@ -70,8 +111,8 @@ export async function createProject(req, res) {
         });
     }
 }
-export async function getProjects(req, res) {
-    Project.find()
+async function getProjects(req, res) {
+    project_1.default.find()
         .then((projects) => {
         // Convertir les _id en chaînes de caractères
         const projectsWithStringIds = projects.map((project) => {
@@ -87,13 +128,13 @@ export async function getProjects(req, res) {
         res.status(404).json({ error });
     });
 }
-export async function deleteProject(req, res) {
-    Project.findOne({ _id: req.params.id })
+async function deleteProject(req, res) {
+    project_1.default.findOne({ _id: req.params.id })
         .then((project) => {
         if (!project) {
             return res.status(404).json({ message: "Projet non trouvé" });
         }
-        Project.deleteOne({ _id: req.params.id })
+        project_1.default.deleteOne({ _id: req.params.id })
             .then(() => {
             const projectObject = project.toObject();
             const projectWithStringId = {
@@ -102,7 +143,7 @@ export async function deleteProject(req, res) {
             };
             // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
             // Ajouter un moyen de logger cette erreur.
-            if (!deletePhotos(projectWithStringId, deleteOnePhotoFromDB)) {
+            if (!(0, deletePhotos_1.default)(projectWithStringId, deletePhotos_1.deleteOnePhotoFromDB)) {
                 console.error("les photos n'ont pas été supprimé");
             }
             res

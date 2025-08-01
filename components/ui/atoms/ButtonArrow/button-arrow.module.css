@@ -9,8 +9,7 @@
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   display: flex;
-  box-shadow: 0 4px 6px -1px var(--color-shadow-main),
-    0 2px 4px -1px var(--color-shadow-second);
+  box-shadow: 0 4px 6px -1px var(--color-shadow-main), 0 2px 4px -1px var(--color-shadow-second);
 }
 .button__p {
   color: var(--color-text-button);
@@ -24,4 +23,4 @@
   transform: translate(-50%, -50%);
   transform-origin: center;
   pointer-events: none;
-} /*# sourceMappingURL=button-arrow.module.css.map */
+}/*# sourceMappingURL=button-arrow.module.css.map */

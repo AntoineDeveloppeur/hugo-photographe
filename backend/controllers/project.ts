@@ -1,11 +1,11 @@
 import { Request, Response } from "express"
-import Project from "@/backend/models/project"
-import uploadToS3, { parseForm } from "../middleware/upload.js"
-import { ParsedForm } from "@/backend/types/index"
+import Project from "@/backend/models/project.js"
+import uploadToS3, { parseForm } from "@/backend/middleware/upload.js"
+import { ParsedForm } from "@/backend/types/index.js"
 import deletePhotos, {
   deleteOnePhotoFromDB,
   ProjectDeletePhotos,
-} from "@/backend/utils/deletePhotos"
+} from "@/backend/utils/deletePhotos.js"
 
 // Exporter les fonctions individuellement
 export async function createProject(req: Request, res: Response) {

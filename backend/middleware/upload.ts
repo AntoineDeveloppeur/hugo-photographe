@@ -1,14 +1,14 @@
 import { IncomingForm, Fields } from "formidable"
 import { PutObjectCommand } from "@aws-sdk/client-s3"
-import getS3Client from "@/backend/utils/getS3Client"
+import getS3Client from "@/backend/utils/getS3Client.js"
 
 import fs from "fs"
 import { Request } from "express"
 import sharp from "sharp"
 import path from "path"
-import { resizePhoto, Metadata } from "@/backend/utils/resizePhoto"
-import { convertToWebp } from "@/backend/utils/convertToWebp"
-import { FormidableFile, ParsedForm } from "@/backend/types/index"
+import { resizePhoto, Metadata } from "@/backend/utils/resizePhoto.js"
+import { convertToWebp } from "@/backend/utils/convertToWebp.js"
+import { FormidableFile, ParsedForm } from "@/backend/types/index.js"
 
 // Fonction pour télécharger un fichier sur S3
 // prefix is the name of the bucket

@@ -1,5 +1,4 @@
 // types.ts
-import { ReactNode } from "react"
 import { Fields } from "formidable"
 
 export interface PhotoVariableProps {

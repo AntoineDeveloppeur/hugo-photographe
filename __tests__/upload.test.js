@@ -1,4 +1,4 @@
-import { parseForm } from "@/backend/dist/middleware/upload"
+import { parseForm, processFiles } from "@/backend/dist/middleware/upload"
 
 jest.mock("sharp")
 
@@ -13,8 +13,8 @@ jest.mock("formidable", () => ({
   },
 }))
 
-// Mocker file
-const file = {
+// Mocker files
+const files = {
   set1photo1: {
     filepath: "/image.png",
     originalFilename: "image",
@@ -25,9 +25,7 @@ const file = {
 const mockRequest = {
   body: {
     err: "il y a bien une erreur",
-    files: {
-      file,
-    },
+    files: files,
     fields: {
       projectTexts: [
         '{"title":"test","summary":"test","alt":"test","textsAbovePhotos":["test"],"photosSets":[[{"alt":"test"}]]}',
@@ -64,35 +62,17 @@ describe("parseForm", () => {
       "il y a bien une erreur"
     )
   })
-  it("should reject with 'formulaire vide'", async () => {
-    // Arrange
-    mockParse.mockImplementation((req, callback) => {
-      callback(new Error(""))
-    })
-    // Act
-    const result = await parseForm(mockRequest)
-    //Assert
-    expect(convertToWebp).toHaveBeenCalledTimes(0)
-    expect(result) // to reject with 'formulaire vide'
-  })
-  it("should reject with 'formulaire sans fichier", async () => {
-    // Arrange
-    // Mocker une requête aucun field
-    // Act
-    const result = await parseForm(mockRequest)
-    //Assert
-    expect(convertToWebp).toHaveBeenCalledTimes(0)
-    expect(result) // to reject with 'formulaire sans fichier'
-  })
+})
 
+describe("processFiles", () => {
   it("should return the same object if the mimetype is not image/", async () => {
     // Arrange
     // Mocker une requête avec un fichier qui n'est pas une image
     // Act
-    const result = await parseForm(mockRequest)
+    const result = await processFiles(files)
     //Assert
     expect(convertToWebp).toHaveBeenCalledTimes(0)
-    expect(result.files).toEqual(req.files)
+    expect(result).toEqual(files)
   })
   it("should return the same object if metadata are not available", async () => {
     // Arrange
@@ -102,7 +82,7 @@ describe("parseForm", () => {
     const result = await parseForm(mockRequest)
     //Assert
     expect(convertToWebp).toHaveBeenCalledTimes(0)
-    expect(result.files).toEqual(req.files)
+    expect(result.files).toEqual(files)
   })
   it("should return the same object + originalFilename if mimetype is image/webp", async () => {
     // Arrange

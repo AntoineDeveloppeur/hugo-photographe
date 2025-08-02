@@ -3,8 +3,14 @@ import { parseForm } from "@/backend/dist/middleware/upload"
 jest.mock("sharp")
 
 // Mocker partiel de formidable
+const mockParse = jest.fn()
+
 jest.mock("formidable", () => ({
-  IncomingForm: jest.fn().mockImplementation(() => ({ parse: jest.fn() })),
+  IncomingForm: class {
+    constructor() {
+      this.parse = mockParse // Toutes les instances partagent le même mock
+    }
+  },
 }))
 
 // Mocker file
@@ -49,17 +55,14 @@ const convertToWebp = jest.fn(async (file) => ({
 describe("parseForm", () => {
   it("should reject with an err", async () => {
     // Arrange
-    const { IncomingForm } = require("formidable")
-    IncomingForm().parse.mockImplementation((req, callback) => {
+    mockParse.mockImplementation((req, callback) => {
       callback(new Error("il y a bien une erreur"), null, null)
     })
-    // Act
-    try {
-      parseForm(mockRequest)
-    } catch (err) {
-      // Assert
-      expect(err).toBe(mockRequest.body.err)
-    }
+
+    // Act & Assert
+    await expect(parseForm(mockRequest)).rejects.toThrow(
+      "il y a bien une erreur"
+    )
   })
   it("should reject with 'formulaire vide'", async () => {
     // Arrange

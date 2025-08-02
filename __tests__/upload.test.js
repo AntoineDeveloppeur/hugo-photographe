@@ -66,7 +66,9 @@ describe("parseForm", () => {
   })
   it("should reject with 'formulaire vide'", async () => {
     // Arrange
-    // Mocker une requête aucun field
+    mockParse.mockImplementation((req, callback) => {
+      callback(new Error(""))
+    })
     // Act
     const result = await parseForm(mockRequest)
     //Assert

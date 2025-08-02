@@ -45,9 +45,11 @@ export interface FormidableFile {
   [key: string]: any
 }
 
+export interface Files {
+  [key: string]: FormidableFile
+}
+
 export interface ParsedForm {
   fields: Fields
-  files: {
-    [key: string]: FormidableFile
-  }
+  files: Files
 }

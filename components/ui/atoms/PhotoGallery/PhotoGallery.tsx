@@ -9,7 +9,7 @@ import Loader from "../Loader/Loader"
 import useIsMobile from "@/hooks/useIsMobile"
 import PhotoBasic from "../PhotoBasic/PhotoBasic"
 import dynamic from "next/dynamic"
-import imageURL from "@/utils/imageURL"
+import composeImageURL from "@/utils/composeImageURL"
 
 // const Modal = lazy(() => import('../Modal/Modal'))
 const Modal = dynamic(() => import("../Modal/Modal"))
@@ -39,7 +39,7 @@ export default function PhotoGallery({
     if ("requestIdleCallback" in window) {
       const requestIdleCallbackId = window.requestIdleCallback(() => {
         const image = new Image()
-        image.src = imageURL(
+        image.src = composeImageURL(
           photo.width,
           80,
           photo.src,
@@ -55,7 +55,7 @@ export default function PhotoGallery({
     else {
       const timeout = setTimeout(() => {
         const image = new Image()
-        image.src = imageURL(
+        image.src = composeImageURL(
           photo.width,
           80,
           photo.src,

@@ -1,21 +1,21 @@
-import imageURL from "@/utils/imageURL"
-import { widthAcceptedByNextJs } from "@/utils/imageURL"
+import composeImageURL from "@/utils/composeImageURL"
+import { pickAcceptedByNextWidth } from "@/utils/composeImageURL"
 
 describe("Get the url of the image to preload the modal test unit", () => {
   it("should return something", () => {
-    expect(widthAcceptedByNextJs(1920, 3)).toBeDefined()
+    expect(pickAcceptedByNextWidth(1920, 3)).toBeDefined()
   })
   it("should return 1920", () => {
-    expect(widthAcceptedByNextJs(640, 2)).toBe(1920)
+    expect(pickAcceptedByNextWidth(640, 2)).toBe(1920)
   })
   it("should return maximum 3840", () => {
-    expect(widthAcceptedByNextJs(5000, 5)).toBe(3840)
+    expect(pickAcceptedByNextWidth(5000, 5)).toBe(3840)
   })
   it("should return minimum 16", () => {
-    expect(widthAcceptedByNextJs(1, 1)).toBe(16)
+    expect(pickAcceptedByNextWidth(1, 1)).toBe(16)
   })
   it("should return a certain type of url", () => {
-    expect(imageURL(20, 100, "https://sourcecom", 2)).toMatch(
+    expect(composeImageURL(20, 100, "https://sourcecom", 2)).toMatch(
       /_next\/image\?url=%2F/
     )
   })

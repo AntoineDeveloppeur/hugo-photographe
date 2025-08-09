@@ -1,4 +1,4 @@
-export default function imageURL(
+export default function composeImageURL(
   width: number,
   quality: number,
   src: string,
@@ -10,14 +10,14 @@ export default function imageURL(
   const srcCorrected = src.slice(1)
   const URL = `${
     process.env.NEXT_PUBLIC_BASE_URL
-  }/_next/image?url=%2F${srcCorrected}&w=${widthAcceptedByNextJs(
+  }/_next/image?url=%2F${srcCorrected}&w=${pickAcceptedByNextWidth(
     width,
     densityPixelRatio
   )}&q=${quality}`
   return URL
 }
 
-export const widthAcceptedByNextJs = (
+export const pickAcceptedByNextWidth = (
   width: number,
   densityPixelRatio: number
 ) => {

@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react"
 import IconPhone from "../../atoms/IconPhone/IconPhone"
 import IconBook from "../../atoms/IconBook/IconBook"
 import IconPortfolio from "../../atoms/IconPortfolio/IconPortfolio"
-import useClickOutside from "@/hooks/useClickOutside"
+import useCloseWhenClickOutside from "@/hooks/useCloseWhenClickOutside"
 import Link from "next/link"
 import ThemeChanger from "../ThemeChanger/ThemeChanger"
 
@@ -16,7 +16,7 @@ export default function MenuMobile() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { height } = useDimensions(containerRef)
 
-  useClickOutside(containerRef, () => {
+  useCloseWhenClickOutside(containerRef, () => {
     if (isOpen) setIsOpen(false)
   })
 

@@ -7,7 +7,7 @@ import { useEffect, RefObject } from "react"
  * @param ref - Référence à l'élément à surveiller
  * @param handler - Fonction à exécuter lors d'un clic en dehors de l'élément
  */
-export default function useClickOutside(
+export default function useCloseWhenClickOutside(
   ref: RefObject<HTMLElement>,
   handler: () => void
 ) {

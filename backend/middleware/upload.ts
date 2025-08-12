@@ -104,11 +104,11 @@ export async function processFiles(files: Files) {
 
       // Fail-fast: Si ce n'est pas une image, conserver le fichier original
       if (!file.mimetype?.startsWith("image/")) {
-        return { [key]: file }
+        throw new Error("La photo choisie n'est pas une image")
       }
       // Obtenir les métadonnées de l'image originale
       const metadata = await sharp(file.filepath).metadata()
-      // Modifier la taille si metadata disponible
+      // Modifier la taille si metadata disponibles
       const resizedFile =
         metadata.width && metadata.height
           ? await resizePhoto(metadata as Metadata, file)
@@ -135,7 +135,6 @@ export async function processFiles(files: Files) {
   )
 
   // Résoudre avec les fichiers traités
-
   return processedFilesArray.reduce((acc, object) => {
     return { ...acc, ...object }
   })

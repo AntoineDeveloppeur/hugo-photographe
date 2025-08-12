@@ -13,27 +13,6 @@ jest.mock("formidable", () => ({
   },
 }))
 
-// Mocker files
-const files = {
-  set1photo1: {
-    filepath: "/image.png",
-    originalFilename: "image",
-    mimetype: "image/png",
-  },
-}
-// Mocker une requête avec une erreur
-const mockRequest = {
-  body: {
-    err: "il y a bien une erreur",
-    files: files,
-    fields: {
-      projectTexts: [
-        '{"title":"test","summary":"test","alt":"test","textsAbovePhotos":["test"],"photosSets":[[{"alt":"test"}]]}',
-      ],
-    },
-  },
-}
-
 const metadata = { width: 3000, height: 1500 }
 
 //Mocker resizePhoto
@@ -53,6 +32,14 @@ const convertToWebp = jest.fn(async (file) => ({
 describe("parseForm", () => {
   it("should reject with an err", async () => {
     // Arrange
+    // Mocker une requête avec une erreur
+    const mockRequest = {
+      body: {
+        err: "il y a bien une erreur",
+      },
+    }
+
+    // Mocker parse de formidable
     mockParse.mockImplementation((req, callback) => {
       callback(new Error("il y a bien une erreur"), null, null)
     })
@@ -65,24 +52,55 @@ describe("parseForm", () => {
 })
 
 describe("processFiles", () => {
-  it("should return the same object if the mimetype is not image/", async () => {
+  it("should throw an error if the mimetype is not image/", async () => {
     // Arrange
-    // Mocker une requête avec un fichier qui n'est pas une image
-    // Act
-    const result = await processFiles(files)
-    //Assert
+    // Mock files avec un mimetype "script/png"
+    const files = {
+      set1photo1: [
+        {
+          filepath: "/image.png",
+          originalFilename: "image.webp",
+          mimetype: "script/png",
+        },
+      ],
+    }
+    // const processedFilesArray = await Promise.all(
+    //   Object.entries(files).map(async ([key, fileArray]) => {
+    //     const file = fileArray[0]
+    //     return { [key]: file }
+    //   })
+    // )
+    // const mockProcessedFiles = processedFilesArray.reduce((acc, object) => {
+    //   return { ...acc, ...object }
+    // })
+
+    // Act & Assert
+    await expect(processFiles(files)).rejects.toThrow(
+      "La photo choisie n'est pas une image"
+    )
     expect(convertToWebp).toHaveBeenCalledTimes(0)
-    expect(result).toEqual(files)
   })
   it("should return the same object if metadata are not available", async () => {
     // Arrange
-    // Mocker une requête avec tous disponible
-    // Mocker sharp pour qu'il ne renvoie pas de metadata
+    // Mock files correct
+    const files = {
+      set1photo1: [
+        {
+          filepath: "/image.png",
+          originalFilename: "image.webp",
+          mimetype: "script/png",
+        },
+      ],
+    }
+    // Mock sharp pour qu'il ne renvoie pas de metadata
+    const sharp = jest.fn(() => ({
+      metadata: jest.fn().mockReturnValue(null),
+    }))
+
     // Act
-    const result = await parseForm(mockRequest)
+    await processFiles(files)
     //Assert
-    expect(convertToWebp).toHaveBeenCalledTimes(0)
-    expect(result.files).toEqual(files)
+    expect(resizePhoto).toHaveBeenCalledTimes(0)
   })
   it("should return the same object + originalFilename if mimetype is image/webp", async () => {
     // Arrange

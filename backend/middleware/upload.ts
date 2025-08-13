@@ -110,7 +110,7 @@ export async function processFiles(files: Files) {
       const metadata = await sharp(file.filepath).metadata()
       // Modifier la taille si metadata disponibles
       const resizedFile =
-        metadata.width && metadata.height
+        metadata?.width && metadata?.height
           ? await resizePhoto(metadata as Metadata, file)
           : { ...file }
 

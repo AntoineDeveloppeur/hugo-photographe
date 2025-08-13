@@ -92,7 +92,7 @@ export async function processFiles(files) {
         // Obtenir les métadonnées de l'image originale
         const metadata = await sharp(file.filepath).metadata();
         // Modifier la taille si metadata disponibles
-        const resizedFile = metadata.width && metadata.height
+        const resizedFile = metadata?.width && metadata?.height
             ? await resizePhoto(metadata, file)
             : { ...file };
         // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp

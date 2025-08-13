@@ -1,4 +1,5 @@
 import { parseForm, processFiles } from "@/backend/dist/middleware/upload"
+import sharp from "@/__mocks__/sharp"
 
 jest.mock("sharp")
 
@@ -64,15 +65,6 @@ describe("processFiles", () => {
         },
       ],
     }
-    // const processedFilesArray = await Promise.all(
-    //   Object.entries(files).map(async ([key, fileArray]) => {
-    //     const file = fileArray[0]
-    //     return { [key]: file }
-    //   })
-    // )
-    // const mockProcessedFiles = processedFilesArray.reduce((acc, object) => {
-    //   return { ...acc, ...object }
-    // })
 
     // Act & Assert
     await expect(processFiles(files)).rejects.toThrow(
@@ -80,7 +72,7 @@ describe("processFiles", () => {
     )
     expect(convertToWebp).toHaveBeenCalledTimes(0)
   })
-  it("should return the same object if metadata are not available", async () => {
+  it("should not return width and height if metadata are not available", async () => {
     // Arrange
     // Mock files correct
     const files = {
@@ -88,17 +80,29 @@ describe("processFiles", () => {
         {
           filepath: "/image.png",
           originalFilename: "image.webp",
-          mimetype: "script/png",
+          mimetype: "image/png",
         },
       ],
     }
-    // Mock sharp pour qu'il ne renvoie pas de metadata
-    const sharp = jest.fn(() => ({
-      metadata: jest.fn().mockReturnValue(null),
+    // Modifier le mock Sharp AVANT que le module soit utilisé
+    sharp.mockImplementation(() => ({
+      resize: jest.fn().mockReturnThis(),
+      toFile: jest.fn().mockResolvedValue(undefined),
+      metadata: jest.fn().mockReturnValue(null), // ← Votre modification
+      webp: jest.fn().mockReturnThis(),
     }))
 
+    const processedFilesArray = await Promise.all(
+      Object.entries(files).map(async ([key, fileArray]) => {
+        const file = fileArray[0]
+        return { [key]: file }
+      })
+    )
+    const mockProcessedFiles = processedFilesArray.reduce((acc, object) => {
+      return { ...acc, ...object }
+    })
     // Act
-    await processFiles(files)
+    const result = await processFiles(files)
     //Assert
     expect(resizePhoto).toHaveBeenCalledTimes(0)
   })

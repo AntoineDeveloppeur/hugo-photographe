@@ -1,11 +1,13 @@
 import { parseForm, processFiles } from "@/backend/dist/middleware/upload"
-import sharp from "@/__mocks__/sharp"
+import sharp from "sharp"
+import { v4 as uuidv4, mockUuidValue } from "uuid"
+import { convertToWebp } from "@/backend/dist/utils/convertToWebp.js"
+import { resizePhoto } from "@/backend/dist/utils/resizePhoto.js"
 
 jest.mock("sharp")
 
 // Mocker partiel de formidable
 const mockParse = jest.fn()
-
 jest.mock("formidable", () => ({
   IncomingForm: class {
     constructor() {
@@ -14,21 +16,23 @@ jest.mock("formidable", () => ({
   },
 }))
 
+jest.mock("@/backend/dist/utils/resizePhoto.js", () => ({
+  resizePhoto: jest.fn(async (metadata, file) => ({
+    ...file,
+    ...metadata,
+  })),
+}))
+
+jest.mock("@/backend/dist/utils/convertToWebp.js", () => ({
+  convertToWebp: jest.fn(async (file) => ({
+    ...file,
+    filepath: "/src.webp",
+    originalFilename: "image.webp",
+    mimetype: "image/webp",
+  })),
+}))
+
 const metadata = { width: 3000, height: 1500 }
-
-//Mocker resizePhoto
-const resizePhoto = jest.fn(async (metadata, file) => ({
-  ...file,
-  ...metadata,
-}))
-
-// Mocker convertToWebp
-const convertToWebp = jest.fn(async (file) => ({
-  ...file,
-  filepath: "/src.webp",
-  originalFilename: "image.webp",
-  mimetype: "image/webp",
-}))
 
 describe("parseForm", () => {
   it("should reject with an err", async () => {
@@ -78,7 +82,7 @@ describe("processFiles", () => {
     const files = {
       set1photo1: [
         {
-          filepath: "/image.png",
+          filepath: "/image.webp",
           originalFilename: "image.webp",
           mimetype: "image/webp",
         },
@@ -106,9 +110,34 @@ describe("processFiles", () => {
     //Assert
     expect(resizePhoto).toHaveBeenCalledTimes(0)
   })
-  it("should return the same object + originalFilename if mimetype is image/webp", async () => {
+  it("should call resizePhoto if metadata available", async () => {
     // Arrange
-    // Mock files correct au format png
+    // Mock files correct
+    const files = {
+      set1photo1: [
+        {
+          filepath: "/image.webp",
+          originalFilename: "image.webp",
+          mimetype: "image/webp",
+        },
+      ],
+    }
+    // Je réécris la bonne implementation de sharp. Dans le test précédent j'ai changé l'implementation
+    sharp.mockImplementation(() => ({
+      resize: jest.fn().mockReturnThis(),
+      toFile: jest.fn().mockResolvedValue(undefined),
+      metadata: jest.fn().mockReturnValue(metadata), // ← Votre modification
+      webp: jest.fn().mockReturnThis(),
+    }))
+    // Act
+    await processFiles(files)
+
+    //Assert
+    expect(resizePhoto).toHaveBeenCalledTimes(1)
+  })
+  it("should return the same object + originalFilename changed with uuid if mimetype is image/webp", async () => {
+    // Arrange
+    // Mock files correct au format webp
     const files = {
       set1photo1: [
         {
@@ -123,7 +152,8 @@ describe("processFiles", () => {
     const processedFilesArray = await Promise.all(
       Object.entries(files).map(async ([key, fileArray]) => {
         const file = fileArray[0]
-        return { [key]: file }
+        // Ajoute les metadata
+        return { [key]: { ...file, ...metadata } }
       })
     )
     const mockProcessedFiles = processedFilesArray.reduce((acc, object) => {
@@ -134,24 +164,23 @@ describe("processFiles", () => {
     //Assert
     expect(result).toEqual(mockProcessedFiles)
   })
-  it("should return the same object + originalFilename if mimetype is not image/webp", async () => {
+  it("should use convertToWeb if mimetype is not image/webp", async () => {
     // Arrange
-    // Mocker une requête avec tous disponible et mimetype image/webp
-    // Mocker sharp pour qu'il renvoie les metadata
-    // Act
-    const result = await parseForm(mockRequest)
-    //Assert
-    expect(convertToWebp).toHaveBeenCalledTimes(1)
-    expect(result.files).toEqual(req.files)
-  })
-  it("should catch a conversion error", async () => {
-    // Arrange
-    // Mocker une requête avec tous disponible
-    // Mocker processedFilesArray pour qu'il contient une promesse rejetée
+    // Mock files au format webp
+    const files = {
+      set1photo1: [
+        {
+          filepath: "/image.jpg",
+          originalFilename: "image.jpg",
+          mimetype: "image/jpg",
+        },
+      ],
+    }
 
     // Act
-    const result = await parseForm(mockRequest)
+    await processFiles(files)
+
     //Assert
-    // expect error
+    expect(convertToWebp).toHaveBeenCalledTimes(1)
   })
 })

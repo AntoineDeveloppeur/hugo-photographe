@@ -1,14 +1,11 @@
-// mock sharp - utilise automatiquement __mocks__/sharp.js
-jest.mock("sharp")
+import {
+  calculateResizeDimensions,
+  resizePhoto,
+} from "@/backend/dist/utils/resizePhoto"
 
-// mock uuidv4
-const mockUuidValue = "abc123"
-jest.mock("uuid", () => ({
-  v4: jest.fn(() => mockUuidValue),
-}))
-
-import { calculateResizeDimensions, resizePhoto } from "@/utils/resizePhoto"
+// Auto-mocking des modules suivants
 import sharp from "sharp"
+import { v4 as uuidv4, mockUuidValue } from "uuid"
 
 describe("calculateResizeDimensions", () => {
   it("should return something", () => {

@@ -72,7 +72,7 @@ describe("processFiles", () => {
     )
     expect(convertToWebp).toHaveBeenCalledTimes(0)
   })
-  it("should not return width and height if metadata are not available", async () => {
+  it("should not call resizePhoto if metadata are not available", async () => {
     // Arrange
     // Mock files correct
     const files = {
@@ -80,7 +80,7 @@ describe("processFiles", () => {
         {
           filepath: "/image.png",
           originalFilename: "image.webp",
-          mimetype: "image/png",
+          mimetype: "image/webp",
         },
       ],
     }
@@ -108,13 +108,31 @@ describe("processFiles", () => {
   })
   it("should return the same object + originalFilename if mimetype is image/webp", async () => {
     // Arrange
-    // Mocker une requête avec tous disponible et mimetype image/webp
-    // Mocker sharp pour qu'il renvoie les metadata
+    // Mock files correct au format png
+    const files = {
+      set1photo1: [
+        {
+          filepath: "/image.webp",
+          originalFilename: "image.webp",
+          mimetype: "image/webp",
+        },
+      ],
+    }
+
+    // transform le format de files pour qu'il corresponde à la valeur de sortie
+    const processedFilesArray = await Promise.all(
+      Object.entries(files).map(async ([key, fileArray]) => {
+        const file = fileArray[0]
+        return { [key]: file }
+      })
+    )
+    const mockProcessedFiles = processedFilesArray.reduce((acc, object) => {
+      return { ...acc, ...object }
+    })
     // Act
-    const result = await parseForm(mockRequest)
+    const result = await processFiles(files)
     //Assert
-    expect(convertToWebp).toHaveBeenCalledTimes(0)
-    expect(result.files).toEqual(req.files)
+    expect(result).toEqual(mockProcessedFiles)
   })
   it("should return the same object + originalFilename if mimetype is not image/webp", async () => {
     // Arrange

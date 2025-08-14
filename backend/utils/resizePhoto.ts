@@ -26,7 +26,11 @@ export type Metadata = {
   width: number
   height: number
 }
-type File = { filepath: string; mimetype: string; originalFilename: string }
+type File = {
+  filepath: string
+  mimetype: string | null
+  originalFilename: string
+}
 type Resize = Metadata & File
 
 export const resizePhoto = async (

@@ -12,8 +12,7 @@
   background-color: var(--background-button);
   border: 1px solid var(--background-button);
   cursor: pointer;
-  box-shadow: 0 4px 6px -1px var(--color-shadow-main),
-    0 2px 4px -1px var(--color-shadow-second);
+  box-shadow: 0 4px 6px -1px var(--color-shadow-main), 0 2px 4px -1px var(--color-shadow-second);
 }
 .button__p {
   color: var(--color-text-button);
@@ -29,4 +28,4 @@
   transform: translate(-50%, -50%);
   transform-origin: center;
   pointer-events: none;
-} /*# sourceMappingURL=button-ripple.module.css.map */
+}/*# sourceMappingURL=button-ripple.module.css.map */

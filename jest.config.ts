@@ -9,11 +9,18 @@ const createJestConfig = nextJest({
 // Configuration Jest personnalisée
 const customJestConfig: Config = {
   // Add more setup options before each test is run
-  // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   collectCoverage: true,
   // on node 14.x coverage provider v8 offers good speed and more or less good report
   // Spécifier explicitement les fichiers de test
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+
+  // Configuration pour résoudre les modules depuis plusieurs répertoires
+  moduleDirectories: [
+    "node_modules",
+    "<rootDir>/node_modules",
+    "<rootDir>/backend/node_modules",
+  ],
 
   collectCoverageFrom: [
     // "**/*.{js,jsx,ts,tsx}",
@@ -26,6 +33,7 @@ const customJestConfig: Config = {
     // "!<rootDir>/coverage/**",
     // "!<rootDir>/jest.setup.js",
   ],
+  clearMocks: true,
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     // https://jestjs.io/docs/webpack#mocking-css-modules

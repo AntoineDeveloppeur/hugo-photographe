@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const projectSchema = new mongoose.Schema({
   //Prendre en compte l'_id de mongoose pour répondre à une requête get
-  _id: { type: String },
+  // _id: { type: String },
   title: { type: String, required: true, unique: true },
   summary: { type: String, required: true },
   mainPhoto: {

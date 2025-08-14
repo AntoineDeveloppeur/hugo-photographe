@@ -1,7 +1,8 @@
-import express, { Request, Response } from 'express'
-import recaptcha from '../controllers/recaptcha.js'
+import express, { Request, Response } from "express"
+import recaptcha from "@/backend/controllers/recaptcha.js"
 
 const router = express.Router()
 
-export default router.post('/',(req: Request, res: Response) => {recaptcha(req, res)})
-
+export default router.post("/", (req: Request, res: Response) => {
+  recaptcha(req, res)
+})

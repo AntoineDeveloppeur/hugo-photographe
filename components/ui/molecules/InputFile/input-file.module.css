@@ -3,11 +3,7 @@
   flex-direction: column;
   margin-bottom: 0.5rem;
 }
-.inputWrapper__Input {
+.inputWrapper__fileInputWrapper__input {
   margin-bottom: 0.5rem;
-}
-.inputWrapper__Info {
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 0.25rem;
+  padding-top: 1rem;
 }/*# sourceMappingURL=input-file.module.css.map */

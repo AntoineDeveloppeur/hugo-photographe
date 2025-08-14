@@ -1,22 +1,30 @@
 import { Request, Response } from "express"
-import Project from "../models/project.js"
-import uploadToS3, {
-  parseForm,
-  ParsedForm,
-  FormidableFile,
-} from "../middleware/upload.js"
-import { Interface } from "readline"
+import Project from "@/backend/models/project.js"
+import uploadToS3, { parseForm } from "@/backend/middleware/upload.js"
+import { ParsedForm } from "@/backend/types/index.js"
 import deletePhotos, {
   deleteOnePhotoFromDB,
   ProjectDeletePhotos,
-} from "../utils/deletePhotos.js"
+} from "@/backend/utils/deletePhotos.js"
 
-// Interface pour la requête authentifié
-// export interface AuthRequest extends Request {
-//     auth?: {
-//         userId: string
-//     }
-// }
+interface PhotosUrl {
+  mainPhoto?: string
+  [key: string]: string | unknown
+}
+type PhotosUrlArray = {
+  [key: string]: string | unknown
+}[]
+
+interface ProjectData {
+  title: string
+  summary: string
+  alt: string
+  height: number
+  width: number
+  textsAbovePhotos: string[]
+  photosSets: object[][]
+  textsBelowPhotos: string
+}
 
 // Exporter les fonctions individuellement
 export async function createProject(req: Request, res: Response) {
@@ -30,14 +38,6 @@ export async function createProject(req: Request, res: Response) {
         .status(400)
         .json({ message: "Les données du projet sont requises" })
     }
-
-    interface PhotosUrl {
-      mainPhoto?: string
-      [key: string]: string | unknown
-    }
-    type PhotosUrlArray = {
-      [key: string]: string | unknown
-    }[]
 
     // Upload vers s3
     const photosUrlArray: PhotosUrlArray = await Promise.all(
@@ -56,24 +56,13 @@ export async function createProject(req: Request, res: Response) {
       return { ...acc, ...file }
     })
 
-    interface ProjectData {
-      title: string
-      summary: string
-      alt: string
-      height: number
-      width: number
-      textsAbovePhotos: string[]
-      photosSets: object[][]
-      textsBelowPhotos: string
-    }
-    //Corriger le type
+    //Corriger le type en faire une fonction
     const projectData: ProjectData =
       typeof fields.projectTexts[0] === "string"
         ? JSON.parse(fields.projectTexts[0])
         : fields.projectTexts
 
     // Crée un nouveau projet
-    console.log("files", files)
     const newProject = new Project({
       title: projectData.title,
       summary: projectData.summary,
@@ -97,8 +86,6 @@ export async function createProject(req: Request, res: Response) {
       }),
       textsBelowPhotos: projectData.textsBelowPhotos || [],
     })
-
-    console.log("newProject.photosSets", newProject.photosSets)
 
     // Sauvegarde le projet dans la base de donnée
     await newProject

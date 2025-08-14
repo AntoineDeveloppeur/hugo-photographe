@@ -1,1 +1,8 @@
-/*# sourceMappingURL=form-photos.module.css.map */
+.formPhoto {
+  margin-top: 2rem;
+}
+.formPhoto__p {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-title);
+}/*# sourceMappingURL=form-photos.module.css.map */

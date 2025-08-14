@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  transition: all 5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 3s cubic-bezier(0.215, 0.61, 0.355, 1);
   box-shadow: 0 5px 10px -3px rgba(255, 255, 255, 0), 0 0 0 0 rgba(255, 255, 255, 0);
 }
 .imageWrapper__image {
@@ -17,22 +17,9 @@
        user-select: none;
   -webkit-user-select: none;
 }
-.imageWrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transition: all 5s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-.imageWrapper::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0);
-  transition: all 5s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
 .imageWrapper:hover {
   box-shadow: 0 5.25px 10.5px -3.15px rgba(255, 255, 255, 0.25), 0 0 0 1.05px rgba(255, 255, 255, 0.1);
-  transition: transform 5s cubic-bezier(0.215, 0.61, 0.355, 1), box-shadow 0.3s ease-out, filter 0.3s ease-out;
+  transition: transform 3s cubic-bezier(0.215, 0.61, 0.355, 1), box-shadow 3s ease-out, filter 0.2s ease-out;
   filter: brightness(1.05);
 }
 .imageWrapper:hover::after {

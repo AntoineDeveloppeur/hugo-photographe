@@ -29,7 +29,7 @@ export type Metadata = {
 type File = {
   filepath: string
   mimetype: string | null
-  originalFilename: string
+  originalFilename: string | null
 }
 type Resize = Metadata & File
 

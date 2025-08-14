@@ -1,5 +1,5 @@
 import { parseForm, processFiles } from "@/backend/dist/middleware/upload"
-import sharp from "sharp"
+import sharp, { metadata } from "sharp"
 import { v4 as uuidv4, mockUuidValue } from "uuid"
 import { convertToWebp } from "@/backend/dist/utils/convertToWebp.js"
 import { resizePhoto } from "@/backend/dist/utils/resizePhoto.js"
@@ -31,8 +31,6 @@ jest.mock("@/backend/dist/utils/convertToWebp.js", () => ({
     mimetype: "image/webp",
   })),
 }))
-
-const metadata = { width: 3000, height: 1500 }
 
 describe("parseForm", () => {
   it("should reject with an err", async () => {
@@ -95,6 +93,8 @@ describe("processFiles", () => {
       metadata: jest.fn().mockReturnValue(null), // ← Votre modification
       webp: jest.fn().mockReturnThis(),
     }))
+
+    // jest.spyOn(sharp(), "metadata").mockReturnValue(null)
 
     const processedFilesArray = await Promise.all(
       Object.entries(files).map(async ([key, fileArray]) => {

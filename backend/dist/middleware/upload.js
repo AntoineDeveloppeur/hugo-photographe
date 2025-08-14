@@ -52,14 +52,9 @@ export async function parseForm(req) {
                     return reject(new Error("formulaire sans fichier"));
                 }
                 const processedFiles = await processFiles(files);
-                // Résoudre avec les fichiers traités
                 resolve({
                     fields,
                     files: processedFiles,
-                    // files doit ressembler à
-                    // files = {
-                    //    set1photo1: file
-                    //}
                 });
             });
         }
@@ -69,23 +64,9 @@ export async function parseForm(req) {
     });
 }
 export async function processFiles(files) {
-    const processedFilesArray = await Promise.all(
-    // l'objet files ressemble à
-    // files = {
-    //  set1photo1: file[0]
-    //  set1photo2: file[0]
-    //}
-    Object.entries(files).map(async ([key, fileArray]) => {
-        // avec map je peux renvoyer
-        // [{key: file},{key2: file 2}]
-        // avec reduce je peux construire mon objet
-        // xx.reduce((object) => {
-        //  return {...acc, ...object}
-        //})
-        // J'obtient
-        // { key: file, key2: file 2}
+    const processedFilesArray = await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
         const file = fileArray?.[0];
-        // Fail-fast: Si ce n'est pas une image, conserver le fichier original
+        // Fail-fast: Si ce n'est pas une image, lancer une erreur
         if (!file.mimetype?.startsWith("image/")) {
             throw new Error("La photo choisie n'est pas une image");
         }
@@ -116,8 +97,4 @@ export async function processFiles(files) {
     return processedFilesArray.reduce((acc, object) => {
         return { ...acc, ...object };
     });
-    // files doit ressembler à
-    // files = {
-    //    set1photo1: file
-    //}
 }

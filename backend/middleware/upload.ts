@@ -67,14 +67,9 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
 
         const processedFiles = await processFiles(files)
 
-        // Résoudre avec les fichiers traités
         resolve({
           fields,
           files: processedFiles,
-          // files doit ressembler à
-          // files = {
-          //    set1photo1: file
-          //}
         })
       })
     } catch (error) {
@@ -85,27 +80,14 @@ export async function parseForm(req: Request): Promise<ParsedForm> {
 
 export async function processFiles(files: Files) {
   const processedFilesArray = await Promise.all(
-    // l'objet files ressemble à
-    // files = {
-    //  set1photo1: file[0]
-    //  set1photo2: file[0]
-
-    //}
     Object.entries(files).map(async ([key, fileArray]) => {
-      // avec map je peux renvoyer
-      // [{key: file},{key2: file 2}]
-      // avec reduce je peux construire mon objet
-      // xx.reduce((object) => {
-      //  return {...acc, ...object}
-      //})
-      // J'obtient
-      // { key: file, key2: file 2}
       const file = (fileArray as FormidableFile[])?.[0]
 
-      // Fail-fast: Si ce n'est pas une image, conserver le fichier original
+      // Fail-fast: Si ce n'est pas une image, lancer une erreur
       if (!file.mimetype?.startsWith("image/")) {
         throw new Error("La photo choisie n'est pas une image")
       }
+
       // Obtenir les métadonnées de l'image originale
       const metadata = await sharp(file.filepath).metadata()
       // Modifier la taille si metadata disponibles
@@ -138,8 +120,4 @@ export async function processFiles(files: Files) {
   return processedFilesArray.reduce((acc, object) => {
     return { ...acc, ...object }
   })
-  // files doit ressembler à
-  // files = {
-  //    set1photo1: file
-  //}
 }

@@ -7,12 +7,30 @@ import deletePhotos, {
   ProjectDeletePhotos,
 } from "@/backend/utils/deletePhotos.js"
 
+interface PhotosUrl {
+  mainPhoto?: string
+  [key: string]: string | unknown
+}
+type PhotosUrlArray = {
+  [key: string]: string | unknown
+}[]
+
+interface ProjectData {
+  title: string
+  summary: string
+  alt: string
+  height: number
+  width: number
+  textsAbovePhotos: string[]
+  photosSets: object[][]
+  textsBelowPhotos: string
+}
+
 // Exporter les fonctions individuellement
 export async function createProject(req: Request, res: Response) {
   try {
     // Parse le formulaire avec formidable
     const { fields, files }: ParsedForm = await parseForm(req)
-    console.log("fields", fields)
 
     //Vérification du formulaire
     if (!fields.projectTexts) {
@@ -20,14 +38,6 @@ export async function createProject(req: Request, res: Response) {
         .status(400)
         .json({ message: "Les données du projet sont requises" })
     }
-
-    interface PhotosUrl {
-      mainPhoto?: string
-      [key: string]: string | unknown
-    }
-    type PhotosUrlArray = {
-      [key: string]: string | unknown
-    }[]
 
     // Upload vers s3
     const photosUrlArray: PhotosUrlArray = await Promise.all(
@@ -46,17 +56,7 @@ export async function createProject(req: Request, res: Response) {
       return { ...acc, ...file }
     })
 
-    interface ProjectData {
-      title: string
-      summary: string
-      alt: string
-      height: number
-      width: number
-      textsAbovePhotos: string[]
-      photosSets: object[][]
-      textsBelowPhotos: string
-    }
-    //Corriger le type
+    //Corriger le type en faire une fonction
     const projectData: ProjectData =
       typeof fields.projectTexts[0] === "string"
         ? JSON.parse(fields.projectTexts[0])

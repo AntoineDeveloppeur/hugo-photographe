@@ -6,7 +6,6 @@ export async function createProject(req, res) {
     try {
         // Parse le formulaire avec formidable
         const { fields, files } = await parseForm(req);
-        console.log("fields", fields);
         //Vérification du formulaire
         if (!fields.projectTexts) {
             return res
@@ -25,7 +24,7 @@ export async function createProject(req, res) {
         const photosUrl = photosUrlArray.reduce((acc, file) => {
             return { ...acc, ...file };
         });
-        //Corriger le type
+        //Corriger le type en faire une fonction
         const projectData = typeof fields.projectTexts[0] === "string"
             ? JSON.parse(fields.projectTexts[0])
             : fields.projectTexts;

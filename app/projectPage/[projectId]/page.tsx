@@ -8,6 +8,14 @@ import Button from "@/components/ui/atoms/ButtonBig/ButtonBig"
 import { ProjectsProps, Data } from "@/types"
 import getProjects from "@/utils/getProjects"
 
+// Permet de générer des pages pour les nouveaux projets non listés dans generateStaticParams
+export const dynamicParams = true
+
+// Optionnel : Active l'ISR avec revalidation toutes les 60 secondes
+export const revalidate = 5
+
+export const dynamic = "force-dynamic"
+
 export async function generateStaticParams() {
   const data: Data = await getProjects()
   // il faudrait que je dise que les params possibles sont data.projects.id
@@ -22,9 +30,6 @@ export default async function ProjectPage({
 }: {
   params: Promise<{ projectId: string }>
 }) {
-  //est-ce que c'est mal de récupérer l'id de l'objet mongoDB pour le passer en paramètre dynamique ?
-  // Peut-être problème de sécurité ?
-
   // Nouvelle méthode avec generateStaticParams
   const { projectId } = await params
   const data: Data = await getProjects()

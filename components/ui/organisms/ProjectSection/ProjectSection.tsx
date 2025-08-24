@@ -66,7 +66,7 @@ export default function ProjectSection() {
               <div
                 key="cardLandscape"
                 className={
-                  styles.projectSection__largeScreen__cards__cardLandscapteWrapper
+                  styles.projectSection__largeScreen__cards__cardLandscapeWrapper
                 }
               >
                 {isMobile ? (

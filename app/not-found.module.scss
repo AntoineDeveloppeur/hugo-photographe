@@ -1,0 +1,31 @@
+.notFound {
+  width: 100%;
+  flex: 1;
+  background-color: var(--background-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__largeScreen {
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+    margin-left: 12rem;
+    margin-right: 12rem;
+    width: 100%;
+    max-width: 1440px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    &__titleWrapper {
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: center;
+    }
+    &__ButtonWrapper {
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

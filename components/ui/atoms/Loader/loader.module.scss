@@ -1,66 +1,78 @@
 .loader {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    background-color: var(--dark12);
-    z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  z-index: 10;
 }
 
 .spinner {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  opacity: 0;
+  animation: 0.7s appear forwards;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
     border-radius: 50%;
-    position: relative;
+    animation: spin 1.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
 
-    &::before,
-    &::after {
-        content: '';
-        position: absolute;
-        border-radius: 50%;
-        animation: spin 1.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    }
+  &::before {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      var(--dark20) 0%,
+      var(--dark30) 50%,
+      var(--dark40) 100%
+    );
+    animation-name: rotate;
+  }
 
-    &::before {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            to right,
-            var(--dark20) 0%,
-            var(--dark30) 50%,
-            var(--dark40) 100%
-        );
-        animation-name: rotate;
-    }
+  &::after {
+    width: 75%;
+    height: 75%;
+    background: var(--dark12);
+    top: 12.5%;
+    left: 12.5%;
+    animation: none;
+  }
+}
 
-    &::after {
-        width: 75%;
-        height: 75%;
-        background: var(--dark12);
-        top: 12.5%;
-        left: 12.5%;
-        animation: none;
-    }
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

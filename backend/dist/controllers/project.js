@@ -1,6 +1,6 @@
-import Project from "../models/project.js";
+import Project from "@/backend/models/project.js";
 import uploadToS3, { parseForm } from "../middleware/upload.js";
-import deletePhotos, { deleteOnePhotoFromDB, } from "../utils/deletePhotos.js";
+import deletePhotos, { deleteOnePhotoFromDB, } from "@/backend/utils/deletePhotos.js";
 // Exporter les fonctions individuellement
 export async function createProject(req, res) {
     try {

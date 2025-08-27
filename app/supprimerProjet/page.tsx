@@ -4,7 +4,7 @@ import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjec
 import styles from "./supprimer-projet.module.scss"
 import CardPortrait from "@/components/ui/molecules/CardPortrait/CardPortrait"
 import Button from "@/components/ui/atoms/Button/Button"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Pagination from "@/components/ui/molecules/Pagination/Pagination"
 import { motion, AnimatePresence } from "framer-motion"
 import { ProjectsProps } from "@/types"
@@ -16,6 +16,7 @@ export default function Supprimer() {
   const data = useGetProjects()
 
   const isMobile = useIsMobile()
+  const supprimerSectionRef = useRef<HTMLElement>(null)
   // définir une constant qui dépend du nombre de projets
   // const projectsCount = nombre d'élément dans le tableau de données
   const projectsPerPage: number = 6
@@ -24,13 +25,16 @@ export default function Supprimer() {
 
   const [isExpandedView, setIsExpandedView] = useState<boolean>(false)
   const projectCountPerPage = isExpandedView ? 6 : 3
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   //Enregistrer la page actuelle dans les données locales et supprimer lorsque la page est quittée
-  const currentPageStored =
-    window.localStorage.getItem("currentPage") !== null
-      ? Number(window.localStorage.getItem("currentPage"))
-      : 1
-  const [currentPage, setCurrentPage] = useState<number>(currentPageStored)
+  useEffect(() => {
+    const currentPageStored = window.localStorage.getItem("currentPage")
+    if (currentPageStored !== null) {
+      setCurrentPage(Number(currentPageStored))
+    }
+  }, [])
+
   useEffect(() => {
     window.localStorage.setItem("currentPage", currentPage.toString())
   }, [currentPage])
@@ -40,15 +44,18 @@ export default function Supprimer() {
   }
   function previousPage() {
     setCurrentPage(((currentPage - 2 + PagesCount) % PagesCount) + 1)
-    document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" })
+    supprimerSectionRef.current?.scrollIntoView({ behavior: "smooth" })
   }
   function nextPage() {
     setCurrentPage((currentPage % PagesCount) + 1)
-    document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" })
+    supprimerSectionRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <section className={styles.supprimer}>
+    <section
+      className={styles.supprimer}
+      ref={supprimerSectionRef}
+    >
       <div className={styles.supprimer__largeScreen}>
         <div className={styles.supprimer__largeScreen__titleWrapper}>
           <TitleProjectPage text="Supprimer un projet" />

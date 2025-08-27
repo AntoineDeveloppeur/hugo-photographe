@@ -5,7 +5,7 @@ import Subtitle from "../../atoms/Subtitle/Subtitle"
 import Title from "../../atoms/Title/Title"
 import CardPortrait from "../../molecules/CardPortrait/CardPortrait"
 import Button from "../../atoms/Button/Button"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Pagination from "../../molecules/Pagination/Pagination"
 import { motion, AnimatePresence } from "framer-motion"
 import { ProjectsProps } from "@/types"
@@ -17,6 +17,7 @@ export default function ProjectSection() {
   const data = useGetProjects()
 
   const isMobile = useIsMobile()
+  const projectSectionRef = useRef<HTMLElement>(null)
   // définir une constant qui dépend du nombre de projets
   // const projectsCount = nombre d'élément dans le tableau de données
   const projectsPerPage: number = 6
@@ -25,13 +26,16 @@ export default function ProjectSection() {
 
   const [isExpandedView, setIsExpandedView] = useState<boolean>(false)
   const projectCountPerPage = isExpandedView ? 6 : 3
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   //Enregistrer la page actuelle dans les données locales et supprimer lorsque la page est quittée
-  const currentPageStored =
-    window.localStorage.getItem("currentPage") !== null
-      ? Number(window.localStorage.getItem("currentPage"))
-      : 1
-  const [currentPage, setCurrentPage] = useState<number>(currentPageStored)
+  useEffect(() => {
+    const currentPageStored = window.localStorage.getItem("currentPage")
+    if (currentPageStored !== null) {
+      setCurrentPage(Number(currentPageStored))
+    }
+  }, [])
+
   useEffect(() => {
     window.localStorage.setItem("currentPage", currentPage.toString())
   }, [currentPage])
@@ -41,17 +45,17 @@ export default function ProjectSection() {
   }
   function previousPage() {
     setCurrentPage(((currentPage - 2 + PagesCount) % PagesCount) + 1)
-    document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" })
+    projectSectionRef.current?.scrollIntoView({ behavior: "smooth" })
   }
   function nextPage() {
     setCurrentPage((currentPage % PagesCount) + 1)
-    document.getElementById("Projects")?.scrollIntoView({ behavior: "smooth" })
+    projectSectionRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
     <section
-      id="Projects"
       className={styles.projectSection}
+      ref={projectSectionRef}
     >
       <div className={styles.projectSection__largeScreen}>
         <div className={styles.projectSection__largeScreen__titleAndSubtitle}>

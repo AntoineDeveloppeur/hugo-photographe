@@ -3,13 +3,14 @@
 import styles from "./menu-mobile.module.scss"
 import type { Variants } from "framer-motion"
 import { motion } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import IconPhone from "../../atoms/IconPhone/IconPhone"
 import IconBook from "../../atoms/IconBook/IconBook"
 import IconPortfolio from "../../atoms/IconPortfolio/IconPortfolio"
 import useCloseWhenClickOutside from "@/hooks/useCloseWhenClickOutside"
 import Link from "next/link"
 import ThemeChanger from "../ThemeChanger/ThemeChanger"
+import useDimensions from "@/hooks/useDimensions"
 
 export default function MenuMobile() {
   const [isOpen, setIsOpen] = useState(false)
@@ -201,24 +202,3 @@ const MenuToggle = ({ toggle }: { toggle: () => void }) => (
     </svg>
   </motion.div>
 )
-
-/**
- * ==============   Utils   ================
- */
-
-// Naive implementation - in reality would want to attach
-// a window or resize listener. Also use state/layoutEffect instead of ref/effect
-// if this is important to know on initial client render.
-// It would be safer to  return null for unmeasured states.
-function useDimensions(ref: React.RefObject<HTMLDivElement | null>) {
-  const dimensions = useRef({ width: 0, height: 0 })
-
-  useEffect(() => {
-    if (ref.current) {
-      dimensions.current.width = ref.current.offsetWidth
-      dimensions.current.height = ref.current.offsetHeight
-    }
-  }, [ref])
-
-  return dimensions.current
-}

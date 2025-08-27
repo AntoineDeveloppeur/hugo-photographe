@@ -1,11 +1,11 @@
 import { IncomingForm } from "formidable";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import getS3Client from "@/backend/utils/getS3Client.js";
+import getS3Client from "../utils/getS3Client.js";
 import fs from "fs";
 import sharp from "sharp";
 import path from "path";
 import { resizePhoto } from "../utils/resizePhoto.js";
-import { convertToWebp } from "@/backend/utils/convertToWebp.js";
+import { convertToWebp } from "../utils/convertToWebp.js";
 // Fonction pour télécharger un fichier sur S3
 // prefix is the name of the bucket
 export default async function uploadToS3(file, prefix = "") {

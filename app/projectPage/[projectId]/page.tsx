@@ -11,7 +11,7 @@ import { notFound } from "next/navigation"
 // Permet de générer des pages pour les nouveaux projets non listés dans generateStaticParams
 export const dynamicParams = true
 
-// Optionnel : Active l'ISR avec revalidation toutes les 60 secondes
+// Optionnel : Active l'ISR avec revalidation toutes les 5 secondes
 export const revalidate = 5
 
 export const dynamic = "force-dynamic"

@@ -4,9 +4,9 @@ import Paragraphes from "@/components/ui/molecules/Paragraphes/Paragraphes"
 import PhotosSets from "@/components/ui/molecules/PhotosSets/PhotosSets"
 import LinkBottomOfProjectPage from "@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage"
 import PhotoProjectPage from "@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage"
-import Button from "@/components/ui/atoms/ButtonBig/ButtonBig"
 import { ProjectsProps, Data } from "@/types"
 import getProjects from "@/utils/getProjects"
+import { notFound } from "next/navigation"
 
 // Permet de générer des pages pour les nouveaux projets non listés dans generateStaticParams
 export const dynamicParams = true
@@ -39,21 +39,7 @@ export default async function ProjectPage({
   )
   if (!project) {
     // Si le projet n'est pas trouvé, renvoyer une page d'erreur
-    return (
-      <section className={styles.projectPage}>
-        <div className={styles.projectPage__largeScreen}>
-          <div className={styles.projectPage__largeScreen__404Wrapper}>
-            <p className={styles.projectPage__largeScreen__404Wrapper__text}>
-              Le projet n&apos;a pas été trouvé.
-            </p>
-            <Button
-              text="Retourner aux projets"
-              link="/"
-            />
-          </div>
-        </div>
-      </section>
-    )
+    return notFound()
   } else {
     return (
       <section className={styles.projectPage}>

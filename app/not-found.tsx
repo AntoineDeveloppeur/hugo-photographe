@@ -1,5 +1,5 @@
 import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjectPage"
-import styles from "./not-found.module.scss"
+import styles from "@/app/not-found.module.scss"
 import Button from "@/components/ui/atoms/Button/Button"
 
 export default function NotFound() {

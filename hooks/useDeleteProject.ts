@@ -1,21 +1,17 @@
 "use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
 
 export default function useDeleteProject() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isSuccess, setIsSuccess] = useState<boolean>(false)
   const Router = useRouter()
 
-  async function deleteProject(_id: string) {
+  async function deleteProject(_id: string): Promise<boolean> {
     try {
       if (!window.localStorage.getItem("token")) {
         Router.push("/connexion")
-        throw new Error("Veuillez vous connecter")
+        throw new Error("Veuillez vous connecter pour supprimer un projet")
       }
-      setIsLoading(true)
-      const responseJSON = await fetch(
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/deleteProject/${_id}`,
         {
           method: "DELETE",
@@ -25,23 +21,23 @@ export default function useDeleteProject() {
         }
       )
 
-      const response = await responseJSON.json()
+      const data = await response.json()
 
-      if (responseJSON.status === 403 || responseJSON.status === 401) {
+      if (response.status === 401) {
         Router.push("/connexion")
-        throw new Error(response.message)
+        throw new Error(data.message)
+      } else if (!response.ok) {
+        throw new Error(data.message)
       }
-      if (!responseJSON.ok) {
-        throw new Error("Contacter votre administrateur")
-      }
-      setIsLoading(false)
-      setIsSuccess(true)
+      return true
     } catch (error) {
+      // Revoir le catch pour donner plus d'information à l'administrateur
       const errorMessage =
         error instanceof Error ? error.message : String(error)
-      alert(errorMessage)
+      window.alert(errorMessage)
+      return false
     }
   }
 
-  return { isLoading, isSuccess, deleteProject }
+  return { deleteProject }
 }

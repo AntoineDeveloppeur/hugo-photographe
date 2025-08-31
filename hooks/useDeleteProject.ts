@@ -1,11 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
 
 export default function useDeleteProject() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isSuccess, setIsSuccess] = useState<boolean>(false)
   const Router = useRouter()
 
   async function deleteProject(_id: string) {
@@ -14,7 +11,6 @@ export default function useDeleteProject() {
         Router.push("/connexion")
         throw new Error("Veuillez vous connecter")
       }
-      setIsLoading(true)
       const responseJSON = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/deleteProject/${_id}`,
         {
@@ -34,14 +30,10 @@ export default function useDeleteProject() {
       if (!responseJSON.ok) {
         throw new Error("Contacter votre administrateur")
       }
-      setIsLoading(false)
-      setIsSuccess(true)
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : String(error)
-      alert(errorMessage)
+    } catch {
+      throw new Error("Contacter votre administrateur")
     }
   }
 
-  return { isLoading, isSuccess, deleteProject }
+  return { deleteProject }
 }

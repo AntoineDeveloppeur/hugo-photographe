@@ -5,8 +5,14 @@ import { useState } from "react"
 import Paragraphes from "../Paragraphes/Paragraphes"
 import Button from "../../atoms/Button/Button"
 import ButtonSecondary from "../../atoms/ButtonSecondary/ButtonSecondary"
-import useDeleteProject from "@/hooks/useDeleteProject"
 import Loader from "../../atoms/Loader/Loader"
+import useDeleteProject from "@/hooks/useDeleteProject"
+
+type modalStateType =
+  | "CONFIRMING"
+  | "DELETING"
+  | "DELETIONSUCCESS"
+  | "DELETIONERROR"
 
 export default function ModalDeleteProject({
   _id,
@@ -14,13 +20,18 @@ export default function ModalDeleteProject({
   isOpen,
   onClose,
 }: ModalDeleteProjectProps) {
-  const [isConfirmed, setIsConfirmed] = useState<boolean>(false)
-  const { isLoading, isSuccess, deleteProject } = useDeleteProject()
+  const [modalState, setModalState] = useState<modalStateType>("CONFIRMING")
+  const { deleteProject } = useDeleteProject()
 
-  const handleYes = () => {
-    setIsConfirmed(true)
-    deleteProject(_id)
-    // revalidateProjects()
+  const handleYes = async () => {
+    setModalState("DELETING")
+    try {
+      await deleteProject(_id)
+      setModalState("DELETIONSUCCESS")
+      // revalidateProjects()
+    } catch {
+      setModalState("DELETIONERROR")
+    }
   }
   const handleNo = () => {
     onClose()
@@ -31,7 +42,7 @@ export default function ModalDeleteProject({
       isOpen={isOpen}
       onClose={onClose}
     >
-      {!isConfirmed && (
+      {modalState === "CONFIRMING" && (
         <div
           className={styles.buttonsWrapper}
           onClick={(e) => e.stopPropagation()}
@@ -47,8 +58,15 @@ export default function ModalDeleteProject({
           />
         </div>
       )}
-      {isLoading && <Loader />}
-      {isSuccess && <Paragraphes texts={["Suppression réussie"]} />}
+      {modalState === "DELETING" && <Loader />}
+      {modalState === "DELETIONSUCCESS" && (
+        <Paragraphes texts={["Suppression réussie"]} />
+      )}
+      {modalState === "DELETIONERROR" && (
+        <Paragraphes
+          texts={["Échec de la suppression, contacter votre administrateur"]}
+        />
+      )}
     </Modal>
   )
 }

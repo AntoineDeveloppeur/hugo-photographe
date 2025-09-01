@@ -12,7 +12,7 @@ type modalStateType =
   | "CONFIRMING"
   | "DELETING"
   | "DELETIONSUCCESS"
-  | "DELETIONERROR"
+  | "DELETIONFAILED"
 
 export default function ModalDeleteProject({
   _id,
@@ -25,13 +25,12 @@ export default function ModalDeleteProject({
 
   const handleYes = async () => {
     setModalState("DELETING")
-    try {
-      await deleteProject(_id)
+    const success = await deleteProject(_id)
+    if (success) {
       setModalState("DELETIONSUCCESS")
       // revalidateProjects()
-    } catch {
-      setModalState("DELETIONERROR")
     }
+    // Fails are handled by useDeleteProject
   }
   const handleNo = () => {
     onClose()
@@ -62,7 +61,7 @@ export default function ModalDeleteProject({
       {modalState === "DELETIONSUCCESS" && (
         <Paragraphes texts={["Suppression réussie"]} />
       )}
-      {modalState === "DELETIONERROR" && (
+      {modalState === "DELETIONFAILED" && (
         <Paragraphes
           texts={["Échec de la suppression, contacter votre administrateur"]}
         />

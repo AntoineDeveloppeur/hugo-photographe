@@ -8,11 +8,7 @@ import ButtonSecondary from "../../atoms/ButtonSecondary/ButtonSecondary"
 import Loader from "../../atoms/Loader/Loader"
 import useDeleteProject from "@/hooks/useDeleteProject"
 
-type modalStateType =
-  | "CONFIRMING"
-  | "DELETING"
-  | "DELETIONSUCCESS"
-  | "DELETIONFAILED"
+type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"
 
 export default function ModalDeleteProject({
   _id,
@@ -28,7 +24,6 @@ export default function ModalDeleteProject({
     const success = await deleteProject(_id)
     if (success) {
       setModalState("DELETIONSUCCESS")
-      // revalidateProjects()
     }
     // Fails are handled by useDeleteProject
   }
@@ -60,11 +55,6 @@ export default function ModalDeleteProject({
       {modalState === "DELETING" && <Loader />}
       {modalState === "DELETIONSUCCESS" && (
         <Paragraphes texts={["Suppression réussie"]} />
-      )}
-      {modalState === "DELETIONFAILED" && (
-        <Paragraphes
-          texts={["Échec de la suppression, contacter votre administrateur"]}
-        />
       )}
     </Modal>
   )

@@ -28,14 +28,14 @@ export default function useDeleteProject() {
         throw new Error(data.message)
       } else if (!response.ok) {
         throw new Error(data.message)
-      } else {
-        return true
       }
+      return true
     } catch (error) {
       // Revoir le catch pour donner plus d'information à l'administrateur
       const errorMessage =
         error instanceof Error ? error.message : String(error)
       alert(errorMessage)
+      return false
     }
   }
 

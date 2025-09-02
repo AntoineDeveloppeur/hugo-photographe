@@ -21,7 +21,7 @@ describe("useDeleteProject", () => {
     jest.clearAllMocks()
   })
 
-  it("should push to connexion page", async () => {
+  it("should push to connexion page because no token", async () => {
     // Arrange
     window.alert = jest.fn()
     window.localStorage.getItem = jest.fn().mockReturnValue(null)
@@ -35,5 +35,23 @@ describe("useDeleteProject", () => {
     // Assert
     expect(mockPush).toHaveBeenCalledWith("/connexion")
     expect(window.alert).toHaveBeenCalledTimes(1)
+  })
+  it("should push to connexion page because token is not correct", async () => {
+    // Arrange
+    const wrongToken = "fdsq"
+    window.alert = jest.fn()
+    window.localStorage.getItem = jest.fn().mockReturnValue(wrongToken)
+    global.fetch.mockResolvedValue(() => ({
+      status: "403",
+      json: jest.fn(),
+    }))
+    // Act
+    const { result } = renderHook(() => useDeleteProject())
+    await act(async () => {
+      result.current.deleteProject(id)
+    })
+    // Assert
+    expect(window.alert).toHaveBeenCalledTimes(1)
+    expect(mockPush).toHaveBeenCalledWith("/connexion")
   })
 })

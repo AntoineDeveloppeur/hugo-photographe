@@ -23,7 +23,8 @@ export default function useDeleteProject() {
 
       const data = await response.json()
 
-      if (response.status === 403 || response.status === 401) {
+      if (response.status === 401) {
+        console.error("je suis dnas 401")
         Router.push("/connexion")
         throw new Error(data.message)
       } else if (!response.ok) {

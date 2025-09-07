@@ -12,6 +12,7 @@ import InputFile from "../../molecules/InputFile/InputFile"
 import FormPhoto from "../../molecules/FormPhoto/FormPhoto"
 import ButtonAdd from "../../atoms/ButtonAdd/ButtonAdd"
 import { useRouter } from "next/navigation"
+import postForm from "@/utils/postForm"
 
 export default function FormAjouterProjet() {
   const router = useRouter()
@@ -152,30 +153,12 @@ export default function FormAjouterProjet() {
       })
 
       // Envoie du formulaire
-      const responseJSON = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          },
-          body: formData,
-        }
+      const { success, error, redirectPath } = await postForm(
+        formData,
+        window.localStorage.getItem("token")
       )
-
-      const response = await responseJSON.json()
-
-      if (responseJSON.status === 403) {
-        router.push("/connexion")
-        throw new Error("Veuillez vous connecter pour ajouter un projet")
-      }
-
-      if (!responseJSON.ok) {
-        throw new Error(response.error)
-      }
-      //Réinitialise le cache serveur des données
-      // revalidateProjects()
-      router.push("/succesAjoutProjet")
+      if (!success) window.alert(error)
+      if (redirectPath) router.push(redirectPath)
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error)
@@ -217,7 +200,7 @@ export default function FormAjouterProjet() {
         register={register}
         type="text"
         name="mainPhotoAlt"
-        label="description succinte de la photo"
+        label="description succincte de la photo"
         error={errors.mainPhotoAlt?.message}
         defaultValue="test"
       />
@@ -262,9 +245,9 @@ export default function FormAjouterProjet() {
                 id={`set${setIndex + 1}photo${photoIndex + 1}`}
                 key={`set${setIndex + 1}photo${photoIndex + 1}`}
                 fileInputRef={ref}
-                //@ts-expect-error ddd
+                //@ts-expect-error erreur non comprise
                 register={register}
-                //@ts-expect-error ddd
+                //@ts-expect-error erreur non comprise
                 errorAlt={errors[dynamicAlt]?.message}
               />
             )

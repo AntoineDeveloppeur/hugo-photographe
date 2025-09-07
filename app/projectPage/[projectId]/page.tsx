@@ -9,12 +9,13 @@ import getProjects from "@/utils/getProjects"
 import { notFound } from "next/navigation"
 
 // Permet de générer des pages pour les nouveaux projets non listés dans generateStaticParams
-export const dynamicParams = true
+// export const dynamicParams = true
 
 // Optionnel : Active l'ISR avec revalidation toutes les 5 secondes
-export const revalidate = 5
+export const revalidate = 3600
 
-export const dynamic = "force-dynamic"
+// test sans force-dynamic qui force la revalidation à chaque requête
+// export const dynamic = "force-dynamic"
 
 export async function generateStaticParams() {
   const data: Data = await getProjects()

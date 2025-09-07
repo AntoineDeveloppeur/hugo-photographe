@@ -9,7 +9,6 @@ interface PostForm {
   redirectPath?: string
 }
 
-// Post le bodyFormData
 export default async function postForm(
   form: BodyInit,
   token: string | null
@@ -32,6 +31,8 @@ export default async function postForm(
         body: form,
       }
     )
+
+    // si token a été modifié
     if (response.status === 403) {
       return {
         success: false,
@@ -39,6 +40,7 @@ export default async function postForm(
         redirectPath: "/connexion",
       }
     }
+    // les autres cas dont le nom du projet est déjà pris
     const data = await response.json()
     if (!response.ok) {
       return {

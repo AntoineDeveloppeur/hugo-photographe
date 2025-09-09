@@ -21,13 +21,14 @@
       display: flex;
       &__imageWrapper {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         z-index: 2;
         overflow: hidden;
         margin: auto;
         &__image {
           width: auto;
+          max-height: 300px;
           border: 1px solid var(--color-medal-primary);
           user-select: none;
           -webkit-user-select: none;
@@ -79,6 +80,7 @@
       width: 100%;
       &__imageWrapper {
         &__image {
+          max-height: 400px;
           width: 100%;
         }
       }

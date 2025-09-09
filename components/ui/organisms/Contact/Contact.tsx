@@ -19,8 +19,8 @@ export default function Contact() {
   const example: PhotoVariableProps = {
     src: portraitHugo.src,
     alt: "Hugo Randez",
-    width: 1943,
-    height: 1880,
+    width: portraitHugo.width,
+    height: portraitHugo.height,
   }
 
   const { showPresentation, setShowPresentation } = useContext(
@@ -44,6 +44,7 @@ export default function Contact() {
   })
 
   const { email, phone } = useReCaptcha()
+  // Dé-commenter pour ne pas utiliser le ReCaptcha lors des tests
   // const email = "n'utilise pas le Recaptcha"
   // const phone = "faux numéro"
 
@@ -78,7 +79,6 @@ export default function Contact() {
           <div className={styles.contact__presentation__photoWrapper}>
             <PhotoBasic
               photo={example}
-              sizes="250px"
               className={
                 styles.contact__presentation__photoWrapper__imageWrapper
               }

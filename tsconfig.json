@@ -31,5 +31,5 @@
     "__tests__/administrateur.test.js",
     "__tests__/upload.test.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "backend"]
 }

@@ -1,6 +1,9 @@
 stages:
   - test
-  - build
+  - build-backend
+  - deploy-backend
+  - build-frontend
+  - deploy-frontend
 
 # Cache des dépendances pour accélérer les jobs
 cache:
@@ -9,6 +12,18 @@ cache:
     - node_modules/
     - .next/cache/
     - backend/node_modules/
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+services:
+  - docker:dind
+
+before_script:
+  - docker info
+  - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER
+    --password-stdin $CI_REGISTRY
 
 unit-tests:
   stage: test
@@ -38,16 +53,72 @@ typescript:
     - cd ./backend && npm ci
     - npm run type-check
 
-# Job pour le build
-build:
-  stage: build
-  image: node:20-alpine
+build-backend:
+  stage: build-backend
   script:
-    - npm ci --legacy-peer-deps
-    - npm run build
-  artifacts:
-    paths:
-      - .next/
-    expire_in: 1 week
+    - cd backend
+    - docker build -t $CI_REGISTRY_IMAGE/backend:$CI_COMMIT_SHA .
+    - docker push $CI_REGISTRY_IMAGE/backend:$CI_COMMIT_SHA
   only:
     - main
+    - develop
+
+# Nécessaire pour construire une application Next.js avec SSG
+deploy-backend:
+  stage: deploy-backend
+  script:
+    - docker pull $CI_REGISTRY_IMAGE/backend:$CI_COMMIT_SHA
+    - docker stop hugo-backend || true
+    - docker rm hugo-backend || true
+    - docker run -d --name hugo-backend --network hugo-network -p 3002:3002
+      --env-file ./backend/.env $CI_REGISTRY_IMAGE/backend:$CI_COMMIT_SHA
+    # Attendre que le backend soit opérationnel
+    - |
+      for i in {1..30}; do
+        if curl -f http://localhost:3002/health; then
+          echo "Backend opérationnel!"
+          break
+        fi
+        echo "Attente backend... ($i/30)"
+        sleep 10
+      done
+  only:
+    - main
+    - develop
+
+# Build Frontend (avec backend disponible)
+build-frontend:
+  stage: build-frontend
+  script:
+    - docker build --build-arg BACKEND_URL=http://localhost:3002 -t
+      $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHA .
+    - docker push $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHA
+  dependencies:
+    - deploy-backend
+  only:
+    - main
+    - develop
+
+deploy-frontend:
+  stage: deploy-frontend
+  script:
+    - docker pull $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHA
+    - docker stop hugo-frontend || true
+    - docker rm hugo-frontend || true
+    - docker run -d --name hugo-frontend --network hugo-network -p 3001:3001
+      --env-file .env $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHA
+  dependencies:
+    - build-frontend
+  only:
+    - main
+    - develop
+
+# Job de nettoyage (optionnel)
+cleanup:
+  stage: deploy-frontend
+  script:
+    - docker system prune -f
+  when: always
+  only:
+    - main
+    - develop

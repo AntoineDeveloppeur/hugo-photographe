@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
   images: {
     formats: ["image/webp", "image/avif"],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 jours
@@ -23,6 +26,8 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "500mb",
     },
   },
+  // Configuration pour le mode standalone (nécessaire pour Docker)
+  output: "standalone",
 }
 
 export default nextConfig

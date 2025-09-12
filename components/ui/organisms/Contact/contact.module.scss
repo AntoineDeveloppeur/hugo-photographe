@@ -28,7 +28,8 @@
         margin: auto;
         border-radius: 10% 10% 31% 67% / 10% 10% 96% 68%;
         &__image {
-          width: auto;
+          // important est obligatoire lors de la contenrisation avec l'option "standAlone"
+          width: auto !important;
           max-height: 300px;
           user-select: none;
           -webkit-user-select: none;

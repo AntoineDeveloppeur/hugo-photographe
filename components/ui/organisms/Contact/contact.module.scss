@@ -27,7 +27,8 @@
         overflow: hidden;
         margin: auto;
         &__image {
-          width: auto;
+          // important est obligatoire lors de la contenrisation avec l'option "standAlone"
+          width: auto !important;
           max-height: 300px;
           border: 1px solid var(--color-medal-primary);
           user-select: none;

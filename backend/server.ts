@@ -36,10 +36,11 @@ mongoose
   .catch(() => console.log("Connexion à MongoDB échouée !"))
 
 // Configuration CORS
-const originCORS: string | string[] | undefined =
-  process.env.NODE_ENV === "production"
-    ? process.env.DOMAIN_NAME
-    : ["http://localhost:3000", "http://localhost:3001"]
+const originCORS: string | string[] | undefined = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://frontend:3001",
+]
 
 app.use(
   cors({
@@ -57,7 +58,7 @@ app.get("/health", (req, res) => {
     service: "hugo-photographe-backend",
   })
 })
-
+console.log("la requête est arrivé jusque là")
 // Routes
 app.use("/api/auth", userRoutes)
 app.use("/api/project", projectRoutes)

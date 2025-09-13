@@ -14,6 +14,11 @@ COPY . .
 # Variables d'environnement pour le build
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV production
+ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY 6Lejp9MqAAAAAMtrvI6ixsE2OXFmaNucIa6okLov
+ENV NEXT_PUBLIC_BASE_URL http://localhost:3001
+ENV NEXT_PUBLIC_SERVER_URL http://localhost:3002
+ENV SERVER_URL http://backend:3002
+
 # Build de l'application Next.js
 RUN npm run build
 

@@ -21,8 +21,10 @@ export default async function postForm(
     }
   }
   try {
+    console.log("on arrive au fetch")
+
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/create`,
+      `${process.env.SERVER_URL}/api/project/create`,
       {
         method: "POST",
         headers: {
@@ -31,6 +33,7 @@ export default async function postForm(
         body: form,
       }
     )
+    console.log("juste après fetch")
 
     // si token a été modifié
     if (response.status === 403) {
@@ -40,6 +43,8 @@ export default async function postForm(
         redirectPath: "/connexion",
       }
     }
+    console.log("if (response.status === 403) {")
+
     // les autres cas dont le nom du projet est déjà pris
     const data = await response.json()
     if (!response.ok) {
@@ -55,11 +60,12 @@ export default async function postForm(
       success: true,
       redirectPath: "/succesAjoutProjet",
     }
-  } catch {
+  } catch (error) {
+    console.log("error", error)
+
     return {
       success: false,
-      error:
-        "L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur",
+      error: `L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur, ${error}`,
       redirectPath: "/administrateur",
     }
   }

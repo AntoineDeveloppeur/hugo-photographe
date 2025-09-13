@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
     },
   },
   // Configuration pour le mode standalone (nécessaire pour Docker)
-  // output: "standalone",
+  output: "standalone",
 }
 
 export default nextConfig

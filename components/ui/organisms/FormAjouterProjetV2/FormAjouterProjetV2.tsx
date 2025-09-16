@@ -10,7 +10,7 @@ import Textarea from "../../atoms/Textarea/Textarea"
 import { useState, useEffect, useRef, createRef } from "react"
 import InputFile from "../../molecules/InputFile/InputFile"
 import FormPhoto from "../../molecules/FormPhoto/FormPhoto"
-import ButtonAdd from "../../atoms/ButtonAdd/ButtonAdd"
+import ButtonIcon from "../../atoms/ButtonIcon/ButtonIcon"
 import { useRouter } from "next/navigation"
 import postForm from "@/utils/postForm"
 
@@ -92,9 +92,19 @@ export default function FormAjouterProjet() {
     setSelectedFile(file)
   }
 
-  // Gestionnaire pour l'ajout d'inputs
+  // Gestionnaire pour l'ajout de champs
+  const handleAddParagraph = () => {
+    setParagraphArray([...paragraphArray, ""])
+  }
+  const handleDeleteParagraph = () => {
+    setParagraphArray(paragraphArray.slice(0, -1))
+  }
   const handleAddASet = () => {
     setPhotoRefs([...photoRefs, [createRef<HTMLInputElement>()]])
+  }
+  const handleDeleteASet = () => {
+    if (photoRefs.length === 1) return
+    setPhotoRefs(photoRefs.slice(0, -1))
   }
   const handleAddPhoto = (setIndex: number) => {
     if (photoRefs[setIndex].length > 2) {
@@ -106,8 +116,14 @@ export default function FormAjouterProjet() {
     // Changer la façon dont sont ajouté les références
     setPhotoRefs(newPhotoRefs)
   }
-  const handleAddParagraph = () => {
-    setParagraphArray([...paragraphArray, ""])
+  const handleDeletePhoto = (setIndex: number) => {
+    if (photoRefs[setIndex].length === 1) return
+    setPhotoRefs(
+      photoRefs.map((set, index) => {
+        if (index === setIndex) return set.slice(0, -1)
+        return set
+      })
+    )
   }
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
@@ -222,9 +238,17 @@ export default function FormAjouterProjet() {
         />
       ))}
       <div className={styles.form__buttonWrapper__addAParagraph}>
-        <ButtonAdd
+        <ButtonIcon
           text="Ajouter un paragraphe"
           onclick={handleAddParagraph}
+          icon="add"
+        />
+      </div>
+      <div className={styles.form__buttonWrapper__addAParagraph}>
+        <ButtonIcon
+          text="Supprimer un paragraphe"
+          onclick={handleDeleteParagraph}
+          icon="delete"
         />
       </div>
 
@@ -253,19 +277,37 @@ export default function FormAjouterProjet() {
             )
           })}
           <div className={styles.form__buttonWrapper__addAPhoto}>
-            <ButtonAdd
+            <ButtonIcon
               text="Ajouter une photo"
               onclick={() => {
                 handleAddPhoto(setIndex)
               }}
+              icon="add"
+            />
+          </div>
+          <div className={styles.form__buttonWrapper__addAPhoto}>
+            <ButtonIcon
+              text="Supprimer une photo"
+              onclick={() => {
+                handleDeletePhoto(setIndex)
+              }}
+              icon="delete"
             />
           </div>
         </div>
       ))}
       <div className={styles.form__buttonWrapper__addASet}>
-        <ButtonAdd
+        <ButtonIcon
           text="Ajouter un set"
           onclick={handleAddASet}
+          icon="add"
+        />
+      </div>
+      <div className={styles.form__buttonWrapper__addASet}>
+        <ButtonIcon
+          text="Supprimer un set"
+          onclick={handleDeleteASet}
+          icon="delete"
         />
       </div>
       <div className={styles.form__buttonWrapper__saveProject}>

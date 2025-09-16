@@ -56,6 +56,7 @@ export default function ProjectSection() {
     <section
       className={styles.projectSection}
       ref={projectSectionRef}
+      id="Projects"
     >
       <div className={styles.projectSection__largeScreen}>
         <div className={styles.projectSection__largeScreen__titleAndSubtitle}>

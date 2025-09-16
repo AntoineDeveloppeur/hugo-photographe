@@ -6,7 +6,7 @@
   overflow: hidden;
   transition: all 5s cubic-bezier(0.215, 0.61, 0.355, 1);
   &__image {
-    max-height: 85vh;
+    max-height: 80vh;
     width: auto;
     border: 1px solid var(--color-border-photo);
     user-select: none;

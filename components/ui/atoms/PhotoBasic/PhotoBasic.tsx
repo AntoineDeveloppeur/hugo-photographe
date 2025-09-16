@@ -27,7 +27,7 @@ export default function PhotoBasic({
   // Calcul du style conditionnel pour les photos principales (mainPhoto)
   const mainPhotoStyle = mainPhoto
     ? photo.height > photo.width
-      ? { height: "65vh", width: "auto" }
+      ? { height: "85vh", width: "auto" }
       : { height: "auto", width: "100vw" }
     : undefined
 

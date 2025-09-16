@@ -29,7 +29,7 @@ export default function FormAjouterProjet() {
     Array<Array<React.RefObject<HTMLInputElement>>>
   >([[createRef<HTMLInputElement>()]])
   // État pour stocker les paragraphs
-  const [paragraphArray, setParagraphArray] = useState<string[]>([""])
+  const [paragraphArray, setParagraphArray] = useState<string[]>([])
 
   interface FormFields {
     title: string
@@ -63,7 +63,8 @@ export default function FormAjouterProjet() {
       })
     })
     paragraphArray.forEach(
-      (_, index) => (dynamicFields[`paragraph${index + 1}`] = z.string().min(2))
+      (_, index) =>
+        (dynamicFields[`paragraph${index + 1}`] = z.optional(z.string().min(2)))
     )
 
     const dynamicFieldsSchema = z.object(dynamicFields)
@@ -218,7 +219,6 @@ export default function FormAjouterProjet() {
           type="text"
           label={`paragraphe n°${index + 1}`}
           error={errors.textAbovePhotos?.message}
-          defaultValue="test"
         />
       ))}
       <div className={styles.form__buttonWrapper__addAParagraph}>

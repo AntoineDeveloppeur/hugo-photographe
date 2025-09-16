@@ -24,7 +24,7 @@ export async function createProject(req, res) {
         const photosUrl = photosUrlArray.reduce((acc, file) => {
             return { ...acc, ...file };
         });
-        //Corriger le type en faire une fonction
+        //Corriger le type, en faire une fonction
         const projectData = typeof fields.projectTexts[0] === "string"
             ? JSON.parse(fields.projectTexts[0])
             : fields.projectTexts;

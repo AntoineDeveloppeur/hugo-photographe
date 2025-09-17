@@ -63,6 +63,7 @@ export interface ButtonProps {
   type?: "button" | "submit" | "reset" | undefined
   disabled?: boolean
   onclick?: () => void
+  icon?: "add" | "delete"
 }
 
 export interface ButtonArrowProps {

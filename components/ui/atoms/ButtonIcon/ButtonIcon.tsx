@@ -1,10 +1,11 @@
 "use client"
 
-import styles from "./button-add.module.scss"
+import styles from "./button-Icon.module.scss"
 import { ButtonProps } from "@/types"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import IconAdd from "../IconAdd/IconAdd"
+import IconDelete from "@/components/ui/atoms/IconDelete/IconDelete"
 
 type RippleState = {
   x: number
@@ -12,7 +13,13 @@ type RippleState = {
   isAnimating: boolean
 } | null
 
-export default function Button({ text, onclick, type, disabled }: ButtonProps) {
+export default function Button({
+  text,
+  onclick,
+  type,
+  disabled,
+  icon,
+}: ButtonProps) {
   const [ripple, setRipple] = useState<RippleState>(null)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -66,7 +73,13 @@ export default function Button({ text, onclick, type, disabled }: ButtonProps) {
           />
         )}
       </AnimatePresence>
-      <IconAdd />
+      {icon === "add" && <IconAdd />}
+      {icon === "delete" && (
+        <IconDelete
+          width={24}
+          height={24}
+        />
+      )}
       <p className={styles.button__p}>{text}</p>
     </motion.button>
   )

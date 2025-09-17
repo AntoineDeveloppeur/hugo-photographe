@@ -56,7 +56,10 @@ export default function CardLandscape({
           className={styles.cardWrapper__deleteWrapper}
           onClick={handleDelete}
         >
-          <IconDelete />
+          <IconDelete
+            width={96}
+            height={96}
+          />
         </div>
       )}
       {isModalOpen && (

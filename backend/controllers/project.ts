@@ -56,7 +56,7 @@ export async function createProject(req: Request, res: Response) {
       return { ...acc, ...file }
     })
 
-    //Corriger le type en faire une fonction
+    //Corriger le type, en faire une fonction
     const projectData: ProjectData =
       typeof fields.projectTexts[0] === "string"
         ? JSON.parse(fields.projectTexts[0])

@@ -1,53 +1,58 @@
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+// Définir l'ordre des layers : photobasic aura une priorité plus faible que contact-specific
+@layer photobasic, contact-specific;
 
-  &__image {
+@layer photobasic {
+  .imageWrapper {
+    position: relative;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    overflow: hidden;
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
-}
 
-.loading {
-  opacity: 0;
-}
-
-.loaded {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-@keyframes shimmerEffect {
-  0% {
-    transform: translateX(-100%);
+  .loading {
+    opacity: 0;
   }
-  100% {
-    transform: translateX(100%);
+
+  .loaded {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
   }
-}
 
-.skeleton {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--background-second);
+  @keyframes shimmerEffect {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      var(--color-shadow-main) 50%,
-      transparent 100%
-    );
-    transform: translateX(-100%);
-    animation: shimmerEffect 2s infinite;
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--background-second);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--color-shadow-main) 50%,
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      animation: shimmerEffect 2s infinite;
+    }
   }
 }

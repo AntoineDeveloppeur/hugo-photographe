@@ -17,22 +17,20 @@
     align-items: stretch;
     gap: 4rem;
     &__photoWrapper {
+      justify-content: flex-end;
       flex: 1;
       display: flex;
       &__imageWrapper {
         display: flex;
-        justify-content: flex-end;
         align-items: center;
         z-index: 2;
         overflow: hidden;
-        margin: auto;
-        border-radius: 10% 10% 31% 67% / 10% 10% 96% 68%;
         &__image {
-          // important est obligatoire lors de la contenerisation avec l'option "standAlone"
-          width: auto !important;
           max-height: 300px;
+          object-fit: contain;
           user-select: none;
           -webkit-user-select: none;
+          border-radius: 10% 10% 31% 67% / 10% 10% 96% 68%;
         }
       }
     }

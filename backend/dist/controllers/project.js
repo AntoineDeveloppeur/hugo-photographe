@@ -87,13 +87,17 @@ export async function getProjects(req, res) {
     });
 }
 export async function deleteProject(req, res) {
+    console.log("dans deleteProject");
     Project.findOne({ _id: req.params.id })
         .then((project) => {
+        console.log("dans findOne");
         if (!project) {
+            console.log("!project");
             return res.status(404).json({ message: "Projet non trouvé" });
         }
         Project.deleteOne({ _id: req.params.id })
             .then(() => {
+            console.log("dans deleteone");
             const projectObject = project.toObject();
             const projectWithStringId = {
                 ...projectObject,
@@ -102,17 +106,21 @@ export async function deleteProject(req, res) {
             // L'utilisateur n'a pas d'intérêt à savoir si les photos ont été supprimé
             // Ajouter un moyen de logger cette erreur.
             if (!deletePhotos(projectWithStringId, deleteOnePhotoFromDB)) {
+                console.log("les photos n'ont pas été supprimé");
                 console.error("les photos n'ont pas été supprimé");
             }
+            console.log("Projet supprimé avec succès");
             res
                 .status(200)
                 .json({ message: "Projet supprimé avec succès", project });
         })
             .catch((error) => {
+            console.log("res.status(400).json({ error })");
             res.status(400).json({ error });
         });
     })
         .catch((error) => {
+        console.log("res.status(500).json({ error })");
         res.status(500).json({ error });
     });
 }

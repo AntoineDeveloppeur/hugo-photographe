@@ -35,12 +35,23 @@ mongoose
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"))
 
+console.log("la requête est arrivé jusque avec cors")
+
 // Configuration CORS
 const originCORS: string | string[] | undefined = [
+  process.env.DOMAIN_NAME,
   "http://localhost:3000",
   "http://localhost:3001",
-  "http://frontend:3001",
 ]
+
+app.use((req, res, next) => {
+  const fullUrl = `${req.protocol}://${req.get("host")}${req.url}`
+  const origin = req.get("Origin") || req.get("Referer") || "Direct access"
+  console.log(
+    `${req.method} ${fullUrl} - Origin: ${origin} - ${new Date().toISOString()}`
+  )
+  next()
+})
 
 app.use(
   cors({
@@ -58,7 +69,7 @@ app.get("/health", (req, res) => {
     service: "hugo-photographe-backend",
   })
 })
-console.log("la requête est arrivé jusque là")
+console.log("la requête est arrivé jusque après health")
 // Routes
 app.use("/api/auth", userRoutes)
 app.use("/api/project", projectRoutes)

@@ -1,5 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import getS3Client from "../utils/getS3Client";
+import getS3Client from "../utils/getS3Client.js";
 import fs from "fs";
 // prefix est le nom du "bucket" dans aws S3
 export default async function uploadPhoto(file, prefix = "") {

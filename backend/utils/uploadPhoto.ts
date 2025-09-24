@@ -3,18 +3,14 @@ import getS3Client from "@/backend/utils/getS3Client.js"
 import fs from "fs"
 import { FormidableFile } from "@/backend/types/index.js"
 
-// prefix est le nom du "bucket" dans aws S3
 export default async function uploadPhoto(
-  file: FormidableFile,
-  prefix: string = ""
+  file: FormidableFile
 ): Promise<string | unknown> {
   try {
     const fileContent = fs.readFileSync(file.filepath)
 
     // Génération d'un nom de fichier unique
-    const key = `${prefix ? prefix + "/" : ""}${Date.now()}-${
-      file.originalFilename
-    }`
+    const key = `${Date.now()}-${file.originalFilename}`
 
     // Paramètres pour l'upload
     const uploadParams = {

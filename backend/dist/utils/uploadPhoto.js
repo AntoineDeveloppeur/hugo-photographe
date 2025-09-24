@@ -1,12 +1,11 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import getS3Client from "../utils/getS3Client.js";
 import fs from "fs";
-// prefix est le nom du "bucket" dans aws S3
-export default async function uploadPhoto(file, prefix = "") {
+export default async function uploadPhoto(file) {
     try {
         const fileContent = fs.readFileSync(file.filepath);
         // Génération d'un nom de fichier unique
-        const key = `${prefix ? prefix + "/" : ""}${Date.now()}-${file.originalFilename}`;
+        const key = `${Date.now()}-${file.originalFilename}`;
         // Paramètres pour l'upload
         const uploadParams = {
             Bucket: process.env.AWS_S3_BUCKET_NAME,

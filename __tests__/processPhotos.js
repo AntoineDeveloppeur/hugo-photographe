@@ -1,6 +1,7 @@
 import sharp, { metadata } from "sharp"
 import { convertToWebp } from "@/backend/dist/utils/convertToWebp.js"
 import { resizePhoto } from "@/backend/dist/utils/resizePhoto.js"
+import processPhotos from "@/backend/dist/utils/processPhotos.js"
 
 jest.mock("sharp")
 
@@ -30,7 +31,7 @@ jest.mock("@/backend/dist/utils/convertToWebp.js", () => ({
   })),
 }))
 
-describe("processFiles", () => {
+describe("processPhotos", () => {
   it("should throw an error if the mimetype is not image/", async () => {
     // Arrange
     // Mock files avec un mimetype "script/png"
@@ -45,7 +46,7 @@ describe("processFiles", () => {
     }
 
     // Act & Assert
-    await expect(processFiles(files)).rejects.toThrow(
+    await expect(processPhotos(files)).rejects.toThrow(
       "La photo choisie n'est pas une image"
     )
     expect(convertToWebp).toHaveBeenCalledTimes(0)
@@ -82,7 +83,7 @@ describe("processFiles", () => {
       return { ...acc, ...object }
     })
     // Act
-    const result = await processFiles(files)
+    const result = await processPhotos(files)
     //Assert
     expect(resizePhoto).toHaveBeenCalledTimes(0)
   })
@@ -106,7 +107,7 @@ describe("processFiles", () => {
       webp: jest.fn().mockReturnThis(),
     }))
     // Act
-    await processFiles(files)
+    await processPhotos(files)
 
     //Assert
     expect(resizePhoto).toHaveBeenCalledTimes(1)
@@ -136,7 +137,7 @@ describe("processFiles", () => {
       return { ...acc, ...object }
     })
     // Act
-    const result = await processFiles(files)
+    const result = await processPhotos(files)
     //Assert
     expect(result).toEqual(mockProcessedFiles)
   })
@@ -154,7 +155,7 @@ describe("processFiles", () => {
     }
 
     // Act
-    await processFiles(files)
+    await processPhotos(files)
 
     //Assert
     expect(convertToWebp).toHaveBeenCalledTimes(1)

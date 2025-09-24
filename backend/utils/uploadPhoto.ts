@@ -1,5 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3"
-import getS3Client from "@/backend/utils/getS3Client"
+import getS3Client from "@/backend/utils/getS3Client.js"
 import fs from "fs"
 import { FormidableFile } from "@/backend/types/index.js"
 

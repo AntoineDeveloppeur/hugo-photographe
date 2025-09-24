@@ -1,5 +1,5 @@
 import { IncomingForm } from "formidable";
-import processPhotos from "../utils/processPhotos";
+import processPhotos from "../utils/processPhotos.js";
 export default async function parseForm(req) {
     return new Promise((resolve, reject) => {
         try {

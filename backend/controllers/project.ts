@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import Project from "@/backend/models/project.js"
 import uploadPhoto from "@/backend/utils/uploadPhoto.js"
 import { ParsedForm } from "@/backend/types/index.js"
-import parseForm from "@/backend/utils/parseForm"
+import parseForm from "@/backend/utils/parseForm.js"
 import deletePhotos, {
   deleteOnePhotoFromDB,
   ProjectDeletePhotos,

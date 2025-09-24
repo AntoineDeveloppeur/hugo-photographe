@@ -1,7 +1,7 @@
 import { IncomingForm } from "formidable"
 import { Request } from "express"
 import { ParsedForm } from "@/backend/types/index.js"
-import processPhotos from "@/backend/utils/processPhotos"
+import processPhotos from "@/backend/utils/processPhotos.js"
 
 export default async function parseForm(req: Request): Promise<ParsedForm> {
   return new Promise((resolve, reject) => {

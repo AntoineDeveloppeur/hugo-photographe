@@ -43,7 +43,7 @@ export async function createProject(req: Request, res: Response) {
     // Upload vers s3
     const photosUrlArray: PhotosUrlArray = await Promise.all(
       Object.entries(files).map(async ([key, fileArray]) => {
-        const url: string | unknown = await uploadPhoto(fileArray, "projets")
+        const url: string | unknown = await uploadPhoto(fileArray)
         if (url instanceof Error) {
           // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
           throw new Error(

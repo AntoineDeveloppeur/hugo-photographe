@@ -1,4 +1,4 @@
-import getS3Client from "@/backend/utils/getS3Client.js"
+import getS3Client from "@/backend/utils/getS3Client"
 import { DeleteObjectCommand } from "@aws-sdk/client-s3"
 
 export async function deleteOnePhotoFromDB(url: string): Promise<boolean> {

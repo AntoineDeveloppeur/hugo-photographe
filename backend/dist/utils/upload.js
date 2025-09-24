@@ -1,5 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import getS3Client from "../utils/getS3Client.js";
+import getS3Client from "../utils/getS3Client";
 import fs from "fs";
 // Fonction pour télécharger un fichier sur S3
 // prefix is the name of the bucket

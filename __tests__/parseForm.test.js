@@ -1,4 +1,4 @@
-import { parseForm } from "@/backend/dist/middleware/upload"
+import parseForm from "@/backend/dist/utils/parseForm"
 
 jest.mock("sharp")
 

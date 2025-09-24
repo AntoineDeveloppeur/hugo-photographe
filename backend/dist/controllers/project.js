@@ -1,5 +1,6 @@
 import Project from "../models/project.js";
-import uploadToS3, { parseForm } from "../middleware/upload.js";
+import uploadPhoto from "../utils/uploadPhoto.js";
+import parseForm from "../utils/parseForm";
 import deletePhotos, { deleteOnePhotoFromDB, } from "../utils/deletePhotos.js";
 // Exporter les fonctions individuellement
 export async function createProject(req, res) {
@@ -14,7 +15,7 @@ export async function createProject(req, res) {
         }
         // Upload vers s3
         const photosUrlArray = await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
-            const url = await uploadToS3(fileArray, "projets");
+            const url = await uploadPhoto(fileArray, "projets");
             if (url instanceof Error) {
                 // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
                 throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`);

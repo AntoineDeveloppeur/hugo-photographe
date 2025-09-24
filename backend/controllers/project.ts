@@ -1,7 +1,8 @@
 import { Request, Response } from "express"
 import Project from "@/backend/models/project.js"
-import uploadToS3, { parseForm } from "@/backend/middleware/upload.js"
+import uploadPhoto from "@/backend/utils/uploadPhoto.js"
 import { ParsedForm } from "@/backend/types/index.js"
+import parseForm from "@/backend/utils/parseForm"
 import deletePhotos, {
   deleteOnePhotoFromDB,
   ProjectDeletePhotos,
@@ -42,7 +43,7 @@ export async function createProject(req: Request, res: Response) {
     // Upload vers s3
     const photosUrlArray: PhotosUrlArray = await Promise.all(
       Object.entries(files).map(async ([key, fileArray]) => {
-        const url: string | unknown = await uploadToS3(fileArray, "projets")
+        const url: string | unknown = await uploadPhoto(fileArray, "projets")
         if (url instanceof Error) {
           // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
           throw new Error(

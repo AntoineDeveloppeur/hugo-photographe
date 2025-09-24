@@ -1,10 +1,9 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3"
-import getS3Client from "@/backend/utils/getS3Client.js"
+import getS3Client from "@/backend/utils/getS3Client"
 import fs from "fs"
 import { FormidableFile } from "@/backend/types/index.js"
 
-// Fonction pour télécharger un fichier sur S3
-// prefix is the name of the bucket
+// prefix est le nom du "bucket" dans aws S3
 export default async function uploadPhoto(
   file: FormidableFile,
   prefix: string = ""

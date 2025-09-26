@@ -5,15 +5,13 @@ import IconBook from "../../atoms/IconBook/IconBook"
 import IconPortfolio from "../../atoms/IconPortfolio/IconPortfolio"
 import Link from "next/link"
 
-export default function MenuItem({
-  text,
-  icon,
-  link,
-}: {
+interface MenuItemProps {
   text: string
   icon: string
   link: string
-}) {
+}
+
+export default function MenuItem({ text, icon, link }: MenuItemProps) {
   return (
     <motion.li
       variants={itemVariants}

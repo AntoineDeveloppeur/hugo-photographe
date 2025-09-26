@@ -27,6 +27,7 @@ export default function MenuMobile() {
         ref={containerRef}
         className={styles.nav}
       >
+        <MenuToggle toggle={() => setIsOpen(!isOpen)} />
         <motion.div
           className={styles.background}
           variants={sidebarVariants}
@@ -54,7 +55,6 @@ export default function MenuMobile() {
             <ThemeChanger />
           </motion.div>
         </motion.ul>
-        <MenuToggle toggle={() => setIsOpen(!isOpen)} />
       </motion.nav>
     </div>
   )

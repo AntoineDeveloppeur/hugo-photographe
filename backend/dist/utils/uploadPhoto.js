@@ -6,7 +6,6 @@ export default async function uploadPhoto(file) {
         const fileContent = fs.readFileSync(file.filepath);
         // Génération d'un nom de fichier unique
         const key = `${Date.now()}-${file.originalFilename}`;
-        // Paramètres pour l'upload
         const uploadParams = {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
             Key: key,

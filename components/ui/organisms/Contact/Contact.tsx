@@ -6,14 +6,15 @@ import ButtonBig from "../../atoms/ButtonBig/ButtonBig"
 import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
 import portraitHugo from "@/public/images/portrait-hugo.webp"
 import Link from "next/link"
-import IconMail from "../../atoms/IconMail/IconMail"
-import IconMap from "../../atoms/IconMap/IconMap"
-import IconPhone from "../../atoms/IconPhone/IconPhone"
+import IconMail from "@/components/ui/atoms/IconMail/IconMail"
+import IconMap from "@/components/ui/atoms/IconMap/IconMap"
+import IconPhone from "@/components/ui/atoms/IconPhone/IconPhone"
 import { useRef, useContext } from "react"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
-import TitleProjectPage from "../../atoms/TitleProjectPage/TitleProjectPage"
+import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjectPage"
 import useReCaptcha from "@/hooks/useReCaptcha"
 import { ShowPresentationContext } from "@/components/Providers"
+import IconInsta from "@/components/ui/atoms/IconInsta/IconInsta"
 
 export default function Contact() {
   const example: PhotoVariableProps = {
@@ -43,7 +44,9 @@ export default function Contact() {
     mass: 0.5,
   })
 
+  // Commenter pour ne pas utiliser le ReCaptcha lors des tests
   const { email, phone } = useReCaptcha()
+
   // Dé-commenter pour ne pas utiliser le ReCaptcha lors des tests
   // const email = "n'utilise pas le Recaptcha"
   // const phone = "faux numéro"
@@ -95,6 +98,16 @@ export default function Contact() {
               également au plan local, où j&apos;ai collaboré avec la mairie de
               Fos-sur-Mer. ville.{" "}
             </p>
+            <div className={styles.contact__presentation__text__details}>
+              <IconInsta />
+              <Link
+                href="https://www.instagram.com/hugo_randez/"
+                target="_blank"
+                className={styles.contact__presentation__text__details__link}
+              >
+                Instagram
+              </Link>
+            </div>
             <div className={styles.contact__presentation__text__details}>
               <IconPhone />
               <Link

@@ -39,7 +39,7 @@ console.log("la requête est arrivé jusque avec cors")
 
 // Configuration CORS
 const originCORS: string | string[] | undefined = [
-  process.env.DOMAIN_NAME,
+  "https://photographe-hugo-randez.fr",
   "http://localhost:3000",
   "http://localhost:3001",
 ]

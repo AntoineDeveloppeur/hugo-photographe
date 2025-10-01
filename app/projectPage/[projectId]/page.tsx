@@ -12,7 +12,7 @@ import { notFound } from "next/navigation"
 // export const dynamicParams = true
 
 // Optionnel : Active l'ISR avec revalidation toutes les 5 secondes
-export const revalidate = 2
+export const revalidate = 3600
 
 // test sans force-dynamic qui force la revalidation à chaque requête
 // export const dynamic = "force-dynamic"

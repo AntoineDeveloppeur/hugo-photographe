@@ -22,9 +22,9 @@ export default async function postForm(
   }
   try {
     console.log("on arrive au fetch")
-
+    // fonction serveur donc l'adresse de l'API n'est pas la même que depuis le client
     const response = await fetch(
-      `${process.env.SERVER_URL}/api/project/create`,
+      `${process.env.API_URL_FROM_SERVER}/api/project/create`,
       {
         method: "POST",
         headers: {

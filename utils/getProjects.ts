@@ -23,7 +23,7 @@ export default async function getProjects(): Promise<Data> {
   } catch {
     // fetch depuis le serveur Next fonctionnera ici
     try {
-      console.log("je suis dans getProjects tentative avec SERVER_URL")
+      console.log("je suis dans getProjects tentative avec API_URL_FROM_SERVER")
       // fonction serveur donc l'adresse de l'API n'est pas la même que depuis le client
       const response2 = await fetch(
         `${process.env.API_URL_FROM_SERVER}/api/project/getProjects`,

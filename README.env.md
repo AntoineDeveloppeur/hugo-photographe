@@ -8,7 +8,7 @@ Il y a sur mon PC 4 fichiers environnements différents. Il servent tous des env
 - .env.VPS.local -> pour le serveur VPS sans docker
 - .env.VPSDocker -> faire tourner les containers sur mon serveur VPS
 
-Il faut copier coller le fichier dans l'environnement désiré et le **renommer .env**
+Il faut copier coller le fichier dans l'environnement désiré et le **renommer .env.local**
 
 ## Backend
 Il y a sur mon PC 2 fichiers environnements différents.

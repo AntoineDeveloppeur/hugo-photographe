@@ -56,4 +56,8 @@ next-env.d.ts
 # Dossier d'aide à la suppression des photos dans le dépôt distant
 /git-cleanup
 
+# Enlever les doublons créé par google drive
+**/*(1)*
+**/*(2)*
+
 

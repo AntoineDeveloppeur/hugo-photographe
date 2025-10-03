@@ -23,9 +23,15 @@ WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6Lejp9MqAAAAAMtrvI6ixsE2OXFmaNucIa6okLov
+ENV API_URL_FROM_SERVER=http://backend:3002
+
+# Container sur mon ordinateur
 ENV NEXT_PUBLIC_BASE_URL=http://localhost:3001
 ENV NEXT_PUBLIC_SERVER_URL=http://localhost:3002
-ENV SERVER_URL=http://backend:3002
+
+# Container sur le VPS
+# ENV NEXT_PUBLIC_BASE_URL=https://photographe-hugo-randez.fr
+# ENV NEXT_PUBLIC_SERVER_URL=https://photographe-hugo-randez.fr
 
 # Copier les node_modules depuis le stage deps
 COPY --from=deps /app/node_modules ./node_modules

@@ -72,6 +72,7 @@ create-.env:
       DB_APPNAME=$DB_APPNAME
       EOF
     - cat ./backend/.env
+    - echo "HUGO_PHONE=$HUGO_PHONE"
     - |
       cat > .env.local << EOF
       NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY

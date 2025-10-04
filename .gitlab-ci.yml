@@ -113,7 +113,7 @@ build-frontend:
     - create-.env
   before_script:
     - cat .env.local
-    # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
+    # Run l'image backend nécessaire pour que le front fetch les données pour le SSG
     - docker-compose -f docker-compose.ci.yml up -d backend
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
       $CI_REGISTRY

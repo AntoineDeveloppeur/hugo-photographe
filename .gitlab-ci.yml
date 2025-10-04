@@ -1,5 +1,5 @@
 stages:
-#  - test
+  #  - test
   - build-backend
   - build-frontend
   #- deployToVPS
@@ -88,16 +88,16 @@ build-frontend:
   image: docker:latest
   before_script:
     - |
-    cat > .env.local << EOF
-    NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-    NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
-    NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
-    API_URL_FROM_SERVER=$API_URL_FROM_SERVER
-    EOF
-    # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
-    - docker-compose -f docker-compose.ci.yml up -d backend
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
-      $CI_REGISTRY
+      cat > .env.local << EOF
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+      NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+      NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
+      API_URL_FROM_SERVER=$API_URL_FROM_SERVER
+      EOF
+      # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
+      - docker-compose -f docker-compose.ci.yml up -d backend
+      - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+        $CI_REGISTRY
   script:
     - docker-compose -f docker-compose.ci.yml build frontend
     - docker-compose -f docker-compose.ci.yml push frontend

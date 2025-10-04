@@ -15,7 +15,9 @@ export default async function getProjects(): Promise<Data> {
     )
 
     if (!response.ok) {
-      console.log("je suis dans getProjects return data")
+      console.log(
+        "je suis dans getProjects !response.ok ${process.env.NEXT_PUBLIC_SERVER_URL}"
+      )
       return dataFallBack
     }
     const data: Data = await response.json()
@@ -34,7 +36,9 @@ export default async function getProjects(): Promise<Data> {
       )
 
       if (!response2.ok) {
-        console.log("je suis dans getProjects !response2.ok")
+        console.log(
+          "je suis dans getProjects !response.ok ${process.env.API_URL_FROM_SERVER}"
+        )
         return dataFallBack
       }
       console.log("je suis dans getProjects return data2")

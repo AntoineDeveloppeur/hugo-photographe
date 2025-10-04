@@ -32,7 +32,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      network: host
+      network: hugo-photographe-network
     image: ${CI_REGISTRY_IMAGE}/frontend:latest
     container_name: hugo-photographe-frontend
     ports:

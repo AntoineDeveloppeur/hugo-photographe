@@ -5,9 +5,9 @@ import { Data } from "@/types"
 // Deux url sont donc configuré car la manière d'atteindre l'API n'est pas la même
 export default async function getProjects(): Promise<Data> {
   console.log("je suis dans getProjects")
-  // fetch depuis le client fonctionnera ici
 
   try {
+    // fetch depuis le client fonctionnera ici
     if (typeof window !== "undefined") {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/project/getProjects`,
@@ -40,6 +40,8 @@ export default async function getProjects(): Promise<Data> {
         console.log(
           "je suis dans getProjects !response.ok ${process.env.API_URL_FROM_SERVER}"
         )
+        console.log("reponse", response)
+
         return dataFallBack
       }
       console.log("je suis dans getProjects return data2")

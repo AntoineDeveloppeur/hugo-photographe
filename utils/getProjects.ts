@@ -18,6 +18,7 @@ export default async function getProjects(): Promise<Data> {
       console.log(
         "je suis dans getProjects !response.ok ${process.env.NEXT_PUBLIC_SERVER_URL}"
       )
+      console.log("reponse", response)
       return dataFallBack
     }
     const data: Data = await response.json()

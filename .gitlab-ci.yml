@@ -55,7 +55,7 @@ create-.env:
   script:
     - |
       cat > ./backend/.env << EOF
-      NODE_ENV=$NODE_ENV
+      NODE_ENV=${NODE_ENV}
       RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY
       HUGO_EMAIL=$HUGO_EMAIL
       HUGO_PHONE=$HUGO_PHONE

@@ -11,14 +11,14 @@ stages:
 #    - node_modules/
 #    - .next/cache/
 #    - backend/node_modules/
-#
-#variables:
-#  DOCKER_DRIVER: overlay2
-#  DOCKER_TLS_CERTDIR: "/certs"
-#
-#services:
-#  - docker:dind
-#
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+services:
+  - docker:dind
+
 #unit-tests:
 #  stage: test
 #  image: node:20-alpine
@@ -70,7 +70,7 @@ build-backend:
       DB_NAME=$DB_NAME
       DB_APPNAME=$DB_APPNAME
       EOF
-    - echo ./backend/.env
+    - cat ./backend/.env
     # Se connecter a gitlab registry
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
       $CI_REGISTRY

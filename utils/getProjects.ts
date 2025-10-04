@@ -40,7 +40,7 @@ export default async function getProjects(): Promise<Data> {
         console.log(
           "je suis dans getProjects !response.ok ${process.env.API_URL_FROM_SERVER}"
         )
-        console.log("reponse", response)
+        console.log("response2", response2)
 
         return dataFallBack
       }

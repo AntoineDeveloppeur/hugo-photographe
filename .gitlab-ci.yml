@@ -58,7 +58,7 @@ build-backend:
   before_script:
     # Créer le fichier .env à partir des variables CI/CD
     - |
-      cat > ./backend.env << EOF
+      cat > ./backend/.env << EOF
       NODE_ENV=$NODE_ENV
       RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY
       HUGO_EMAIL=$HUGO_EMAIL
@@ -75,7 +75,8 @@ build-backend:
       DB_NAME=$DB_NAME
       DB_APPNAME=$DB_APPNAME
       EOF
-    - echo ./backend.env
+    - echo ./backend/.env
+    # Se connecter a gitlab registry
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
       $CI_REGISTRY
   script:

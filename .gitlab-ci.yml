@@ -81,7 +81,7 @@ create-.env:
       EOF
   artifacts:
     paths:
-      - .backend/.env
+      - ./backend/.env
       - .env.local
     expire_in: 1 hour
 

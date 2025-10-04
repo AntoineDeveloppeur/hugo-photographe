@@ -88,6 +88,8 @@ create-.env:
 build-backend:
   stage: build-backend
   image: docker:latest
+  dependencies:
+    - create-.env
   before_script:
     # Se connecter a gitlab registry
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
@@ -104,6 +106,8 @@ build-backend:
 build-frontend:
   stage: build-frontend
   image: docker:latest
+  dependencies:
+    - create-.env
   before_script:
     # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
     - docker-compose -f docker-compose.ci.yml up -d backend

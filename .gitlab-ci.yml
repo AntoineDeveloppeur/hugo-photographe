@@ -56,8 +56,26 @@ build-backend:
   stage: build-backend
   image: docker:latest
   before_script:
-    # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
-    - docker-compose -f docker-compose.ci.yml up -d backend
+    # Créer le fichier .env à partir des variables CI/CD
+    - |
+      cat > ./backend.env << EOF
+      NODE_ENV=$NODE_ENV
+      RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY
+      HUGO_EMAIL=$HUGO_EMAIL
+      HUGO_PHONE=$HUGO_PHONE
+      SERVER_PORT=$SERVER_PORT
+      SECRET_PHRASE_TOKEN=$SECRET_PHRASE_TOKEN
+      AWS_REGION=$AWS_REGION
+      AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+      AWS_S3_BUCKET_NAME=$AWS_S3_BUCKET_NAME
+      DB_USERNAME=$DB_USERNAME
+      DB_PASSWORD=$DB_PASSWORD
+      DB_CLUSTER=$DB_CLUSTER
+      DB_NAME=$DB_NAME
+      DB_APPNAME=$DB_APPNAME
+      EOF
+    - echo ./backend.env
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
       $CI_REGISTRY
   script:
@@ -69,15 +87,13 @@ build-backend:
       ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
     - docker push ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
 
-run-backend:
-  image: docker:latest
-  stage: run-backend
-  script: docker-compose -f docker-compose.ci.yml up -d backend
-
-# Build Frontend (avec backend disponible)
 build-frontend:
+  image: docker:latest
   stage: build-frontend
   before_script:
+    - echo
+    # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
+    - docker-compose -f docker-compose.ci.yml up -d backend
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
       $CI_REGISTRY
   script:

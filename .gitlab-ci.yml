@@ -104,24 +104,22 @@ build-frontend:
     - docker tag ${CI_REGISTRY_IMAGE}/frontend:latest
       ${CI_REGISTRY_IMAGE}/frontend:${CI_COMMIT_SHA}
     - docker push "$CI_REGISTRY_IMAGE/frontend:${CI_COMMIT_SHA}"
-
 # Nécessaire pour construire une application Next.js avec SSG
 
-#Ou autre version de deploy :
-deploy-docker-images:
-  image: ubuntu:latest
-  stage: deployToVPS
-  only:
-    - main
-  before_script:
-    - apt-get -yq update
-    - apt-get -yqq install ssh
-    - install -m 600 -D /dev/null ~/.ssh/id_rsa
-    - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
-    - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
-  script:
-    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker compose pull && docker
-      compose -f docker-compose.prod.yml up -d backend && docker compose -f
-      docker-compose.prod.yml up -d frontend && exit"
-  after_script:
-    - rm -rf ~/.ssh
+#deploy-docker-images:
+#  image: ubuntu:latest
+# stage: deployToVPS
+#only:
+#  - main
+#before_script:
+# - apt-get -yq update
+#- apt-get -yqq install ssh
+#- install -m 600 -D /dev/null ~/.ssh/id_rsa
+#- echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
+#- ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
+# script:
+#   - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker compose pull && docker
+#     compose -f docker-compose.prod.yml up -d backend && docker compose -f
+#     docker-compose.prod.yml up -d frontend && exit"
+# after_script:
+#   - rm -rf ~/.ssh

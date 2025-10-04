@@ -32,7 +32,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      # network: host
+      extra_hosts:
+        - "backend:host-gateway" # Permet au build d'accéder au backend via l'hôte
     image: ${CI_REGISTRY_IMAGE}/frontend:latest
     container_name: hugo-photographe-frontend
     ports:

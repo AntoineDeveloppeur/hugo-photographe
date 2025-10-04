@@ -79,6 +79,11 @@ create-.env:
       NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
       API_URL_FROM_SERVER=$API_URL_FROM_SERVER
       EOF
+  artifacts:
+    paths:
+      - .backend/.env
+      - .env.local
+    expire_in: 1 hour
 
 build-backend:
   stage: build-backend

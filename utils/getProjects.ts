@@ -35,12 +35,15 @@ export default async function getProjects(): Promise<Data> {
         //
         // Moreover, site load is going to be low, there is not risk of too many requests
       )
+      console.log(
+        "je suis dans getProjects tentative avec API_URL_FROM_SERVER response2",
+        response2
+      )
 
       if (!response2.ok) {
         console.log(
           "je suis dans getProjects !response.ok ${process.env.API_URL_FROM_SERVER}"
         )
-        console.log("response2", response2)
 
         return dataFallBack
       }
@@ -49,8 +52,9 @@ export default async function getProjects(): Promise<Data> {
       const data2: Data = await response2.json()
       return data2
     }
-  } catch {
-    console.log("je suis dans getProjects catch")
+  } catch (error) {
+    console.log(" getProjects catch error", error)
+
     return dataFallBack
   }
 }

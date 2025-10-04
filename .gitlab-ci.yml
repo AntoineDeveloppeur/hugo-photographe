@@ -79,6 +79,7 @@ create-.env:
       NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
       API_URL_FROM_SERVER=$API_URL_FROM_SERVER
       EOF
+    - cat .env.local
   artifacts:
     paths:
       - ./backend/.env

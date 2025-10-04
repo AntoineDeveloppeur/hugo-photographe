@@ -1,10 +1,8 @@
 stages:
   - test
   - build-backend
-  - run-backend
-  - deploy-backend
   - build-frontend
-  - deploy
+  #- deployToVPS
 
 # Cache des dépendances pour accélérer les jobs
 cache:
@@ -58,15 +56,18 @@ build-backend:
   stage: build-backend
   image: docker:latest
   before_script:
+    # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
+    - docker-compose -f docker-compose.ci.yml up -d backend
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
       $CI_REGISTRY
   script:
+    - echo "${CI_REGISTRY_IMAGE}/backend:latest"
     - docker-compose -f docker-compose.ci.yml build backend
     - docker-compose -f docker-compose.ci.yml push backend
-    # Tag en latest pour utliser docker-compose up depuis le VPS
-    - docker tag ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
-      ${CI_REGISTRY_IMAGE}/backend:latest
-    - docker push ${CI_REGISTRY_IMAGE}/backend:latest
+    # Enregistre un backup avec la réf du commit
+    - docker tag ${CI_REGISTRY_IMAGE}/backend:latest
+      ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
+    - docker push ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
 
 run-backend:
   image: docker:latest
@@ -82,16 +83,17 @@ build-frontend:
   script:
     - docker-compose -f docker-compose.ci.yml build frontend
     - docker-compose -f docker-compose.ci.yml push frontend
-    - docker tag ${CI_REGISTRY_IMAGE}/frontend:${CI_COMMIT_SHA}
-      ${CI_REGISTRY_IMAGE}/frontend:latest
-    - docker push "$CI_REGISTRY_IMAGE/frontend:latest
+    # Enregistre un backup avec la réf du commit
+    - docker tag ${CI_REGISTRY_IMAGE}/frontend:latest
+      ${CI_REGISTRY_IMAGE}/frontend:${CI_COMMIT_SHA}
+    - docker push "$CI_REGISTRY_IMAGE/frontend:${CI_COMMIT_SHA}"
 
 # Nécessaire pour construire une application Next.js avec SSG
 
 #Ou autre version de deploy :
 deploy-docker-images:
   image: ubuntu:latest
-  stage: deploy
+  stage: deployToVPS
   only:
     - main
   before_script:
@@ -102,16 +104,7 @@ deploy-docker-images:
     - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
   script:
     - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker compose pull && docker
-      compose up -d backend && docker compose up -d frontend && exit"
+      compose -f docker-compose.prod.yml up -d backend && docker compose -f
+      docker-compose.prod.yml up -d frontend && exit"
   after_script:
     - rm -rf ~/.ssh
-
-# Job de nettoyage (optionnel)
-cleanup:
-  stage: deploy-frontend
-  script:
-    - docker system prune -f
-  when: always
-  only:
-    - main
-    - develop

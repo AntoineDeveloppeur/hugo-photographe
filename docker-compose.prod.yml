@@ -3,6 +3,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    image: registry.gitlab.com/AntoineDeveloppeur-group/Hugo-Photographe/backend:latest
     container_name: hugo-photographe-backend
     ports:
       - "3002:3002"
@@ -32,6 +33,7 @@ services:
       context: .
       dockerfile: Dockerfile
       network: host
+    image: registry.gitlab.com/AntoineDeveloppeur/Hugo-Photographe/frontend:latest
     container_name: hugo-photographe-frontend
     ports:
       - "3001:3001"

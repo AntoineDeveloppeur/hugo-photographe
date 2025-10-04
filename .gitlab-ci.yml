@@ -1,5 +1,6 @@
 stages:
   #  - test
+  - .env-generation
   - build-backend
   - build-frontend
   #- deployToVPS
@@ -47,11 +48,11 @@ services:
 #    - cd ./backend && npm ci
 #    - npm run type-check
 
-build-backend:
-  stage: build-backend
-  image: docker:latest
-  before_script:
-    # Créer le fichier .env à partir des variables CI/CD
+# Créer le fichier .env à partir des variables CI/CD
+create-.env:
+  stage: .env-generation
+  image: alpine:latest
+  script:
     - |
       cat > ./backend/.env << EOF
       NODE_ENV=$NODE_ENV
@@ -71,6 +72,18 @@ build-backend:
       DB_APPNAME=$DB_APPNAME
       EOF
     - cat ./backend/.env
+    - |
+      cat > .env.local << EOF
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+      NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+      NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
+      API_URL_FROM_SERVER=$API_URL_FROM_SERVER
+      EOF
+
+build-backend:
+  stage: build-backend
+  image: docker:latest
+  before_script:
     # Se connecter a gitlab registry
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
       $CI_REGISTRY
@@ -87,17 +100,10 @@ build-frontend:
   stage: build-frontend
   image: docker:latest
   before_script:
-    - |
-      cat > .env.local << EOF
-      NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-      NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
-      NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
-      API_URL_FROM_SERVER=$API_URL_FROM_SERVER
-      EOF
-      # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
-      - docker-compose -f docker-compose.ci.yml up -d backend
-      - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
-        $CI_REGISTRY
+    # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
+    - docker-compose -f docker-compose.ci.yml up -d backend
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+      $CI_REGISTRY
   script:
     - docker-compose -f docker-compose.ci.yml build frontend
     - docker-compose -f docker-compose.ci.yml push frontend

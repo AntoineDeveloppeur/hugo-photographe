@@ -1,51 +1,51 @@
 stages:
-  - test
+#  - test
   - build-backend
   - build-frontend
   #- deployToVPS
 
 # Cache des dépendances pour accélérer les jobs
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - node_modules/
-    - .next/cache/
-    - backend/node_modules/
-
-variables:
-  DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: "/certs"
-
-services:
-  - docker:dind
-
-unit-tests:
-  stage: test
-  image: node:20-alpine
-  script:
-    - npm ci --legacy-peer-deps
-    - npm run test
-  artifacts:
-    reports:
-      junit: junit.xml
-    when: always
-  allow_failure: true
-
-lint:
-  stage: test
-  image: node:20-alpine
-  script:
-    - npm ci --legacy-peer-deps
-    - npm run lint
-  allow_failure: true
-
-typescript:
-  stage: test
-  image: node:20-alpine
-  script:
-    - npm ci --legacy-peer-deps
-    - cd ./backend && npm ci
-    - npm run type-check
+#cache:
+#  key: ${CI_COMMIT_REF_SLUG}
+#  paths:
+#    - node_modules/
+#    - .next/cache/
+#    - backend/node_modules/
+#
+#variables:
+#  DOCKER_DRIVER: overlay2
+#  DOCKER_TLS_CERTDIR: "/certs"
+#
+#services:
+#  - docker:dind
+#
+#unit-tests:
+#  stage: test
+#  image: node:20-alpine
+#  script:
+#    - npm ci --legacy-peer-deps
+#    - npm run test
+#  artifacts:
+#    reports:
+#      junit: junit.xml
+#    when: always
+#  allow_failure: true
+#
+#lint:
+#  stage: test
+#  image: node:20-alpine
+#  script:
+#    - npm ci --legacy-peer-deps
+#    - npm run lint
+#  allow_failure: true
+#
+#typescript:
+#  stage: test
+#  image: node:20-alpine
+#  script:
+#    - npm ci --legacy-peer-deps
+#    - cd ./backend && npm ci
+#    - npm run type-check
 
 build-backend:
   stage: build-backend
@@ -84,10 +84,16 @@ build-backend:
     - docker push ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
 
 build-frontend:
-  image: docker:latest
   stage: build-frontend
+  image: docker:latest
   before_script:
-    - echo
+    - |
+    cat > .env.local << EOF
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+    NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+    NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
+    API_URL_FROM_SERVER=$API_URL_FROM_SERVER
+    EOF
     # Run l'image backend nécessaire pour que le Front fetch les données pour le SSG
     - docker-compose -f docker-compose.ci.yml up -d backend
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"

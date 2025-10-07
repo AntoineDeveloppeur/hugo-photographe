@@ -144,8 +144,7 @@ deploy-docker-images:
     - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
     - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
   script:
-    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && touch test && ls -la test && echo
-      'test creation succesfull'"
+    - ssh $SSH_USER@$SSH_HOST && echo 'test creation succesfull'"
   #    && docker compose -f pull && docker
   #    - compose -f docker-compose.prod.yml up -d backend && docker compose -f
   #      docker-compose.prod.yml

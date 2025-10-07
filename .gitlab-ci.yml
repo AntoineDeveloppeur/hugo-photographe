@@ -137,8 +137,6 @@ services:
 deploy-docker-images:
   image: ubuntu:latest
   stage: deployToVPS
-  only:
-    - main
   before_script:
     - apt-get -yq update
     - apt-get -yqq install ssh

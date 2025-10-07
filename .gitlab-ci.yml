@@ -146,10 +146,10 @@ deploy-docker-images:
   script:
     - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && touch test && ls -la test && echo
       'test creation succesfull'"
-#    && docker compose -f pull && docker
-#    - compose -f docker-compose.prod.yml up -d backend && docker compose -f
-#      docker-compose.prod.yml
-#    - docker-compose.prod.yml up -d frontend && exit"
-#  after_script:
-#    - rm -rf ~/.ssh
-#
+  #    && docker compose -f pull && docker
+  #    - compose -f docker-compose.prod.yml up -d backend && docker compose -f
+  #      docker-compose.prod.yml
+  #    - docker-compose.prod.yml up -d frontend && exit"
+  after_script:
+    - rm -rf ~/.ssh
+# Peit changemnet sans importance

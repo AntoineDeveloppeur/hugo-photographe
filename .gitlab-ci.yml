@@ -145,7 +145,8 @@ deploy-docker-images:
     - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
   script:
     - scp ./docker-compose.prod.yml $SSH_USER@$SSH_HOST:$WORK_DIR
-    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker compose -f
+    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+#      $CI_REGISTRY && docker compose -f
       docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml
       up -d backend && docker compose -f docker-compose.prod.yml
       docker-compose.prod.yml up -d frontend && exit"

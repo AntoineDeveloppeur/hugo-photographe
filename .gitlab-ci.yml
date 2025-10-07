@@ -152,4 +152,4 @@ deploy-docker-images:
   #    - docker-compose.prod.yml up -d frontend && exit"
   after_script:
     - rm -rf ~/.ssh
-# Peit changemnet sans importance
+# Peit changemnet sans importanceee

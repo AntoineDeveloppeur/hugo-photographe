@@ -2,8 +2,8 @@ stages:
   #  - test
   - .env-generation
   #- build-backend
-  - build-frontend
-  #- deployToVPS
+  #- build-frontend
+  - deployToVPS
 
 # Cache des dépendances pour accélérer les jobs
 #cache:
@@ -106,49 +106,50 @@ create-.env:
 #      ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
 #    - docker push ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
 #
-build-frontend:
-  stage: build-frontend
-  image: docker:latest
-  dependencies:
-    - create-.env
-  before_script:
-    - cat .env.local
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
-      $CI_REGISTRY
-    # Run l'image backend nécessaire pour que le ront fetch les données pour le SSG
-    - docker-compose -f docker-compose.ci.yml pull backend
-    - docker-compose -f docker-compose.ci.yml up -d backend
-    # Attendre que le backend soit prêt
-    - sleep 10
-    # Afficher les logs du backend
-    - docker-compose -f docker-compose.ci.yml logs backend
-  script:
-    # Temporairement, ajoute avant la commande build
-    - apk add --no-cache curl
-    - curl http://backend:3002/health || echo "Cannot reach backend"
-    - curl http://localhost:3002/health || echo "Backend health check failed"
-    - docker-compose -f docker-compose.ci.yml build frontend
-    - docker-compose -f docker-compose.ci.yml push frontend
-    # Enregistre un backup avec la réf du commit
-    - docker tag ${CI_REGISTRY_IMAGE}/frontend:latest
-      ${CI_REGISTRY_IMAGE}/frontend:${CI_COMMIT_SHA}
-    - docker push "$CI_REGISTRY_IMAGE/frontend:${CI_COMMIT_SHA}"
-#deploy-docker-images:
-#  image: ubuntu:latest
-#  stage: deployToVPS
+#build-frontend:
+#  stage: build-frontend
+#  image: docker:latest
+#  dependencies:
+#    - create-.env
 #  before_script:
-#    - apt-get -yq update
-#    - apt-get -yqq install ssh
-#    - install -m 600 -D /dev/null ~/.ssh/id_rsa
-#    - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
-#    - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
+#    - cat .env.local
+#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+#      $CI_REGISTRY
+#    # Run l'image backend nécessaire pour que le ront fetch les données pour le SSG
+#    - docker-compose -f docker-compose.ci.yml pull backend
+#    - docker-compose -f docker-compose.ci.yml up -d backend
+#    # Attendre que le backend soit prêt
+#    - sleep 10
+#    # Afficher les logs du backend
+#    - docker-compose -f docker-compose.ci.yml logs backend
 #  script:
-#    - scp ./docker-compose.prod.yml $SSH_USER@$SSH_HOST:$WORK_DIR
-#    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker login -u $CI_REGISTRY_USER
-#      -p $CI_REGISTRY_PASSWORD $CI_REGISTRY && docker compose -f
-#      docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml
-#      up -d backend && docker compose -f docker-compose.prod.yml
-#      docker-compose.prod.yml up -d frontend && exit"
-#  after_script:
-#    - rm -rf ~/.ssh
-# Peit changemnet sans importanceee
+#    # Temporairement, ajoute avant la commande build
+#    - apk add --no-cache curl
+#    - curl http://backend:3002/health || echo "Cannot reach backend"
+#    - curl http://localhost:3002/health || echo "Backend health check failed"
+#    - docker-compose -f docker-compose.ci.yml build frontend
+#    - docker-compose -f docker-compose.ci.yml push frontend
+#    # Enregistre un backup avec la réf du commit
+#    - docker tag ${CI_REGISTRY_IMAGE}/frontend:latest
+#      ${CI_REGISTRY_IMAGE}/frontend:${CI_COMMIT_SHA}
+#    - docker push "$CI_REGISTRY_IMAGE/frontend:${CI_COMMIT_SHA}"
+deploy-docker-images:
+  image: ubuntu:latest
+  stage: deployToVPS
+  before_script:
+    - apt-get -yq update
+    - apt-get -yqq install ssh
+    - install -m 600 -D /dev/null ~/.ssh/id_rsa
+    - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
+    - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
+  script:
+    - scp ./docker-compose.prod.yml $SSH_USER@$SSH_HOST:$WORK_DIR
+    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker login -u $CI_REGISTRY_USER
+      -p $CI_REGISTRY_PASSWORD $CI_REGISTRY && docker compose -f
+      docker-compose.prod.yml pull backend && docker-compose -f
+      docker-compose.prod.yml pull frontend && docker compose -f
+      docker-compose.prod.yml up -d backend && docker compose -f
+      docker-compose.prod.yml up -d frontend && exit"
+  after_script:
+    - rm -rf ~/.ssh
+  #Peit changemnet sans importanceee

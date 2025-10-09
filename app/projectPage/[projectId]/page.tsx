@@ -38,7 +38,6 @@ export default async function ProjectPage({
   const project: ProjectsProps | undefined = data.projects.find(
     (project) => project._id === projectId
   )
-  console.log("je suis dans la page projectPage")
   if (!project) {
     // Si le projet n'est pas trouvé, renvoyer une page d'erreur
     return notFound()

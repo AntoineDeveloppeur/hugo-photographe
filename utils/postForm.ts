@@ -21,7 +21,6 @@ export default async function postForm(
     }
   }
   try {
-    console.log("on arrive au fetch")
     // fonction serveur donc l'adresse de l'API n'est pas la même que depuis le client
     const response = await fetch(
       `${process.env.API_URL_FROM_SERVER}/api/project/create`,
@@ -33,8 +32,6 @@ export default async function postForm(
         body: form,
       }
     )
-    console.log("juste après fetch")
-
     // si token a été modifié
     if (response.status === 403) {
       return {
@@ -43,8 +40,6 @@ export default async function postForm(
         redirectPath: "/connexion",
       }
     }
-    console.log("if (response.status === 403) {")
-
     // les autres cas dont le nom du projet est déjà pris
     const data = await response.json()
     if (!response.ok) {

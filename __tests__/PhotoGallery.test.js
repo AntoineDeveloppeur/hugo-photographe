@@ -2,6 +2,7 @@ import { screen, render } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import userEvent from "@testing-library/user-event"
 import PhotoGallery from "@/components/ui/atoms/PhotoGallery/PhotoGallery"
+import { act } from "react"
 
 // Mock du hook useIsMobile
 jest.mock("@/hooks/useIsMobile", () => {
@@ -30,7 +31,8 @@ describe("PhotoGallery", () => {
   })
   it("should open the modal", async () => {
     const user = userEvent.setup()
-    await user.click(screen.getByTestId("PhotoGalleryImageWrapper"))
+    const target = screen.getByTestId("PhotoGalleryImageWrapper")
+    await user.click(target)
     expect(screen.queryByTestId("ModalPhotoGallery")).toBeInTheDocument()
   })
 })

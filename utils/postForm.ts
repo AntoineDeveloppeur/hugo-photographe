@@ -60,7 +60,7 @@ export default async function postForm(
 
     return {
       success: false,
-      error: `L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur, ${error}`,
+      error: `L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur`,
       redirectPath: "/administrateur",
     }
   }

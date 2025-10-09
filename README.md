@@ -64,3 +64,76 @@ voir le résultat.
 - **Backend** : Node.js, Express
 - **Base de données** : MongoDB
 - **Stockage** : AWS S3
+
+
+## Deployer sans container
+
+### En Local
+- Merge les changements sur la branch **prod**
+- Transpiler les fichier typescript du backend 
+  ```
+  cd backend | pnpm watch
+  ```
+- Run les test
+  ```
+  pnpm test
+  ```
+- Faire un test de build local
+  ```
+  Terminal 1
+  cd backend | pnpm watch
+
+  Terminal 2
+  cd backend | pnpm dev
+
+  Terminal 3
+  pnpm run build
+  ```
+- commit puis push les changements sur origin prod
+
+### Sur le VPS
+- Si besoin arrêter les containers docker
+  ```
+  cd /var/www/hugo-photographe-docker
+  docker-compose -f docker-compose.prod.yml stop backend
+  docker-compose -f docker-compose.prod.yml stop frontend
+  ```
+- Lancer les serveurs node API
+  ```
+  pm2 list
+  pm2 start <numéroDuBackend>
+  ```
+- Build le frontend
+  ```
+  cd /var/www/hugo-photographe/
+  npm run build
+  ```
+- Lancer le serveur frontend Next
+  ```
+  pm2 list
+  pm2 start <numéroDuFrontend>
+  ```
+
+
+## Deployer avec Docker
+
+  ### En Local
+  - Merge les changements sur la branch **prod**
+  - Transpiler les fichiers typescript du backend 
+    ```
+    cd backend | pnpm watch
+    ```
+  
+  ### Sur le VPS
+  - Si besoin arrêter les serveurs nodes
+    ```
+    pm2 list
+    pm2 stop <numéroDuBackend>
+    pm2 stop <numéroFrontend>
+    ```
+  
+  ### En Local
+  - Push dans le pipeline CI/CD
+    ```
+    git push CICD prod
+    ```

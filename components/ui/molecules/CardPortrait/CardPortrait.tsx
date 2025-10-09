@@ -8,6 +8,7 @@ import IconDelete from "../../atoms/IconDelete/IconDelete"
 import { useState } from "react"
 import ModalDeleteProject from "../ModalDeleteProject/ModalDeleteProject"
 import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
+import DeleteOption from "../deleteOption/DeleteOption"
 
 export default function CardPortrait({
   _id,
@@ -24,26 +25,10 @@ export default function CardPortrait({
 
   return (
     <div className={styles.cardWrapper}>
-      {deleteIcon && (
-        <div
-          className={styles.cardWrapper__deleteWrapper}
-          onClick={handleDelete}
-        >
-          <IconDelete
-            width={96}
-            height={96}
-          />
-        </div>
-      )}
-      {isModalOpen && (
-        <ModalDeleteProject
-          _id={_id}
-          title={title}
-          isOpen={isModalOpen}
-          // Solution pas élégante, à revoir
-          onClose={() => (window.location.href = "/supprimerProjet")}
-        />
-      )}
+      <DeleteOption
+        id={_id}
+        title={title}
+      />
       <Link
         className={styles.cardWrapper__card}
         href={`/projectPage/${_id}`}

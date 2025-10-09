@@ -31,8 +31,8 @@ export interface ModalProps {
 }
 
 export interface ModalDeleteProjectProps {
-  _id: string
-  title: string
+  _id: string | URL
+  title?: string
   isOpen: boolean
   onClose: () => void
 }

@@ -1,16 +1,13 @@
 "use client"
 
 import styles from "./menu-mobile.module.scss"
-import type { Variants } from "framer-motion"
 import { motion } from "framer-motion"
 import { useRef, useState } from "react"
-import IconPhone from "../../atoms/IconPhone/IconPhone"
-import IconBook from "../../atoms/IconBook/IconBook"
-import IconPortfolio from "../../atoms/IconPortfolio/IconPortfolio"
 import useCloseWhenClickOutside from "@/hooks/useCloseWhenClickOutside"
-import Link from "next/link"
 import ThemeChanger from "../ThemeChanger/ThemeChanger"
 import useDimensions from "@/hooks/useDimensions"
+import MenuItem from "@/components/ui/atoms/MenuItem/MenuItem"
+import MenuToggle from "@/components/ui/atoms/MenuToggle/MenuToggle"
 
 export default function MenuMobile() {
   const [isOpen, setIsOpen] = useState(false)
@@ -30,6 +27,7 @@ export default function MenuMobile() {
         ref={containerRef}
         className={styles.nav}
       >
+        <MenuToggle toggle={() => setIsOpen(!isOpen)} />
         <motion.div
           className={styles.background}
           variants={sidebarVariants}
@@ -57,7 +55,6 @@ export default function MenuMobile() {
             <ThemeChanger />
           </motion.div>
         </motion.ul>
-        <MenuToggle toggle={() => setIsOpen(!isOpen)} />
       </motion.nav>
     </div>
   )
@@ -70,46 +67,6 @@ const navVariants = {
   closed: {
     transition: { staggerChildren: 0.0, staggerDirection: -1 },
   },
-}
-
-const MenuItem = ({
-  text,
-  icon,
-  link,
-}: {
-  text: string
-  icon: string
-  link: string
-}) => {
-  return (
-    <motion.li
-      variants={itemVariants}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <Link
-        href={link}
-        className={styles.listItem}
-      >
-        {icon === "portfolio" && (
-          <div className={styles.icon}>
-            <IconPortfolio />
-          </div>
-        )}
-        {icon === "book" && (
-          <div className={styles.icon}>
-            <IconBook />
-          </div>
-        )}
-        {icon === "phone" && (
-          <div className={styles.icon}>
-            <IconPhone />
-          </div>
-        )}
-        <div className={styles.text}>{text}</div>
-      </Link>
-    </motion.li>
-  )
 }
 
 const itemVariants = {
@@ -151,54 +108,3 @@ const sidebarVariants = {
     },
   },
 }
-
-interface PathProps {
-  d?: string
-  variants: Variants
-  transition?: { duration: number }
-}
-
-const Path = (props: PathProps) => (
-  <motion.path
-    fill="var(--color-text-main)"
-    strokeWidth="1"
-    stroke="var(--color-text-main)"
-    strokeLinecap="round"
-    {...props}
-  />
-)
-
-const MenuToggle = ({ toggle }: { toggle: () => void }) => (
-  <motion.div
-    className={styles.toggleContainer}
-    onClick={toggle}
-  >
-    <svg
-      width="30"
-      height="30"
-      viewBox="0 0 23 23"
-      strokeWidth="1"
-    >
-      <Path
-        variants={{
-          closed: { d: "M 2 2.5 L 20 2.5" },
-          open: { d: "M 3 16.5 L 17 2.5" },
-        }}
-      />
-      <Path
-        d="M 2 9.423 L 20 9.423"
-        variants={{
-          closed: { opacity: 1 },
-          open: { opacity: 0 },
-        }}
-        transition={{ duration: 0.1 }}
-      />
-      <Path
-        variants={{
-          closed: { d: "M 2 16.346 L 20 16.346" },
-          open: { d: "M 3 2.5 L 17 16.346" },
-        }}
-      />
-    </svg>
-  </motion.div>
-)

@@ -38,31 +38,28 @@ describe("resizePhoto", () => {
 
   it("should return the same width and height", async () => {
     // Arrange
-    const metadata = {
-      width: 3840,
-      height: 2160,
-      format: "webp",
-    }
+    const mockWidth = 3840
+    const mockHeight = 2160
+    const mockFormat = "webp"
+
     // Act
-    const result = await resizePhoto(metadata, file)
+    const result = await resizePhoto(mockWidth, mockHeight, mockFormat, file)
 
     // Assert
     expect(result).toEqual({
       ...file,
-      width: metadata.width,
-      height: metadata.height,
+      width: mockWidth,
+      height: mockHeight,
     })
   })
   it("should return a specific file path with metadata.format available", async () => {
     // Arrange
-    const metadata = {
-      width: 4000,
-      height: 6000,
-      format: "webp",
-    }
+    const mockWidth = 4000
+    const mockHeight = 6000
+    const mockFormat = "webp"
 
     // Act
-    const result = await resizePhoto(metadata, file)
+    const result = await resizePhoto(mockWidth, mockHeight, mockFormat, file)
 
     // Assert
     expect(sharp).toHaveBeenCalledTimes(1)
@@ -70,34 +67,41 @@ describe("resizePhoto", () => {
   })
   it("with and height of returned object should be the same is result from calculateResizeDimensions fonction", async () => {
     // Arrange
-    const metadata1 = {
-      width: 4000,
-      height: 6000,
-      format: "webp",
-    }
 
-    const metadata2 = {
-      width: 6000,
-      height: 2000,
-      format: "webp",
-    }
+    const mockWidth1 = 4000
+    const mockHeight1 = 6000
+    const mockFormat1 = "webp"
+
+    const mockWidth2 = 4000
+    const mockHeight2 = 6000
+    const mockFormat2 = "webp"
     // Act
-    const result1 = await resizePhoto(metadata1, file)
-    const result2 = await resizePhoto(metadata2, file)
+    const result1 = await resizePhoto(
+      mockWidth1,
+      mockHeight1,
+      mockFormat1,
+      file
+    )
+    const result2 = await resizePhoto(
+      mockWidth2,
+      mockHeight2,
+      mockFormat2,
+      file
+    )
 
     // Assert
     expect(sharp).toHaveBeenCalledTimes(2)
     expect(result1.width).toBe(
-      calculateResizeDimensions(metadata1.width, metadata1.height).width
+      calculateResizeDimensions(mockWidth1, mockHeight1).width
     )
     expect(result1.height).toBe(
-      calculateResizeDimensions(metadata1.width, metadata1.height).height
+      calculateResizeDimensions(mockWidth1, mockHeight1).height
     )
     expect(result2.width).toBe(
-      calculateResizeDimensions(metadata2.width, metadata2.height).width
+      calculateResizeDimensions(mockWidth2, mockHeight2).width
     )
     expect(result2.height).toBe(
-      calculateResizeDimensions(metadata2.width, metadata2.height).height
+      calculateResizeDimensions(mockWidth2, mockHeight2).height
     )
   })
 })

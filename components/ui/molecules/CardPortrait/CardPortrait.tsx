@@ -1,34 +1,25 @@
-"use client"
-
 import styles from "./card-portrait.module.scss"
-import TitleCard from "../../atoms/TitleCard/TitleCard"
+import TitleCard from "@/components/ui/atoms/TitleCard/TitleCard"
 import Link from "next/link"
 import { CardProps } from "@/types/index.js"
-import IconDelete from "../../atoms/IconDelete/IconDelete"
-import { useState } from "react"
-import ModalDeleteProject from "../ModalDeleteProject/ModalDeleteProject"
 import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
-import DeleteOption from "../deleteOption/DeleteOption"
+import DeleteOption from "@/components/ui/molecules/DeleteOption/DeleteOption"
 
 export default function CardPortrait({
   _id,
   title,
   summary,
   mainPhoto,
-  deleteIcon,
+  deleteOption = false,
 }: CardProps) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
-  const handleDelete = () => {
-    setIsModalOpen(true)
-  }
-
   return (
     <div className={styles.cardWrapper}>
-      <DeleteOption
-        id={_id}
-        title={title}
-      />
+      {deleteOption && (
+        <DeleteOption
+          id={_id}
+          title={title}
+        />
+      )}
       <Link
         className={styles.cardWrapper__card}
         href={`/projectPage/${_id}`}

@@ -10,21 +10,15 @@ import { useMotionValueEvent, useScroll } from "framer-motion"
 import Medal from "@/public/icons/medal.json"
 import { useState, useRef } from "react"
 import { useTheme } from "next-themes"
-import IconDelete from "../../atoms/IconDelete/IconDelete"
-import ModalDeleteProject from "../ModalDeleteProject/ModalDeleteProject"
+import DeleteOption from "../DeleteOption/DeleteOption"
 
 export default function CardLandscape({
   _id,
   title,
   summary,
   mainPhoto,
-  deleteIcon,
+  deleteOption = false,
 }: CardProps) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const handleDelete = () => {
-    setIsModalOpen(true)
-  }
-
   const playerRef = useRef<Player>(null)
   const medalWrapper = useRef<HTMLDivElement>(null)
   const [isAnimationStarted, setIsAnimationStarted] = useState<boolean>(false)
@@ -51,24 +45,10 @@ export default function CardLandscape({
 
   return (
     <div className={styles.cardWrapper}>
-      {deleteIcon && (
-        <div
-          className={styles.cardWrapper__deleteWrapper}
-          onClick={handleDelete}
-        >
-          <IconDelete
-            width={96}
-            height={96}
-          />
-        </div>
-      )}
-      {isModalOpen && (
-        <ModalDeleteProject
-          _id={_id}
+      {deleteOption && (
+        <DeleteOption
+          id={_id}
           title={title}
-          isOpen={isModalOpen}
-          // Solution pas élégante, à revoir
-          onClose={() => (window.location.href = "/supprimerProjet")}
         />
       )}
       <Link

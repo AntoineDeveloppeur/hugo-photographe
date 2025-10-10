@@ -2,7 +2,7 @@ import styles from "./modal-delete-project.module.scss"
 import { ModalDeleteProjectProps } from "@/types"
 import Modal from "../../atoms/Modal/Modal"
 import { useState } from "react"
-import Paragraphes from "../Paragraphes/Paragraphes"
+import Paragraphes from "../../atoms/Paragraphes/Paragraphes"
 import Button from "../../atoms/Button/Button"
 import ButtonSecondary from "../../atoms/ButtonSecondary/ButtonSecondary"
 import Loader from "../../atoms/Loader/Loader"
@@ -21,7 +21,7 @@ export default function ModalDeleteProject({
 
   const handleYes = async () => {
     setModalState("DELETING")
-    const success = await deleteProject(_id)
+    const success = await deleteProject(_id as string)
     if (success) {
       setModalState("DELETIONSUCCESS")
     }

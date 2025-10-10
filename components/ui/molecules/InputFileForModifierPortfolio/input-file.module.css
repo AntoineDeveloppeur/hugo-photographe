@@ -1,0 +1,9 @@
+.inputWrapper__fileInputWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+.inputWrapper__fileInputWrapper__input {
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+}/*# sourceMappingURL=input-file.module.css.map */

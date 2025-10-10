@@ -11,8 +11,8 @@ interface PostForm {
 }
 
 export default async function postForm(
-  form: BodyInit,
-  token: string | null
+  token: string | null,
+  form: BodyInit
 ): Promise<PostForm> {
   if (!token) {
     return {

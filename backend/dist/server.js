@@ -7,6 +7,8 @@ import mongoose from "mongoose";
 import projectRoutes from "./routes/project.js";
 import userRoutes from "./routes/user.js";
 import recaptchaRoute from "./routes/recaptcha.js";
+import photoRoute from "./routes/photo.js";
+import portfolioRoute from "./routes/portfolio.js";
 // Configuration des variables d'environnement
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,11 +55,12 @@ app.get("/health", (req, res) => {
         service: "hugo-photographe-backend",
     });
 });
-console.log("la requête est arrivé jusque après health");
 // Routes
 app.use("/api/auth", userRoutes);
 app.use("/api/project", projectRoutes);
 app.use("/api/recaptcha", recaptchaRoute);
+app.use("/api/photo", photoRoute);
+app.use("/api/portfolio", portfolioRoute);
 // Démarrer le serveur
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur le port ${PORT}`);

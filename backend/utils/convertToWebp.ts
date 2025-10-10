@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from "uuid"
 import sharp from "sharp"
 import path from "path"
-import { FormidableFile } from "@/backend/types/index"
+import { File } from "@/backend/types/index"
 
-export const convertToWebp = async (file: FormidableFile) => {
+export const convertToWebp = async (file: File): Promise<File> => {
   // Crée un chemin unique et changer l'extension
   const uniqueId = uuidv4()
   const webpFilePath = path.join(

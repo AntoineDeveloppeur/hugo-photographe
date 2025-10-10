@@ -30,10 +30,6 @@ export default async function getProjects(): Promise<Data> {
       )
 
       if (!response2.ok) {
-        console.log(
-          "je suis dans getProjects !response.ok ${process.env.API_URL_FROM_SERVER}"
-        )
-
         return dataFallBack
       }
 

@@ -1,7 +1,9 @@
 // types.ts
-import { ReactNode } from "react"
+import { ReactNode, Dispatch, SetStateAction } from "react"
 
 export interface PhotoVariableProps {
+  id?: string
+  column?: string
   src: string
   alt: string
   width: number
@@ -9,13 +11,15 @@ export interface PhotoVariableProps {
   priority?: boolean
 }
 
-export interface PhotoProps {
+export type PhotoProps = {
   photo: PhotoVariableProps
   hoverEffect?: boolean
   priority?: boolean
   sizes?: string
   mainPhoto?: boolean
   blurDataURL?: string | undefined
+  deleteOption?: boolean
+  setPortfolio?: Dispatch<SetStateAction<PhotoVariableProps[]>>
 }
 
 export type photoSet = PhotoVariableProps[]
@@ -26,7 +30,7 @@ export interface PhotosSetsProps {
 
 export interface ModalProps {
   isOpen: boolean
-  onClose: () => void
+  onClose: any
   children: ReactNode
 }
 
@@ -62,8 +66,9 @@ export interface ButtonProps {
   link?: string
   type?: "button" | "submit" | "reset" | undefined
   disabled?: boolean
-  onclick?: () => void
+  onclick?: any
   icon?: "add" | "delete"
+  children?: ReactNode
 }
 
 export interface ButtonArrowProps {
@@ -81,7 +86,7 @@ export interface CardProps {
   summary: string
   mainPhoto: PhotoVariableProps
   _id: string
-  deleteIcon?: boolean
+  deleteOption?: boolean
 }
 
 export type GaleryType = "galeryDesktop" | "galeryTablet" | "galeryMobile"
@@ -100,4 +105,8 @@ export interface ProjectsProps {
 
 export interface Data {
   projects: ProjectsProps[]
+}
+
+export interface ColumnType {
+  column: string
 }

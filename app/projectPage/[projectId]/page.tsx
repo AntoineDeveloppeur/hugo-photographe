@@ -1,6 +1,6 @@
 import styles from "./projectPage.module.scss"
 import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjectPage"
-import Paragraphes from "@/components/ui/molecules/Paragraphes/Paragraphes"
+import Paragraphes from "@/components/ui/atoms/Paragraphes/Paragraphes"
 import PhotosSets from "@/components/ui/molecules/PhotosSets/PhotosSets"
 import LinkBottomOfProjectPage from "@/components/ui/molecules/LinkBottomOfProjectPage/LinkBottomOfProjectPage"
 import PhotoProjectPage from "@/components/ui/atoms/PhotoProjectPage/PhotoProjectPage"

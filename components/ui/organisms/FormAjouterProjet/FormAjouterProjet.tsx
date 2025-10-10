@@ -171,8 +171,8 @@ export default function FormAjouterProjet() {
 
       // Envoie du formulaire
       const { success, error, redirectPath } = await postForm(
-        formData,
-        window.localStorage.getItem("token")
+        window.localStorage.getItem("token"),
+        formData
       )
       if (!success) window.alert(error)
       if (redirectPath) router.push(redirectPath)

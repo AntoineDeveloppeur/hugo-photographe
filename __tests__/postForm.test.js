@@ -11,6 +11,7 @@ const mockForm = {}
 const mockToken = "azerty"
 describe("postForm", () => {
   it("should redirect to connexion if token is null", async () => {
+    global.fetch.mockResolvedValue({ status: 403 })
     expect(await postForm(mockForm, null)).toEqual({
       success: false,
       error: "Veuillez vous connecter pour enregistrer un projet",
@@ -25,7 +26,7 @@ describe("postForm", () => {
       redirectPath: "/connexion",
     })
   })
-  it("should redirect to connexion if response.status = 403", async () => {
+  it("should display an error if !response.ok", async () => {
     global.fetch.mockResolvedValue({
       ok: false,
       json: jest.fn().mockResolvedValue({ error: "il y eu une erreur" }),

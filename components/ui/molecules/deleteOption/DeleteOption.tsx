@@ -1,13 +1,15 @@
+"use client"
+
 import styles from "./delete-option.module.scss"
 import IconDelete from "../../atoms/IconDelete/IconDelete"
 import { useState } from "react"
-import ModalDeleteProject from "../ModalDeleteProject/ModalDeleteProject"
 import Modal from "../../atoms/Modal/Modal"
 import Paragraphes from "../Paragraphes/Paragraphes"
 import Button from "../../atoms/Button/Button"
 import ButtonSecondary from "../../atoms/ButtonSecondary/ButtonSecondary"
 import Loader from "../../atoms/Loader/Loader"
 import useDeleteProject from "@/hooks/useDeleteProject"
+import useDeletePhoto from "@/hooks/useDeletePhoto"
 
 interface DeleteOptionTypes {
   id: string
@@ -29,18 +31,19 @@ export default function DeleteOption({ id, title }: DeleteOptionTypes) {
   const [modalState, setModalState] = useState<modalStateType>("CONFIRMING")
 
   const { deleteProject } = useDeleteProject()
+  const { deletePhoto } = useDeletePhoto()
 
   const handleYes = async () => {
     setModalState("DELETING")
     if (deleteType === "project") {
       const success = await deleteProject(id)
-      if (success) {
-        setModalState("DELETIONSUCCESS")
-      }
+      if (success) setModalState("DELETIONSUCCESS")
       // Fails are handled by useDeleteProject
     }
     if (deleteType === "photo") {
-      //const success = await deletePhoto(id)
+      const success = await deletePhoto(id)
+      if (success) setModalState("DELETIONSUCCESS")
+      // Fails are handled by useDeletePhoto
     }
   }
   const handleNo = () => {

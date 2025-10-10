@@ -81,7 +81,7 @@ export interface CardProps {
   summary: string
   mainPhoto: PhotoVariableProps
   _id: string
-  deleteIcon?: boolean
+  deleteOption?: boolean
 }
 
 export type GaleryType = "galeryDesktop" | "galeryTablet" | "galeryMobile"

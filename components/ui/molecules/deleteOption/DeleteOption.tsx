@@ -53,7 +53,7 @@ export default function DeleteOption({ id, title }: DeleteOptionTypes) {
   return (
     <>
       <div
-        className={styles.cardWrapper__deleteWrapper}
+        className={styles.deleteOption__deleteWrapper}
         onClick={handleDelete}
       >
         <IconDelete
@@ -68,7 +68,7 @@ export default function DeleteOption({ id, title }: DeleteOptionTypes) {
         >
           {modalState === "CONFIRMING" && (
             <div
-              className={styles.buttonsWrapper}
+              className={styles.deleteOption__deleteWrapper__buttonsWrapper}
               onClick={(e) => e.stopPropagation()}
             >
               <Paragraphes texts={[`Supprimer ${title} définitivement ?`]} />

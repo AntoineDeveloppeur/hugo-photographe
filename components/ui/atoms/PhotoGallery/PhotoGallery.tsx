@@ -10,6 +10,7 @@ import useIsMobile from "@/hooks/useIsMobile"
 import PhotoBasic from "../PhotoBasic/PhotoBasic"
 import dynamic from "next/dynamic"
 import composeImageURL from "@/utils/composeImageURL"
+import DeleteOption from "../../molecules/DeleteOption/DeleteOption"
 
 // const Modal = lazy(() => import('../Modal/Modal'))
 const Modal = dynamic(() => import("../Modal/Modal"))
@@ -18,6 +19,7 @@ export default function PhotoGallery({
   photo,
   hoverEffect,
   priority,
+  deleteOption,
 }: PhotoProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -83,33 +85,37 @@ export default function PhotoGallery({
         }}
         style={!isMobile ? { cursor: "pointer" } : undefined}
       >
+        {deleteOption && <DeleteOption id={photo.src} />}
+
         <PhotoBasic
           photo={photo}
           priority={priority}
         />
       </motion.div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-      >
-        <div className={styles.modalImageContainer}>
-          {isLoading && <Loader />}
-          <NextImage
-            className={`${styles.modalImage} ${
-              !isLoading ? styles.loaded : ""
-            }`}
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            quality={80}
-            priority={isHovered || isModalOpen}
-            onLoad={() => setIsLoading(false)}
-            style={{ objectFit: "contain" }}
-          />
-        </div>
-      </Modal>
+      {!deleteOption && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+        >
+          <div className={styles.modalImageContainer}>
+            {isLoading && <Loader />}
+            <NextImage
+              className={`${styles.modalImage} ${
+                !isLoading ? styles.loaded : ""
+              }`}
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              quality={80}
+              priority={isHovered || isModalOpen}
+              onLoad={() => setIsLoading(false)}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+        </Modal>
+      )}
     </>
   )
 }

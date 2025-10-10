@@ -2,52 +2,51 @@
 
 import styles from "./portfolio.module.scss"
 import Title from "@/components/ui/atoms/Title/Title"
-import Subtitle from "../../atoms/Subtitle/Subtitle"
-import data from "@/data/data.json"
-import PhotoGallery from "../../atoms/PhotoGallery/PhotoGallery"
-import { useState, useEffect } from "react"
-import type { PhotoVariableProps, GaleryType, DataType } from "@/types"
-import ThemeChanger from "../../molecules/ThemeChanger/ThemeChanger"
+import Subtitle from "@/components/ui/atoms/Subtitle/Subtitle"
+import PhotoGallery from "@/components/ui/atoms/PhotoGallery/PhotoGallery"
+import { useState, useEffect, useCallback } from "react"
+
+import type { PhotoVariableProps } from "@/types"
+import ThemeChanger from "@/components/ui/molecules/ThemeChanger/ThemeChanger"
 import useIsMobile from "@/hooks/useIsMobile"
+import useGetPortfolio from "@/hooks/useGetPortfolio"
+import fallbackPortfolio from "@/data/fallbackPortfolio.json"
+import adaptPortfolioToScreenSize from "@/utils/adaptPortfolioToScreenSize"
 
 export default function Portfolio() {
   const isMobile = useIsMobile()
 
-  // Déterminer la galerie initiale pour priorisé les téléchargements
-  const getInitialGalery = (): GaleryType => {
-    if (typeof window === "undefined") {
-      return "galeryMobile"
-    }
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      return "galeryMobile"
-    } else if (window.matchMedia("(max-width: 1023px)").matches) {
-      return "galeryTablet"
-    } else {
-      return "galeryDesktop"
-    }
-  }
+  const [portfolioLayout, setPortfolioLayout] = useState<
+    PhotoVariableProps[][]
+  >(() =>
+    typeof window !== "undefined"
+      ? adaptPortfolioToScreenSize(fallbackPortfolio, window)
+      : []
+  )
 
-  const [galery, setGalery] = useState<GaleryType>(getInitialGalery)
+  const { portfolio } = useGetPortfolio()
 
-  // La même fonction que getInitialGalery mais est utlisé avec une variable d'état
-  // Elle sera utilisé avec un écouteur d'événement pour s'adapter au changement de taille d'écran
-  const checkDevice = () => {
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      setGalery("galeryMobile")
-      return
-    } else if (window.matchMedia("(max-width: 1023px)").matches) {
-      setGalery("galeryTablet")
-      return
-    } else {
-      setGalery("galeryDesktop")
-      return
-    }
-  }
-
+  // Mise à jour du layout quand le portfolio change
   useEffect(() => {
-    window.addEventListener("resize", checkDevice)
-    return () => window.removeEventListener("resize", checkDevice)
-  }, [])
+    if (typeof window !== "undefined") {
+      setPortfolioLayout(adaptPortfolioToScreenSize(portfolio, window))
+    }
+  }, [portfolio])
+
+  // Gestion du resize avec useCallback pour mémoriser la fonction
+  const handleResize = useCallback(() => {
+    if (typeof window !== "undefined") {
+      setPortfolioLayout(adaptPortfolioToScreenSize(portfolio, window))
+    }
+  }, [portfolio])
+
+  // Event listener pour le resize
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize)
+      return () => window.removeEventListener("resize", handleResize)
+    }
+  }, [handleResize])
 
   return (
     <section
@@ -69,23 +68,21 @@ export default function Portfolio() {
           {!isMobile && <ThemeChanger />}
         </div>
         <div className={styles.portfolio__largeScreen__columns}>
-          {(data as DataType)[galery].map(
-            (columns: PhotoVariableProps[], i) => (
-              <div
-                key={`column${i}`}
-                className={styles.portfolio__largeScreen__columns__column}
-              >
-                {columns.map((pic: PhotoVariableProps, i) => (
-                  <PhotoGallery
-                    key={`pic${i}`}
-                    photo={pic}
-                    hoverEffect={true}
-                    priority={pic.priority}
-                  />
-                ))}
-              </div>
-            )
-          )}
+          {portfolioLayout.map((columns: PhotoVariableProps[], i) => (
+            <div
+              key={`column${i}`}
+              className={styles.portfolio__largeScreen__columns__column}
+            >
+              {columns.map((pic: PhotoVariableProps, i) => (
+                <PhotoGallery
+                  key={`pic${i}`}
+                  photo={pic}
+                  hoverEffect={true}
+                  priority={pic.priority}
+                />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
+import formatError from "./formatError"
 
 interface PostForm {
   success: boolean
@@ -10,8 +11,8 @@ interface PostForm {
 }
 
 export default async function postForm(
-  form: BodyInit,
-  token: string | null
+  token: string | null,
+  form: BodyInit
 ): Promise<PostForm> {
   if (!token) {
     return {
@@ -57,10 +58,11 @@ export default async function postForm(
     }
   } catch (error) {
     console.log("error", error)
+    const errorMessage = formatError(error)
 
     return {
       success: false,
-      error: `L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur`,
+      error: `L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur avec ce message d'erreur ${errorMessage}`,
       redirectPath: "/administrateur",
     }
   }

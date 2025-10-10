@@ -1,10 +1,10 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3"
 import getS3Client from "@/backend/utils/getS3Client.js"
 import fs from "fs"
-import { FormidableFile } from "@/backend/types/index.js"
+import { File } from "@/backend/types/index.js"
 
 export default async function uploadPhoto(
-  file: FormidableFile
+  file: File
 ): Promise<string | unknown> {
   try {
     const fileContent = fs.readFileSync(file.filepath)

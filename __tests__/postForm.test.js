@@ -11,6 +11,7 @@ const mockForm = {}
 const mockToken = "azerty"
 describe("postForm", () => {
   it("should redirect to connexion if token is null", async () => {
+    global.fetch.mockResolvedValue({ status: 403 })
     expect(await postForm(mockForm, null)).toEqual({
       success: false,
       error: "Veuillez vous connecter pour enregistrer un projet",
@@ -25,7 +26,7 @@ describe("postForm", () => {
       redirectPath: "/connexion",
     })
   })
-  it("should redirect to connexion if response.status = 403", async () => {
+  it("should display an error if !response.ok", async () => {
     global.fetch.mockResolvedValue({
       ok: false,
       json: jest.fn().mockResolvedValue({ error: "il y eu une erreur" }),
@@ -47,14 +48,14 @@ describe("postForm", () => {
     expect(revalidatePath).toHaveBeenCalledWith("/projectPage")
   })
 
-  it("should swallow an exception", async () => {
+  it("should return an error if fetch throw an error", async () => {
+    const mockError = "fetch error"
     global.fetch.mockImplementation(() => {
-      throw new Error()
+      throw new Error(mockError)
     })
     expect(await postForm(mockForm, mockToken)).toEqual({
       success: false,
-      error:
-        "L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur",
+      error: `L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur avec ce message d'erreur ${mockError}`,
       redirectPath: "/administrateur",
     })
     expect(revalidatePath).not.toHaveBeenCalled()

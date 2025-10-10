@@ -1,14 +1,16 @@
-import { Files } from "formidable"
 import sharp from "sharp"
 import path from "path"
-import { resizePhoto, Metadata } from "@/backend/utils/resizePhoto.js"
+import { resizePhoto } from "@/backend/utils/resizePhoto.js"
 import { convertToWebp } from "@/backend/utils/convertToWebp.js"
-import { FormidableFile } from "@/backend/types/index.js"
+import { Files as FormidableFiles } from "formidable"
+import { Files } from "@/backend/types/index.js"
 
-export default async function processPhotos(files: Files) {
+export default async function processPhotos(
+  files: FormidableFiles
+): Promise<Files> {
   const processedFilesArray = await Promise.all(
     Object.entries(files).map(async ([key, fileArray]) => {
-      const file = (fileArray as FormidableFile[])?.[0]
+      const file = fileArray?.[0]
 
       // Fail-fast: Si ce n'est pas une image, lancer une erreur
       if (!file.mimetype?.startsWith("image/")) {
@@ -16,11 +18,12 @@ export default async function processPhotos(files: Files) {
       }
 
       // Obtenir les métadonnées de l'image originale
-      const metadata = await sharp(file.filepath).metadata()
+      const { width, height, format } = await sharp(file.filepath).metadata()
       // Modifier la taille si metadata disponibles
+      console.error("width", width, "height", height)
       const resizedFile =
-        metadata?.width && metadata?.height
-          ? await resizePhoto(metadata as Metadata, file)
+        width && height
+          ? await resizePhoto(width, height, format, file)
           : { ...file }
 
       // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp

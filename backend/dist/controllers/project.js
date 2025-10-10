@@ -1,7 +1,8 @@
-import Project from "../models/project.js";
-import uploadPhoto from "../utils/uploadPhoto.js";
-import parseForm from "../utils/parseForm.js";
-import deletePhotos, { deleteOnePhotoFromDB, } from "../utils/deletePhotos.js";
+import Project from "@/backend/models/project.js";
+import uploadPhoto from "@/backend/utils/uploadPhoto.js";
+import parseForm from "@/backend/utils/parseForm.js";
+import deletePhotos, { deleteOnePhotoFromDB, } from "@/backend/utils/deletePhotos.js";
+import formatError from "@/backend/utils/formatError";
 // Exporter les fonctions individuellement
 export async function createProject(req, res) {
     try {
@@ -63,7 +64,7 @@ export async function createProject(req, res) {
         }));
     }
     catch (error) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
+        const errorMessage = formatError(error);
         res.status(500).json({
             message: "Erreur lors de la création du projet pour envoi",
             error: errorMessage,

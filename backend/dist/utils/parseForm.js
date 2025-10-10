@@ -12,9 +12,6 @@ export default async function parseForm(req) {
                 if (err) {
                     return reject(err);
                 }
-                if (!fields) {
-                    return reject(new Error("formulaire vide"));
-                }
                 if (!files) {
                     return reject(new Error("formulaire sans fichier"));
                 }

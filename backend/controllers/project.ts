@@ -7,6 +7,7 @@ import deletePhotos, {
   deleteOnePhotoFromDB,
   ProjectDeletePhotos,
 } from "@/backend/utils/deletePhotos.js"
+import formatError from "@/backend/utils/formatError"
 
 interface PhotosUrl {
   mainPhoto?: string
@@ -101,7 +102,7 @@ export async function createProject(req: Request, res: Response) {
         })
       )
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error)
+    const errorMessage = formatError(error)
     res.status(500).json({
       message: "Erreur lors de la création du projet pour envoi",
       error: errorMessage,

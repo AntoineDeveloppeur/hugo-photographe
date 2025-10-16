@@ -1,5 +1,6 @@
 "use client"
 
+import formatError from "@/utils/formatError"
 import { useRouter } from "next/navigation"
 
 export default function useDeleteProject() {
@@ -32,8 +33,7 @@ export default function useDeleteProject() {
       return true
     } catch (error) {
       // Revoir le catch pour donner plus d'information à l'administrateur
-      const errorMessage =
-        error instanceof Error ? error.message : String(error)
+      const errorMessage = formatError(error)
       window.alert(errorMessage)
       return false
     }

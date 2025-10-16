@@ -4,6 +4,7 @@ import dataFallBack from "@/data/data.json"
 import { Data } from "@/types"
 import getProjects from "@/utils/getProjects"
 import { useState, useEffect } from "react"
+import formatError from "@/utils/formatError"
 
 export default function useGetProjects() {
   // Récupérer les projets depuis MongoDB
@@ -16,8 +17,11 @@ export default function useGetProjects() {
           setData(response)
         }
       } catch (error) {
-        const errorMessage =
-          error instanceof Error ? error.message : String(error)
+        console.error(
+          "Echec de la récupération des projets depuis l'API, message d'erreur:",
+          formatError(error)
+        )
+        // le dataFallBack est utilisé
       }
     }
     fetchProjects()

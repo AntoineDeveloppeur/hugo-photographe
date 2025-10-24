@@ -65,6 +65,7 @@ export async function createProject(req, res) {
     }
     catch (error) {
         const errorMessage = formatError(error);
+        const errorMessage = formatError(error);
         res.status(500).json({
             message: "Erreur lors de la création du projet pour envoi",
             error: errorMessage,

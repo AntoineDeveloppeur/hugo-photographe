@@ -1,17 +1,17 @@
 stages:
-  #  - test
+  - test
   - .env-generation
   - build-backend
   - build-frontend
-  - deployToVPS
+  #- deployToVPS
 
 # Cache des dépendances pour accélérer les jobs
-#cache:
-#  key: ${CI_COMMIT_REF_SLUG}
-#  paths:
-#    - node_modules/
-#    - .next/cache/
-#    - backend/node_modules/
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .next/cache/
+    - backend/node_modules/
 
 variables:
   DOCKER_DRIVER: overlay2
@@ -20,33 +20,33 @@ variables:
 services:
   - docker:dind
 
-#unit-tests:
-#  stage: test
-#  image: node:20-alpine
-#  script:
-#    - npm ci --legacy-peer-deps
-#    - npm run test
-#  artifacts:
-#    reports:
-#      junit: junit.xml
-#    when: always
-#  allow_failure: true
-#
-#lint:
-#  stage: test
-#  image: node:20-alpine
-#  script:
-#    - npm ci --legacy-peer-deps
-#    - npm run lint
-#  allow_failure: true
-#
-#typescript:
-#  stage: test
-#  image: node:20-alpine
-#  script:
-#    - npm ci --legacy-peer-deps
-#    - cd ./backend && npm ci
-#    - npm run type-check
+unit-tests:
+  stage: test
+  image: node:20-alpine
+  script:
+    - npm ci --legacy-peer-deps
+    - npm run test
+  artifacts:
+    reports:
+      junit: junit.xml
+    when: always
+  allow_failure: true
+
+lint:
+  stage: test
+  image: node:20-alpine
+  script:
+    - npm ci --legacy-peer-deps
+    - npm run lint
+  allow_failure: true
+
+typescript:
+  stage: test
+  image: node:20-alpine
+  script:
+    - npm ci --legacy-peer-deps
+    - cd ./backend && npm ci
+    - npm run type-check
 
 # Créer le fichier .env à partir des variables CI/CD
 create-.env:
@@ -134,22 +134,21 @@ build-frontend:
       ${CI_REGISTRY_IMAGE}/frontend:${CI_COMMIT_SHA}
     - docker push "$CI_REGISTRY_IMAGE/frontend:${CI_COMMIT_SHA}"
 
-deploy-docker-images:
-  image: ubuntu:latest
-  stage: deployToVPS
-  before_script:
-    - apt-get -yq update
-    - apt-get -yqq install ssh
-    - install -m 600 -D /dev/null ~/.ssh/id_rsa
-    - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
-    - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
-  script:
-    - scp ./docker-compose.prod.yml $SSH_USER@$SSH_HOST:$WORK_DIR
-    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker login -u $CI_REGISTRY_USER
-      -p $CI_REGISTRY_PASSWORD $CI_REGISTRY && docker compose -f
-      docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml
-      up -d backend && docker compose -f docker-compose.prod.yml up -d frontend
-      && exit"
-  after_script:
-    - rm -rf ~/.ssh
-  #Peit changemnet sans importance
+  #deploy-docker-images:
+  #  image: ubuntu:latest
+  #  stage: deployToVPS
+  #  before_script:
+  #    - apt-get -yq update
+  #    - apt-get -yqq install ssh
+  #    - install -m 600 -D /dev/null ~/.ssh/id_rsa
+  #    - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
+  #    - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
+  #  script:
+  #    - scp ./docker-compose.prod.yml $SSH_USER@$SSH_HOST:$WORK_DIR
+  #    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker login -u $CI_REGISTRY_USER
+  #      -p $CI_REGISTRY_PASSWORD $CI_REGISTRY && docker compose -f
+  #      docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml
+  #      up -d backend && docker compose -f docker-compose.prod.yml up -d frontend
+  #      && exit"
+  #  after_script:
+  #    - rm -rf ~/.ssh

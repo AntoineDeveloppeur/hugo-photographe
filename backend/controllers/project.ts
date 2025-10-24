@@ -7,7 +7,11 @@ import deletePhotos, {
   deleteOnePhotoFromDB,
   ProjectDeletePhotos,
 } from "@/backend/utils/deletePhotos.js"
+<<<<<<< HEAD
 import formatError from "@/backend/utils/formatError.js"
+=======
+import formatError from "@/backend/utils/formatError"
+>>>>>>> 434e4fcc6885fe17efd9ab677ced31fb92648487
 
 interface PhotosUrl {
   mainPhoto?: string

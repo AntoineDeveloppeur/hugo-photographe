@@ -47,14 +47,14 @@ describe("postForm", () => {
     expect(revalidatePath).toHaveBeenCalledWith("/projectPage")
   })
 
-  it("should swallow an exception", async () => {
+  it("should return an error if fetch throw an error", async () => {
+    const mockError = "fetch error"
     global.fetch.mockImplementation(() => {
-      throw new Error()
+      throw new Error(mockError)
     })
     expect(await postForm(mockForm, mockToken)).toEqual({
       success: false,
-      error:
-        "L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur",
+      error: `L'enregistrement a échoué, vérifier votre connexion internet puis contacter votre administrateur avec ce message d'erreur ${mockError}`,
       redirectPath: "/administrateur",
     })
     expect(revalidatePath).not.toHaveBeenCalled()

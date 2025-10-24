@@ -1,8 +1,8 @@
-import Project from "../models/project.js";
-import uploadPhoto from "../utils/uploadPhoto.js";
-import parseForm from "../utils/parseForm.js";
-import deletePhotos, { deleteOnePhotoFromDB, } from "../utils/deletePhotos.js";
-import formatError from "../utils/formatError";
+import Project from "@/backend/models/project.js";
+import uploadPhoto from "@/backend/utils/uploadPhoto.js";
+import parseForm from "@/backend/utils/parseForm.js";
+import deletePhotos, { deleteOnePhotoFromDB, } from "@/backend/utils/deletePhotos.js";
+import formatError from "@/backend/utils/formatError";
 // Exporter les fonctions individuellement
 export async function createProject(req, res) {
     try {

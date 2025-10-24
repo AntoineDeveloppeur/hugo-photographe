@@ -10,10 +10,11 @@ export default async function processPhotos(files) {
             throw new Error("La photo choisie n'est pas une image");
         }
         // Obtenir les métadonnées de l'image originale
-        const metadata = await sharp(file.filepath).metadata();
+        const { width, height, format } = await sharp(file.filepath).metadata();
         // Modifier la taille si metadata disponibles
-        const resizedFile = metadata?.width && metadata?.height
-            ? await resizePhoto(metadata, file)
+        console.error("width", width, "height", height);
+        const resizedFile = width && height
+            ? await resizePhoto(width, height, format, file)
             : { ...file };
         // Si c'est déjà un WebP, conserver le fichier original et s'assuré que l'extension est bien .webp
         if (resizedFile?.mimetype === "image/webp") {

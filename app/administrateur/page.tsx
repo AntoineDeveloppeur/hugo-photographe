@@ -17,6 +17,10 @@ export default function Administrateur() {
           text="Supprimer un Projet"
           link={"/supprimerProjet"}
         />
+        <Button
+          text="Modifier le portfolio"
+          link={"/modifierPortfolio"}
+        />
       </div>
     </section>
   )

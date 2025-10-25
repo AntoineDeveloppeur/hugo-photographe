@@ -33,8 +33,10 @@ export default function ModifierPorfolio() {
   }
 
   const handleSavePortfolio = async () => {
-    if (!window.localStorage.getItem("token")) Router.push("connexion")
-    else {
+    if (!window.localStorage.getItem("token")) {
+      Router.push("connexion")
+      alert("Veuillez vous connecter pour modifier le portfolio")
+    } else {
       const { success, error } = await updatePortfolio(
         window.localStorage.getItem("token") as string,
         portfolio

@@ -89,6 +89,7 @@ voir le résultat.
   Terminal 3
   pnpm run build
   ```
+- modifier le fichier .env.local avec pour modèle .env.VPS.local
 - commit puis push les changements sur origin prod
 
 ### Sur le VPS
@@ -134,6 +135,8 @@ voir le résultat.
     ```
     cd backend | pnpm watch
     ```
+  - modifier le fichier .env.local avec pour modèle .env.VPS.local
+  
   
   ### Sur le VPS
   - Si besoin arrêter les serveurs nodes

@@ -2,7 +2,6 @@ import { screen, render } from "@testing-library/react"
 import "@testing-library/jest-dom"
 import userEvent from "@testing-library/user-event"
 import PhotoGallery from "@/components/ui/atoms/PhotoGallery/PhotoGallery"
-import { act } from "react"
 
 // Mock du hook useIsMobile
 jest.mock("@/hooks/useIsMobile", () => {

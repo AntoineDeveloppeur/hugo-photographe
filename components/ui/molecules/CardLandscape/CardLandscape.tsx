@@ -10,7 +10,7 @@ import { useMotionValueEvent, useScroll } from "framer-motion"
 import Medal from "@/public/icons/medal.json"
 import { useState, useRef } from "react"
 import { useTheme } from "next-themes"
-import DeleteOption from "../teOption/DeleteOption"
+import DeleteOption from "../DeleteOption/DeleteOption"
 
 export default function CardLandscape({
   _id,

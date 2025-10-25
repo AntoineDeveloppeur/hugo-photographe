@@ -6,12 +6,12 @@ stages:
   - deployToVPS
 
 # Cache des dépendances pour accélérer les jobs
-#cache:
-#  key: ${CI_COMMIT_REF_SLUG}
-#  paths:
-#    - node_modules/
-#    - .next/cache/
-#    - backend/node_modules/
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .next/cache/
+    - backend/node_modules/
 
 variables:
   DOCKER_DRIVER: overlay2

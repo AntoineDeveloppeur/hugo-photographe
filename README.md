@@ -103,9 +103,20 @@ voir le résultat.
   pm2 list
   pm2 start <numéroDuBackend>
   ```
-- Build le frontend
+
+- Pull les fichiers
   ```
   cd /var/www/hugo-photographe/
+  git branch
+  git switch main
+  git pull origin main
+  npm run build
+  ```
+- Build le frontend
+  ```
+
+  cd /var/www/hugo-photographe/
+  git pull origin main
   npm run build
   ```
 - Lancer le serveur frontend Next

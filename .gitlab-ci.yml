@@ -17,14 +17,14 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: "/certs"
 
-services:
-  - docker:dind
+#services:
+# - docker:dind
 
 unit-tests:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run test
   artifacts:
     reports:
@@ -36,7 +36,7 @@ lint:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run lint
   allow_failure: true
 
@@ -44,7 +44,7 @@ typescript-frontend:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run type-check
 
 typescript-backend:

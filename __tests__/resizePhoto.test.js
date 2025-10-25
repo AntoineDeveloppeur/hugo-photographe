@@ -5,7 +5,7 @@ import {
 
 // Auto-mocking des modules suivants
 import sharp from "sharp"
-import { v4 as uuidv4, mockUuidValue } from "uuid"
+import { mockUuidValue } from "uuid"
 
 describe("calculateResizeDimensions", () => {
   it("should return something", () => {

@@ -3,7 +3,7 @@
 import styles from "./photo-modifier-portfolio.module.scss"
 import { PhotoProps } from "@/types"
 import PhotoBasic from "../PhotoBasic/PhotoBasic"
-import DeleteOption from "../../molecules/DeleteOption/DeleteOption"
+import DeleteOption from "../../molecules/teOption/DeleteOption"
 import { useDraggable } from "@dnd-kit/core"
 
 export default function PhotoModifierPorfolio({

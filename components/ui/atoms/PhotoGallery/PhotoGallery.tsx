@@ -10,7 +10,7 @@ import useIsMobile from "@/hooks/useIsMobile"
 import PhotoBasic from "../PhotoBasic/PhotoBasic"
 import dynamic from "next/dynamic"
 import composeImageURL from "@/utils/composeImageURL"
-import DeleteOption from "../../molecules/DeleteOption/DeleteOption"
+import DeleteOption from "@/components/molecules/DeleteOption/DeleteOption"
 
 // const Modal = lazy(() => import('../Modal/Modal'))
 const Modal = dynamic(() => import("../Modal/Modal"))

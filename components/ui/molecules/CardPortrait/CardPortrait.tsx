@@ -3,7 +3,7 @@ import TitleCard from "@/components/ui/atoms/TitleCard/TitleCard"
 import Link from "next/link"
 import { CardProps } from "@/types/index.js"
 import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
-import DeleteOption from "@/components/ui/molecules/DeleteOption/DeleteOption"
+import DeleteOption from "@/components/ui/molecules/teOption/DeleteOption"
 
 export default function CardPortrait({
   _id,

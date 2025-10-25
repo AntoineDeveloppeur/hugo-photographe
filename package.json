@@ -7,10 +7,10 @@
     "dev": "rimraf .next && next dev",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "npx eslint",
+    "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "type-check": "npx tsc"
+    "type-check": "tsc"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

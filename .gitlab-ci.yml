@@ -24,7 +24,7 @@ unit-tests:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run test
   artifacts:
     reports:
@@ -36,7 +36,7 @@ lint:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run lint
   allow_failure: true
 
@@ -44,14 +44,14 @@ typescript-frontend:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci
+    - npm ci --legacy-peer-deps
     - npm run type-check
 
 typescript-backend:
   stage: test
   image: node:20-alpine
   script:
-    - cd ./backend && npm ci
+    - npm ci --legacy-peer-deps
     - cd ./backend && npm run type-check
 # Créer le fichier .env à partir des variables CI/CD
 #create-.env:

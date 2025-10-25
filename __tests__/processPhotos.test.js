@@ -1,4 +1,4 @@
-import sharp, { metadata } from "sharp"
+import sharp from "sharp"
 import { convertToWebp } from "@/backend/dist/utils/convertToWebp.js"
 import { resizePhoto } from "@/backend/dist/utils/resizePhoto.js"
 import processPhotos from "@/backend/dist/utils/processPhotos.js"
@@ -15,17 +15,22 @@ jest.mock("formidable", () => ({
   },
 }))
 
+const mockWidth = 3000
+const mockHeight = 1500
+const mockFormat = "webp"
+
 jest.mock("@/backend/dist/utils/resizePhoto.js", () => ({
-  resizePhoto: jest.fn(async (metadata, file) => ({
+  resizePhoto: jest.fn(async (mockWidth, mockHeight, mockFormat, file) => ({
     ...file,
-    ...metadata,
+    height: mockHeight,
+    width: mockWidth,
   })),
 }))
 
 jest.mock("@/backend/dist/utils/convertToWebp.js", () => ({
   convertToWebp: jest.fn(async (file) => ({
     ...file,
-    filepath: "/src.webp",
+    filepath: "/image.webp",
     originalFilename: "image.webp",
     mimetype: "image/webp",
   })),
@@ -67,11 +72,12 @@ describe("processPhotos", () => {
     sharp.mockImplementation(() => ({
       resize: jest.fn().mockReturnThis(),
       toFile: jest.fn().mockResolvedValue(undefined),
-      metadata: jest.fn().mockReturnValue(null), // ← Votre modification
+      metadata: jest.fn().mockReturnValue({
+        width: undefined,
+        height: undefined,
+      }), // ← Votre modification
       webp: jest.fn().mockReturnThis(),
     }))
-
-    // jest.spyOn(sharp(), "metadata").mockReturnValue(null)
 
     const processedFilesArray = await Promise.all(
       Object.entries(files).map(async ([key, fileArray]) => {
@@ -103,7 +109,11 @@ describe("processPhotos", () => {
     sharp.mockImplementation(() => ({
       resize: jest.fn().mockReturnThis(),
       toFile: jest.fn().mockResolvedValue(undefined),
-      metadata: jest.fn().mockReturnValue(metadata), // ← Votre modification
+      metadata: jest.fn().mockReturnValue({
+        width: mockWidth,
+        height: mockHeight,
+        format: mockFormat,
+      }), // ← Votre modification
       webp: jest.fn().mockReturnThis(),
     }))
     // Act
@@ -121,6 +131,8 @@ describe("processPhotos", () => {
           filepath: "/image.webp",
           originalFilename: "image.webp",
           mimetype: "image/webp",
+          height: mockHeight,
+          width: mockWidth,
         },
       ],
     }
@@ -130,7 +142,7 @@ describe("processPhotos", () => {
       Object.entries(files).map(async ([key, fileArray]) => {
         const file = fileArray[0]
         // Ajoute les metadata
-        return { [key]: { ...file, ...metadata } }
+        return { [key]: { ...file, width: mockWidth, height: mockHeight } }
       })
     )
     const mockProcessedFiles = processedFilesArray.reduce((acc, object) => {

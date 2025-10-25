@@ -75,7 +75,7 @@ export default function Supprimer() {
                     summary={data.projects[0].summary}
                     mainPhoto={data.projects[0].mainPhoto}
                     _id={data.projects[0]._id}
-                    deleteIcon={true}
+                    deleteOption={true}
                   />
                 ) : (
                   <CardLandscape
@@ -83,7 +83,7 @@ export default function Supprimer() {
                     summary={data.projects[0].summary}
                     mainPhoto={data.projects[0].mainPhoto}
                     _id={data.projects[0]._id}
-                    deleteIcon={true}
+                    deleteOption={true}
                   />
                 )}
               </div>
@@ -131,7 +131,7 @@ export default function Supprimer() {
                       summary={project.summary}
                       mainPhoto={project.mainPhoto}
                       _id={project._id}
-                      deleteIcon={true}
+                      deleteOption={true}
                     />
                   </motion.div>
                 ))}

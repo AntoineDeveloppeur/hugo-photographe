@@ -18,6 +18,7 @@ export default function Button({
   onclick,
   type = "button",
   disabled = false,
+  children,
 }: ButtonProps) {
   const [ripple, setRipple] = useState<RippleState>(null)
 
@@ -72,6 +73,7 @@ export default function Button({
           />
         )}
       </AnimatePresence>
+      {children}
       {link ? (
         <Link href={link}>
           <p className={styles.button__p}>{text}</p>

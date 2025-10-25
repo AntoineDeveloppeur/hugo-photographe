@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid" // Pour générer des noms de fichiers uniques
 import path from "path"
 import sharp from "sharp"
+import { File } from "@/backend/types/index"
 
 export const calculateResizeDimensions = (
   width: number,
@@ -21,32 +22,17 @@ export const calculateResizeDimensions = (
     height: Math.round(height * ratio),
   }
 }
-export type Metadata = {
-  format?: string | undefined
-  width: number
-  height: number
-}
-type File = {
-  filepath: string
-  mimetype: string | null
-  originalFilename: string | null
-}
-type Resize = Metadata & File
 
 export const resizePhoto = async (
-  metadata: Metadata,
+  width: number,
+  height: number,
+  format: string | null,
   file: File
-): Promise<Resize> => {
-  const newDimensions = calculateResizeDimensions(
-    metadata.width,
-    metadata.height
-  )
+): Promise<File> => {
+  const newDimensions = calculateResizeDimensions(width, height)
   // Renvoie le fichier s'il est déjà aux bonnes dimenssions
-  if (
-    newDimensions.width === metadata.width &&
-    newDimensions.height === metadata.height
-  ) {
-    return { ...file, width: metadata.width, height: metadata.height }
+  if (newDimensions.width === width && newDimensions.height === height) {
+    return { ...file, width: width, height: height }
   }
 
   // Crée un chemin unique
@@ -55,7 +41,7 @@ export const resizePhoto = async (
     path.dirname(file.filepath),
     // TODO: 'jpg' est pris arbitrairement, cela n'a pas d'incidence sur la suite
     // A travailler pour rendre le code plus propre
-    `${uniqueId}.${metadata.format || "jpg"}`
+    `${uniqueId}.${format || "jpg"}`
   )
   await sharp(file.filepath)
     .resize(newDimensions.width, newDimensions.height)

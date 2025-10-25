@@ -1,5 +1,5 @@
 // types.ts
-import { Fields } from "formidable"
+import { Fields, File as FormidableFile } from "formidable"
 
 export interface PhotoVariableProps {
   src: string
@@ -38,15 +38,16 @@ export interface Data {
 }
 
 // Types pour formidable
-export interface FormidableFile {
+export interface File extends FormidableFile {
   filepath: string
   originalFilename: string | null
   mimetype: string | null
-  [key: string]: any
+  width?: number
+  height?: number
 }
 
 export interface Files {
-  [key: string]: FormidableFile
+  [key: string]: File
 }
 
 export interface ParsedForm {

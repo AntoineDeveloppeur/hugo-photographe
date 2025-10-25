@@ -1,47 +1,23 @@
-"use client"
-
 import styles from "./card-portrait.module.scss"
-import TitleCard from "../../atoms/TitleCard/TitleCard"
+import TitleCard from "@/components/ui/atoms/TitleCard/TitleCard"
 import Link from "next/link"
 import { CardProps } from "@/types/index.js"
-import IconDelete from "../../atoms/IconDelete/IconDelete"
-import { useState } from "react"
-import ModalDeleteProject from "../ModalDeleteProject/ModalDeleteProject"
 import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
+import DeleteOption from "@/components/ui/molecules/DeleteOption/DeleteOption"
 
 export default function CardPortrait({
   _id,
   title,
   summary,
   mainPhoto,
-  deleteIcon,
+  deleteOption = false,
 }: CardProps) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
-  const handleDelete = () => {
-    setIsModalOpen(true)
-  }
-
   return (
     <div className={styles.cardWrapper}>
-      {deleteIcon && (
-        <div
-          className={styles.cardWrapper__deleteWrapper}
-          onClick={handleDelete}
-        >
-          <IconDelete
-            width={96}
-            height={96}
-          />
-        </div>
-      )}
-      {isModalOpen && (
-        <ModalDeleteProject
-          _id={_id}
+      {deleteOption && (
+        <DeleteOption
+          id={_id}
           title={title}
-          isOpen={isModalOpen}
-          // Solution pas élégante, à revoir
-          onClose={() => (window.location.href = "/supprimerProjet")}
         />
       )}
       <Link

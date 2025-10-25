@@ -1,0 +1,92 @@
+[
+  {
+    "id": "775cfb9f-3065-427a-85ec-26dc24f5ec4b",
+    "column": "1",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320765522-taiwan7.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3240,
+    "height": 2160,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5df"
+  },
+  {
+    "id": "d9b14dd4-fbfa-4e26-8899-69a5e74c1f95",
+    "column": "2",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320776184-paysage.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3840,
+    "height": 1867,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5e0"
+  },
+  {
+    "id": "fe227ab5-6dc0-46bd-b94e-983ed8770357",
+    "column": "3",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320789765-maquillage.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3240,
+    "height": 2160,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5e1"
+  },
+  {
+    "id": "be03840b-8ba0-47d0-a736-79cf790a27d0",
+    "column": "1",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3240,
+    "height": 2160,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5e2"
+  },
+  {
+    "id": "451ebf41-fed3-4ab8-acc4-810cf1986cfb",
+    "column": "2",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320808308-chien.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3295,
+    "height": 2160,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5e3"
+  },
+  {
+    "id": "097fa0c7-72af-4e55-9245-653dd799b280",
+    "column": "3",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320819542-taureau.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3240,
+    "height": 2160,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5e4"
+  },
+  {
+    "id": "c5a5adc5-87f3-4581-9e3c-cf6d4d4d1727",
+    "column": "1",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320828055-concert2.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3240,
+    "height": 2160,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5e5"
+  },
+  {
+    "id": "568fa0c7-8769-4214-8974-95649cf7dbec",
+    "column": "2",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320844086-gym.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3240,
+    "height": 2160,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5e6"
+  },
+  {
+    "id": "a2f5939a-739d-40f8-9db7-2f070877e8ce",
+    "column": "3",
+    "src": "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320854916-cuisine.webp",
+    "alt": "Photographie de Hugo Randez",
+    "width": 3236,
+    "height": 2160,
+    "priority": false,
+    "_id": "68fb9f994498268d7888f5e7"
+  }
+]

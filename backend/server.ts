@@ -4,9 +4,11 @@ import cors from "cors"
 import path from "path"
 import { fileURLToPath } from "url"
 import mongoose from "mongoose"
-import projectRoutes from "./routes/project.js"
-import userRoutes from "./routes/user.js"
-import recaptchaRoute from "./routes/recaptcha.js"
+import projectRoutes from "@/backend/routes/project.js"
+import userRoutes from "@/backend/routes/user.js"
+import recaptchaRoute from "@/backend/routes/recaptcha.js"
+import photoRoute from "@/backend/routes/photo.js"
+import portfolioRoute from "@/backend/routes/portfolio.js"
 
 // Configuration des variables d'environnement
 const __filename = fileURLToPath(import.meta.url)
@@ -69,11 +71,12 @@ app.get("/health", (req, res) => {
     service: "hugo-photographe-backend",
   })
 })
-console.log("la requête est arrivé jusque après health")
 // Routes
 app.use("/api/auth", userRoutes)
 app.use("/api/project", projectRoutes)
 app.use("/api/recaptcha", recaptchaRoute)
+app.use("/api/photo", photoRoute)
+app.use("/api/portfolio", portfolioRoute)
 
 // Démarrer le serveur
 app.listen(PORT, () => {

@@ -20,33 +20,39 @@ variables:
 services:
   - docker:dind
 
-#unit-tests:
-#  stage: test
-#  image: node:20-alpine
-#  script:
-#    - npm ci --legacy-peer-deps
-#    - npm run test
-#  artifacts:
-#    reports:
-#      junit: junit.xml
-#    when: always
-#  allow_failure: true
-#
-#lint:
-#  stage: test
-#  image: node:20-alpine
-#  script:
-#    - npm ci --legacy-peer-deps
-#    - npm run lint
-#  allow_failure: true
-#
-#typescript:
-#  stage: test
-#  image: node:20-alpine
-#  script:
-#    - npm ci --legacy-peer-deps
-#    - cd ./backend && npm ci
-#    - npm run type-check
+unit-tests:
+  stage: test
+  image: node:20-alpine
+  script:
+    - npm ci
+    - npm run test
+  artifacts:
+    reports:
+      junit: junit.xml
+    when: always
+  allow_failure: true
+
+lint:
+  stage: test
+  image: node:20-alpine
+  script:
+    - npm ci
+    - npm run lint
+  allow_failure: true
+
+typescript-frontend:
+  stage: test
+  image: node:20-alpine
+  script:
+    - npm ci
+    - npm run type-check
+
+typescript-backend:
+  stage: test
+  image: node:20-alpine
+  script:
+    - cd ./backend && npm ci
+    - cd ./backend && npm run type-check
 
 # Créer le fichier .env à partir des variables CI/CD
 create-.env:

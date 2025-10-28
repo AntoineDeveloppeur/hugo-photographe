@@ -52,7 +52,7 @@ typescript-backend:
   image: node:20-alpine
   script:
     - cd ./backend && npm ci
-    - cd ./backend && npm run type-check
+    - npm run type-check
 # Créer le fichier .env à partir des variables CI/CD
 #create-.env:
 #  stage: .env-generation

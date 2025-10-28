@@ -24,13 +24,6 @@ unit-tests:
   stage: test
   image: node:20-alpine
   script:
-    - echo "=== Debugging package files ==="
-    - ls -lh package*.json
-    - head -30 package.json
-    - wc -l package-lock.json
-    - grep -c '"node_modules/' package-lock.json || echo "No node_modules
-      entries"
-    - echo "=== Installing dependencies ==="
     - npm ci --legacy-peer-deps
     - npm run test
   artifacts:
@@ -43,21 +36,7 @@ lint:
   stage: test
   image: node:20-alpine
   script:
-    - echo "=== Debugging environment ==="
-    - echo "NODE_ENV = $NODE_ENV"
-    - echo "CI = $CI"
-    - env | grep -i node || echo "No NODE variables"
-    - echo "=== Debugging package files ==="
-    - ls -lh package*.json
-    - head -30 package.json
-    - wc -l package-lock.json
-    - grep -c '"node_modules/' package-lock.json || echo "No node_modules
-      entries"
-    - echo "=== Installing dependencies ==="
     - npm ci --legacy-peer-deps
-    - echo "=== Checking installed packages ==="
-    - ls node_modules | wc -l
-    - test -d node_modules/jest && echo "jest found" || echo "jest NOT found"
     - npm run lint
   allow_failure: true
 
@@ -65,12 +44,6 @@ typescript-frontend:
   stage: test
   image: node:20-alpine
   script:
-    - echo "=== Debugging package files ==="
-    - ls -lh package*.json
-    - wc -l package-lock.json
-    - grep -c '"node_modules/' package-lock.json || echo "No node_modules
-      entries"
-    - echo "=== Installing dependencies ==="
     - npm ci --legacy-peer-deps
     - npm run type-check
 
@@ -78,15 +51,8 @@ typescript-backend:
   stage: test
   image: node:20-alpine
   script:
-    - echo "=== Debugging package files ==="
-    - ls -lh package*.json
-    - wc -l package-lock.json
-    - grep -c '"node_modules/' package-lock.json || echo "No node_modules
-      entries"
-    - echo "=== Installing dependencies ==="
     - npm ci --legacy-peer-deps
-    - cd ./backend && npm ci
-    - npm run type-check
+    - cd ./backend && npm run type-check
 # Créer le fichier .env à partir des variables CI/CD
 #create-.env:
 #  stage: .env-generation

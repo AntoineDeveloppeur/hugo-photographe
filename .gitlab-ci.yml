@@ -20,6 +20,9 @@ stages:
 #services:
 # - docker:dind
 
+variables:
+  NODE_ENV: "development"
+
 unit-tests:
   stage: test
   image: node:20-alpine

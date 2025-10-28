@@ -43,6 +43,10 @@ lint:
   stage: test
   image: node:20-alpine
   script:
+    - echo "=== Debugging environment ==="
+    - echo "NODE_ENV = $NODE_ENV"
+    - echo "CI = $CI"
+    - env | grep -i node || echo "No NODE variables"
     - echo "=== Debugging package files ==="
     - ls -lh package*.json
     - head -30 package.json
@@ -51,6 +55,9 @@ lint:
       entries"
     - echo "=== Installing dependencies ==="
     - npm ci --legacy-peer-deps
+    - echo "=== Checking installed packages ==="
+    - ls node_modules | wc -l
+    - test -d node_modules/jest && echo "jest found" || echo "jest NOT found"
     - npm run lint
   allow_failure: true
 

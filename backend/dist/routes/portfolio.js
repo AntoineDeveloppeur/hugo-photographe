@@ -1,6 +1,6 @@
 import express from "express";
-import portfolioCtrl from "../controllers/portfolio.js";
-import checkToken from "../middleware/checkToken.js";
+import portfolioCtrl from "@/backend/controllers/portfolio.js";
+import checkToken from "@/backend/middleware/checkToken.js";
 const router = express.Router();
 export default router.put("/update", (req, res, next) => {
     checkToken(req, res, next);

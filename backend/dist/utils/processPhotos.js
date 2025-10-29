@@ -1,7 +1,7 @@
 import sharp from "sharp";
 import path from "path";
-import { resizePhoto } from "../utils/resizePhoto.js";
-import { convertToWebp } from "../utils/convertToWebp.js";
+import { resizePhoto } from "@/backend/utils/resizePhoto.js";
+import { convertToWebp } from "@/backend/utils/convertToWebp.js";
 export default async function processPhotos(files) {
     const processedFilesArray = await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
         const file = fileArray?.[0];
@@ -21,12 +21,7 @@ export default async function processPhotos(files) {
             return {
                 [key]: {
                     ...resizedFile,
-                    //@ts-expect-error TODO
-                    originalFilename: `${
-                    //@ts-expect-error TODO
-                    path.parse(resizedFile?.originalFilename).name
-                    //@ts-expect-error TODO
-                    }.webp`,
+                    originalFilename: `${path.parse(resizedFile?.originalFilename).name}.webp`,
                 },
             };
         }

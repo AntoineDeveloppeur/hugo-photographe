@@ -1,5 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import getS3Client from "../utils/getS3Client.js";
+import getS3Client from "@/backend/utils/getS3Client.js";
 import fs from "fs";
 export default async function uploadPhoto(file) {
     try {
@@ -15,7 +15,6 @@ export default async function uploadPhoto(file) {
         };
         // Envoi du fichier à S3
         const s3Client = getS3Client();
-        //@ts-expect-error TODO
         await s3Client.send(new PutObjectCommand(uploadParams));
         // Retourne l'URL du fichier télécahrgé
         return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;

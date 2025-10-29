@@ -1,8 +1,8 @@
-import parseForm from "../utils/parseForm.js";
-import uploadPhoto from "../utils/uploadPhoto.js";
-import formatError from "../utils/formatError.js";
+import parseForm from "@/backend/utils/parseForm.js";
+import uploadPhoto from "@/backend/utils/uploadPhoto.js";
+import formatError from "@/backend/utils/formatError.js";
 import { v4 as uuidv4 } from "uuid";
-import { deleteOnePhotoFromDB } from "../utils/deletePhotos.js";
+import { deleteOnePhotoFromDB } from "@/backend/utils/deletePhotos.js";
 const photoCtrl = {
     upload: async (req, res) => {
         try {

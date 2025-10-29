@@ -31,11 +31,8 @@ export default async function processPhotos(
         return {
           [key]: {
             ...resizedFile,
-            //@ts-expect-error TODO
             originalFilename: `${
-              //@ts-expect-error TODO
               path.parse(resizedFile?.originalFilename).name
-              //@ts-expect-error TODO
             }.webp`,
           },
         }

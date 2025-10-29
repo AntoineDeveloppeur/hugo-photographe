@@ -22,7 +22,6 @@ export default async function uploadPhoto(
 
     // Envoi du fichier à S3
     const s3Client = getS3Client()
-    //@ts-expect-error TODO
     await s3Client.send(new PutObjectCommand(uploadParams))
 
     // Retourne l'URL du fichier télécahrgé

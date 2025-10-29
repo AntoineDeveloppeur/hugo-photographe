@@ -1,30 +1,31 @@
 stages:
   - test
-  #- .env-generation
-  #- build-backend
-  #- build-frontend
-  #- deployToVPS
+  - .env-generation
+  - build-backend
+  - build-frontend
+  - deployToVPS
 
 # Cache des dépendances pour accélérer les jobs
-#cache:
-#  key: ${CI_COMMIT_REF_SLUG}
-#  paths:
-#    - node_modules/
-#    - .next/cache/
-#    - backend/node_modules/
-
-#variables:
-#  DOCKER_DRIVER: overlay2
-#  DOCKER_TLS_CERTDIR: "/certs"
-
-#services:
-# - docker:dind
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .next/cache/
+    - backend/node_modules/
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+services:
+  - docker:dind
 
 unit-tests:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci --legacy-peer-deps
+    - npm ci
+    - cd backend && npm ci  && cd ../
+    # converti les fichiers typescript en js pour faire fonctionner les tests
+    - cd backend && npm run build && cd ../
     - npm run test
   artifacts:
     reports:
@@ -36,7 +37,7 @@ lint:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci --legacy-peer-deps
+    - npm ci
     - npm run lint
   allow_failure: true
 
@@ -44,115 +45,114 @@ typescript-frontend:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci --legacy-peer-deps
+    - npm ci
     - npm run type-check
 
 typescript-backend:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci --legacy-peer-deps
-    - cd ./backend && npm run type-check
+    - cd ./backend && npm ci
+    - npm run type-check
+
 # Créer le fichier .env à partir des variables CI/CD
-#create-.env:
-#  stage: .env-generation
-#  image: alpine:latest
-#  script:
-#    - |
-#      cat > ./backend/.env << EOF
-#      NODE_ENV=${NODE_ENV}
-#      RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY
-#      HUGO_EMAIL=$HUGO_EMAIL
-#      HUGO_PHONE=$HUGO_PHONE
-#      SERVER_PORT=$SERVER_PORT
-#      SECRET_PHRASE_TOKEN=$SECRET_PHRASE_TOKEN
-#      AWS_REGION=$AWS_REGION
-#      AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-#      AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-#      AWS_S3_BUCKET_NAME=$AWS_S3_BUCKET_NAME
-#      DB_USERNAME=$DB_USERNAME
-#      DB_PASSWORD=$DB_PASSWORD
-#      DB_CLUSTER=$DB_CLUSTER
-#      DB_NAME=$DB_NAME
-#      DB_APPNAME=$DB_APPNAME
-#      EOF
-#    - cat ./backend/.env
-#    - echo "HUGO_PHONE=$HUGO_PHONE"
-#    - |
-#      cat > .env.local << EOF
-#      NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-#      NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
-#      NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
-#      API_URL_FROM_SERVER=$API_URL_FROM_SERVER
-#      EOF
-#    - cat .env.local
-#  artifacts:
-#    paths:
-#      - ./backend/.env
-#      - .env.local
-#    expire_in: 1 hour
-#
-#build-backend:
-#  stage: build-backend
-#  image: docker:latest
-#  dependencies:
-#    - create-.env
-#  before_script:
-#    # Se connecter a gitlab registry
-#    - cat ./backend/.env
-#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
-#      $CI_REGISTRY
-#  script:
-#    - echo "${CI_REGISTRY_IMAGE}/backend:latest"
-#    - docker-compose -f docker-compose.ci.yml build backend
-#    - docker-compose -f docker-compose.ci.yml push backend
-#    # Enregistre un backup avec la réf du commit
-#    - docker tag ${CI_REGISTRY_IMAGE}/backend:latest
-#      ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
-#    - docker push ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
-#
-#build-frontend:
-#  stage: build-frontend
-#  image: docker:latest
-#  dependencies:
-#    - create-.env
-#  before_script:
-#    - cat .env.local
-#    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
-#      $CI_REGISTRY
-#    # Run l'image backend nécessaire pour que le ront fetch les données pour le SSG
-#    - docker-compose -f docker-compose.ci.yml pull backend
-#    - docker-compose -f docker-compose.ci.yml up -d backend
-#    # Attendre que le backend soit prêt
-#    - sleep 10
-#    # Afficher les logs du backend
-#    - docker-compose -f docker-compose.ci.yml logs backend
-#  script:
-#    # Temporairement, ajoute avant la commande build
-#    - apk add --no-cache curl
-#    - curl http://backend:3002/health || echo "Cannot reach backend"
-#    - curl http://localhost:3002/health || echo "Backend health check failed"
-#    - docker-compose -f docker-compose.ci.yml build frontend
-#    - docker-compose -f docker-compose.ci.yml push frontend
-#    # Enregistre un backup avec la réf du commit
-#    - docker tag ${CI_REGISTRY_IMAGE}/frontend:latest
-#      ${CI_REGISTRY_IMAGE}/frontend:${CI_COMMIT_SHA}
-#    - docker push "$CI_REGISTRY_IMAGE/frontend:${CI_COMMIT_SHA}"
-#deploy-docker-images:
-#  image: ubuntu:latest
-#  stage: deployToVPS
-#  before_script:
-#    - apt-get -yq update
-#    - apt-get -yqq install ssh
-#    - install -m 600 -D /dev/null ~/.ssh/id_rsa
-#    - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
-#    - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
-#  script:
-#    - scp ./docker-compose.prod.yml $SSH_USER@$SSH_HOST:$WORK_DIR
-#    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker login -u $CI_REGISTRY_USER
-#      -p $CI_REGISTRY_PASSWORD $CI_REGISTRY && docker compose -f
-#      docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml
-#      up -d backend && docker compose -f docker-compose.prod.yml up -d frontend
-#      && exit"
-#  after_script:
-#    - rm -rf ~/.ssh
+create-.env:
+  stage: .env-generation
+  image: alpine:latest
+  script:
+    - |
+      cat > ./backend/.env << EOF
+      NODE_ENV='production'
+      RECAPTCHA_SECRET_KEY=$RECAPTCHA_SECRET_KEY
+      HUGO_EMAIL=$HUGO_EMAIL
+      HUGO_PHONE=$HUGO_PHONE
+      SERVER_PORT=$SERVER_PORT
+      SECRET_PHRASE_TOKEN=$SECRET_PHRASE_TOKEN
+      AWS_REGION=$AWS_REGION
+      AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+      AWS_S3_BUCKET_NAME=$AWS_S3_BUCKET_NAME
+      DB_USERNAME=$DB_USERNAME
+      DB_PASSWORD=$DB_PASSWORD
+      DB_CLUSTER=$DB_CLUSTER
+      DB_NAME=$DB_NAME
+      DB_APPNAME=$DB_APPNAME
+      EOF
+    - cat ./backend/.env
+    - echo "HUGO_PHONE=$HUGO_PHONE"
+    - |
+      cat > .env.local << EOF
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+      NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+      NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
+      API_URL_FROM_SERVER=$API_URL_FROM_SERVER
+      EOF
+    - cat .env.local
+  artifacts:
+    paths:
+      - ./backend/.env
+      - .env.local
+    expire_in: 1 hour
+
+build-backend:
+  stage: build-backend
+  image: docker:latest
+  dependencies:
+    - create-.env
+  before_script:
+    # Se connecter a gitlab registry
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+      $CI_REGISTRY
+  script:
+    - docker-compose -f docker-compose.ci.yml build backend
+    - docker-compose -f docker-compose.ci.yml push backend
+    # Enregistre un backup avec la réf du commit
+    - docker tag ${CI_REGISTRY_IMAGE}/backend:latest
+      ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
+    - docker push ${CI_REGISTRY_IMAGE}/backend:${CI_COMMIT_SHA}
+
+build-frontend:
+  stage: build-frontend
+  image: docker:latest
+  dependencies:
+    - create-.env
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+      $CI_REGISTRY
+    # Run l'image backend nécessaire pour que le ront fetch les données pour le SSG
+    - docker-compose -f docker-compose.ci.yml pull backend
+    - docker-compose -f docker-compose.ci.yml up -d backend
+    # Attendre que le backend soit prêt
+    - sleep 10
+    # Afficher les logs du backend
+    - docker-compose -f docker-compose.ci.yml logs backend
+  script:
+    # Temporairement, ajoute avant la commande build
+    - apk add --no-cache curl
+    - curl http://backend:3002/health || echo "Cannot reach backend"
+    - curl http://localhost:3002/health || echo "Backend health check failed"
+    - docker-compose -f docker-compose.ci.yml build frontend
+    - docker-compose -f docker-compose.ci.yml push frontend
+    # Enregistre un backup avec la réf du commit
+    - docker tag ${CI_REGISTRY_IMAGE}/frontend:latest
+      ${CI_REGISTRY_IMAGE}/frontend:${CI_COMMIT_SHA}
+    - docker push "$CI_REGISTRY_IMAGE/frontend:${CI_COMMIT_SHA}"
+
+deploy-docker-images:
+  image: ubuntu:latest
+  stage: deployToVPS
+  before_script:
+    - apt-get -yq update
+    - apt-get -yqq install ssh
+    - install -m 600 -D /dev/null ~/.ssh/id_rsa
+    - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
+    - ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
+  script:
+    - scp ./docker-compose.prod.yml $SSH_USER@$SSH_HOST:$WORK_DIR
+    - ssh $SSH_USER@$SSH_HOST "cd $WORK_DIR && docker login -u $CI_REGISTRY_USER
+      -p $CI_REGISTRY_PASSWORD $CI_REGISTRY && docker compose -f
+      docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml
+      up -d backend && docker compose -f docker-compose.prod.yml up -d frontend
+      && exit"
+  after_script:
+    - rm -rf ~/.ssh

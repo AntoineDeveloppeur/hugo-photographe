@@ -36,6 +36,7 @@ const eslintConfig = [
       "@typescript-eslint/no-unsafe-function-type": "off",
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/triple-slash-reference": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
     },
   },
 ]

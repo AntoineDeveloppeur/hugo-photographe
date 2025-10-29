@@ -136,6 +136,10 @@ voir le résultat.
     cd backend | pnpm watch
     ```
   - modifier le fichier .env.local avec pour modèle .env.VPS.local
+  - Push dans le pipeline CI/CD
+  ```
+  git push CICD prod
+  ```
   
   
   ### Sur le VPS
@@ -145,9 +149,8 @@ voir le résultat.
     pm2 stop <numéroDuBackend>
     pm2 stop <numéroFrontend>
     ```
-  
-  ### En Local
+  - modifier le fichier .env.local avec pour modèle .env.VPS.docker
   - Push dans le pipeline CI/CD
-    ```
-    git push CICD prod
-    ```
+  ```
+  git push CICD prod
+  ```

@@ -69,7 +69,6 @@ export default function FormAjouterProjet() {
 
     const dynamicFieldsSchema = z.object(dynamicFields)
 
-    // @ts-expect-error merge fonctionne mais apporte des problème de typages qui ne sont pas véritable
     setProjectSchema(basicSchema.merge(dynamicFieldsSchema))
   }, [photoRefs, paragraphArray])
 

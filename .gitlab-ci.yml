@@ -22,8 +22,8 @@ unit-tests:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci --legacy-peer-deps
-    - cd backend && npm ci --legacy-peer-deps && cd ../
+    - npm ci
+    - cd backend && npm ci  && cd ../
     # converti les fichiers typescript en js pour faire fonctionner les tests
     - cd backend && npm run build && cd ../
     - npm run test
@@ -37,7 +37,7 @@ lint:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci --legacy-peer-deps
+    - npm ci
     - npm run lint
   allow_failure: true
 
@@ -45,14 +45,14 @@ typescript-frontend:
   stage: test
   image: node:20-alpine
   script:
-    - npm ci --legacy-peer-deps
+    - npm ci
     - npm run type-check
 
 typescript-backend:
   stage: test
   image: node:20-alpine
   script:
-    - cd ./backend && npm ci --legacy-peer-deps
+    - cd ./backend && npm ci
     - npm run type-check
 
 # Créer le fichier .env à partir des variables CI/CD

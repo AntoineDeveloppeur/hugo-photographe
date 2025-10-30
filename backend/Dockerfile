@@ -16,7 +16,7 @@ COPY package*.json ./
 
 # Supprimer complètement node_modules s'il existe et installer proprement
 RUN rm -rf node_modules package-lock.json && \
-    npm install && \
+    npm ci && \
     npm rebuild bcrypt --build-from-source && \
     npm cache clean --force
 

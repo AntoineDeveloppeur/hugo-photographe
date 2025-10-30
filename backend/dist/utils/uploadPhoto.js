@@ -1,5 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import getS3Client from "@/backend/utils/getS3Client.js";
+import getS3Client from "../utils/getS3Client.js";
 import fs from "fs";
 export default async function uploadPhoto(file) {
     try {

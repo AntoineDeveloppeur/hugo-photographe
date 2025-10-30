@@ -1,6 +1,6 @@
 import express from "express";
-import { createProject, getProjects, deleteProject, } from "@/backend/controllers/project.js";
-import checkToken from "@/backend/middleware/checkToken.js";
+import { createProject, getProjects, deleteProject, } from "../controllers/project.js";
+import checkToken from "../middleware/checkToken.js";
 const router = express.Router();
 // Use the createProject function as middleware with proper type handling
 router.post("/create", (req, res, next) => {

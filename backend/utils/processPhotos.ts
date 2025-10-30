@@ -20,7 +20,6 @@ export default async function processPhotos(
       // Obtenir les métadonnées de l'image originale
       const { width, height, format } = await sharp(file.filepath).metadata()
       // Modifier la taille si metadata disponibles
-      console.error("width", width, "height", height)
       const resizedFile =
         width && height
           ? await resizePhoto(width, height, format, file)

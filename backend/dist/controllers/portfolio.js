@@ -1,5 +1,5 @@
-import Portfolio from "@/backend/models/portfolio.js";
-import formatError from "@/backend/utils/formatError.js";
+import Portfolio from "../models/portfolio.js";
+import formatError from "../utils/formatError.js";
 const portfolioCtrl = {
     update: async (req, res) => {
         console.log("portfolioCtrl req.body", req.body);

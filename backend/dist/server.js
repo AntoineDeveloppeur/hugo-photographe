@@ -4,11 +4,11 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
-import projectRoutes from "@/backend/routes/project.js";
-import userRoutes from "@/backend/routes/user.js";
-import recaptchaRoute from "@/backend/routes/recaptcha.js";
-import photoRoute from "@/backend/routes/photo.js";
-import portfolioRoute from "@/backend/routes/portfolio.js";
+import projectRoutes from "./routes/project.js";
+import userRoutes from "./routes/user.js";
+import recaptchaRoute from "./routes/recaptcha.js";
+import photoRoute from "./routes/photo.js";
+import portfolioRoute from "./routes/portfolio.js";
 // Configuration des variables d'environnement
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

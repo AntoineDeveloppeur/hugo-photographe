@@ -1,7 +1,7 @@
 import sharp from "sharp";
 import path from "path";
-import { resizePhoto } from "@/backend/utils/resizePhoto.js";
-import { convertToWebp } from "@/backend/utils/convertToWebp.js";
+import { resizePhoto } from "../utils/resizePhoto.js";
+import { convertToWebp } from "../utils/convertToWebp.js";
 export default async function processPhotos(files) {
     const processedFilesArray = await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
         const file = fileArray?.[0];

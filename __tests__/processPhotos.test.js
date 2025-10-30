@@ -2,6 +2,7 @@ import sharp from "sharp"
 import { convertToWebp } from "@/backend/dist/utils/convertToWebp.js"
 import { resizePhoto } from "@/backend/dist/utils/resizePhoto.js"
 import processPhotos from "@/backend/dist/utils/processPhotos.js"
+import formidable from "formidable"
 
 jest.mock("sharp")
 

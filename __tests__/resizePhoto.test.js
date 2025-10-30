@@ -63,7 +63,7 @@ describe("resizePhoto", () => {
 
     // Assert
     expect(sharp).toHaveBeenCalledTimes(1)
-    expect(result.filepath).toBe(`local\\${mockUuidValue}.webp`)
+    expect(result.filepath).toBe(`local/${mockUuidValue}.webp`)
   })
   it("with and height of returned object should be the same is result from calculateResizeDimensions fonction", async () => {
     // Arrange

@@ -13,25 +13,15 @@ import { useRouter } from "next/navigation"
 import useGetPortfolio from "@/hooks/useGetPortfolio"
 import Loader from "@/components/ui/atoms/Loader/Loader"
 import Paragraphes from "@/components/ui/atoms/Paragraphes/Paragraphes"
-import { MultipleContainers } from "./MultipleContainers"
 
 export default function ModifierPorfolio() {
   const Router = useRouter()
 
-  const photos = {
-    A: [
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320776184-paysage.webp",
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320789765-maquillage.webp",
-    ],
-    B: [
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
-    ],
-    C: [
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
-    ],
-  }
+  const columns: ColumnType[] = [
+    { column: "1" },
+    { column: "2" },
+    { column: "3" },
+  ]
 
   const { isPortfolioFetching, portfolio, setPortfolio, error } =
     useGetPortfolio()
@@ -56,6 +46,20 @@ export default function ModifierPorfolio() {
     }
   }
 
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event
+    if (!over) return
+    const photoId = active.id as string
+    const newStatus = over.id as PhotoVariableProps["column"]
+    setPortfolio((prevPortfolio) =>
+      prevPortfolio.map((prevPhoto) =>
+        prevPhoto.id === photoId
+          ? { ...prevPhoto, column: newStatus }
+          : prevPhoto
+      )
+    )
+  }
+
   return (
     <section className={styles.modifierPortfolio}>
       <div className={styles.modifierPortfolio__largeScreen}>
@@ -71,11 +75,21 @@ export default function ModifierPorfolio() {
           />
         )}
         <div className={styles.modifierPortfolio__largeScreen__columns}>
-          <MultipleContainers
-            setPortfolio={setPortfolio}
-            deleteOption={modeSupprimerPhoto}
-            items={photos}
-          />
+          <DndContext onDragEnd={handleDragEnd}>
+            {columns.map((column: ColumnType) => {
+              return (
+                <ColonneModifierPortfolio
+                  key={column.column}
+                  column={column}
+                  photos={portfolio.filter(
+                    (photo) => photo.column === column.column
+                  )}
+                  deleteOption={modeSupprimerPhoto}
+                  setPortfolio={setPortfolio}
+                />
+              )
+            })}
+          </DndContext>
         </div>
         <div className={styles.modifierPortfolio__largeScreen__buttonsWrapper}>
           <FormAjouterPhoto

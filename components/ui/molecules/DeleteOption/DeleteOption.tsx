@@ -57,13 +57,7 @@ export default function DeleteOption({
       // if (success && setItems) {
       // Utiliser la fonction updater pour filtrer la photo supprimée
       console.log('je suis a if (deleteType === "photo" && setItems) { ')
-      setItems((prevItems: Items) => {
-        console.log("je suis a  setItems((prevItems: any) => {")
-        const { column, index } = findPositionOfURL(id, prevItems)
-        if (index === null || !column) return prevItems
-        return deleteURL(prevItems, column, index)
-      })
-
+      setItems((prevItems: Items) => deleteURL(id, prevItems))
       setModalState("DELETIONSUCCESS")
       // }
       // Fails are handled by useDeletePhoto

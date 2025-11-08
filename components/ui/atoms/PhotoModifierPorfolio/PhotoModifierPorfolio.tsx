@@ -19,7 +19,7 @@ export default function PhotoModifierPorfolio({
             setItems={setItems}
           />
         )}
-        <PhotoBasic photo={{ src: url, alt: "jjj", width: 400, height: 300 }} />
+        <PhotoBasic photo={{ src: url, alt: "jjj" }} />
       </div>
     </>
   )

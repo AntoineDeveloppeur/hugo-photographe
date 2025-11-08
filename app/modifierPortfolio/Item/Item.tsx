@@ -5,7 +5,7 @@ import type { Transform } from "@dnd-kit/utilities"
 
 import { Handle, Remove } from "./components"
 import PhotoModifierPorfolio from "@/components/ui/atoms/PhotoModifierPorfolio/PhotoModifierPorfolio"
-import { Items } from "@/types/index"
+import { ItemsProps } from "@/types/index"
 import styles from "./Item.module.css"
 
 export interface Props {
@@ -26,8 +26,7 @@ export interface Props {
   wrapperStyle?: React.CSSProperties
   value: React.ReactNode
   deleteOption: any
-  pic: any
-  setItems: Dispatch<SetStateAction<Items>>
+  setItems: Dispatch<SetStateAction<ItemsProps>>
   onRemove?(): void
   renderItem?(args: {
     dragOverlay: boolean

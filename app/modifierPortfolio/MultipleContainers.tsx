@@ -36,8 +36,7 @@ import { CSS } from "@dnd-kit/utilities"
 import { coordinateGetter as multipleContainersCoordinateGetter } from "./multipleContainersKeyboardCoordinates"
 
 import { Item, Container, ContainerProps } from "./"
-
-import { createRange } from "./createRange"
+import { ItemsProps, PhotoVariableProps } from "@/types/index"
 
 export default {
   title: "Presets/Sortable/Multiple Containers",
@@ -57,7 +56,7 @@ function DroppableContainer({
 }: ContainerProps & {
   disabled?: boolean
   id: UniqueIdentifier
-  items: UniqueIdentifier[]
+  items: ItemsProps
   style?: React.CSSProperties
 }) {
   const {
@@ -113,8 +112,6 @@ const dropAnimation: DropAnimation = {
     },
   }),
 }
-
-type Items = Record<UniqueIdentifier, UniqueIdentifier[]>
 
 interface Props {
   adjustScale?: boolean
@@ -250,7 +247,7 @@ export function MultipleContainers({
     },
     [activeId, items]
   )
-  const [clonedItems, setClonedItems] = useState<Items | null>(null)
+  const [clonedItems, setClonedItems] = useState<ItemsProps | null>(null)
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
@@ -262,7 +259,7 @@ export function MultipleContainers({
     if (id in items) {
       return id
     }
-
+    // TODO : revoir la façon doit est cherché l'url = id
     return Object.keys(items).find((key) => items[key].includes(id))
   }
 
@@ -272,7 +269,7 @@ export function MultipleContainers({
     if (!container) {
       return -1
     }
-
+    // TODO : revoir la façon doit est cherché l'url = id
     const index = items[container].indexOf(id)
 
     return index
@@ -326,7 +323,9 @@ export function MultipleContainers({
           setItems((items) => {
             const activeItems = items[activeContainer]
             const overItems = items[overContainer]
+            // TODO indexOf overId ne fonctionne pas overId est un string et moi je veux chercher dans un objet
             const overIndex = overItems.indexOf(overId)
+            // TODO indexOf ne fonctionne pas
             const activeIndex = activeItems.indexOf(active.id)
 
             let newIndex: number
@@ -351,7 +350,7 @@ export function MultipleContainers({
             return {
               ...items,
               [activeContainer]: items[activeContainer].filter(
-                (item) => item !== active.id
+                (item: PhotoVariableProps) => item.src !== active.id
               ),
               [overContainer]: [
                 ...items[overContainer].slice(0, newIndex),
@@ -390,10 +389,10 @@ export function MultipleContainers({
         }
 
         if (overId === TRASH_ID) {
-          setItems((items) => ({
+          setItems((items: ItemsProps) => ({
             ...items,
             [activeContainer]: items[activeContainer].filter(
-              (id) => id !== activeId
+              (id) => id.src !== activeId
             ),
           }))
           setActiveId(null)
@@ -405,10 +404,10 @@ export function MultipleContainers({
 
           unstable_batchedUpdates(() => {
             setContainers((containers) => [...containers, newContainerId])
-            setItems((items) => ({
+            setItems((items: ItemsProps) => ({
               ...items,
               [activeContainer]: items[activeContainer].filter(
-                (id) => id !== activeId
+                (id) => id.src !== activeId
               ),
               [newContainerId]: [active.id],
             }))
@@ -420,11 +419,15 @@ export function MultipleContainers({
         const overContainer = findContainer(overId)
 
         if (overContainer) {
+          // TODO : revoir la façon doit est cherché l'url = id
+
           const activeIndex = items[activeContainer].indexOf(active.id)
+          // TODO : revoir la façon doit est cherché l'url = id
+
           const overIndex = items[overContainer].indexOf(overId)
 
           if (activeIndex !== overIndex) {
-            setItems((items) => ({
+            setItems((items: ItemsProps) => ({
               ...items,
               [overContainer]: arrayMove(
                 items[overContainer],
@@ -477,8 +480,8 @@ export function MultipleContainers({
                   return (
                     <SortableItem
                       disabled={isSortingContainer}
-                      key={value}
-                      id={value}
+                      key={value.url}
+                      id={value.url}
                       index={index}
                       handle={handle}
                       style={getItemStyles}
@@ -561,14 +564,14 @@ export function MultipleContainers({
       >
         {items[containerId].map((item, index) => (
           <Item
-            key={item}
-            value={item}
+            key={item.src}
+            value={item.src}
             handle={handle}
             style={getItemStyles({
               containerId,
               overIndex: -1,
               index: getIndex(item),
-              value: item,
+              value: item.src,
               isDragging: false,
               isSorting: false,
               isDragOverlay: false,

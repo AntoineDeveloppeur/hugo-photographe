@@ -1,11 +1,11 @@
-import React, { useEffect } from "react"
+import React, { useEffect, SetStateAction, Dispatch } from "react"
 import classNames from "classnames"
 import type { DraggableSyntheticListeners } from "@dnd-kit/core"
 import type { Transform } from "@dnd-kit/utilities"
 
 import { Handle, Remove } from "./components"
 import PhotoModifierPorfolio from "@/components/ui/atoms/PhotoModifierPorfolio/PhotoModifierPorfolio"
-
+import { Items } from "@/types/index"
 import styles from "./Item.module.css"
 
 export interface Props {
@@ -26,8 +26,8 @@ export interface Props {
   wrapperStyle?: React.CSSProperties
   value: React.ReactNode
   deleteOption: any
-  setPortfolio: any
   pic: any
+  setItems: Dispatch<SetStateAction<Items>>
   onRemove?(): void
   renderItem?(args: {
     dragOverlay: boolean
@@ -67,8 +67,7 @@ export const Item = React.memo(
         value,
         wrapperStyle,
         deleteOption,
-        setPortfolio,
-        pic,
+        setItems,
         ...props
       },
       ref
@@ -142,14 +141,14 @@ export const Item = React.memo(
             )}
             style={style}
             data-cypress="draggable-item"
-            {...(!handle ? listeners : undefined)}
+            {...(!handle && !deleteOption ? listeners : undefined)}
             {...props}
             tabIndex={!handle ? 0 : undefined}
           >
             <PhotoModifierPorfolio
-              photo={value}
+              url={value as string}
               deleteOption={deleteOption}
-              setPortfolio={setPortfolio}
+              setItems={setItems}
             />
             <span className={styles.Actions}>
               {onRemove ? (

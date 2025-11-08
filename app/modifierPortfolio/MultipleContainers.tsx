@@ -134,6 +134,7 @@ interface Props {
   wrapperStyle?(args: { index: number }): React.CSSProperties
   itemCount?: number
   items?: Items
+  setItems: any
   handle?: boolean
   renderItem?: any
   strategy?: SortingStrategy
@@ -142,7 +143,6 @@ interface Props {
   trashable?: boolean
   scrollable?: boolean
   vertical?: boolean
-  setPortfolio: any
   deleteOption: any
 }
 
@@ -156,7 +156,8 @@ export function MultipleContainers({
   cancelDrop,
   columns,
   handle = false,
-  items: initialItems,
+  items,
+  setItems,
   containerStyle,
   coordinateGetter = multipleContainersCoordinateGetter,
   getItemStyles = () => ({}),
@@ -168,18 +169,8 @@ export function MultipleContainers({
   trashable = false,
   vertical = false,
   scrollable,
-  setPortfolio,
   deleteOption,
 }: Props) {
-  const [items, setItems] = useState<Items>(
-    () =>
-      initialItems ?? {
-        A: createRange(itemCount, (index) => `A${index + 1}`),
-        B: createRange(itemCount, (index) => `B${index + 1}`),
-        C: createRange(itemCount, (index) => `C${index + 1}`),
-        D: createRange(itemCount, (index) => `D${index + 1}`),
-      }
-  )
   const [containers, setContainers] = useState(
     Object.keys(items) as UniqueIdentifier[]
   )
@@ -496,7 +487,7 @@ export function MultipleContainers({
                       containerId={containerId}
                       getIndex={getIndex}
                       deleteOption={deleteOption}
-                      setPortfolio={setPortfolio}
+                      setItems={setItems}
                     />
                   )
                 })}
@@ -669,7 +660,7 @@ interface SortableItemProps {
   renderItem(): React.ReactElement
   wrapperStyle({ index }: { index: number }): React.CSSProperties
   deleteOption: any
-  setPortfolio: any
+  setItems: any
 }
 
 function SortableItem({
@@ -683,7 +674,7 @@ function SortableItem({
   getIndex,
   wrapperStyle,
   deleteOption,
-  setPortfolio,
+  setItems,
 }: SortableItemProps) {
   const {
     setNodeRef,
@@ -726,7 +717,7 @@ function SortableItem({
       listeners={listeners}
       renderItem={renderItem}
       deleteOption={deleteOption}
-      setPortfolio={setPortfolio}
+      setItems={setItems}
     />
   )
 }

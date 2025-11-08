@@ -1,25 +1,25 @@
 "use client"
 
 import styles from "./photo-modifier-portfolio.module.scss"
-import { PhotoProps } from "@/types"
+import { PhotoModifierPortfolioProps } from "@/types"
 import PhotoBasic from "../PhotoBasic/PhotoBasic"
 import DeleteOption from "../../molecules/DeleteOption/DeleteOption"
 
 export default function PhotoModifierPorfolio({
-  photo,
+  url,
   deleteOption,
-  setPortfolio,
-}: PhotoProps) {
+  setItems,
+}: PhotoModifierPortfolioProps) {
   return (
     <>
       <div className={styles.imageWrapper}>
         {deleteOption && (
           <DeleteOption
-            id={photo}
-            setPortfolio={setPortfolio}
+            id={url}
+            setItems={setItems}
           />
         )}
-        <PhotoBasic photo={{ src: photo, alt: "jjj" }} />
+        <PhotoBasic photo={{ src: url, alt: "jjj", width: 400, height: 300 }} />
       </div>
     </>
   )

@@ -18,8 +18,6 @@ export type PhotoProps = {
   sizes?: string
   mainPhoto?: boolean
   blurDataURL?: string | undefined
-  deleteOption?: boolean
-  setPortfolio?: Dispatch<SetStateAction<PhotoVariableProps[]>>
 }
 
 export type photoSet = PhotoVariableProps[]
@@ -109,4 +107,12 @@ export interface Data {
 
 export interface ColumnType {
   column: string
+}
+
+export type Items = Record<string, string[]>
+
+export type PhotoModifierPortfolioProps = {
+  url: string
+  deleteOption?: boolean
+  setItems: Dispatch<SetStateAction<Items>>
 }

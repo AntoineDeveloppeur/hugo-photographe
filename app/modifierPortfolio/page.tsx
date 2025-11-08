@@ -2,11 +2,9 @@
 
 import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjectPage"
 import styles from "./modifier-portfolio.module.scss"
-import type { PhotoVariableProps, ColumnType } from "@/types"
+import type { Items } from "@/types"
 import Button from "@/components/ui/atoms/Button/Button"
 import { useState } from "react"
-import { ColonneModifierPortfolio } from "@/components/ui/molecules/ColonneModifierPortfolio/ColonneModifierPortfolio"
-import { DragEndEvent, DndContext } from "@dnd-kit/core"
 import FormAjouterPhoto from "@/components/ui/organisms/FormAjouterPhoto/FormAjouterPhoto"
 import updatePortfolio from "@/utils/updatePortfolio"
 import { useRouter } from "next/navigation"
@@ -25,13 +23,15 @@ export default function ModifierPorfolio() {
     ],
     B: [
       "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
+      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320828055-concert2.webp",
     ],
     C: [
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
-      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
+      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320844086-gym.webp",
+      "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320854916-cuisine.webp",
     ],
   }
+
+  const [items, setItems] = useState<Items>(photos)
 
   const { isPortfolioFetching, portfolio, setPortfolio, error } =
     useGetPortfolio()
@@ -72,9 +72,10 @@ export default function ModifierPorfolio() {
         )}
         <div className={styles.modifierPortfolio__largeScreen__columns}>
           <MultipleContainers
-            setPortfolio={setPortfolio}
             deleteOption={modeSupprimerPhoto}
-            items={photos}
+            items={items}
+            setItems={setItems}
+            minimal={true}
           />
         </div>
         <div className={styles.modifierPortfolio__largeScreen__buttonsWrapper}>

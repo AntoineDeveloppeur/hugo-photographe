@@ -130,7 +130,7 @@ interface Props {
   }): React.CSSProperties
   wrapperStyle?(args: { index: number }): React.CSSProperties
   itemCount?: number
-  items?: Items
+  items: ItemsProps
   setItems: any
   handle?: boolean
   renderItem?: any
@@ -169,7 +169,7 @@ export function MultipleContainers({
   deleteOption,
 }: Props) {
   const [containers, setContainers] = useState(
-    Object.keys(items) as UniqueIdentifier[]
+    Object.keys(items as ItemsProps) as UniqueIdentifier[]
   )
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
   const lastOverId = useRef<UniqueIdentifier | null>(null)
@@ -259,8 +259,9 @@ export function MultipleContainers({
     if (id in items) {
       return id
     }
-    // TODO : revoir la façon doit est cherché l'url = id
-    return Object.keys(items).find((key) => items[key].includes(id))
+    return Object.keys(items).find((key) =>
+      items[key].some((photo) => photo.src === id)
+    )
   }
 
   const getIndex = (id: UniqueIdentifier) => {
@@ -270,7 +271,8 @@ export function MultipleContainers({
       return -1
     }
     // TODO : revoir la façon doit est cherché l'url = id
-    const index = items[container].indexOf(id)
+    // const index = items[container].indexOf(id)
+    const index = items[container].find((photo) => photo.src === id)
 
     return index
   }
@@ -324,9 +326,15 @@ export function MultipleContainers({
             const activeItems = items[activeContainer]
             const overItems = items[overContainer]
             // TODO indexOf overId ne fonctionne pas overId est un string et moi je veux chercher dans un objet
-            const overIndex = overItems.indexOf(overId)
+            // const overIndex = overItems.indexOf(overId)
+            const overIndex = overItems.findIndex(
+              (photo) => photo.src === overId
+            )
             // TODO indexOf ne fonctionne pas
-            const activeIndex = activeItems.indexOf(active.id)
+            // const activeIndex = activeItems.indexOf(active.id)
+            const activeIndex = activeItems.findIndex(
+              (photo) => photo.src === active.id
+            )
 
             let newIndex: number
 
@@ -421,10 +429,16 @@ export function MultipleContainers({
         if (overContainer) {
           // TODO : revoir la façon doit est cherché l'url = id
 
-          const activeIndex = items[activeContainer].indexOf(active.id)
+          // const activeIndex = items[activeContainer].indexOf(active.id)
+          const activeIndex = items[activeContainer].findIndex(
+            (photo) => photo.src === active.id
+          )
           // TODO : revoir la façon doit est cherché l'url = id
 
-          const overIndex = items[overContainer].indexOf(overId)
+          // const overIndex = items[overContainer].indexOf(overId)
+          const overIndex = items[overContainer].findIndex(
+            (photo) => photo.src === overId
+          )
 
           if (activeIndex !== overIndex) {
             setItems((items: ItemsProps) => ({
@@ -480,8 +494,8 @@ export function MultipleContainers({
                   return (
                     <SortableItem
                       disabled={isSortingContainer}
-                      key={value.url}
-                      id={value.url}
+                      key={value.src}
+                      id={value.src}
                       index={index}
                       handle={handle}
                       style={getItemStyles}
@@ -570,13 +584,13 @@ export function MultipleContainers({
             style={getItemStyles({
               containerId,
               overIndex: -1,
-              index: getIndex(item),
+              index: getIndex(item.src),
               value: item.src,
               isDragging: false,
               isSorting: false,
               isDragOverlay: false,
             })}
-            color={getColor(item)}
+            color={getColor(item.src)}
             wrapperStyle={wrapperStyle({ index })}
             renderItem={renderItem}
           />

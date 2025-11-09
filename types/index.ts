@@ -9,6 +9,7 @@ export interface PhotoVariableProps {
   width: number
   height: number
   priority?: boolean
+  _id?: string
 }
 
 export type PhotoProps = {

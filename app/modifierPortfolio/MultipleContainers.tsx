@@ -56,7 +56,7 @@ function DroppableContainer({
 }: ContainerProps & {
   disabled?: boolean
   id: UniqueIdentifier
-  items: ItemsProps
+  items: PhotoVariableProps[]
   style?: React.CSSProperties
 }) {
   const {
@@ -590,7 +590,7 @@ export function MultipleContainers({
               isSorting: false,
               isDragOverlay: false,
             })}
-            color={getColor(item.src)}
+            color={getColor(item)}
             wrapperStyle={wrapperStyle({ index })}
             renderItem={renderItem}
           />

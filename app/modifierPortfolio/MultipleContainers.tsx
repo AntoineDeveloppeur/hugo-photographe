@@ -223,7 +223,9 @@ export function MultipleContainers({
               droppableContainers: args.droppableContainers.filter(
                 (container) =>
                   container.id !== overId &&
-                  containerItems.includes(container.id)
+                  //TODO
+                  // containerItems.includes(container.id)
+                  containerItems.some((item) => item.src === container.id)
               ),
             })[0]?.id
           }
@@ -260,7 +262,7 @@ export function MultipleContainers({
       return id
     }
     return Object.keys(items).find((key) =>
-      items[key].some((photo) => photo.src === id)
+      items[key].some((item) => item.src === id)
     )
   }
 
@@ -272,7 +274,7 @@ export function MultipleContainers({
     }
     // TODO : revoir la façon doit est cherché l'url = id
     // const index = items[container].indexOf(id)
-    const index = items[container].find((photo) => photo.src === id)
+    const index = items[container].find((item) => item.src === id)
 
     return index
   }
@@ -327,13 +329,11 @@ export function MultipleContainers({
             const overItems = items[overContainer]
             // TODO indexOf overId ne fonctionne pas overId est un string et moi je veux chercher dans un objet
             // const overIndex = overItems.indexOf(overId)
-            const overIndex = overItems.findIndex(
-              (photo) => photo.src === overId
-            )
+            const overIndex = overItems.findIndex((item) => item.src === overId)
             // TODO indexOf ne fonctionne pas
             // const activeIndex = activeItems.indexOf(active.id)
             const activeIndex = activeItems.findIndex(
-              (photo) => photo.src === active.id
+              (item) => item.src === active.id
             )
 
             let newIndex: number
@@ -431,13 +431,13 @@ export function MultipleContainers({
 
           // const activeIndex = items[activeContainer].indexOf(active.id)
           const activeIndex = items[activeContainer].findIndex(
-            (photo) => photo.src === active.id
+            (item) => item.src === active.id
           )
           // TODO : revoir la façon doit est cherché l'url = id
 
           // const overIndex = items[overContainer].indexOf(overId)
           const overIndex = items[overContainer].findIndex(
-            (photo) => photo.src === overId
+            (item) => item.src === overId
           )
 
           if (activeIndex !== overIndex) {

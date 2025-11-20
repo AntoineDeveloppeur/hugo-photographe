@@ -5,10 +5,10 @@ export default function adaptPortfolioToScreenSizeNewStructure(
   window: Window | undefined
 ): PhotoVariableProps[][] {
   if (typeof window === "undefined") {
-    return groupPhotosInOneColumn(portfolio)
+    return flattenAllPhotos(portfolio)
   }
   if (window.matchMedia("(max-width: 767px)").matches) {
-    return groupPhotosInOneColumn(portfolio)
+    return flattenAllPhotos(portfolio)
   } else if (window.matchMedia("(max-width: 1023px)").matches) {
     return groupPhotosInTwoColumns(portfolio)
   } else {
@@ -16,20 +16,20 @@ export default function adaptPortfolioToScreenSizeNewStructure(
   }
 }
 
-function groupPhotosInOneColumn(portfolio: ItemsProps): PhotoVariableProps[][] {
+function flattenAllPhotos(portfolio: ItemsProps): PhotoVariableProps[][] {
   return [Object.values(portfolio).flat()]
 }
 
 function groupPhotosInTwoColumns(
   portfolio: ItemsProps
 ): PhotoVariableProps[][] {
-  const photosInOneColumn = groupPhotosInOneColumn(portfolio)
+  const flattendPhotos = flattenAllPhotos(portfolio)
   const photosInTwoColumns: PhotoVariableProps[][] = Array.from(
     { length: 2 },
     () => []
   )
 
-  photosInOneColumn[0].forEach((photo, index) => {
+  flattendPhotos[0].forEach((photo, index) => {
     photosInTwoColumns[index % 2].push(photo)
   })
   return photosInTwoColumns

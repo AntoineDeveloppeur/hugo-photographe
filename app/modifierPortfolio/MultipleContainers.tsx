@@ -261,6 +261,9 @@ export function MultipleContainers({
     if (id in items) {
       return id
     }
+    //TODO
+    // return Object.keys(items).find((key) => items[key].includes(id))
+
     return Object.keys(items).find((key) =>
       items[key].some((item) => item.src === id)
     )
@@ -584,7 +587,7 @@ export function MultipleContainers({
             style={getItemStyles({
               containerId,
               overIndex: -1,
-              index: getIndex(item.src),
+              index: getIndex(item),
               value: item.src,
               isDragging: false,
               isSorting: false,

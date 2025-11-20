@@ -277,7 +277,7 @@ export function MultipleContainers({
     }
     // TODO : revoir la façon doit est cherché l'url = id
     // const index = items[container].indexOf(id)
-    const index = items[container].find((item) => item.src === id)
+    const index = items[container].findIndex((item) => item.src === id)
 
     return index
   }
@@ -490,7 +490,7 @@ export function MultipleContainers({
               onRemove={() => handleRemove(containerId)}
             >
               <SortableContext
-                items={items[containerId]}
+                items={items[containerId].map((item) => item.src)}
                 strategy={strategy}
               >
                 {items[containerId].map((value, index) => {

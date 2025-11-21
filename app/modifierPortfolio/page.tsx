@@ -4,91 +4,26 @@ import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjec
 import styles from "./modifier-portfolio.module.scss"
 import type { ItemsProps } from "@/types"
 import Button from "@/components/ui/atoms/Button/Button"
-import { useState } from "react"
-import FormAjouterPhoto from "@/components/ui/organisms/FormAjouterPhoto/FormAjouterPhoto"
-import updatePortfolio from "@/utils/updatePortfolio"
+import { useState, useEffect } from "react"
+import FormAjouterPhotoNewStructure from "@/components/ui/organisms/FormAjouterPhoto/FormAjouterPhotoNewStructure"
+import updatePortfolio from "@/utils/updatePortfolioNewStructure"
 import { useRouter } from "next/navigation"
-import useGetPortfolio from "@/hooks/useGetPortfolio"
+import useGetPortfolioNewStructure from "@/hooks/useGetPortfolioNewStructure"
 import Loader from "@/components/ui/atoms/Loader/Loader"
 import Paragraphes from "@/components/ui/atoms/Paragraphes/Paragraphes"
 import { MultipleContainers } from "./MultipleContainers"
-
+import fallbackPortfolioNewStructure from "@/data/fallbackPortfolioNewStructure.json"
 export default function ModifierPorfolio() {
   const Router = useRouter()
 
-  const photos = {
-    A: [
-      {
-        id: "775cfb9f-3065-427a-85ec-26dc24f5ec4b",
-        column: "1",
-        src: "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320765522-taiwan7.webp",
-        alt: "Photographie de Hugo Randez",
-        width: 3240,
-        height: 2160,
-        priority: false,
-        _id: "68fb9f994498268d7888f5df",
-      },
-      {
-        id: "d9b14dd4-fbfa-4e26-8899-69a5e74c1f95",
-        column: "2",
-        src: "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320776184-paysage.webp",
-        alt: "Photographie de Hugo Randez",
-        width: 3840,
-        height: 1867,
-        priority: false,
-        _id: "68fb9f994498268d7888f5e0",
-      },
-    ],
-    B: [
-      {
-        id: "fe227ab5-6dc0-46bd-b94e-983ed8770357",
-        column: "3",
-        src: "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320789765-maquillage.webp",
-        alt: "Photographie de Hugo Randez",
-        width: 3240,
-        height: 2160,
-        priority: false,
-        _id: "68fb9f994498268d7888f5e1",
-      },
-      {
-        id: "be03840b-8ba0-47d0-a736-79cf790a27d0",
-        column: "1",
-        src: "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320797776-concert.webp",
-        alt: "Photographie de Hugo Randez",
-        width: 3240,
-        height: 2160,
-        priority: false,
-        _id: "68fb9f994498268d7888f5e2",
-      },
-    ],
-    C: [
-      {
-        id: "451ebf41-fed3-4ab8-acc4-810cf1986cfb",
-        column: "2",
-        src: "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320808308-chien.webp",
-        alt: "Photographie de Hugo Randez",
-        width: 3295,
-        height: 2160,
-        priority: false,
-        _id: "68fb9f994498268d7888f5e3",
-      },
-      {
-        id: "097fa0c7-72af-4e55-9245-653dd799b280",
-        column: "3",
-        src: "https://photos-hugo.s3.eu-west-3.amazonaws.com/1761320819542-taureau.webp",
-        alt: "Photographie de Hugo Randez",
-        width: 3240,
-        height: 2160,
-        priority: false,
-        _id: "68fb9f994498268d7888f5e4",
-      },
-    ],
-  }
-
-  const [items, setItems] = useState<ItemsProps>(photos)
+  const [items, setItems] = useState<ItemsProps>(fallbackPortfolioNewStructure)
 
   const { isPortfolioFetching, portfolio, setPortfolio, error } =
-    useGetPortfolio()
+    useGetPortfolioNewStructure()
+
+  useEffect(() => {
+    setItems(portfolio)
+  }, [portfolio])
 
   const [modeSupprimerPhoto, setModeSupprimerPhoto] = useState<boolean>(false)
 
@@ -103,7 +38,7 @@ export default function ModifierPorfolio() {
     } else {
       const { success, error } = await updatePortfolio(
         window.localStorage.getItem("token") as string,
-        portfolio
+        items
       )
       if (error) alert(`portfolio pas mis à jour ${error}`)
       if (success) alert(`portfolio mis à jour avec succès`)
@@ -133,10 +68,7 @@ export default function ModifierPorfolio() {
           />
         </div>
         <div className={styles.modifierPortfolio__largeScreen__buttonsWrapper}>
-          <FormAjouterPhoto
-            photos={portfolio}
-            setPortfolio={setPortfolio}
-          />
+          <FormAjouterPhotoNewStructure setPortfolio={setPortfolio} />
           <Button
             text="mode supprimer photo"
             onclick={handleModeSupprimerPhoto}

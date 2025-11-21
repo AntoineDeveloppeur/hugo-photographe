@@ -115,5 +115,6 @@ export type ItemsProps = Record<string, PhotoVariableProps[]>
 export type PhotoModifierPortfolioProps = {
   url: string
   deleteOption?: boolean
+  items: ItemsProps
   setItems: Dispatch<SetStateAction<ItemsProps>>
 }

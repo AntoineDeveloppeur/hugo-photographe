@@ -9,16 +9,17 @@ import Button from "../../atoms/Button/Button"
 import ButtonSecondary from "../../atoms/ButtonSecondary/ButtonSecondary"
 import Loader from "../../atoms/Loader/Loader"
 import useDeleteProject from "@/hooks/useDeleteProject"
-import useDeletePhoto from "@/hooks/useDeletePhoto"
+import useDeletePhotoFromDB from "@/hooks/useDeletePhotoFromDBNewStructure"
 import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
-import { deleteURL, findPositionOfURL } from "@/utils/portfolioDataOperation"
-import { Items } from "@/types/index"
+import { deletePhotoByUrl } from "@/utils/portfolioDataOperationNewStructure"
+import { ItemsProps } from "@/types/index"
 
 interface DeleteOptionTypes {
   id: string
   title?: string
-  setItems?: Dispatch<SetStateAction<Items>>
+  items?: ItemsProps
+  setItems?: Dispatch<SetStateAction<ItemsProps>>
 }
 
 type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"
@@ -26,6 +27,7 @@ type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"
 export default function DeleteOption({
   id,
   title,
+  items,
   setItems,
 }: DeleteOptionTypes) {
   const Router = useRouter()
@@ -40,7 +42,7 @@ export default function DeleteOption({
   const [modalState, setModalState] = useState<modalStateType>("CONFIRMING")
 
   const { deleteProject } = useDeleteProject()
-  const { deletePhoto } = useDeletePhoto()
+  const { deletePhotoFromDB } = useDeletePhotoFromDB()
 
   const handleYes = async () => {
     setModalState("DELETING")
@@ -53,14 +55,13 @@ export default function DeleteOption({
       // Fails are handled by useDeleteProject
     }
     if (deleteType === "photo" && setItems) {
-      const { success } = await deletePhoto(id)
-      if (success && setItems) {
-        // Utiliser la fonction updater pour filtrer la photo supprimée
+      const { success } = await deletePhotoFromDB(id)
+      if (success) {
         console.log('je suis a if (deleteType === "photo" && setItems) { ')
-        setItems((prevItems: Items) => deleteURL(id, prevItems))
+        setItems((prevItems) => deletePhotoByUrl(id, prevItems))
         setModalState("DELETIONSUCCESS")
       }
-      // Fails are handled by useDeletePhoto
+      // Fails are handled by useDeletePhotoFromDB
     }
   }
   const handleNo = () => {

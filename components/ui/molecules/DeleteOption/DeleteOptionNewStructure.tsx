@@ -8,7 +8,7 @@ import Paragraphes from "../../atoms/Paragraphes/Paragraphes"
 import Button from "../../atoms/Button/Button"
 import ButtonSecondary from "../../atoms/ButtonSecondary/ButtonSecondary"
 import Loader from "../../atoms/Loader/Loader"
-import useDeleteProject from "@/hooks/useDeleteProject"
+import useDeleteProjectFromDB from "@/hooks/useDeleteProjectFromDB"
 import useDeletePhotoFromDB from "@/hooks/useDeletePhotoFromDBNewStructure"
 import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
@@ -18,7 +18,6 @@ import { ItemsProps } from "@/types/index"
 interface DeleteOptionTypes {
   id: string
   title?: string
-  items?: ItemsProps
   setItems?: Dispatch<SetStateAction<ItemsProps>>
 }
 
@@ -27,7 +26,6 @@ type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"
 export default function DeleteOption({
   id,
   title,
-  items,
   setItems,
 }: DeleteOptionTypes) {
   const Router = useRouter()
@@ -41,7 +39,7 @@ export default function DeleteOption({
 
   const [modalState, setModalState] = useState<modalStateType>("CONFIRMING")
 
-  const { deleteProject } = useDeleteProject()
+  const { deleteProjectFromDB } = useDeleteProjectFromDB()
   const { deletePhotoFromDB } = useDeletePhotoFromDB()
 
   const handleYes = async () => {
@@ -50,7 +48,7 @@ export default function DeleteOption({
     console.log("setItems", setItems)
     if (deleteType === "project") {
       console.log("deleteType", deleteType)
-      const success = await deleteProject(id)
+      const success = await deleteProjectFromDB(id)
       if (success) setModalState("DELETIONSUCCESS")
       // Fails are handled by useDeleteProject
     }

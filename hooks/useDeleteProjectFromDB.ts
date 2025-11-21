@@ -3,10 +3,10 @@
 import formatError from "@/utils/formatError"
 import { useRouter } from "next/navigation"
 
-export default function useDeleteProject() {
+export default function useDeleteProjectFromDB() {
   const Router = useRouter()
 
-  async function deleteProject(_id: string): Promise<boolean> {
+  async function deleteProjectFromDB(_id: string): Promise<boolean> {
     try {
       if (!window.localStorage.getItem("token")) {
         Router.push("/connexion")
@@ -39,5 +39,5 @@ export default function useDeleteProject() {
     }
   }
 
-  return { deleteProject }
+  return { deleteProjectFromDB }
 }

@@ -6,7 +6,7 @@ import Paragraphes from "../../atoms/Paragraphes/Paragraphes"
 import Button from "../../atoms/Button/Button"
 import ButtonSecondary from "../../atoms/ButtonSecondary/ButtonSecondary"
 import Loader from "../../atoms/Loader/Loader"
-import useDeleteProject from "@/hooks/useDeleteProject"
+import useDeleteProject from "@/hooks/useDeleteProjectFromDB"
 
 type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"
 

@@ -56,7 +56,7 @@ function DroppableContainer({
 }: ContainerProps & {
   disabled?: boolean
   id: UniqueIdentifier
-  items: PhotoData[]
+  items: PhotoData[] | UniqueIdentifier[]
   style?: React.CSSProperties
 }) {
   const {
@@ -327,7 +327,7 @@ export function MultipleContainers({
         }
 
         if (activeContainer !== overContainer) {
-          setPortfolio((items) => {
+          setPortfolio((items: Portfolio) => {
             const activeItems = items[activeContainer]
             const overItems = items[overContainer]
             // TODO indexOf overId ne fonctionne pas overId est un string et moi je veux chercher dans un objet
@@ -587,13 +587,13 @@ export function MultipleContainers({
             style={getItemStyles({
               containerId,
               overIndex: -1,
-              index: getIndex(item),
+              index: getIndex(item.src),
               value: item.src,
               isDragging: false,
               isSorting: false,
               isDragOverlay: false,
             })}
-            color={getColor(item)}
+            color={getColor(item.src)}
             wrapperStyle={wrapperStyle({ index })}
             renderItem={renderItem}
           />
@@ -611,7 +611,7 @@ export function MultipleContainers({
 
     unstable_batchedUpdates(() => {
       setContainers((containers) => [...containers, newContainerId])
-      setPortfolio((items) => ({
+      setPortfolio((items: Portfolio) => ({
         ...items,
         [newContainerId]: [],
       }))

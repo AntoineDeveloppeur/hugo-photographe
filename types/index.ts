@@ -115,6 +115,5 @@ export type Portfolio = Record<string, PhotoData[]>
 export type PhotoModifierPortfolioProps = {
   url: string
   deleteOption?: boolean
-  items: Portfolio
   setPortfolio: Dispatch<SetStateAction<Portfolio>>
 }

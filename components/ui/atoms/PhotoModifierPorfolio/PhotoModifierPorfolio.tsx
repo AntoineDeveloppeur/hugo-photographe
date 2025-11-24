@@ -8,7 +8,6 @@ import DeleteOptionNewStructure from "../../molecules/DeleteOption/DeleteOptionN
 export default function PhotoModifierPorfolio({
   url,
   deleteOption,
-  items,
   setPortfolio,
 }: PhotoModifierPortfolioProps) {
   return (
@@ -17,7 +16,6 @@ export default function PhotoModifierPorfolio({
         {deleteOption && (
           <DeleteOptionNewStructure
             id={url}
-            items={items}
             setPortfolio={setPortfolio}
           />
         )}

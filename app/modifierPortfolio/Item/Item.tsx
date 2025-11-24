@@ -25,8 +25,8 @@ export interface Props {
   transition?: string | null
   wrapperStyle?: React.CSSProperties
   value: React.ReactNode
-  deleteOption: any
-  setPortfolio: Dispatch<SetStateAction<Portfolio>>
+  deleteOption?: boolean
+  setPortfolio?: Dispatch<SetStateAction<Portfolio>>
   onRemove?(): void
   renderItem?(args: {
     dragOverlay: boolean

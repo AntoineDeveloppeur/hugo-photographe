@@ -147,7 +147,7 @@ export const Item = React.memo(
             <PhotoModifierPorfolio
               url={value as string}
               deleteOption={deleteOption}
-              setPortfolio={setPortfolio}
+              setPortfolio={setPortfolio as Dispatch<SetStateAction<Portfolio>>}
             />
             <span className={styles.Actions}>
               {onRemove ? (

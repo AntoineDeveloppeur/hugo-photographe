@@ -5,13 +5,13 @@ import formatError from "@/utils/formatError"
 import React, { useRef } from "react"
 import postPhoto from "@/utils/postPhoto"
 import { useRouter } from "next/navigation"
-import { ItemsProps, PhotoData } from "@/types"
+import { Portfolio, PhotoData } from "@/types"
 import { Dispatch, SetStateAction } from "react"
 
 export default function FormAjouterPhoto({
   setPortfolio,
 }: {
-  setPortfolio: Dispatch<SetStateAction<ItemsProps>>
+  setPortfolio: Dispatch<SetStateAction<Portfolio>>
 }) {
   const Router = useRouter()
 

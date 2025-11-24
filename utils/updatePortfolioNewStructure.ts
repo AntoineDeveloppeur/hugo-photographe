@@ -1,4 +1,4 @@
-import { ItemsProps } from "@/types"
+import { Portfolio } from "@/types"
 import formatError from "@/utils/formatError"
 
 type PutPortfolioResult = {
@@ -8,7 +8,7 @@ type PutPortfolioResult = {
 
 export default async function updatePortfolio(
   token: string,
-  portfolio: ItemsProps
+  portfolio: Portfolio
 ): Promise<PutPortfolioResult> {
   console.log("body", JSON.stringify(portfolio))
   try {

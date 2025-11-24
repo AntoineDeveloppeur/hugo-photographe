@@ -9,7 +9,7 @@ export default function PhotoModifierPorfolio({
   url,
   deleteOption,
   items,
-  setItems,
+  setPortfolio,
 }: PhotoModifierPortfolioProps) {
   return (
     <>
@@ -18,7 +18,7 @@ export default function PhotoModifierPorfolio({
           <DeleteOptionNewStructure
             id={url}
             items={items}
-            setItems={setItems}
+            setPortfolio={setPortfolio}
           />
         )}
         <PhotoBasic photo={{ src: url, alt: "jjj" }} />

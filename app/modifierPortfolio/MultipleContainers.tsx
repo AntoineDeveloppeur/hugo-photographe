@@ -36,7 +36,7 @@ import { CSS } from "@dnd-kit/utilities"
 import { coordinateGetter as multipleContainersCoordinateGetter } from "./multipleContainersKeyboardCoordinates"
 
 import { Item, Container, ContainerProps } from "./"
-import { ItemsProps, PhotoData } from "@/types/index"
+import { Portfolio, PhotoData } from "@/types/index"
 
 export default {
   title: "Presets/Sortable/Multiple Containers",
@@ -130,8 +130,8 @@ interface Props {
   }): React.CSSProperties
   wrapperStyle?(args: { index: number }): React.CSSProperties
   itemCount?: number
-  items: ItemsProps
-  setItems: any
+  items: Portfolio
+  setPortfolio: any
   handle?: boolean
   renderItem?: any
   strategy?: SortingStrategy
@@ -154,7 +154,7 @@ export function MultipleContainers({
   columns,
   handle = false,
   items,
-  setItems,
+  setPortfolio,
   containerStyle,
   coordinateGetter = multipleContainersCoordinateGetter,
   getItemStyles = () => ({}),
@@ -169,7 +169,7 @@ export function MultipleContainers({
   deleteOption,
 }: Props) {
   const [containers, setContainers] = useState(
-    Object.keys(items as ItemsProps) as UniqueIdentifier[]
+    Object.keys(items as Portfolio) as UniqueIdentifier[]
   )
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
   const lastOverId = useRef<UniqueIdentifier | null>(null)
@@ -249,7 +249,7 @@ export function MultipleContainers({
     },
     [activeId, items]
   )
-  const [clonedItems, setClonedItems] = useState<ItemsProps | null>(null)
+  const [clonedItems, setClonedItems] = useState<Portfolio | null>(null)
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
@@ -286,7 +286,7 @@ export function MultipleContainers({
     if (clonedItems) {
       // Reset items to their original state in case items have been
       // Dragged across containers
-      setItems(clonedItems)
+      setPortfolio(clonedItems)
     }
 
     setActiveId(null)
@@ -327,7 +327,7 @@ export function MultipleContainers({
         }
 
         if (activeContainer !== overContainer) {
-          setItems((items) => {
+          setPortfolio((items) => {
             const activeItems = items[activeContainer]
             const overItems = items[overContainer]
             // TODO indexOf overId ne fonctionne pas overId est un string et moi je veux chercher dans un objet
@@ -400,7 +400,7 @@ export function MultipleContainers({
         }
 
         if (overId === TRASH_ID) {
-          setItems((items: ItemsProps) => ({
+          setPortfolio((items: Portfolio) => ({
             ...items,
             [activeContainer]: items[activeContainer].filter(
               (id) => id.src !== activeId
@@ -415,7 +415,7 @@ export function MultipleContainers({
 
           unstable_batchedUpdates(() => {
             setContainers((containers) => [...containers, newContainerId])
-            setItems((items: ItemsProps) => ({
+            setPortfolio((items: Portfolio) => ({
               ...items,
               [activeContainer]: items[activeContainer].filter(
                 (id) => id.src !== activeId
@@ -444,7 +444,7 @@ export function MultipleContainers({
           )
 
           if (activeIndex !== overIndex) {
-            setItems((items: ItemsProps) => ({
+            setPortfolio((items: Portfolio) => ({
               ...items,
               [overContainer]: arrayMove(
                 items[overContainer],
@@ -507,7 +507,7 @@ export function MultipleContainers({
                       containerId={containerId}
                       getIndex={getIndex}
                       deleteOption={deleteOption}
-                      setItems={setItems}
+                      setPortfolio={setPortfolio}
                     />
                   )
                 })}
@@ -611,7 +611,7 @@ export function MultipleContainers({
 
     unstable_batchedUpdates(() => {
       setContainers((containers) => [...containers, newContainerId])
-      setItems((items) => ({
+      setPortfolio((items) => ({
         ...items,
         [newContainerId]: [],
       }))
@@ -680,7 +680,7 @@ interface SortableItemProps {
   renderItem(): React.ReactElement
   wrapperStyle({ index }: { index: number }): React.CSSProperties
   deleteOption: any
-  setItems: any
+  setPortfolio: any
 }
 
 function SortableItem({
@@ -694,7 +694,7 @@ function SortableItem({
   getIndex,
   wrapperStyle,
   deleteOption,
-  setItems,
+  setPortfolio,
 }: SortableItemProps) {
   const {
     setNodeRef,
@@ -737,7 +737,7 @@ function SortableItem({
       listeners={listeners}
       renderItem={renderItem}
       deleteOption={deleteOption}
-      setItems={setItems}
+      setPortfolio={setPortfolio}
     />
   )
 }

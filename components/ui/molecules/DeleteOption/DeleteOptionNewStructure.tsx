@@ -13,12 +13,12 @@ import useDeletePhotoFromDB from "@/hooks/useDeletePhotoFromDBNewStructure"
 import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import { deletePhotoByUrl } from "@/utils/portfolioDataOperationNewStructure"
-import { ItemsProps } from "@/types/index"
+import { Portfolio } from "@/types/index"
 
 interface DeleteOptionTypes {
   id: string
   title?: string
-  setItems?: Dispatch<SetStateAction<ItemsProps>>
+  setPortfolio?: Dispatch<SetStateAction<Portfolio>>
 }
 
 type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"
@@ -26,7 +26,7 @@ type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"
 export default function DeleteOption({
   id,
   title,
-  setItems,
+  setPortfolio,
 }: DeleteOptionTypes) {
   const Router = useRouter()
 
@@ -45,18 +45,18 @@ export default function DeleteOption({
   const handleYes = async () => {
     setModalState("DELETING")
     console.log("je suis handleYes) { ")
-    console.log("setItems", setItems)
+    console.log("setPortfolio", setPortfolio)
     if (deleteType === "project") {
       console.log("deleteType", deleteType)
       const success = await deleteProjectFromDB(id)
       if (success) setModalState("DELETIONSUCCESS")
       // Fails are handled by useDeleteProject
     }
-    if (deleteType === "photo" && setItems) {
+    if (deleteType === "photo" && setPortfolio) {
       const { success } = await deletePhotoFromDB(id)
       if (success) {
-        console.log('je suis a if (deleteType === "photo" && setItems) { ')
-        setItems((prevItems) => deletePhotoByUrl(id, prevItems))
+        console.log('je suis a if (deleteType === "photo" && setPortfolio) { ')
+        setPortfolio((prevItems) => deletePhotoByUrl(id, prevItems))
         setModalState("DELETIONSUCCESS")
       }
       // Fails are handled by useDeletePhotoFromDB

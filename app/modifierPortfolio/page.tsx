@@ -2,9 +2,8 @@
 
 import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjectPage"
 import styles from "./modifier-portfolio.module.scss"
-import type { ItemsProps } from "@/types"
 import Button from "@/components/ui/atoms/Button/Button"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import FormAjouterPhotoNewStructure from "@/components/ui/organisms/FormAjouterPhoto/FormAjouterPhotoNewStructure"
 import updatePortfolio from "@/utils/updatePortfolioNewStructure"
 import { useRouter } from "next/navigation"
@@ -12,18 +11,11 @@ import useGetPortfolioNewStructure from "@/hooks/useGetPortfolioNewStructure"
 import Loader from "@/components/ui/atoms/Loader/Loader"
 import Paragraphes from "@/components/ui/atoms/Paragraphes/Paragraphes"
 import { MultipleContainers } from "./MultipleContainers"
-import fallbackPortfolioNewStructure from "@/data/fallbackPortfolioNewStructure.json"
 export default function ModifierPorfolio() {
   const Router = useRouter()
 
-  const [items, setItems] = useState<ItemsProps>(fallbackPortfolioNewStructure)
-
   const { isPortfolioFetching, portfolio, setPortfolio, error } =
     useGetPortfolioNewStructure()
-
-  useEffect(() => {
-    setItems(portfolio)
-  }, [portfolio])
 
   const [modeSupprimerPhoto, setModeSupprimerPhoto] = useState<boolean>(false)
 
@@ -38,7 +30,7 @@ export default function ModifierPorfolio() {
     } else {
       const { success, error } = await updatePortfolio(
         window.localStorage.getItem("token") as string,
-        items
+        portfolio
       )
       if (error) alert(`portfolio pas mis à jour ${error}`)
       if (success) alert(`portfolio mis à jour avec succès`)
@@ -62,8 +54,8 @@ export default function ModifierPorfolio() {
         <div className={styles.modifierPortfolio__largeScreen__columns}>
           <MultipleContainers
             deleteOption={modeSupprimerPhoto}
-            items={items}
-            setItems={setItems}
+            items={portfolio}
+            setPortfolio={setPortfolio}
             minimal={true}
           />
         </div>

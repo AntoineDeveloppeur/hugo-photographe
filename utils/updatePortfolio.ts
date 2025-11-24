@@ -1,4 +1,4 @@
-import { PhotoVariableProps } from "@/types"
+import { PhotoData } from "@/types"
 import formatError from "@/utils/formatError"
 
 type PutPortfolioResult = {
@@ -8,7 +8,7 @@ type PutPortfolioResult = {
 
 export default async function updatePortfolio(
   token: string,
-  portfolio: PhotoVariableProps[]
+  portfolio: PhotoData[]
 ): Promise<PutPortfolioResult> {
   try {
     const response = await fetch(

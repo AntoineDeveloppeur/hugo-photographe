@@ -1,8 +1,8 @@
-import { PhotoVariableProps } from "@/types"
+import { PhotoData } from "@/types"
 import formatError from "@/utils/formatError"
 
 type postPhotoResult = {
-  data: PhotoVariableProps | null
+  data: PhotoData | null
   error: string | null
 }
 

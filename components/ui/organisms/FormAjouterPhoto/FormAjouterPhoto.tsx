@@ -5,15 +5,15 @@ import formatError from "@/utils/formatError"
 import React, { useRef } from "react"
 import postPhoto from "@/utils/postPhoto"
 import { useRouter } from "next/navigation"
-import { PhotoVariableProps } from "@/types"
+import { PhotoData } from "@/types"
 import { Dispatch, SetStateAction } from "react"
 
 export default function FormAjouterPhoto({
   photos,
   setPortfolio,
 }: {
-  photos: PhotoVariableProps[]
-  setPortfolio: Dispatch<SetStateAction<PhotoVariableProps[]>>
+  photos: PhotoData[]
+  setPortfolio: Dispatch<SetStateAction<PhotoData[]>>
 }) {
   const Router = useRouter()
 
@@ -24,7 +24,7 @@ export default function FormAjouterPhoto({
     if (file) {
       const newPhoto = await submit(file)
       console.log("newPhoto", newPhoto)
-      setPortfolio([...photos, newPhoto as PhotoVariableProps])
+      setPortfolio([...photos, newPhoto as PhotoData])
     }
   }
 

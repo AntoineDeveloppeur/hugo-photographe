@@ -1,9 +1,9 @@
-import { PhotoVariableProps } from "@/types"
+import { PhotoData } from "@/types"
 
 export default function adaptPortfolioToScreenSize(
-  photos: PhotoVariableProps[],
+  photos: PhotoData[],
   window: Window | undefined
-): PhotoVariableProps[][] {
+): PhotoData[][] {
   if (typeof window === "undefined") {
     return groupPhotosInColumns(photos, 1)
   }
@@ -17,10 +17,10 @@ export default function adaptPortfolioToScreenSize(
 }
 
 function groupPhotosInColumns(
-  photos: PhotoVariableProps[],
+  photos: PhotoData[],
   columnCount: 1 | 2 | 3
-): PhotoVariableProps[][] {
-  const photosInColumns: PhotoVariableProps[][] | [][] = Array.from(
+): PhotoData[][] {
+  const photosInColumns: PhotoData[][] | [][] = Array.from(
     { length: columnCount },
     () => []
   )

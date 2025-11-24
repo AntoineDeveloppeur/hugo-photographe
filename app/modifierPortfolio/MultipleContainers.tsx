@@ -36,7 +36,7 @@ import { CSS } from "@dnd-kit/utilities"
 import { coordinateGetter as multipleContainersCoordinateGetter } from "./multipleContainersKeyboardCoordinates"
 
 import { Item, Container, ContainerProps } from "./"
-import { ItemsProps, PhotoVariableProps } from "@/types/index"
+import { ItemsProps, PhotoData } from "@/types/index"
 
 export default {
   title: "Presets/Sortable/Multiple Containers",
@@ -56,7 +56,7 @@ function DroppableContainer({
 }: ContainerProps & {
   disabled?: boolean
   id: UniqueIdentifier
-  items: PhotoVariableProps[]
+  items: PhotoData[]
   style?: React.CSSProperties
 }) {
   const {
@@ -361,7 +361,7 @@ export function MultipleContainers({
             return {
               ...items,
               [activeContainer]: items[activeContainer].filter(
-                (item: PhotoVariableProps) => item.src !== active.id
+                (item: PhotoData) => item.src !== active.id
               ),
               [overContainer]: [
                 ...items[overContainer].slice(0, newIndex),

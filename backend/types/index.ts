@@ -1,7 +1,7 @@
 // types.ts
 import { Fields, File as FormidableFile } from "formidable"
 
-export interface PhotoVariableProps {
+export interface PhotoData {
   src: string
   alt: string
   width: number
@@ -10,7 +10,7 @@ export interface PhotoVariableProps {
 }
 
 export interface PhotoProps {
-  photo: PhotoVariableProps
+  photo: PhotoData
   hoverEffect?: boolean
   priority?: boolean
   sizes?: string
@@ -18,18 +18,18 @@ export interface PhotoProps {
   blurDataURL?: string | undefined
 }
 
-export type photoSet = PhotoVariableProps[]
+export type photoSet = PhotoData[]
 
 export interface PhotosSetsProps {
-  photosSets: PhotoVariableProps[][]
+  photosSets: PhotoData[][]
 }
 export interface ProjectsProps {
   _id: string
   title: string
   summary: string
-  mainPhoto: PhotoVariableProps
+  mainPhoto: PhotoData
   textsAbovePhotos?: string[]
-  photosSets: PhotoVariableProps[][]
+  photosSets: PhotoData[][]
   textsBelowPhotos?: string[]
 }
 

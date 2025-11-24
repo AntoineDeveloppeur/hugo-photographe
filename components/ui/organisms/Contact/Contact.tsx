@@ -1,7 +1,7 @@
 "use client"
 
 import styles from "./contact.module.scss"
-import { PhotoVariableProps } from "@/types/index"
+import { PhotoData } from "@/types/index"
 import ButtonBig from "../../atoms/ButtonBig/ButtonBig"
 import PhotoBasic from "@/components/ui/atoms/PhotoBasic/PhotoBasic"
 import portraitHugo from "@/public/images/portrait-hugo.webp"
@@ -17,7 +17,7 @@ import { ShowPresentationContext } from "@/components/Providers"
 import IconInsta from "@/components/ui/atoms/IconInsta/IconInsta"
 
 export default function Contact() {
-  const example: PhotoVariableProps = {
+  const example: PhotoData = {
     src: portraitHugo.src,
     alt: "Hugo Randez",
     width: portraitHugo.width,

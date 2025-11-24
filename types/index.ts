@@ -1,7 +1,7 @@
 // types.ts
 import { ReactNode, Dispatch, SetStateAction } from "react"
 
-export interface PhotoVariableProps {
+export interface PhotoData {
   id?: string
   column?: string
   src: string
@@ -13,7 +13,7 @@ export interface PhotoVariableProps {
 }
 
 export type PhotoProps = {
-  photo: PhotoVariableProps
+  photo: PhotoData
   hoverEffect?: boolean
   priority?: boolean
   sizes?: string
@@ -21,10 +21,10 @@ export type PhotoProps = {
   blurDataURL?: string | undefined
 }
 
-export type photoSet = PhotoVariableProps[]
+export type photoSet = PhotoData[]
 
 export interface PhotosSetsProps {
-  photosSets: PhotoVariableProps[][]
+  photosSets: PhotoData[][]
 }
 
 export interface ModalProps {
@@ -41,9 +41,9 @@ export interface ModalDeleteProjectProps {
 }
 
 export interface DataType {
-  galeryDesktop: PhotoVariableProps[][]
-  galeryTablet: PhotoVariableProps[][]
-  galeryMobile: PhotoVariableProps[][]
+  galeryDesktop: PhotoData[][]
+  galeryTablet: PhotoData[][]
+  galeryMobile: PhotoData[][]
 }
 
 // Définition des props pour le composant PhotosSets
@@ -83,7 +83,7 @@ export interface TitleCardProps {
 export interface CardProps {
   title: string
   summary: string
-  mainPhoto: PhotoVariableProps
+  mainPhoto: PhotoData
   _id: string
   deleteOption?: boolean
 }
@@ -96,9 +96,9 @@ export interface ProjectsProps {
   _id: string
   title: string
   summary: string
-  mainPhoto: PhotoVariableProps
+  mainPhoto: PhotoData
   textsAbovePhotos?: string[]
-  photosSets: PhotoVariableProps[][]
+  photosSets: PhotoData[][]
   textsBelowPhotos?: string[]
 }
 
@@ -110,7 +110,7 @@ export interface ColumnType {
   column: string
 }
 
-export type ItemsProps = Record<string, PhotoVariableProps[]>
+export type ItemsProps = Record<string, PhotoData[]>
 
 export type PhotoModifierPortfolioProps = {
   url: string

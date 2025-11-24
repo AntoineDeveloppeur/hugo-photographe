@@ -2,7 +2,7 @@
 
 import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjectPage"
 import styles from "./modifier-portfolio.module.scss"
-import type { PhotoVariableProps, ColumnType } from "@/types"
+import type { PhotoData, ColumnType } from "@/types"
 import Button from "@/components/ui/atoms/Button/Button"
 import { useState } from "react"
 import { ColonneModifierPortfolio } from "@/components/ui/molecules/ColonneModifierPortfolio/ColonneModifierPortfolio"
@@ -50,7 +50,7 @@ export default function ModifierPorfolio() {
     const { active, over } = event
     if (!over) return
     const photoId = active.id as string
-    const newStatus = over.id as PhotoVariableProps["column"]
+    const newStatus = over.id as PhotoData["column"]
     setPortfolio((prevPortfolio) =>
       prevPortfolio.map((prevPhoto) =>
         prevPhoto.id === photoId

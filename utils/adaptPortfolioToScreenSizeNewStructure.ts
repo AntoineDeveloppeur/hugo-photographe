@@ -1,9 +1,9 @@
-import { ItemsProps, PhotoVariableProps } from "@/types"
+import { ItemsProps, PhotoData } from "@/types"
 
 export default function adaptPortfolioToScreenSizeNewStructure(
   portfolio: ItemsProps,
   window: Window | undefined
-): PhotoVariableProps[][] {
+): PhotoData[][] {
   if (typeof window === "undefined") {
     return flattenAllPhotos(portfolio)
   }
@@ -16,18 +16,13 @@ export default function adaptPortfolioToScreenSizeNewStructure(
   }
 }
 
-function flattenAllPhotos(portfolio: ItemsProps): PhotoVariableProps[][] {
+function flattenAllPhotos(portfolio: ItemsProps): PhotoData[][] {
   return [Object.values(portfolio).flat()]
 }
 
-function groupPhotosInTwoColumns(
-  portfolio: ItemsProps
-): PhotoVariableProps[][] {
+function groupPhotosInTwoColumns(portfolio: ItemsProps): PhotoData[][] {
   const flattendPhotos = flattenAllPhotos(portfolio)
-  const photosInTwoColumns: PhotoVariableProps[][] = Array.from(
-    { length: 2 },
-    () => []
-  )
+  const photosInTwoColumns: PhotoData[][] = Array.from({ length: 2 }, () => [])
 
   flattendPhotos[0].forEach((photo, index) => {
     photosInTwoColumns[index % 2].push(photo)
@@ -35,8 +30,6 @@ function groupPhotosInTwoColumns(
   return photosInTwoColumns
 }
 
-function groupPhotosInThreeColumns(
-  portfolio: ItemsProps
-): PhotoVariableProps[][] {
+function groupPhotosInThreeColumns(portfolio: ItemsProps): PhotoData[][] {
   return Object.values(portfolio)
 }

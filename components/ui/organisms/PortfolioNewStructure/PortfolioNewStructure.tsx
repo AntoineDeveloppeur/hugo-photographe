@@ -6,7 +6,7 @@ import Subtitle from "@/components/ui/atoms/Subtitle/Subtitle"
 import PhotoGallery from "@/components/ui/atoms/PhotoGallery/PhotoGallery"
 import { useState, useEffect, useCallback } from "react"
 
-import { ItemsProps, type PhotoVariableProps } from "@/types"
+import { ItemsProps, type PhotoData } from "@/types"
 import ThemeChanger from "@/components/ui/molecules/ThemeChanger/ThemeChanger"
 import useIsMobile from "@/hooks/useIsMobile"
 import useGetPortfolioNewStructure from "@/hooks/useGetPortfolioNewStructure"
@@ -16,9 +16,7 @@ import adaptPortfolioToScreenSizeNewStructure from "@/utils/adaptPortfolioToScre
 export default function PortfolioNewStructure() {
   const isMobile = useIsMobile()
 
-  const [portfolioLayout, setPortfolioLayout] = useState<
-    PhotoVariableProps[][]
-  >(() =>
+  const [portfolioLayout, setPortfolioLayout] = useState<PhotoData[][]>(() =>
     typeof window !== "undefined"
       ? adaptPortfolioToScreenSizeNewStructure(
           fallbackPortfolioNewStructure,
@@ -75,12 +73,12 @@ export default function PortfolioNewStructure() {
           {!isMobile && <ThemeChanger />}
         </div>
         <div className={styles.portfolio__largeScreen__columns}>
-          {portfolioLayout.map((columns: PhotoVariableProps[], i) => (
+          {portfolioLayout.map((columns: PhotoData[], i) => (
             <div
               key={`column${i}`}
               className={styles.portfolio__largeScreen__columns__column}
             >
-              {columns.map((pic: PhotoVariableProps, i) => (
+              {columns.map((pic: PhotoData, i) => (
                 <PhotoGallery
                   key={`pic${i}`}
                   photo={pic}

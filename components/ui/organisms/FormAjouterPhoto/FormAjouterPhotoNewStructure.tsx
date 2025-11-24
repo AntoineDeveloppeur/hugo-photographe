@@ -5,7 +5,7 @@ import formatError from "@/utils/formatError"
 import React, { useRef } from "react"
 import postPhoto from "@/utils/postPhoto"
 import { useRouter } from "next/navigation"
-import { ItemsProps, PhotoVariableProps } from "@/types"
+import { ItemsProps, PhotoData } from "@/types"
 import { Dispatch, SetStateAction } from "react"
 
 export default function FormAjouterPhoto({
@@ -25,7 +25,7 @@ export default function FormAjouterPhoto({
       setPortfolio((prevPortfolio) => {
         return {
           ...prevPortfolio,
-          C: [...prevPortfolio["C"], newPhoto as PhotoVariableProps],
+          C: [...prevPortfolio["C"], newPhoto as PhotoData],
         }
       })
     }

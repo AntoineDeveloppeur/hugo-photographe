@@ -13,12 +13,12 @@ import useDeletePhotoFromDB from "@/hooks/useDeletePhotoFromDB"
 import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import { deletePhotoByUrl } from "@/utils/portfolioDataOperation"
-import { Portfolio } from "@/types/index"
+import { PortfolioData } from "@/types/index"
 
 interface DeleteOptionTypes {
   id: string
   title?: string
-  setPortfolio?: Dispatch<SetStateAction<Portfolio>>
+  setPortfolio?: Dispatch<SetStateAction<PortfolioData>>
 }
 
 type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"

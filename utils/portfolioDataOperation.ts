@@ -1,11 +1,14 @@
-import { Portfolio } from "@/types"
+import { PortfolioData } from "@/types"
 
 type findPositionOfURLReturn = {
   column: string | null
   index: number | null
 }
 
-export const deletePhotoByUrl = (url: string, object: Portfolio): Portfolio => {
+export const deletePhotoByUrl = (
+  url: string,
+  object: PortfolioData
+): PortfolioData => {
   const { column, index } = findPhotoPosition(url, object)
   if (index === null || column === null) return object
   const updatedPortfolio = deletePhotoAtPosition(object, column, index)
@@ -13,10 +16,10 @@ export const deletePhotoByUrl = (url: string, object: Portfolio): Portfolio => {
 }
 
 export const deletePhotoAtPosition = (
-  object: Portfolio,
+  object: PortfolioData,
   column: string,
   index: number
-): Portfolio => {
+): PortfolioData => {
   const updatedPortfolio = structuredClone(object)
   console.log("je suis a deleteURL")
 
@@ -26,7 +29,7 @@ export const deletePhotoAtPosition = (
 
 export const findPhotoPosition = (
   url: string,
-  items: Portfolio
+  items: PortfolioData
 ): findPositionOfURLReturn => {
   console.log("je suis a  findPositionOfURL")
   for (const column in items) {

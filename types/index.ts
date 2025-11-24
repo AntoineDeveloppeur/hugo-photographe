@@ -110,10 +110,10 @@ export interface ColumnType {
   column: string
 }
 
-export type Portfolio = Record<string, PhotoData[]>
+export type PortfolioData = Record<string, PhotoData[]>
 
 export type PhotoModifierPortfolioProps = {
   url: string
   deleteOption?: boolean
-  setPortfolio: Dispatch<SetStateAction<Portfolio>>
+  setPortfolio: Dispatch<SetStateAction<PortfolioData>>
 }

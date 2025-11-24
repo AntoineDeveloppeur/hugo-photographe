@@ -1,20 +1,20 @@
 "use client"
 
-import { Portfolio } from "@/types"
+import { PortfolioData } from "@/types"
 import { useState, useEffect, Dispatch, SetStateAction } from "react"
 import getPorfolio from "@/utils/getPortfolio"
 import fallbackPortfolio from "@/data/fallbackPortfolio.json"
 
 type useGetPortfolioReturn = {
   isPortfolioFetching: boolean
-  portfolio: Portfolio
+  portfolio: PortfolioData
   error: string | null
-  setPortfolio: Dispatch<SetStateAction<Portfolio>>
+  setPortfolio: Dispatch<SetStateAction<PortfolioData>>
 }
 
 export default function useGetPortfolio(): useGetPortfolioReturn {
   const [isPortfolioFetching, setIsPortfolioFetching] = useState<boolean>(true)
-  const [portfolio, setPortfolio] = useState<Portfolio>(fallbackPortfolio)
+  const [portfolio, setPortfolio] = useState<PortfolioData>(fallbackPortfolio)
   const [error, setError] = useState<string | null>(null)
   useEffect(() => {
     const updateStateWithFetchPhoto = async () => {
@@ -23,7 +23,7 @@ export default function useGetPortfolio(): useGetPortfolioReturn {
       if (error) {
         setError(error)
       } else {
-        setPortfolio(photos as Portfolio)
+        setPortfolio(photos as PortfolioData)
       }
     }
     updateStateWithFetchPhoto()

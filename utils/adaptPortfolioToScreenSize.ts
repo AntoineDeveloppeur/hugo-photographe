@@ -1,7 +1,7 @@
-import { Portfolio, PhotoData } from "@/types"
+import { PortfolioData, PhotoData } from "@/types"
 
 export default function adaptPortfolioToScreenSize(
-  portfolio: Portfolio,
+  portfolio: PortfolioData,
   window: Window | undefined
 ): PhotoData[][] {
   if (typeof window === "undefined") {
@@ -16,11 +16,11 @@ export default function adaptPortfolioToScreenSize(
   }
 }
 
-function flattenAllPhotos(portfolio: Portfolio): PhotoData[][] {
+function flattenAllPhotos(portfolio: PortfolioData): PhotoData[][] {
   return [Object.values(portfolio).flat()]
 }
 
-function groupPhotosInTwoColumns(portfolio: Portfolio): PhotoData[][] {
+function groupPhotosInTwoColumns(portfolio: PortfolioData): PhotoData[][] {
   const flattendPhotos = flattenAllPhotos(portfolio)
   const photosInTwoColumns: PhotoData[][] = Array.from({ length: 2 }, () => [])
 
@@ -30,6 +30,6 @@ function groupPhotosInTwoColumns(portfolio: Portfolio): PhotoData[][] {
   return photosInTwoColumns
 }
 
-function groupPhotosInThreeColumns(portfolio: Portfolio): PhotoData[][] {
+function groupPhotosInThreeColumns(portfolio: PortfolioData): PhotoData[][] {
   return Object.values(portfolio)
 }

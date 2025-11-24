@@ -5,7 +5,7 @@ import type { Transform } from "@dnd-kit/utilities"
 
 import { Handle, Remove } from "./components"
 import PhotoModifierPorfolio from "@/components/ui/atoms/PhotoModifierPorfolio/PhotoModifierPorfolio"
-import { Portfolio } from "@/types/index"
+import { PortfolioData } from "@/types/index"
 import styles from "./Item.module.css"
 
 export interface Props {
@@ -26,7 +26,7 @@ export interface Props {
   wrapperStyle?: React.CSSProperties
   value: React.ReactNode
   deleteOption?: boolean
-  setPortfolio?: Dispatch<SetStateAction<Portfolio>>
+  setPortfolio?: Dispatch<SetStateAction<PortfolioData>>
   onRemove?(): void
   renderItem?(args: {
     dragOverlay: boolean
@@ -147,7 +147,9 @@ export const Item = React.memo(
             <PhotoModifierPorfolio
               url={value as string}
               deleteOption={deleteOption}
-              setPortfolio={setPortfolio as Dispatch<SetStateAction<Portfolio>>}
+              setPortfolio={
+                setPortfolio as Dispatch<SetStateAction<PortfolioData>>
+              }
             />
             <span className={styles.Actions}>
               {onRemove ? (

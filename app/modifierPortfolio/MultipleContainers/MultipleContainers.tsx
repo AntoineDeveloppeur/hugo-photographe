@@ -36,7 +36,7 @@ import { CSS } from "@dnd-kit/utilities"
 import { coordinateGetter as multipleContainersCoordinateGetter } from "./multipleContainersKeyboardCoordinates"
 
 import { Item, Container, ContainerProps } from ".."
-import { Portfolio, PhotoData } from "@/types/index"
+import { PortfolioData, PhotoData } from "@/types/index"
 
 export default {
   title: "Presets/Sortable/Multiple Containers",
@@ -130,7 +130,7 @@ interface Props {
   }): React.CSSProperties
   wrapperStyle?(args: { index: number }): React.CSSProperties
   itemCount?: number
-  items: Portfolio
+  items: PortfolioData
   setPortfolio: any
   handle?: boolean
   renderItem?: any
@@ -169,7 +169,7 @@ export function MultipleContainers({
   deleteOption,
 }: Props) {
   const [containers, setContainers] = useState(
-    Object.keys(items as Portfolio) as UniqueIdentifier[]
+    Object.keys(items as PortfolioData) as UniqueIdentifier[]
   )
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
   const lastOverId = useRef<UniqueIdentifier | null>(null)
@@ -249,7 +249,7 @@ export function MultipleContainers({
     },
     [activeId, items]
   )
-  const [clonedItems, setClonedItems] = useState<Portfolio | null>(null)
+  const [clonedItems, setClonedItems] = useState<PortfolioData | null>(null)
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
@@ -327,7 +327,7 @@ export function MultipleContainers({
         }
 
         if (activeContainer !== overContainer) {
-          setPortfolio((items: Portfolio) => {
+          setPortfolio((items: PortfolioData) => {
             const activeItems = items[activeContainer]
             const overItems = items[overContainer]
             // TODO indexOf overId ne fonctionne pas overId est un string et moi je veux chercher dans un objet
@@ -400,7 +400,7 @@ export function MultipleContainers({
         }
 
         if (overId === TRASH_ID) {
-          setPortfolio((items: Portfolio) => ({
+          setPortfolio((items: PortfolioData) => ({
             ...items,
             [activeContainer]: items[activeContainer].filter(
               (id) => id.src !== activeId
@@ -415,7 +415,7 @@ export function MultipleContainers({
 
           unstable_batchedUpdates(() => {
             setContainers((containers) => [...containers, newContainerId])
-            setPortfolio((items: Portfolio) => ({
+            setPortfolio((items: PortfolioData) => ({
               ...items,
               [activeContainer]: items[activeContainer].filter(
                 (id) => id.src !== activeId
@@ -444,7 +444,7 @@ export function MultipleContainers({
           )
 
           if (activeIndex !== overIndex) {
-            setPortfolio((items: Portfolio) => ({
+            setPortfolio((items: PortfolioData) => ({
               ...items,
               [overContainer]: arrayMove(
                 items[overContainer],
@@ -611,7 +611,7 @@ export function MultipleContainers({
 
     unstable_batchedUpdates(() => {
       setContainers((containers) => [...containers, newContainerId])
-      setPortfolio((items: Portfolio) => ({
+      setPortfolio((items: PortfolioData) => ({
         ...items,
         [newContainerId]: [],
       }))

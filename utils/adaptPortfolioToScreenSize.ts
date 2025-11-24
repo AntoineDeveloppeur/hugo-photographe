@@ -1,6 +1,6 @@
 import { Portfolio, PhotoData } from "@/types"
 
-export default function adaptPortfolioToScreenSizeNewStructure(
+export default function adaptPortfolioToScreenSize(
   portfolio: Portfolio,
   window: Window | undefined
 ): PhotoData[][] {

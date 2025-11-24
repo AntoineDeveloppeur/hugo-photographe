@@ -3,7 +3,7 @@
 import styles from "./photo-modifier-portfolio.module.scss"
 import { PhotoModifierPortfolioProps } from "@/types"
 import PhotoBasic from "../PhotoBasic/PhotoBasic"
-import DeleteOptionNewStructure from "../../molecules/DeleteOption/DeleteOption"
+import DeleteOption from "../../molecules/DeleteOption/DeleteOption"
 
 export default function PhotoModifierPorfolio({
   url,
@@ -14,7 +14,7 @@ export default function PhotoModifierPorfolio({
     <>
       <div className={styles.imageWrapper}>
         {deleteOption && (
-          <DeleteOptionNewStructure
+          <DeleteOption
             id={url}
             setPortfolio={setPortfolio}
           />

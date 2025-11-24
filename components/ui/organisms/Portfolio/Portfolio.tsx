@@ -9,39 +9,32 @@ import { useState, useEffect, useCallback } from "react"
 import { Portfolio, type PhotoData } from "@/types"
 import ThemeChanger from "@/components/ui/molecules/ThemeChanger/ThemeChanger"
 import useIsMobile from "@/hooks/useIsMobile"
-import useGetPortfolioNewStructure from "@/hooks/useGetPortfolio"
-import fallbackPortfolioNewStructure from "@/data/fallbackPortfolioNewStructure.json"
-import adaptPortfolioToScreenSizeNewStructure from "@/utils/adaptPortfolioToScreenSize"
+import useGetPortfolio from "@/hooks/useGetPortfolio"
+import fallbackPortfolio from "@/data/fallbackPortfolio.json"
+import adaptPortfolioToScreenSize from "@/utils/adaptPortfolioToScreenSize"
 
 export default function Portfolio() {
   const isMobile = useIsMobile()
 
   const [portfolioLayout, setPortfolioLayout] = useState<PhotoData[][]>(() =>
     typeof window !== "undefined"
-      ? adaptPortfolioToScreenSizeNewStructure(
-          fallbackPortfolioNewStructure,
-          window
-        )
+      ? adaptPortfolioToScreenSize(fallbackPortfolio, window)
       : []
   )
 
-  const { portfolio } = useGetPortfolioNewStructure()
+  const { portfolio } = useGetPortfolio()
 
   // Mise à jour du layout quand le portfolio change
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setPortfolioLayout(
-        adaptPortfolioToScreenSizeNewStructure(portfolio, window)
-      )
+      setPortfolioLayout(adaptPortfolioToScreenSize(portfolio, window))
     }
   }, [portfolio])
 
   // Gestion du resize avec useCallback pour mémoriser la fonction
   const handleResize = useCallback(() => {
     if (typeof window !== "undefined") {
-      setPortfolioLayout(
-        adaptPortfolioToScreenSizeNewStructure(portfolio, window)
-      )
+      setPortfolioLayout(adaptPortfolioToScreenSize(portfolio, window))
     }
   }, [portfolio])
 

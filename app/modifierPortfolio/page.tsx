@@ -4,10 +4,10 @@ import TitleProjectPage from "@/components/ui/atoms/TitleProjectPage/TitleProjec
 import styles from "./modifier-portfolio.module.scss"
 import Button from "@/components/ui/atoms/Button/Button"
 import { useState } from "react"
-import FormAjouterPhotoNewStructure from "@/components/ui/organisms/FormAjouterPhoto/FormAjouterPhotoNewStructure"
+import FormAjouterPhoto from "@/components/ui/organisms/FormAjouterPhoto/FormAjouterPhoto"
 import updatePortfolio from "@/utils/updatePortfolio"
 import { useRouter } from "next/navigation"
-import useGetPortfolioNewStructure from "@/hooks/useGetPortfolio"
+import useGetPortfolio from "@/hooks/useGetPortfolio"
 import Loader from "@/components/ui/atoms/Loader/Loader"
 import Paragraphes from "@/components/ui/atoms/Paragraphes/Paragraphes"
 import { MultipleContainers } from "./MultipleContainers/MultipleContainers"
@@ -15,7 +15,7 @@ export default function ModifierPorfolio() {
   const Router = useRouter()
 
   const { isPortfolioFetching, portfolio, setPortfolio, error } =
-    useGetPortfolioNewStructure()
+    useGetPortfolio()
 
   const [modeSupprimerPhoto, setModeSupprimerPhoto] = useState<boolean>(false)
 
@@ -60,7 +60,7 @@ export default function ModifierPorfolio() {
           />
         </div>
         <div className={styles.modifierPortfolio__largeScreen__buttonsWrapper}>
-          <FormAjouterPhotoNewStructure setPortfolio={setPortfolio} />
+          <FormAjouterPhoto setPortfolio={setPortfolio} />
           <Button
             text="mode supprimer photo"
             onclick={handleModeSupprimerPhoto}

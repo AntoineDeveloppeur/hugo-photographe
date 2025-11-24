@@ -13,7 +13,7 @@ export default async function updatePortfolio(
   console.log("body", JSON.stringify(portfolio))
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/portfolio/updateNewStructure`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/portfolio/update`,
       {
         method: "PUT",
         headers: {

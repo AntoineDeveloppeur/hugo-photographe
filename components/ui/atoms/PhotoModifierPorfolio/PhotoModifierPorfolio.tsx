@@ -3,7 +3,7 @@
 import styles from "./photo-modifier-portfolio.module.scss"
 import { PhotoModifierPortfolioProps } from "@/types"
 import PhotoBasic from "../PhotoBasic/PhotoBasic"
-import DeleteOptionNewStructure from "../../molecules/DeleteOption/DeleteOptionNewStructure"
+import DeleteOptionNewStructure from "../../molecules/DeleteOption/DeleteOption"
 
 export default function PhotoModifierPorfolio({
   url,

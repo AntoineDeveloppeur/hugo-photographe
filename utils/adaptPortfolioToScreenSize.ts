@@ -1,40 +1,35 @@
-import { PhotoData } from "@/types"
+import { Portfolio, PhotoData } from "@/types"
 
-export default function adaptPortfolioToScreenSize(
-  photos: PhotoData[],
+export default function adaptPortfolioToScreenSizeNewStructure(
+  portfolio: Portfolio,
   window: Window | undefined
 ): PhotoData[][] {
   if (typeof window === "undefined") {
-    return groupPhotosInColumns(photos, 1)
+    return flattenAllPhotos(portfolio)
   }
   if (window.matchMedia("(max-width: 767px)").matches) {
-    return groupPhotosInColumns(photos, 1)
+    return flattenAllPhotos(portfolio)
   } else if (window.matchMedia("(max-width: 1023px)").matches) {
-    return groupPhotosInColumns(photos, 2)
+    return groupPhotosInTwoColumns(portfolio)
   } else {
-    return groupPhotosInColumns(photos, 3)
+    return groupPhotosInThreeColumns(portfolio)
   }
 }
 
-function groupPhotosInColumns(
-  photos: PhotoData[],
-  columnCount: 1 | 2 | 3
-): PhotoData[][] {
-  const photosInColumns: PhotoData[][] | [][] = Array.from(
-    { length: columnCount },
-    () => []
-  )
-  console.log("[photos]", [photos])
+function flattenAllPhotos(portfolio: Portfolio): PhotoData[][] {
+  return [Object.values(portfolio).flat()]
+}
 
-  if (columnCount === 1) return [photos]
-  if (columnCount === 2)
-    photos.forEach((photo, index) => {
-      photosInColumns[index % 2].push(photo)
-    })
-  if (columnCount === 3)
-    for (const photo of photos) {
-      photosInColumns[Number(photo.column) - 1].push(photo)
-    }
-  console.log("photosInColumns", photosInColumns)
-  return photosInColumns
+function groupPhotosInTwoColumns(portfolio: Portfolio): PhotoData[][] {
+  const flattendPhotos = flattenAllPhotos(portfolio)
+  const photosInTwoColumns: PhotoData[][] = Array.from({ length: 2 }, () => [])
+
+  flattendPhotos[0].forEach((photo, index) => {
+    photosInTwoColumns[index % 2].push(photo)
+  })
+  return photosInTwoColumns
+}
+
+function groupPhotosInThreeColumns(portfolio: Portfolio): PhotoData[][] {
+  return Object.values(portfolio)
 }

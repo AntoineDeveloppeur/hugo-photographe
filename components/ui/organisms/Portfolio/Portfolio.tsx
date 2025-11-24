@@ -6,35 +6,42 @@ import Subtitle from "@/components/ui/atoms/Subtitle/Subtitle"
 import PhotoGallery from "@/components/ui/atoms/PhotoGallery/PhotoGallery"
 import { useState, useEffect, useCallback } from "react"
 
-import type { PhotoData } from "@/types"
+import { Portfolio, type PhotoData } from "@/types"
 import ThemeChanger from "@/components/ui/molecules/ThemeChanger/ThemeChanger"
 import useIsMobile from "@/hooks/useIsMobile"
-import useGetPortfolio from "@/hooks/useGetPortfolio"
-import fallbackPortfolio from "@/data/fallbackPortfolio.json"
-import adaptPortfolioToScreenSize from "@/utils/adaptPortfolioToScreenSize"
+import useGetPortfolioNewStructure from "@/hooks/useGetPortfolio"
+import fallbackPortfolioNewStructure from "@/data/fallbackPortfolioNewStructure.json"
+import adaptPortfolioToScreenSizeNewStructure from "@/utils/adaptPortfolioToScreenSize"
 
 export default function Portfolio() {
   const isMobile = useIsMobile()
 
   const [portfolioLayout, setPortfolioLayout] = useState<PhotoData[][]>(() =>
     typeof window !== "undefined"
-      ? adaptPortfolioToScreenSize(fallbackPortfolio, window)
+      ? adaptPortfolioToScreenSizeNewStructure(
+          fallbackPortfolioNewStructure,
+          window
+        )
       : []
   )
 
-  const { portfolio } = useGetPortfolio()
+  const { portfolio } = useGetPortfolioNewStructure()
 
   // Mise à jour du layout quand le portfolio change
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setPortfolioLayout(adaptPortfolioToScreenSize(portfolio, window))
+      setPortfolioLayout(
+        adaptPortfolioToScreenSizeNewStructure(portfolio, window)
+      )
     }
   }, [portfolio])
 
   // Gestion du resize avec useCallback pour mémoriser la fonction
   const handleResize = useCallback(() => {
     if (typeof window !== "undefined") {
-      setPortfolioLayout(adaptPortfolioToScreenSize(portfolio, window))
+      setPortfolioLayout(
+        adaptPortfolioToScreenSizeNewStructure(portfolio, window)
+      )
     }
   }, [portfolio])
 

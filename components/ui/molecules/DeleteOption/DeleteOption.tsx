@@ -8,17 +8,17 @@ import Paragraphes from "../../atoms/Paragraphes/Paragraphes"
 import Button from "../../atoms/Button/Button"
 import ButtonSecondary from "../../atoms/ButtonSecondary/ButtonSecondary"
 import Loader from "../../atoms/Loader/Loader"
-import useDeleteProject from "@/hooks/useDeleteProjectFromDB"
-import useDeletePhoto from "@/hooks/useDeletePhoto"
+import useDeleteProjectFromDB from "@/hooks/useDeleteProjectFromDB"
+import useDeletePhotoFromDB from "@/hooks/useDeletePhotoFromDB"
 import { useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
-import { deleteURL, findPositionOfURL } from "@/utils/portfolioDataOperation"
-import { Items } from "@/types/index"
+import { deletePhotoByUrl } from "@/utils/portfolioDataOperation"
+import { Portfolio } from "@/types/index"
 
 interface DeleteOptionTypes {
   id: string
   title?: string
-  setPortfolio?: Dispatch<SetStateAction<Items>>
+  setPortfolio?: Dispatch<SetStateAction<Portfolio>>
 }
 
 type modalStateType = "CONFIRMING" | "DELETING" | "DELETIONSUCCESS"
@@ -39,8 +39,8 @@ export default function DeleteOption({
 
   const [modalState, setModalState] = useState<modalStateType>("CONFIRMING")
 
-  const { deleteProject } = useDeleteProject()
-  const { deletePhoto } = useDeletePhoto()
+  const { deleteProjectFromDB } = useDeleteProjectFromDB()
+  const { deletePhotoFromDB } = useDeletePhotoFromDB()
 
   const handleYes = async () => {
     setModalState("DELETING")
@@ -48,19 +48,18 @@ export default function DeleteOption({
     console.log("setPortfolio", setPortfolio)
     if (deleteType === "project") {
       console.log("deleteType", deleteType)
-      const success = await deleteProject(id)
+      const success = await deleteProjectFromDB(id)
       if (success) setModalState("DELETIONSUCCESS")
       // Fails are handled by useDeleteProject
     }
     if (deleteType === "photo" && setPortfolio) {
-      const { success } = await deletePhoto(id)
-      if (success && setPortfolio) {
-        // Utiliser la fonction updater pour filtrer la photo supprimée
+      const { success } = await deletePhotoFromDB(id)
+      if (success) {
         console.log('je suis a if (deleteType === "photo" && setPortfolio) { ')
-        setPortfolio((prevItems: Items) => deleteURL(id, prevItems))
+        setPortfolio((prevItems) => deletePhotoByUrl(id, prevItems))
         setModalState("DELETIONSUCCESS")
       }
-      // Fails are handled by useDeletePhoto
+      // Fails are handled by useDeletePhotoFromDB
     }
   }
   const handleNo = () => {

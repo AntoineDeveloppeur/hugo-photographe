@@ -3,7 +3,7 @@ import formatError from "@/utils/formatError"
 export default async function fetchPortfolio() {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/portfolio/getPortfolio`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/portfolio/getPortfolioNewStructure`
     )
     const data = await response.json()
 

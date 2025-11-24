@@ -1,35 +1,36 @@
-import { Items } from "@/types"
+import { Portfolio } from "@/types"
 
 type findPositionOfURLReturn = {
   column: string | null
   index: number | null
 }
 
-export const deleteURL = (url: string, object: Items): Items => {
-  const { column, index } = findPositionOfURL(url, object)
-  if (index === null || !column) return object
-  return deleteURLOfKnownPosition(object, column, index)
+export const deletePhotoByUrl = (url: string, object: Portfolio): Portfolio => {
+  const { column, index } = findPhotoPosition(url, object)
+  if (index === null || column === null) return object
+  const updatedPortfolio = deletePhotoAtPosition(object, column, index)
+  return updatedPortfolio
 }
 
-export const deleteURLOfKnownPosition = (
-  object: Items,
+export const deletePhotoAtPosition = (
+  object: Portfolio,
   column: string,
   index: number
-): Items => {
-  const deepCopy = structuredClone(object)
-  console.log("je suis a  deleteURL")
+): Portfolio => {
+  const updatedPortfolio = structuredClone(object)
+  console.log("je suis a deleteURL")
 
-  deepCopy[column] = deepCopy[column].toSpliced(index, 1)
-  return deepCopy
+  updatedPortfolio[column] = updatedPortfolio[column].toSpliced(index, 1)
+  return updatedPortfolio
 }
 
-export const findPositionOfURL = (
+export const findPhotoPosition = (
   url: string,
-  items: Record<string, string[]>
+  items: Portfolio
 ): findPositionOfURLReturn => {
   console.log("je suis a  findPositionOfURL")
   for (const column in items) {
-    const index = items[column].findIndex((element) => element === url)
+    const index = items[column].findIndex((element) => element.src === url)
     console.log("index", index)
     if (index !== -1) {
       return { column: column, index: index }

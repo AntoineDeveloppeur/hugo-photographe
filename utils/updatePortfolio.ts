@@ -1,4 +1,4 @@
-import { PhotoData } from "@/types"
+import { Portfolio } from "@/types"
 import formatError from "@/utils/formatError"
 
 type PutPortfolioResult = {
@@ -8,11 +8,12 @@ type PutPortfolioResult = {
 
 export default async function updatePortfolio(
   token: string,
-  portfolio: PhotoData[]
+  portfolio: Portfolio
 ): Promise<PutPortfolioResult> {
+  console.log("body", JSON.stringify(portfolio))
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/portfolio/update`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/portfolio/updateNewStructure`,
       {
         method: "PUT",
         headers: {

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 import useGetPortfolioNewStructure from "@/hooks/useGetPortfolioNewStructure"
 import Loader from "@/components/ui/atoms/Loader/Loader"
 import Paragraphes from "@/components/ui/atoms/Paragraphes/Paragraphes"
-import { MultipleContainers } from "./MultipleContainers"
+import { MultipleContainers } from "./MultipleContainers/MultipleContainers"
 export default function ModifierPorfolio() {
   const Router = useRouter()
 

@@ -35,7 +35,7 @@ import {
 import { CSS } from "@dnd-kit/utilities"
 import { coordinateGetter as multipleContainersCoordinateGetter } from "./multipleContainersKeyboardCoordinates"
 
-import { Item, Container, ContainerProps } from "./"
+import { Item, Container, ContainerProps } from ".."
 import { Portfolio, PhotoData } from "@/types/index"
 
 export default {

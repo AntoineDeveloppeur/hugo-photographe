@@ -78,7 +78,7 @@ function DroppableContainer({
   })
   const isOverContainer = over
     ? (id === over.id && active?.data.current?.type !== "container") ||
-      items.includes(over.id)
+      items.includes(over.id as PhotoData & UniqueIdentifier)
     : false
 
   return (

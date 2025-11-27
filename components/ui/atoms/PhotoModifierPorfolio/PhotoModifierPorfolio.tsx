@@ -19,7 +19,9 @@ export default function PhotoModifierPorfolio({
             setPortfolio={setPortfolio}
           />
         )}
-        <PhotoBasic photo={{ src: url, alt: "jjj" }} />
+        {/* alt n'est pas précisé car la page n'est crawlable*/}
+        {/* Les tailles n'ont pas d'importances dans cette page car le layout shifting importe seulement sur les pages crawlable */}
+        <PhotoBasic photo={{ src: url, alt: "jjj", width: 300, height: 200 }} />
       </div>
     </>
   )

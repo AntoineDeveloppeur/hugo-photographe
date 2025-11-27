@@ -41,7 +41,7 @@ export const Container = forwardRef<HTMLDivElement, Props>(
     }: Props,
     ref
   ) => {
-    const Component = onClick ? "button" : "div"
+    const Component = "div"
 
     return (
       <Component
@@ -64,6 +64,7 @@ export const Container = forwardRef<HTMLDivElement, Props>(
         )}
         onClick={onClick}
         tabIndex={onClick ? 0 : undefined}
+        role={onClick ? "button" : undefined}
       >
         {label ? (
           <div className={styles.Header}>
@@ -79,3 +80,5 @@ export const Container = forwardRef<HTMLDivElement, Props>(
     )
   }
 )
+
+Container.displayName = "Container"

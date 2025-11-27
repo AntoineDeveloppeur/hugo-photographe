@@ -19,6 +19,7 @@ export type PhotoProps = {
   sizes?: string
   mainPhoto?: boolean
   blurDataURL?: string | undefined
+  deleteOption?: boolean
 }
 
 export type photoSet = PhotoData[]

@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom"
-import useDeleteProject from "../hooks/useDeleteProject"
+import useDeleteProjectFromDB from "@/hooks/useDeleteProjectFromDB"
 import { renderHook, act } from "@testing-library/react"
 
 // Simuler fetch
@@ -19,15 +19,15 @@ jest.spyOn(window, "alert").mockImplementation(() => {})
 
 const id = "testid"
 
-describe("useDeleteProject", () => {
+describe("useDeleteProjectFromDB", () => {
   it("should push to connexion page because no token", async () => {
     // Arrange
     jest.spyOn(Storage.prototype, "getItem").mockReturnValue(null)
 
     // Act
-    const { result } = renderHook(() => useDeleteProject())
+    const { result } = renderHook(() => useDeleteProjectFromDB())
     await act(async () => {
-      const success = await result.current.deleteProject(id)
+      const success = await result.current.deleteProjectFromDB(id)
       // Assert
       expect(success).toBe(false)
     })
@@ -47,9 +47,9 @@ describe("useDeleteProject", () => {
     })
 
     // Act
-    const { result } = renderHook(() => useDeleteProject())
+    const { result } = renderHook(() => useDeleteProjectFromDB())
     await act(async () => {
-      const success = await result.current.deleteProject(id)
+      const success = await result.current.deleteProjectFromDB(id)
       // Assert
       expect(success).toBe(false)
     })
@@ -67,9 +67,9 @@ describe("useDeleteProject", () => {
       ok: false,
     })
     // Act
-    const { result } = renderHook(() => useDeleteProject())
+    const { result } = renderHook(() => useDeleteProjectFromDB())
     await act(async () => {
-      const success = await result.current.deleteProject(id)
+      const success = await result.current.deleteProjectFromDB(id)
       expect(success).toBe(false)
     })
     // Assert
@@ -86,9 +86,9 @@ describe("useDeleteProject", () => {
       ok: true,
     })
     // Act
-    const { result } = renderHook(() => useDeleteProject())
+    const { result } = renderHook(() => useDeleteProjectFromDB())
     await act(async () => {
-      const success = await result.current.deleteProject(id)
+      const success = await result.current.deleteProjectFromDB(id)
       expect(success).toBe(true)
     })
     // Assert

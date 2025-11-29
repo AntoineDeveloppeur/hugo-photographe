@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
-import Administrateur from "@/app/administrateur/page"
+import Administrateur from "@/app/(admin)/administrateur/page"
 
 beforeEach(() => {
   render(<Administrateur />)

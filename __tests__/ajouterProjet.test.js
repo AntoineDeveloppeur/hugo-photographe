@@ -1,6 +1,6 @@
 import { screen, render, act } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import AjouterProjet from "@/app/ajouterProjet/page"
+import AjouterProjet from "@/app/(admin)/ajouterProjet/page"
 
 // Mock de la fonction postForm qui utilise des APIs serveur
 jest.mock("@/utils/postForm", () => ({

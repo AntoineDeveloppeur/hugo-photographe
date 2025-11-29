@@ -2,6 +2,7 @@ import {
   calculateResizeDimensions,
   resizePhoto,
 } from "@/backend/dist/utils/resizePhoto"
+import path from "path"
 
 // Auto-mocking des modules suivants
 import sharp from "sharp"
@@ -63,7 +64,9 @@ describe("resizePhoto", () => {
 
     // Assert
     expect(sharp).toHaveBeenCalledTimes(1)
-    expect(result.filepath).toBe(`local/${mockUuidValue}.webp`)
+    expect(path.normalize(result.filepath)).toBe(
+      path.normalize(`local/${mockUuidValue}.webp`)
+    )
   })
   it("with and height of returned object should be the same is result from calculateResizeDimensions fonction", async () => {
     // Arrange

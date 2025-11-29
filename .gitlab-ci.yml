@@ -59,6 +59,8 @@ typescript-backend:
 create-.env:
   stage: .env-generation
   image: alpine:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
   script:
     - |
       cat > ./backend/.env << EOF
@@ -97,6 +99,8 @@ create-.env:
 build-backend:
   stage: build-backend
   image: docker:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
   dependencies:
     - create-.env
   before_script:
@@ -114,6 +118,8 @@ build-backend:
 build-frontend:
   stage: build-frontend
   image: docker:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
   dependencies:
     - create-.env
   before_script:
@@ -141,6 +147,9 @@ build-frontend:
 deploy-docker-images:
   image: ubuntu:latest
   stage: deployToVPS
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
   before_script:
     - apt-get -yq update
     - apt-get -yqq install ssh

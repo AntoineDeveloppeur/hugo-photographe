@@ -47,9 +47,6 @@ next-env.d.ts
 # TODO
 #/backend/dist
 
-#css générés par erreur avec l'extension watch Saas
-*.css
-
 # photos
 # Après réflexion, les données nécessaires à l'affichage du site sont ajoutées au repo
 !/public/images

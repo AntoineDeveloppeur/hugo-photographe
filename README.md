@@ -152,7 +152,7 @@ voir le résultat.
   - modifier le fichier .env.local avec pour modèle .env.VPS.docker
   - Push dans le pipeline CI/CD
   ```
-  git push CICD prod
+  git push CICD main
   ```
 
 ## Gestion des branches

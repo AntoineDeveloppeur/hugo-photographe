@@ -6,7 +6,7 @@ Il y a sur mon PC 4 fichiers environnements différents. Il servent tous des env
 - .env.PC.local -> pour le mode dev et build sur mon ordinateur
 - .env.PCDocker.local -> faire tourner les containers sur mon ordinateur
 - .env.VPS.local -> pour le serveur VPS sans docker
-- .env.VPSDocker -> faire tourner les containers sur mon serveur VPS
+- .env.VPSDocker;local -> faire tourner les containers sur mon serveur VPS
 
 Il faut copier coller le fichier dans l'environnement désiré et le **renommer .env.local**
 

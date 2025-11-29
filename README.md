@@ -154,3 +154,8 @@ voir le résultat.
   ```
   git push CICD prod
   ```
+
+## Gestion des branches
+
+ - Les fonctionalités sont à développer à partir de **main**
+ - La branche **prod** est mis à jour depuis **main** à chaque fois qu'une nouvelle version est déployée

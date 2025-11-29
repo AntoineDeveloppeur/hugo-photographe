@@ -5,7 +5,6 @@ type InputType = {
   defaultValue?: string | number
   name: string
   type: "email" | "password" | "text" | "number"
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any
   error?: string
 }

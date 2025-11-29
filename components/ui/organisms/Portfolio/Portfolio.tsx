@@ -6,7 +6,7 @@ import Subtitle from "@/components/ui/atoms/Subtitle/Subtitle"
 import PhotoGallery from "@/components/ui/atoms/PhotoGallery/PhotoGallery"
 import { useState, useEffect, useCallback } from "react"
 
-import { PortfolioData, type PhotoData } from "@/types"
+import { type PhotoData } from "@/types"
 import ThemeChanger from "@/components/ui/molecules/ThemeChanger/ThemeChanger"
 import useIsMobile from "@/hooks/useIsMobile"
 import useGetPortfolio from "@/hooks/useGetPortfolio"

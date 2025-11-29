@@ -38,10 +38,6 @@ import { coordinateGetter as multipleContainersCoordinateGetter } from "./multip
 import { Item, Container, ContainerProps } from ".."
 import { PortfolioData, PhotoData } from "@/types/index"
 
-export default {
-  title: "Presets/Sortable/Multiple Containers",
-}
-
 const animateLayoutChanges: AnimateLayoutChanges = (args) =>
   defaultAnimateLayoutChanges({ ...args, wasDragging: true })
 
@@ -129,7 +125,6 @@ interface Props {
     isDragOverlay: boolean
   }): React.CSSProperties
   wrapperStyle?(args: { index: number }): React.CSSProperties
-  itemCount?: number
   items: PortfolioData
   setPortfolio: any
   handle?: boolean
@@ -149,7 +144,6 @@ const empty: UniqueIdentifier[] = []
 
 export function MultipleContainers({
   adjustScale = false,
-  itemCount = 3,
   cancelDrop,
   columns,
   handle = false,

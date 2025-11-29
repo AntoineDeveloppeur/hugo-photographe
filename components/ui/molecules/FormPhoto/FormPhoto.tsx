@@ -10,7 +10,6 @@ type FormPhotoTypes<T extends FieldValues> = {
   register: UseFormRegister<T>
   fileInputRef: RefObject<HTMLInputElement>
   handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   errorAlt: any
 }
 

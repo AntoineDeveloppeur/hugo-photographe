@@ -15,7 +15,6 @@ export interface Props {
   dragging?: boolean
   handle?: boolean
   handleProps?: any
-  height?: number
   index?: number
   fadeIn?: boolean
   transform?: Transform | null
@@ -54,7 +53,6 @@ export const Item = React.memo(
         fadeIn,
         handle,
         handleProps,
-        height,
         index,
         listeners,
         onRemove,

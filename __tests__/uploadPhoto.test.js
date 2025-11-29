@@ -3,7 +3,7 @@ import uploadPhoto from "@/backend/dist/utils/uploadPhoto"
 jest.mock("@aws-sdk/client-s3", () => ({
   PutObjectCommand: class Anonymous {
     constructor(arg) {
-      this.arg = "noNeed"
+      this.arg = arg
     }
   },
 }))

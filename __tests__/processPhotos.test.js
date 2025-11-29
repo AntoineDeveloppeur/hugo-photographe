@@ -20,7 +20,7 @@ const mockHeight = 1500
 const mockFormat = "webp"
 
 jest.mock("@/backend/dist/utils/resizePhoto.js", () => ({
-  resizePhoto: jest.fn(async (mockWidth, mockHeight, mockFormat, file) => ({
+  resizePhoto: jest.fn(async (mockWidth, mockHeight, _mockFormat, file) => ({
     ...file,
     height: mockHeight,
     width: mockWidth,
@@ -58,7 +58,6 @@ describe("processPhotos", () => {
   })
   it("should not call resizePhoto if metadata are not available", async () => {
     // Arrange
-    // Mock files correct
     const files = {
       set1photo1: [
         {
@@ -68,28 +67,18 @@ describe("processPhotos", () => {
         },
       ],
     }
-    // Modifier le mock Sharp AVANT que le module soit utilisé
     sharp.mockImplementation(() => ({
       resize: jest.fn().mockReturnThis(),
       toFile: jest.fn().mockResolvedValue(undefined),
       metadata: jest.fn().mockReturnValue({
         width: undefined,
         height: undefined,
-      }), // ← Votre modification
+      }),
       webp: jest.fn().mockReturnThis(),
     }))
 
-    const processedFilesArray = await Promise.all(
-      Object.entries(files).map(async ([key, fileArray]) => {
-        const file = fileArray[0]
-        return { [key]: file }
-      })
-    )
-    const mockProcessedFiles = processedFilesArray.reduce((acc, object) => {
-      return { ...acc, ...object }
-    })
     // Act
-    const result = await processPhotos(files)
+    await processPhotos(files)
     //Assert
     expect(resizePhoto).toHaveBeenCalledTimes(0)
   })
@@ -155,7 +144,6 @@ describe("processPhotos", () => {
   })
   it("should use convertToWeb if mimetype is not image/webp", async () => {
     // Arrange
-    // Mock files au format webp
     const files = {
       set1photo1: [
         {

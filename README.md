@@ -29,6 +29,7 @@ Le photographe peut, en toute autonomie, gérer le contenu de son portfolio :
   mots de passe et jsonWebToken pour la gestion des sessions
 - 📝 **Gestion de projets** : Interface d'ajout de nouveaux projets avec
   React-hook-form et Zod pour la validation des données
+- 📝 **Gestion de portofolio** : Interface d'ajout de nouvelles photos et de modifications du positionnement de chaque photo avec du drag'n'drop
 
 <br>
 
@@ -44,13 +45,10 @@ Le photographe peut, en toute autonomie, gérer le contenu de son portfolio :
 La partie frontend fonctionne avec des données en fallback :
 
 ```bash
+npm i
+
 npm run dev
-# ou
-yarn dev
-# ou
-pnpm dev
-# ou
-bun dev
+
 ```
 
 Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour
@@ -69,16 +67,24 @@ voir le résultat.
 ## Deployer sans container
 
 ### En Local
-- Merge les changements sur la branch **prod**
-- Transpiler les fichier typescript du backend 
+
+- <details>
+  <summary>modifier le fichier .env.local</summary>
+  Remplacer le contenu de .env.local avec le code ci-dessous
+  
+  ```ts
+  # Google ReCaptcha
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY='6Lejp9MqAAAAAMtrvI6ixsE2OXFmaNucIa6okLov'
+  
+  NEXT_PUBLIC_BASE_URL='http://localhost:3001'
+  
+  NEXT_PUBLIC_SERVER_URL='http://localhost:3002'
+  
+  # Pour les Server Actions (côté serveur) dans Docker obligé de mettre une adresse   spécifique pas dans les autres cas
+  API_URL_FROM_SERVER='http://localhost:3002'
   ```
-  cd backend | pnpm watch
-  ```
-- Run les test
-  ```
-  pnpm test
-  ```
-- Faire un test de build local
+</details>
+
   ```
   Terminal 1
   cd backend | pnpm watch
@@ -89,10 +95,26 @@ voir le résultat.
   Terminal 3
   pnpm run build
   ```
-- modifier le fichier .env.local avec pour modèle .env.VPS.local
-- commit puis push les changements sur origin prod
 
 ### Sur le VPS
+
+- <details>
+  <summary>modifier le fichier .env.local</summary>
+  Remplacer le contenu de .env.local avec le code ci-dessous
+  
+  ```ts
+  # Google ReCaptcha
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY='6Lejp9MqAAAAAMtrvI6ixsE2OXFmaNucIa6okLov'
+  
+  NEXT_PUBLIC_BASE_URL='https://photographe-hugo-randez.fr'
+  
+  NEXT_PUBLIC_SERVER_URL='https://photographe-hugo-randez.fr'
+  
+  # Pour les Server Actions (côté serveur) dans Docker obligé de mettre une adresse   spécifique pas dans les autres cas
+  API_URL_FROM_SERVER='http://localhost:3002'
+  ```
+</details>
+
 - Si besoin arrêter les containers docker
   ```
   cd /var/www/hugo-photographe-docker
@@ -125,35 +147,73 @@ voir le résultat.
   pm2 list
   pm2 start <numéroDuFrontend>
   ```
-
+- merge la branch main dans prod
+  ```
+  git switch prod
+  git merge main
+  ```
 
 ## Deployer avec Docker
 
   ### En Local
-  - Merge les changements sur la branch **prod**
+- <details>
+  <summary>modifier le fichier .env.local</summary>
+  Remplacer le contenu de .env.local avec le code ci-dessous
+  
+  ```ts
+  # Google ReCaptcha
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6Lejp9MqAAAAAMtrvI6ixsE2OXFmaNucIa6okLov
+  
+  NEXT_PUBLIC_BASE_URL='http://localhost:3001'
+  
+  NEXT_PUBLIC_SERVER_URL='http://localhost:3002'
+  
+  # Pour les Server Actions (côté serveur) dans Docker obligé de mettre une adresse   spécifique pas dans les autres cas
+  API_URL_FROM_SERVER='http://backend:3002'
+  ```
+</details>
+
+  - Merge les changements sur la branch **main**
   - Transpiler les fichiers typescript du backend 
     ```
     cd backend | pnpm watch
     ```
   - modifier le fichier .env.local avec pour modèle .env.VPS.local
   - Push dans le pipeline CI/CD
-  ```
-  git push CICD prod
-  ```
+    ```
+    git push CICD main
+    ```
   
   
   ### Sur le VPS
-  - Si besoin arrêter les serveurs nodes
-    ```
-    pm2 list
-    pm2 stop <numéroDuBackend>
-    pm2 stop <numéroFrontend>
-    ```
-  - modifier le fichier .env.local avec pour modèle .env.VPS.docker
+- Si besoin arrêter les serveurs nodes
+  ```
+  pm2 list
+  pm2 stop <numéroDuBackend>
+  pm2 stop <numéroFrontend>
+  ```
+- <details>
+  <summary>modifier le fichier .env.local</summary>
+  Remplacer le contenu de .env.local avec le code ci-dessous
+  
+  ```ts
+  # Google ReCaptcha
+  NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6Lejp9MqAAAAAMtrvI6ixsE2OXFmaNucIa6okLov
+  
+  NEXT_PUBLIC_BASE_URL=https://photographe-hugo-randez.fr
+  
+  NEXT_PUBLIC_SERVER_URL=https://photographe-hugo-randez.fr
+  
+  # Pour les Server Actions (côté serveur) dans Docker obligé de mettre une adresse   spécifique pas dans les autres cas
+  API_URL_FROM_SERVER='http://backend:3002'
+
+  ```
+</details>
+
   - Push dans le pipeline CI/CD
-  ```
-  git push CICD main
-  ```
+    ```
+    git push CICD main
+    ```
 
 ## Gestion des branches
 

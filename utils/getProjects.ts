@@ -1,4 +1,4 @@
-import dataFallBack from "@/data/data.json"
+import fallbackProjects from "@/data/fallbackProjects.json"
 import { Data } from "@/types"
 
 // fonction utilisé parfois depuis le client ou depuis le server Next comme fonction serveur
@@ -15,7 +15,7 @@ export default async function getProjects(): Promise<Data> {
       )
 
       if (!response.ok) {
-        return dataFallBack
+        return fallbackProjects
       }
       const data: Data = await response.json()
       return data
@@ -30,13 +30,13 @@ export default async function getProjects(): Promise<Data> {
       )
 
       if (!response2.ok) {
-        return dataFallBack
+        return fallbackProjects
       }
 
       const data2: Data = await response2.json()
       return data2
     }
   } catch {
-    return dataFallBack
+    return fallbackProjects
   }
 }

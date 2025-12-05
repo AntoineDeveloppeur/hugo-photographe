@@ -1,6 +1,6 @@
 "use client"
 
-import dataFallBack from "@/data/data.json"
+import fallbackProjects from "@/data/fallbackProjects.json"
 import { Data } from "@/types"
 import getProjects from "@/utils/getProjects"
 import { useState, useEffect } from "react"
@@ -8,7 +8,7 @@ import formatError from "@/utils/formatError"
 
 export default function useGetProjects() {
   // Récupérer les projets depuis MongoDB
-  const [data, setData] = useState<typeof dataFallBack | Data>(dataFallBack)
+  const [data, setData] = useState<Data>(fallbackProjects)
   useEffect(() => {
     async function fetchProjects() {
       try {

@@ -25,6 +25,7 @@
 .DS_Store
 *.pem
 .swc
+.gitlab-ci.yml.rej
 
 # debug
 npm-debug.log*

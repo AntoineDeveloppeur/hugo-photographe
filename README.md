@@ -130,13 +130,14 @@ voir le résultat.
   ```
 - Lancer les serveurs node API
   ```
+  cd backend
+  npm i
   pm2 list
   pm2 start <numéroDuBackend>
   ```
 - Build le frontend
   ```
-  cd /var/www/hugo-photographe/
-  git pull origin main
+  npm i
   npm run build
   ```
 - Lancer le serveur frontend Next

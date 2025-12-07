@@ -1,6 +1,5 @@
 import getProjects from "@/utils/getProjects"
-import dataFallBack from "@/data/data"
-// Je voudrais tester que la fonction getProjects me renvoi un objet contenant la clé projects
+import fallbackProjects from "@/data/fallbackProjects.json" // Je voudrais tester que la fonction getProjects me renvoi un objet contenant la clé projects
 
 global.fetch = jest.fn()
 describe("getProjects", () => {
@@ -23,18 +22,18 @@ describe("getProjects", () => {
     expect(fetch).toHaveBeenCalledTimes(1)
   })
 
-  it("should return dataFallBack when API reponse is not ok", async () => {
+  it("should return fallbackProjects when API reponse is not ok", async () => {
     global.fetch.mockResolvedValueOnce({
       ok: false,
     })
     const result = await getProjects()
-    expect(result).toEqual(dataFallBack)
+    expect(result).toEqual(fallbackProjects)
   })
   // tester lorsque la requête renvoie une erreur
-  it("should return dataFallBack when fetch throws an Error", async () => {
+  it("should return fallbackProjects when fetch throws an Error", async () => {
     global.fetch.mockRejectedValueOnce(new Error("Network Error"))
     const result = await getProjects()
-    expect(result).toEqual(dataFallBack)
+    expect(result).toEqual(fallbackProjects)
   })
   it("should return an object which contain 'projects' which is an array", async () => {
     const mockData = { projects: [{ title: "test" }] }

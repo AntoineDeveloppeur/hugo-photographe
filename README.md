@@ -121,23 +121,20 @@ voir le résultat.
   docker-compose -f docker-compose.prod.yml stop backend
   docker-compose -f docker-compose.prod.yml stop frontend
   ```
-- Lancer les serveurs node API
-  ```
-  pm2 list
-  pm2 start <numéroDuBackend>
-  ```
-
 - Pull les fichiers
   ```
   cd /var/www/hugo-photographe/
   git branch
   git switch main
   git pull origin main
-  npm run build
+  ```
+- Lancer les serveurs node API
+  ```
+  pm2 list
+  pm2 start <numéroDuBackend>
   ```
 - Build le frontend
   ```
-
   cd /var/www/hugo-photographe/
   git pull origin main
   npm run build

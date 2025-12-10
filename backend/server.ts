@@ -44,6 +44,7 @@ const originCORS: string | string[] | undefined = [
   "http://localhost:3001",
 ]
 
+// Affiche la requête reçue
 app.use((req, res, next) => {
   const fullUrl = `${req.protocol}://${req.get("host")}${req.url}`
   const origin = req.get("Origin") || req.get("Referer") || "Direct access"

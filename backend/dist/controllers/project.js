@@ -6,19 +6,21 @@ import formatError from "../utils/formatError.js";
 // Exporter les fonctions individuellement
 export async function createProject(req, res) {
     try {
+        console.log("début createProject");
         // Parse le formulaire avec formidable
         const { fields, files } = await parseForm(req);
         //Vérification du formulaire
         if (!fields.projectTexts) {
+            console.log("Les données du projet sont incomplètes");
             return res
                 .status(400)
-                .json({ message: "Les données du projet sont requises" });
+                .json({ message: "Les données du projet sont incomplètes" });
         }
         // Upload vers s3
         const photosUrlArray = await Promise.all(Object.entries(files).map(async ([key, fileArray]) => {
             const url = await uploadPhoto(fileArray);
             if (url instanceof Error) {
-                // return res.status(500).json({message: `erreur lors de l'upload des fichiers : ${url.message}`})
+                console.log(`erreur lors de l'upload des fichiers : ${url.message}`);
                 throw new Error(`erreur lors de l'upload des fichiers : ${url.message}`);
             }
             return { [key]: url };
@@ -54,17 +56,25 @@ export async function createProject(req, res) {
             }),
             textsBelowPhotos: projectData.textsBelowPhotos || [],
         });
+        console.log("variable newProject définie");
         // Sauvegarde le projet dans la base de donnée
         await newProject
             .save()
-            .then(() => res.status(201).json({ message: "Le projet a bien été créé" }))
-            .catch((error) => res.status(400).json({
-            message: "Erreur lors de l'enregistrement du projet",
-            error: error.message,
-        }));
+            .then(() => {
+            console.log(`après then de newProject`);
+            res.status(201).json({ message: "Le projet a bien été créé" });
+        })
+            .catch((error) => {
+            console.log(`après catch final de createProject`);
+            res.status(400).json({
+                message: "Erreur lors de l'enregistrement du projet",
+                error: error.message,
+            });
+        });
     }
     catch (error) {
         const errorMessage = formatError(error);
+        console.log(`après catch de newProject`);
         res.status(500).json({
             message: "Erreur lors de la création du projet pour envoi",
             error: errorMessage,

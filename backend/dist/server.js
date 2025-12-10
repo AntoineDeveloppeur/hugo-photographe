@@ -29,13 +29,13 @@ mongoose
     .connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.fndalaw.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=${process.env.APPNAME}`)
     .then(() => console.log("Connexion à MongoDB réussie !"))
     .catch(() => console.log("Connexion à MongoDB échouée !"));
-console.log("la requête est arrivé jusque avec cors");
 // Configuration CORS
 const originCORS = [
     "https://photographe-hugo-randez.fr",
     "http://localhost:3000",
     "http://localhost:3001",
 ];
+// Affiche la requête reçue
 app.use((req, res, next) => {
     const fullUrl = `${req.protocol}://${req.get("host")}${req.url}`;
     const origin = req.get("Origin") || req.get("Referer") || "Direct access";

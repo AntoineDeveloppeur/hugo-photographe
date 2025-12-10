@@ -57,7 +57,6 @@ export default async function postForm(
       redirectPath: "/succesAjoutProjet",
     }
   } catch (error) {
-    console.log("error", error)
     const errorMessage = formatError(error)
 
     return {

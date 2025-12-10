@@ -21,7 +21,6 @@ export default function FormAjouterPhoto({
     const file = event.target.files?.[0] || null
     if (file) {
       const newPhoto = await submit(file)
-      console.log("newPhoto", newPhoto)
       setPortfolio((prevPortfolio) => {
         return {
           ...prevPortfolio,

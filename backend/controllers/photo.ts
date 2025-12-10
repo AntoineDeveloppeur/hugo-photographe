@@ -8,12 +8,10 @@ import { deleteOnePhotoFromDB } from "@/backend/utils/deletePhotos.js"
 const photoCtrl = {
   upload: async (req: Request, res: Response) => {
     try {
-      console.log(" je suis dans photoCtrl")
       const { files } = await parseForm(req)
       const file = files["photo"]
 
       const url = await uploadPhoto(file)
-      console.log(" je suis dans photoCtrl après UPLOADphoto")
 
       const data = {
         id: uuidv4(),
@@ -29,15 +27,9 @@ const photoCtrl = {
   },
   delete: async (req: Request, res: Response) => {
     const { success, error } = await deleteOnePhotoFromDB(req.body.url)
-    console.log("après appel de deleteOnePhotoFromDb depuis photoCtrl")
-
     if (success) {
-      console.log("après appel de deleteOnePhotoFromDb avant res.status(200)")
-
       res.status(200).json({})
     } else {
-      console.log("après appel de deleteOnePhotoFromDb avant res.status(500)")
-
       res.status(500).json({ error })
     }
   },

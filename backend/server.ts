@@ -37,8 +37,6 @@ mongoose
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"))
 
-console.log("la requête est arrivé jusque avec cors")
-
 // Configuration CORS
 const originCORS: string | string[] | undefined = [
   "https://photographe-hugo-randez.fr",

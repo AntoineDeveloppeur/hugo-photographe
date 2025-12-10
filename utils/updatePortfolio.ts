@@ -10,7 +10,6 @@ export default async function updatePortfolio(
   token: string,
   portfolio: PortfolioData
 ): Promise<PutPortfolioResult> {
-  console.log("body", JSON.stringify(portfolio))
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/portfolio/update`,

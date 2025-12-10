@@ -44,10 +44,7 @@ export default function DeleteOption({
 
   const handleYes = async () => {
     setModalState("DELETING")
-    console.log("je suis handleYes) { ")
-    console.log("setPortfolio", setPortfolio)
     if (deleteType === "project") {
-      console.log("deleteType", deleteType)
       const success = await deleteProjectFromDB(id)
       if (success) setModalState("DELETIONSUCCESS")
       // Fails are handled by useDeleteProject
@@ -55,7 +52,6 @@ export default function DeleteOption({
     if (deleteType === "photo" && setPortfolio) {
       const { success } = await deletePhotoFromDB(id)
       if (success) {
-        console.log('je suis a if (deleteType === "photo" && setPortfolio) { ')
         setPortfolio((prevItems) => deletePhotoByUrl(id, prevItems))
         setModalState("DELETIONSUCCESS")
       }

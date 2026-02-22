@@ -2,6 +2,7 @@ import NextImage from "next/image"
 import { PhotoProps } from "@/types"
 import styles from "./photo-basic.module.scss"
 import { useState } from "react"
+import Loader from "../Loader/Loader"
 
 type PhotoBasicProps = {
   photo: PhotoProps["photo"]
@@ -40,8 +41,9 @@ export default function PhotoBasic({
     <div
       className={`${styles.imageWrapper} 
       ${className || ""} 
-      ${!isImageLoaded ? styles.skeleton : ""}`}
+      `}
     >
+      {!isImageLoaded && <Loader />}
       <NextImage
         data-testid="photoBasic"
         className={`${styles.imageWrapper__image} ${imageClassName || ""}`}

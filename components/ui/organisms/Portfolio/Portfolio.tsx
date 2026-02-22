@@ -10,19 +10,17 @@ import { type PhotoData } from "@/types"
 import ThemeChanger from "@/components/ui/molecules/ThemeChanger/ThemeChanger"
 import useIsMobile from "@/hooks/useIsMobile"
 import useGetPortfolio from "@/hooks/useGetPortfolio"
-import fallbackPortfolio from "@/data/fallbackPortfolio.json"
 import adaptPortfolioToScreenSize from "@/utils/adaptPortfolioToScreenSize"
 
 export default function Portfolio() {
   const isMobile = useIsMobile()
+  const { portfolio } = useGetPortfolio()
 
   const [portfolioLayout, setPortfolioLayout] = useState<PhotoData[][]>(() =>
     typeof window !== "undefined"
-      ? adaptPortfolioToScreenSize(fallbackPortfolio, window)
-      : []
+      ? adaptPortfolioToScreenSize(portfolio, window)
+      : [],
   )
-
-  const { portfolio } = useGetPortfolio()
 
   // Mise à jour du layout quand le portfolio change
   useEffect(() => {

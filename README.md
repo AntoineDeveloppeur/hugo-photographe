@@ -115,6 +115,10 @@ voir le résultat.
   ```
 </details>
 
+- Transpiler les fichiers typescript du backend 
+  ```
+  cd backend | pnpm watch
+  ```
 - Si besoin arrêter les containers docker
   ```
   cd /var/www/hugo-photographe-docker
@@ -184,29 +188,33 @@ voir le résultat.
   
   
   ### Sur le VPS
-- Si besoin arrêter les serveurs nodes
+  - Transpiler les fichiers typescript du backend 
   ```
-  pm2 list
-  pm2 stop <numéroDuBackend>
-  pm2 stop <numéroFrontend>
+  cd backend | pnpm watch
   ```
-- <details>
-  <summary>modifier le fichier .env.local</summary>
-  Remplacer le contenu de .env.local avec le code ci-dessous
-  
-  ```ts
-  # Google ReCaptcha
-  NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6Lejp9MqAAAAAMtrvI6ixsE2OXFmaNucIa6okLov
-  
-  NEXT_PUBLIC_BASE_URL=https://photographe-hugo-randez.fr
-  
-  NEXT_PUBLIC_SERVER_URL=https://photographe-hugo-randez.fr
-  
-  # Pour les Server Actions (côté serveur) dans Docker obligé de mettre une adresse   spécifique pas dans les autres cas
-  API_URL_FROM_SERVER='http://backend:3002'
+  - Si besoin arrêter les serveurs nodes
+    ```
+    pm2 list
+    pm2 stop <numéroDuBackend>
+    pm2 stop <numéroFrontend>
+    ```
+  - <details>
+    <summary>modifier le fichier .env.local</summary>
+    Remplacer le contenu de .env.local avec le code ci-dessous
+    
+    ```ts
+    # Google ReCaptcha
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6Lejp9MqAAAAAMtrvI6ixsE2OXFmaNucIa6okLov
+    
+    NEXT_PUBLIC_BASE_URL=https://photographe-hugo-randez.fr
+    
+    NEXT_PUBLIC_SERVER_URL=https://photographe-hugo-randez.fr
+    
+    # Pour les Server Actions (côté serveur) dans Docker obligé de mettre une adresse   spécifique pas dans les autres cas
+    API_URL_FROM_SERVER='http://backend:3002'
 
-  ```
-</details>
+    ```
+  </details>
 
   - Push dans le pipeline CI/CD
     ```

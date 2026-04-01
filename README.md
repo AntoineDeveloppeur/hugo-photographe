@@ -94,6 +94,7 @@ voir le résultat.
 
   Terminal 3
   pnpm run build
+  pnpm run start
   ```
 
 ### Sur le VPS

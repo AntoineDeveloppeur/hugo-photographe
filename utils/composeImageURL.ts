@@ -2,24 +2,24 @@ export default function composeImageURL(
   width: number,
   quality: number,
   src: string,
-  densityPixelRatio: number
+  densityPixelRatio: number,
 ) {
   // Next ne permet pas d'avoir toutes les tailles d'images
   // Permet d'obtenir la bonne width en fonction de la width initiale
 
-  const srcCorrected = src.slice(1)
+  const srcCorrected = encodeURIComponent(src)
   const URL = `${
     process.env.NEXT_PUBLIC_BASE_URL
-  }/_next/image?url=%2F${srcCorrected}&w=${pickAcceptedByNextWidth(
+  }/_next/image?url=${srcCorrected}&w=${pickAcceptedByNextWidth(
     width,
-    densityPixelRatio
+    densityPixelRatio,
   )}&q=${quality}`
   return URL
 }
 
 export const pickAcceptedByNextWidth = (
   width: number,
-  densityPixelRatio: number
+  densityPixelRatio: number,
 ) => {
   //Valeurs prise dans le next.config.ts
   const deviceSizes = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]

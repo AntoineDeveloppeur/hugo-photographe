@@ -45,12 +45,15 @@ export default function PhotoGallery({
           photo.width,
           80,
           photo.src,
-          window.devicePixelRatio || 2
+          window.devicePixelRatio || 2,
         )
       })
 
-      if ("cancelIdleCallback" in window)
-        return () => window.cancelIdleCallback(requestIdleCallbackId)
+      return () => {
+        if ("cancelIdleCallback" in window) {
+          window.cancelIdleCallback(requestIdleCallbackId)
+        }
+      }
     }
     // Après un timer si le chargement du reste de la page est trop long ou
     // si requestIdleCallback n'est pas supporté
@@ -61,13 +64,13 @@ export default function PhotoGallery({
           photo.width,
           80,
           photo.src,
-          window.devicePixelRatio || 2
+          window.devicePixelRatio || 2,
         )
       }, 3000)
       return () => clearTimeout(timeout)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [photo])
 
   return (
     <>

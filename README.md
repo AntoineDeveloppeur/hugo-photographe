@@ -150,6 +150,7 @@ voir le résultat.
   pm2 list
   pm2 start <numéroDuFrontend>
   ```
+- Vérifier le fonctionnement du site
 - merge la branch main dans prod
   ```
   git switch prod
